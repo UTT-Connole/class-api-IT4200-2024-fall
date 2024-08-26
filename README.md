@@ -4,4 +4,6 @@ We will be using this repo to create an API for our entire class. We will use Fl
 
 ## Contributors
 
+* Christian Bassilios
+* Donavan Franco
 * Soren Bybee
