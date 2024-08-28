@@ -2,25 +2,23 @@
 
 We will be using this repo to create an API for our entire class. We will use Flask for this application and each member of the class will work within this single repo.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-#contributors
-Abayomi Odubiyi 
-=======
 ## Contributors
-=======
-## Contributor
->>>>>>> main
 
+* Riker Evans
 * Jace Barrett
 * Donavan Franco
 * Christian Bassilios
 * Soren Bybee
 * Keaton Hall
-<<<<<<< HEAD
->>>>>>> main
-=======
 * Josh Beckstrand
 * Dallin Hougaard
 * Not Donavan Franco
->>>>>>> main
+* Andres
+* Travis Gunter
+* Not Donavan Franco
+* Dallin Hougaard
+* Josh Beckstrand
+* Dallin Hougaard
+* Not Donavan Franco
+* Morgan Andrus
+
