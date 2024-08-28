@@ -63,7 +63,6 @@ http://127.0.0.1:5000/favoritequote
 * ⬛⬛🟩🟩🟩🟩🟩🟩🟩⬛⬛⬛⬛
 * Pepe after forcing to main....
 
-
 Go Trailblazers!
 
              _.-````'-,_
