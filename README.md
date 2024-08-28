@@ -9,10 +9,7 @@ We will be using this repo to create an API for our entire class. We will use Fl
 * Christian Bassilios
 * Soren Bybee
 * Keaton Hall
-<<<<<<< HEAD
 * Travis Gunter
 * Not Donavan Franco
-=======
 * Dallin Hougaard
-* Not Donavan Franco
->>>>>>> main
+
