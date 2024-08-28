@@ -11,8 +11,10 @@ We will be using this repo to create an API for our entire class. We will use Fl
 * Soren Bybee
 * Keaton Hall
 * Andres
+* Travis Gunter
+* Not Donavan Franco
+* Dallin Hougaard
 * Josh Beckstrand
 * Dallin Hougaard
 * Not Donavan Franco
 * Morgan Andrus
-* Andres
