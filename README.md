@@ -2,7 +2,7 @@
 
 We will be using this repo to create an API for our entire class. We will use Flask for this application and each member of the class will work within this single repo.
 
-## Contributor
+## Contributors
 
 * Riker Evans
 * Jace Barrett
@@ -10,6 +10,8 @@ We will be using this repo to create an API for our entire class. We will use Fl
 * Christian Bassilios
 * Soren Bybee
 * Keaton Hall
-* Josh Beckstrand
+* Andres
+* Travis Gunter
 * Dallin Hougaard
-* Not Donavan Franco
+* Josh Beckstrand
+* Morgan Andrus
