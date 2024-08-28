@@ -67,6 +67,7 @@ http://127.0.0.1:5000/favoritequote
 * Keaton Hall
 * Josh Beckstrand
 * Dallin Hougaard
+<<<<<<< HEAD
 * Andres
 * Travis Gunter
 * Morgan Andrus
@@ -96,3 +97,6 @@ Go Trailblazers!
        `)_/    \  \  )    ( >  ( >
                 \( \(     |/   |/
                 /_(/_(    /_(  /_(
+=======
+* Not Donavan Franco
+>>>>>>> b3f0bac (added riker to contributor list)
