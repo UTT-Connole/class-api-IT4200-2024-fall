@@ -6,3 +6,6 @@ We will be using this repo to create an API for our entire class. We will use Fl
 
 * Jace Barrett
 * Donavan Franco
+* Christian Bassilios
+* Soren Bybee
+* Keaton Hall
