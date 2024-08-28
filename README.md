@@ -35,8 +35,6 @@ If the color doesn't exist in the library, you will get an error.
 
 Open up the url to http://127.0.0.1:5000/quotes
 Start reading people's favorite quotes!
-<<<<<<< HEAD
-
 
 ## How to Use the Favorite Quote Endpoint
 
@@ -75,9 +73,7 @@ If the color doesn't exist in the library, you will get an error.
 * ⬛⬛⬛🟩🟩🟩🟩🟩🟩🟩⬛⬛⬛
 * ⬛⬛🟩🟩🟩🟩🟫🟫🟫🟫⬛⬛⬛
 * ⬛⬛🟩🟩🟩🟩🟩🟩🟩⬛⬛⬛⬛
-<<<<<<< HEAD
 * Pepe after forcing to main....
-<<<<<<< HEAD
 
 Go Trailblazers!
 
@@ -93,8 +89,3 @@ Go Trailblazers!
        `)_/    \  \  )    ( >  ( >
                 \( \(     |/   |/
                 /_(/_(    /_(  /_(
-=======
->>>>>>> ea1973b (added riker to contributor list)
-=======
-* Pepe after forcing to main....
->>>>>>> 70ea3b8 (removed duplicate quote endpoint and combined all the quotes, removed duplicate endpoint description in README)
