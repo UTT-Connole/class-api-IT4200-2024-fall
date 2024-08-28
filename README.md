@@ -18,4 +18,17 @@ We will be using this repo to create an API for our entire class. We will use Fl
 * Not Donavan Franco
 * Josh Beckstrand
 * Dallin Hougaard
+<<<<<<< HEAD
 * Morgan Andrus
+=======
+* Not Donavan Franco
+* Andres
+* Travis Gunter
+* Not Donavan Franco
+* Josh Beckstrand
+* Dallin Hougaard
+* Not Donavan Franco
+* Morgan Andrus
+* Yomi Odubiyi
+
+>>>>>>> main
