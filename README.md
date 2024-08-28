@@ -2,8 +2,9 @@
 
 We will be using this repo to create an API for our entire class. We will use Flask for this application and each member of the class will work within this single repo.
 
-## Contributors
+## Contributors:
 
+* Laura Coulome
 * Riker Evans
 * Jace Barrett
 * Donavan Franco
