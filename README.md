@@ -14,7 +14,6 @@ If you leave one of the variables empty, you will get an error.
 Go to http://127.0.0.1:5000/twoManaCombos, get the combo name, and start building your next MTG deck!
 
 # How to get to the stoic quotes Endpoint
-<<<<<<< HEAD
 Go to http://127.0.0.1:5000/quotes for a good quote
 
 # How to use pizzaToppings Endpoint
@@ -28,7 +27,6 @@ Go to http://127.0.0.1:5000/travel to be given a randomly chosen travel destinat
 
 # How to use Marathon Facts Endpoint
 Go to http://127.0.0.1:5000/marathonFacts to learn a random fact about marathons! 
-<<<<<<< HEAD
 Use the template to return a hex code of the color you want "http://127.0.0.1:5000/color?color=blue"
 Replace the "blue" at the end with any color of your choosing.
 If the color doesn't exist in the library, you will get an error.
@@ -37,8 +35,7 @@ If the color doesn't exist in the library, you will get an error.
 
 Open up the url to http://127.0.0.1:5000/quotes
 Start reading people's favorite quotes!
-=======
->>>>>>> 1dee111 (fixed README add)
+
 
 ## How to Use the Favorite Quote Endpoint
 
@@ -46,8 +43,6 @@ To retrieve a favorite quote, navigate to:
 
 http://127.0.0.1:5000/favoritequote
 
-<<<<<<< HEAD
-=======
 # How to use Color Hexifier endpoint
 
 Use the template to return a hex code of the color you want "http://127.0.0.1:5000/color?color=blue"
@@ -108,4 +103,3 @@ Go Trailblazers!
        `)_/    \  \  )    ( >  ( >
                 \( \(     |/   |/
                 /_(/_(    /_(  /_(
-
