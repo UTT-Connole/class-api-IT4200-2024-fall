@@ -5,12 +5,3 @@ We will be using this repo to create an API for our entire class. We will use Fl
 ## Contributors
 
 * Riker Evans
-* Donavan Franco
-* Christian Bassilios
-* Jace Barrett
-* Donavan Franco
-* Christian Bassilios
-* Soren Bybee
-* Keaton Hall
-* Dallin Hougaard
-* Not Donavan Franco
