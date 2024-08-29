@@ -8,4 +8,6 @@ app = Flask(__name__)
 def hello_world():
     return "Hello World"
 
-
+@app.route('/calc')
+def calc_main():
+    return "This is the starter page for the calculator app"
