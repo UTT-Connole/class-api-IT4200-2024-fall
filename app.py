@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 
 
 app = Flask(__name__)
@@ -8,6 +8,14 @@ app = Flask(__name__)
 def hello_world():
     return "Hello World"
 
-@app.route('/calc')
+@app.route('/calc', methods=['GET','POST'])
 def calc_main():
-    return "This is the starter page for the calculator app"
+    x = request.args.get('x')
+    y = request.args.get('y')
+    if x and y:
+        x = int(x)
+        y = int(y)
+        result = x+y
+    else:
+        result = "Invalid Input"
+    return str(result)

@@ -6,6 +6,12 @@ We will be using this repo to create an API for our entire class. We will use Fl
 
 To get to your endpoint go to the folder the app is in in a terminal (EX. class-api-IT4200-2024-fall) and run the command “python3 -m flask run”, this will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
 
+# How to use Calculator Endpoint
+
+Use this template to add two numbers together "http://127.0.0.1:5000/calc?x=#&?y=#"
+Replace the #'s with what ever numbers you would like!
+If you leave one of the variables empty, you will get an error.
+
 ## Contributors:
 
 * Laura Coulome
