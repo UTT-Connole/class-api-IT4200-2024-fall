@@ -9,6 +9,7 @@ app = Flask(__name__)
 def hello_world():
     return "Hello World"
 
+<<<<<<< HEAD
 @app.route('/calc', methods=['GET','POST'])
 def calc_main():
     x = request.args.get('x')
@@ -141,3 +142,12 @@ if __name__ == '__main__':
 
     picked = random.choice(destinations)
     return jsonify({"You should go to": picked})
+=======
+@app.route('/quotes', methods=['GET'])
+def favoriteQuotes():
+        quotes = '''
+        [
+            {"quote": "If more of us valued food and cheer and song above hoarded gold, it would be a merrier world.", "author": Thorin Oakenshield}
+        ]'''
+        return quotes
+>>>>>>> e70d23b (added quote endpoint and README)
