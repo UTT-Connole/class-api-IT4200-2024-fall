@@ -12,6 +12,12 @@ Use this template to add two numbers together "http://127.0.0.1:5000/calc?x=#&y=
 Replace the #'s with what ever numbers you would like!
 If you leave one of the variables empty, you will get an error.
 
+# How to use Color Hexifier endpoint
+
+Use the template to return a hex code of the color you want "http://127.0.0.1:5000/color?color=blue"
+Replace the "blue" at the end with any color of your choosing.
+If the color doesn't exist in the library, you will get an error.
+
 ## Contributors:
 
 * Laura Coulome
