@@ -12,6 +12,10 @@ Use this template to add two numbers together "http://127.0.0.1:5000/calc?x=#&y=
 Replace the #'s with what ever numbers you would like!
 If you leave one of the variables empty, you will get an error.
 
+# How to use twoManaCombo Endpoint
+
+Go to http://127.0.0.1:5000/twoManaCombos, get the combo name, and start building your next MTG deck!
+
 ## Contributors:
 
 * Laura Coulome
