@@ -1,4 +1,5 @@
 from flask import Flask, request
+import random
 import matplotlib
 
 app = Flask(__name__)
@@ -31,4 +32,15 @@ def color_hexifier():
         return f"The hex code for {color_name} is {hex_code}"
     else:
         return "Invalid color name"
-    
+
+@app.route('/twoManaCombos', methods='GET')
+def random_combo():
+    two_m =[{ "name": "Boros", "color_1": "red", "color_2": "white"},
+            { "name": "Golgari", "color_1": "blue", "color_2": "black"},
+            { "name": "Gruul", "color_1": "red", "color_2": "green"},
+            { "name": "Orzhov", "color_1": "white", "color_2": "black"},
+            { "name": "Rakdos", "color_1": "black", "color_2": "red"},
+            { "name": "Selesnya", "color_1": "white", "color_2": "green"}]
+    r = two_m[random.randrange(len(two_m))]
+    return r
+print(random_combo())
