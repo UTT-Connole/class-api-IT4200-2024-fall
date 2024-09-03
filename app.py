@@ -1,5 +1,5 @@
 from flask import Flask, request
-
+import matplotlib
 
 app = Flask(__name__)
 
@@ -19,3 +19,16 @@ def calc_main():
     else:
         result = "Invalid Input"
     return str(result)
+
+@app.route('/color', methods=['GET','POST'])
+def color_hexifier():
+    color_name = request.args.get('color')
+    
+    print(f"Received color name: {color_name}")
+    
+    if color_name and color_name.lower() in matplotlib.colors.CSS4_COLORS:
+        hex_code = matplotlib.colors.CSS4_COLORS[color_name.lower()]
+        return f"The hex code for {color_name} is {hex_code}"
+    else:
+        return "Invalid color name"
+    
