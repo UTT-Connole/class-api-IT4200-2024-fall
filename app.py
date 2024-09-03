@@ -1,10 +1,6 @@
 from flask import Flask, request
-<<<<<<< HEAD
 import random
-
-=======
 import matplotlib
->>>>>>> 287ffa8706eb89e7e316484e6f1a10fd6f350b03
 
 app = Flask(__name__)
 
@@ -23,9 +19,6 @@ def calc_main():
         result = x+y
     else:
         result = "Invalid Input"
-<<<<<<< HEAD
-    return str(result)
-=======
     return str(result)
 
 @app.route('/color', methods=['GET','POST'])
@@ -39,5 +32,3 @@ def color_hexifier():
         return f"The hex code for {color_name} is {hex_code}"
     else:
         return "Invalid color name"
-    
->>>>>>> 287ffa8706eb89e7e316484e6f1a10fd6f350b03
