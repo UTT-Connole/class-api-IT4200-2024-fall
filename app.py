@@ -8,7 +8,6 @@ app = Flask(__name__)
 def hello_world():
     return "Hello World"
 
-<<<<<<< HEAD
 @app.route('/quotes', methods=['GET'])
 def favoriteQuotes():
         quotes = '''
@@ -16,7 +15,7 @@ def favoriteQuotes():
             {"quote": "If more of us valued food and cheer and song above hoarded gold, it would be a merrier world.", "author": Thorin Oakenshield}
         ]'''
         return quotes
-=======
+
 @app.route('/calc', methods=['GET','POST'])
 def calc_main():
     x = request.args.get('x')
@@ -40,5 +39,3 @@ def color_hexifier():
         return f"The hex code for {color_name} is {hex_code}"
     else:
         return "Invalid color name"
-    
->>>>>>> main
