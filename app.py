@@ -10,6 +10,17 @@ def hello_world():
     return "Hello World"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+@app.route('/quotes', methods=['GET'])
+def favoriteQuotes():
+        quotes = '''
+        [
+            {"quote": "If more of us valued food and cheer and song above hoarded gold, it would be a merrier world.", "author": Thorin Oakenshield}
+        ]'''
+        return quotes
+
+>>>>>>> e103bcb (fixed merges)
 @app.route('/calc', methods=['GET','POST'])
 def calc_main():
     x = request.args.get('x')
@@ -37,6 +48,7 @@ def color_hexifier():
         return f"The hex code for {color_name} is {hex_code}"
     else:
         return "Invalid color name"
+<<<<<<< HEAD
 
 @app.route('/twoManaCombos', methods=['GET'])
 def random_combo():
@@ -151,3 +163,5 @@ def favoriteQuotes():
         ]'''
         return quotes
 >>>>>>> e70d23b (added quote endpoint and README)
+=======
+>>>>>>> e103bcb (fixed merges)
