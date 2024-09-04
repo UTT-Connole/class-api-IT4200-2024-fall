@@ -21,6 +21,9 @@ Go to http://127.0.0.1:5000/twoManaCombos, get the combo name, and start buildin
 Open up the url to http://127.0.0.1:5000/quotes
 Start reading people's favorite quotes!
 
+# How to get to the stoic quotes Endpoint
+go to http://127.0.0.1:5000/quotes for a good quote
+
 ## Contributors:
 
 * Laura Coulome
