@@ -9,10 +9,6 @@ app = Flask(__name__)
 def hello_world():
     return "Hello World"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 @app.route('/quotes', methods=['GET'])
 def favoriteQuotes():
         quotes = '''
@@ -21,9 +17,6 @@ def favoriteQuotes():
         ]'''
         return quotes
 
->>>>>>> e103bcb (fixed merges)
-=======
->>>>>>> ccf6a5e (removed duplicate quote endpoint and combined all the quotes, removed duplicate endpoint description in README)
 @app.route('/calc', methods=['GET','POST'])
 def calc_main():
     x = request.args.get('x')
@@ -51,7 +44,6 @@ def color_hexifier():
         return f"The hex code for {color_name} is {hex_code}"
     else:
         return "Invalid color name"
-<<<<<<< HEAD
 
 @app.route('/twoManaCombos', methods=['GET'])
 def random_combo():
@@ -144,7 +136,7 @@ def marathon_facts():
     random_fact = random.choice(facts)
     return jsonify(random_fact)
 
-    @app.route('/favoritequote', methods=['GET'])
+@app.route('/favoritequote', methods=['GET'])
 def get_favorite_quote():
     favorite_quote = {
         "quote": "The only way to do great work is to love what you do.",
@@ -157,14 +149,4 @@ if __name__ == '__main__':
 
     picked = random.choice(destinations)
     return jsonify({"You should go to": picked})
-=======
-@app.route('/quotes', methods=['GET'])
-def favoriteQuotes():
-        quotes = '''
-        [
-            {"quote": "If more of us valued food and cheer and song above hoarded gold, it would be a merrier world.", "author": Thorin Oakenshield}
-        ]'''
-        return quotes
->>>>>>> e70d23b (added quote endpoint and README)
-=======
->>>>>>> e103bcb (fixed merges)
+
