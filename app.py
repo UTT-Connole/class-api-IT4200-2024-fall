@@ -86,7 +86,7 @@ def dad_joke():
         {"Why don't skeletons fight each other? They don't have the guts."},
         {"What do you call fake spaghetti? An impasta!"},
         {"Why did the scarecrow win an award? Because he was outstanding in his field!"},
-        {"I would avoid the sushi if I was you. It’s a little fishy."},
+        {"I would avoid the sushi if I was you. It’s a little fishy."}
     ]
     joke = random.choice(jokes)
     return jsonify({"joke": joke})
