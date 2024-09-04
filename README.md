@@ -19,6 +19,9 @@ Go to http://127.0.0.1:5000/twoManaCombos, get the combo name, and start buildin
 # How to get to the stoic quotes Endpoint
 go to http://127.0.0.1:5000/quotes for a good quote
 
+# How to use pizzaToppings Endpoint
+Go to http://127.0.0.1:5000/pizzaToppings to finally decide what to put on your pizza!
+
 ## Contributors:
 
 * Laura Coulome
