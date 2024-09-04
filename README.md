@@ -32,7 +32,6 @@ go to http://127.0.0.1:5000/quotes for a good quote
 * Dallin Hougaard
 * Andres
 * Travis Gunter
-* Josh Beckstrand
 * Not Donavan Franco
 * Morgan Andrus
 * Yomi Odubiyi
