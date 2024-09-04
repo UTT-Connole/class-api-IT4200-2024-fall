@@ -81,7 +81,6 @@ http://127.0.0.1:5000/favoritequote
 * ⬛⬛🟩🟩🟩🟩🟫🟫🟫🟫⬛⬛⬛
 * ⬛⬛🟩🟩🟩🟩🟩🟩🟩⬛⬛⬛⬛
 * Pepe after forcing to main....
-<<<<<<< HEAD
 
 Go Trailblazers!
 
@@ -97,5 +96,3 @@ Go Trailblazers!
        `)_/    \  \  )    ( >  ( >
                 \( \(     |/   |/
                 /_(/_(    /_(  /_(
-=======
->>>>>>> ea1973b (added riker to contributor list)
