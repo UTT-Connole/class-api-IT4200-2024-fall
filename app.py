@@ -58,3 +58,9 @@ def fav_quotes():
 ]
     quote = random.choice(quotes)
     return jsonify(quote)
+
+@app.route('/randomName', methods=['GET'])
+def random_name():
+    names = ["Alice", "Bob", "Charlie", "Diana"]
+    name = random.choice(names)
+    return jsonify({"name": name})
