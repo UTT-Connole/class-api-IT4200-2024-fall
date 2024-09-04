@@ -45,3 +45,13 @@ Go to http://127.0.0.1:5000/travel to be given a randomly chosen travel destinat
 * Morgan Andrus
 * Yomi Odubiyi
 * Brayden Connole
+
+
+## Add some Text art to make the repo more welcoming!
+* ⬛⬛⬛⬛⬛🟩🟩⬛🟩🟩⬛⬛⬛
+* ⬛⬛⬛⬛🟩🟩🟩🟩🟩🟩🟩⬛⬛ 
+* ⬛⬛⬛🟩🟩⬜⬛⬜⬜⬛🟩⬛⬛ 
+* ⬛⬛⬛🟩🟩🟩🟩🟩🟩🟩⬛⬛⬛
+* ⬛⬛🟩🟩🟩🟩🟫🟫🟫🟫⬛⬛⬛
+* ⬛⬛🟩🟩🟩🟩🟩🟩🟩⬛⬛⬛⬛
+* Pepe after forcing to main....
