@@ -1,7 +1,3 @@
-<<<<<<< HEAD
 Brayden was here
 
 Was Keaton here?
-=======
-Brayden was he
->>>>>>> main
