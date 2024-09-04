@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import random
 import matplotlib
 
@@ -33,7 +33,7 @@ def color_hexifier():
     else:
         return "Invalid color name"
 
-@app.route('/twoManaCombos', methods='GET')
+@app.route('/twoManaCombos', methods=['GET'])
 def random_combo():
     two_m =[{ "name": "Boros", "color_1": "red", "color_2": "white"},
             { "name": "Golgari", "color_1": "blue", "color_2": "black"},
@@ -44,3 +44,17 @@ def random_combo():
     r = two_m[random.randrange(len(two_m))]
     return r
 print(random_combo())
+
+@app.route('/quotes', methods=['GET'])
+def fav_quotes():
+    quotes = [
+    {"author": "Marcus Aurelius", "quote": "You have power over your mind - not outside events. Realize this, and you will find strength."},
+    {"author": "Marcus Aurelius", "quote": "The happiness of your life depends upon the quality of your thoughts."},
+    {"author": "Epictetus", "quote": "It's not what happens to you, but how you react to it that matters."},
+    {"author": "Seneca", "quote": "We suffer more in imagination than in reality."},
+    {"author": "Marcus Aurelius", "quote": "Waste no more time arguing about what a good man should be. Be one."},
+    {"author": "Epictetus", "quote": "No man is free who is not master of himself."},
+    {"author": "Seneca", "quote": "Luck is what happens when preparation meets opportunity."}
+]
+    quote = random.choice(quotes)
+    return jsonify(quote)
