@@ -22,6 +22,9 @@ go to http://127.0.0.1:5000/quotes for a good quote
 # How to use pizzaToppings Endpoint
 Go to http://127.0.0.1:5000/pizzaToppings to finally decide what to put on your pizza!
 
+# How to use Dad Jokes Endpoint
+Go to http://127.0.0.1:5000/dadjoke to laugh so hard you throw up!
+
 ## Contributors:
 
 * Laura Coulome
@@ -41,7 +44,7 @@ Go to http://127.0.0.1:5000/pizzaToppings to finally decide what to put on your 
 * Brayden Connole
 
 
-## Add Stuff Here for Update API Assignment:
+## Add some Text art to make the repo more welcoming!
 * ⬛⬛⬛⬛⬛🟩🟩⬛🟩🟩⬛⬛⬛
 * ⬛⬛⬛⬛🟩🟩🟩🟩🟩🟩🟩⬛⬛ 
 * ⬛⬛⬛🟩🟩⬜⬛⬜⬜⬛🟩⬛⬛ 
