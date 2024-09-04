@@ -64,3 +64,15 @@ def random_name():
     names = ["Alice", "Bob", "Charlie", "Diana"]
     name = random.choice(names)
     return jsonify({"name": name})
+
+@app.route('/dadjoke', methods=['GET'])
+def dad_joke():
+    jokes = [
+        {"Why don't skeletons fight each other? They don't have the guts."},
+        {"What do you call fake spaghetti? An impasta!"},
+        {"Why did the scarecrow win an award? Because he was outstanding in his field!"},
+        {"I would avoid the sushi if I was you. It’s a little fishy."},
+    ]
+    joke = random.choice(jokes)
+    return jsonify({"joke": joke})
+
