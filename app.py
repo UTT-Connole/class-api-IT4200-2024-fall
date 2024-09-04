@@ -64,3 +64,45 @@ def random_name():
     names = ["Alice", "Bob", "Charlie", "Diana"]
     name = random.choice(names)
     return jsonify({"name": name})
+
+@app.route('/pizzaToppings', methods=['GET'])
+def pizza_toppings():
+    toppings = [
+        {"topping": "Pepperoni"},
+        {"topping": "Mushrooms"},
+        {"topping": "Chicken"},
+        {"topping": "Sausage"},
+        {"topping": "Bacon"},
+        {"topping": "Extra cheese"},
+        {"topping": "Pineapple"},
+        {"topping": "Spinach"}
+    ]
+    selected_toppings = random.sample(toppings, 3) 
+    return jsonify(selected_toppings)
+
+@app.route('/dadjoke', methods=['GET'])
+def dad_joke():
+    jokes = [
+        {"Why don't skeletons fight each other? They don't have the guts."},
+        {"What do you call fake spaghetti? An impasta!"},
+        {"Why did the scarecrow win an award? Because he was outstanding in his field!"},
+        {"I would avoid the sushi if I was you. It’s a little fishy."},
+    ]
+    joke = random.choice(jokes)
+    return jsonify({"joke": joke})
+
+@app.route('/travel', methods=['GET','POST'])
+def travel():
+    destinations = [
+        "Paris, France",
+        "Rome, Italy",
+        "Maui, Hawaii",
+        "London, England",
+        "Tokyo, Japan",
+        "Barcelona, Spain"
+        ]
+    picked = "You should go to: " + str(random.choice(destinations))
+    return picked
+
+        
+        

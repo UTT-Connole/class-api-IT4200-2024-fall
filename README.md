@@ -19,6 +19,15 @@ Go to http://127.0.0.1:5000/twoManaCombos, get the combo name, and start buildin
 # How to get to the stoic quotes Endpoint
 go to http://127.0.0.1:5000/quotes for a good quote
 
+# How to use pizzaToppings Endpoint
+Go to http://127.0.0.1:5000/pizzaToppings to finally decide what to put on your pizza!
+
+# How to use Dad Jokes Endpoint
+Go to http://127.0.0.1:5000/dadjoke to laugh so hard you throw up!
+
+# How to use the Travel Randomizer Endpoint
+Go to http://127.0.0.1:5000/travel to be given a randomly chosen travel destination!
+
 ## Contributors:
 
 * Laura Coulome
