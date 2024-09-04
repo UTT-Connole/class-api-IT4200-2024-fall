@@ -65,6 +65,21 @@ def random_name():
     name = random.choice(names)
     return jsonify({"name": name})
 
+@app.route('/pizzaToppings', methods=['GET'])
+def pizza_toppings():
+    toppings = [
+        {"topping": "Pepperoni"},
+        {"topping": "Mushrooms"},
+        {"topping": "Chicken"},
+        {"topping": "Sausage"},
+        {"topping": "Bacon"},
+        {"topping": "Extra cheese"},
+        {"topping": "Pineapple"},
+        {"topping": "Spinach"}
+    ]
+    selected_toppings = random.sample(toppings, 3) 
+    return jsonify(selected_toppings)
+
 @app.route('/dadjoke', methods=['GET'])
 def dad_joke():
     jokes = [
@@ -75,3 +90,5 @@ def dad_joke():
     ]
     joke = random.choice(jokes)
     return jsonify({"joke": joke})
+
+
