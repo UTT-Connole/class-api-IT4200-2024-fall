@@ -2,6 +2,7 @@
 We will be using this repo to create an API for our entire class. We will use Flask for this application and each member of the class will work within this single repo.
 
 # How to run and get to your endpoint
+<<<<<<< HEAD
 To get to your endpoint go to the folder the app is in in a terminal (EX. class-api-IT4200-2024-fall) and run the command “python3 -m flask run”, this will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
 
 # How to use Calculator Endpoint
@@ -35,6 +36,8 @@ If the color doesn't exist in the library, you will get an error.
 
 Open up the url to http://127.0.0.1:5000/quotes
 Start reading people's favorite quotes!
+=======
+>>>>>>> 1dee111 (fixed README add)
 
 ## How to Use the Favorite Quote Endpoint
 
@@ -48,6 +51,13 @@ Use the template to return a hex code of the color you want "http://127.0.0.1:50
 Replace the "blue" at the end with any color of your choosing.
 If the color doesn't exist in the library, you will get an error.
 
+<<<<<<< HEAD
+=======
+# How to use the Quotes Endpoint
+
+Open up the url to http://127.0.0.1:5000/quotes
+Start reading people's favorite quotes!
+>>>>>>> 1dee111 (fixed README add)
 
 ## Contributors:
 
