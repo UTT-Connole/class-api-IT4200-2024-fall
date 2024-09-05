@@ -25,6 +25,8 @@ Go to http://127.0.0.1:5000/dadjoke to laugh so hard you throw up!
 # How to use the Travel Randomizer Endpoint
 Go to http://127.0.0.1:5000/travel to be given a randomly chosen travel destination!
 
+# How to use Marathon Facts Endpoint
+Go to http://127.0.0.1:5000/marathonFacts to learn a random fact about marathons! 
 
 ## Contributors:
 
