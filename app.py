@@ -13,14 +13,16 @@ def hello_world():
 def calc_main():
     x = request.args.get('x')
     y = request.args.get('y')
-    o = request.args.get('o')
-    if x and y:
+    op = request.args.get('op')
+    if x and y and op:
         x = int(x)
         y = int(y)
-        o = int(o)
-        result = x+y
     else:
         result = "Invalid Input"
+    if op == 'add':
+        result = x + y
+    elif op == 'subtract':
+        result = x - y
     return str(result)
 
 @app.route('/color', methods=['GET','POST'])
@@ -45,7 +47,7 @@ def random_combo():
             { "name": "Selesnya", "color_1": "white", "color_2": "green"}]
     r = two_m[random.randrange(len(two_m))]
     return r
-print(random_combo())
+"""print(random_combo()) <-Quoting this out because not really needed? Test it with the route!"""
 
 @app.route('/quotes', methods=['GET'])
 def fav_quotes():
@@ -105,6 +107,3 @@ def travel():
         ]
     picked = random.choice(destinations)
     return jsonify({"You should go to": picked})
-
-        
-        
