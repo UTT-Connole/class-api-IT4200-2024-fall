@@ -13,12 +13,16 @@ def hello_world():
 def calc_main():
     x = request.args.get('x')
     y = request.args.get('y')
-    if x and y:
+    op = request.args.get('op')
+    if x and y and op:
         x = int(x)
         y = int(y)
-        result = x+y
     else:
         result = "Invalid Input"
+    if op == 'add':
+        result = x + y
+    elif op == 'subtract':
+        result = x - y
     return str(result)
 
 @app.route('/color', methods=['GET','POST'])
@@ -43,7 +47,7 @@ def random_combo():
             { "name": "Selesnya", "color_1": "white", "color_2": "green"}]
     r = two_m[random.randrange(len(two_m))]
     return r
-print(random_combo())
+"""print(random_combo()) <-Quoting this out because not really needed? Test it with the route!"""
 
 @app.route('/quotes', methods=['GET'])
 def fav_quotes():
@@ -58,3 +62,48 @@ def fav_quotes():
 ]
     quote = random.choice(quotes)
     return jsonify(quote)
+
+@app.route('/randomName', methods=['GET'])
+def random_name():
+    names = ["Alice", "Bob", "Charlie", "Diana"]
+    name = random.choice(names)
+    return jsonify({"name": name})
+
+@app.route('/pizzaToppings', methods=['GET'])
+def pizza_toppings():
+    toppings = [
+        {"topping": "Pepperoni"},
+        {"topping": "Mushrooms"},
+        {"topping": "Chicken"},
+        {"topping": "Sausage"},
+        {"topping": "Bacon"},
+        {"topping": "Extra cheese"},
+        {"topping": "Pineapple"},
+        {"topping": "Spinach"}
+    ]
+    selected_toppings = random.sample(toppings, 3) 
+    return jsonify(selected_toppings)
+
+@app.route('/dadjoke', methods=['GET'])
+def dad_joke():
+    jokes = [
+        {"Why don't skeletons fight each other? They don't have the guts."},
+        {"What do you call fake spaghetti? An impasta!"},
+        {"Why did the scarecrow win an award? Because he was outstanding in his field!"},
+        {"I would avoid the sushi if I was you. It’s a little fishy."},
+    ]
+    joke = random.choice(jokes)
+    return jsonify({"joke": joke})
+
+@app.route('/travel', methods=['GET','POST'])
+def travel():
+    destinations = [
+        "Paris, France",
+        "Rome, Italy",
+        "Maui, Hawaii",
+        "London, England",
+        "Tokyo, Japan",
+        "Barcelona, Spain"
+        ]
+    picked = random.choice(destinations)
+    return jsonify({"You should go to": picked})
