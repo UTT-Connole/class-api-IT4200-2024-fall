@@ -14,8 +14,9 @@ To get to your endpoint go to the folder the app is in in a terminal (EX. class-
 
 # How to use Calculator Endpoint
 
-Use this template to add two numbers together "http://127.0.0.1:5000/calc?x=#&y=#"
-Replace the #'s with what ever numbers you would like!
+Use this template to add or subtract two numbers together "http://127.0.0.1:5000/calc?x=#&y=#&op=#"
+Replace the first two #'s with what ever numbers you would like! The last # is your operator
+Current Operators: add, subtract
 If you leave one of the variables empty, you will get an error.
 
 # How to use twoManaCombo Endpoint
@@ -23,7 +24,7 @@ If you leave one of the variables empty, you will get an error.
 Go to http://127.0.0.1:5000/twoManaCombos, get the combo name, and start building your next MTG deck!
 
 # How to get to the stoic quotes Endpoint
-go to http://127.0.0.1:5000/quotes for a good quote
+Go to http://127.0.0.1:5000/quotes for a good quote
 
 ## Dad Joke Generator Endpoint
 
