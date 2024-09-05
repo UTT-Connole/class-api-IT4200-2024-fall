@@ -101,8 +101,8 @@ def travel():
         "Tokyo, Japan",
         "Barcelona, Spain"
         ]
-    picked = "You should go to: " + str(random.choice(destinations))
-    return picked
+    picked = random.choice(destinations)
+    return jsonify({"You should go to": picked})
 
         
         
