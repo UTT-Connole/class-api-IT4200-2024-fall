@@ -29,6 +29,15 @@ go to http://127.0.0.1:5000/quotes for a good quote
 - Start the Flask server by running: `python3 -m flask run`
 - Visit `http://127.0.0.1:5000/dadjoke` in your browser to get a dad joke.
 
+=======
+# How to use pizzaToppings Endpoint
+Go to http://127.0.0.1:5000/pizzaToppings to finally decide what to put on your pizza!
+
+# How to use Dad Jokes Endpoint
+Go to http://127.0.0.1:5000/dadjoke to laugh so hard you throw up!
+
+# How to use the Travel Randomizer Endpoint
+Go to http://127.0.0.1:5000/travel to be given a randomly chosen travel destination!
 
 ## Contributors:
 
@@ -43,8 +52,17 @@ go to http://127.0.0.1:5000/quotes for a good quote
 * Dallin Hougaard
 * Andres
 * Travis Gunter
-* Josh Beckstrand
 * Not Donavan Franco
 * Morgan Andrus
 * Yomi Odubiyi
 * Brayden Connole
+
+
+## Add some Text art to make the repo more welcoming!
+* ⬛⬛⬛⬛⬛🟩🟩⬛🟩🟩⬛⬛⬛
+* ⬛⬛⬛⬛🟩🟩🟩🟩🟩🟩🟩⬛⬛ 
+* ⬛⬛⬛🟩🟩⬜⬛⬜⬜⬛🟩⬛⬛ 
+* ⬛⬛⬛🟩🟩🟩🟩🟩🟩🟩⬛⬛⬛
+* ⬛⬛🟩🟩🟩🟩🟫🟫🟫🟫⬛⬛⬛
+* ⬛⬛🟩🟩🟩🟩🟩🟩🟩⬛⬛⬛⬛
+* Pepe after forcing to main....
