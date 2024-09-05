@@ -19,6 +19,17 @@ Go to http://127.0.0.1:5000/twoManaCombos, get the combo name, and start buildin
 # How to get to the stoic quotes Endpoint
 go to http://127.0.0.1:5000/quotes for a good quote
 
+## Dad Joke Generator Endpoint
+
+- **Endpoint:** `/dadjoke`
+- **Method:** `GET`
+- **Description:** Returns a random dad joke.
+
+### How to Use:
+- Start the Flask server by running: `python3 -m flask run`
+- Visit `http://127.0.0.1:5000/dadjoke` in your browser to get a dad joke.
+
+
 ## Contributors:
 
 * Laura Coulome

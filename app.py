@@ -58,3 +58,9 @@ def fav_quotes():
 ]
     quote = random.choice(quotes)
     return jsonify(quote)
+
+    def dad_joke():
+    joke = {
+        "joke": "Why don't skeletons fight each other? They don't have the guts."
+    }
+    return jsonify(joke)
