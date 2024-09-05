@@ -111,6 +111,22 @@ def travel():
     picked = "You should go to: " + str(random.choice(destinations))
     return picked
 
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+# Endpoint for returning a favorite quote
+@app.route('/favoritequote', methods=['GET'])
+def get_favorite_quote():
+    favorite_quote = {
+        "quote": "The only way to do great work is to love what you do.",
+        "author": "Steve Jobs"
+    }
+    return jsonify(favorite_quote)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
         
         
 
