@@ -2,7 +2,6 @@
 We will be using this repo to create an API for our entire class. We will use Flask for this application and each member of the class will work within this single repo.
 
 # How to run and get to your endpoint
-<<<<<<< HEAD
 To get to your endpoint go to the folder the app is in in a terminal (EX. class-api-IT4200-2024-fall) and run the command “python3 -m flask run”, this will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
 
 # How to use Calculator Endpoint
@@ -29,6 +28,7 @@ Go to http://127.0.0.1:5000/travel to be given a randomly chosen travel destinat
 
 # How to use Marathon Facts Endpoint
 Go to http://127.0.0.1:5000/marathonFacts to learn a random fact about marathons! 
+<<<<<<< HEAD
 Use the template to return a hex code of the color you want "http://127.0.0.1:5000/color?color=blue"
 Replace the "blue" at the end with any color of your choosing.
 If the color doesn't exist in the library, you will get an error.
@@ -58,10 +58,8 @@ If the color doesn't exist in the library, you will get an error.
 
 Open up the url to http://127.0.0.1:5000/quotes
 Start reading people's favorite quotes!
->>>>>>> 1dee111 (fixed README add)
-=======
 go to http://127.0.0.1:5000/quotes for a good quote
->>>>>>> ccf6a5e (removed duplicate quote endpoint and combined all the quotes, removed duplicate endpoint description in README)
+
 
 ## Contributors:
 
@@ -78,7 +76,6 @@ go to http://127.0.0.1:5000/quotes for a good quote
 * Travis Gunter
 * Morgan Andrus
 * Yomi Odubiyi
-<<<<<<< HEAD
 * Brayden Connole
 
 ## Add some Text art to make the repo more welcoming!
@@ -104,6 +101,4 @@ Go Trailblazers!
        `)_/    \  \  )    ( >  ( >
                 \( \(     |/   |/
                 /_(/_(    /_(  /_(
-=======
-* Brayden Connole
->>>>>>> ccf6a5e (removed duplicate quote endpoint and combined all the quotes, removed duplicate endpoint description in README)
+
