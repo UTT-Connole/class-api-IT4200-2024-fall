@@ -13,9 +13,11 @@ def hello_world():
 def calc_main():
     x = request.args.get('x')
     y = request.args.get('y')
+    o = request.args.get('o')
     if x and y:
         x = int(x)
         y = int(y)
+        o = int(o)
         result = x+y
     else:
         result = "Invalid Input"
