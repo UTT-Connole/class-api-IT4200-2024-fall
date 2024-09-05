@@ -91,4 +91,18 @@ def dad_joke():
     joke = random.choice(jokes)
     return jsonify({"joke": joke})
 
+@app.route('/travel', methods=['GET','POST'])
+def travel():
+    destinations = [
+        "Paris, France",
+        "Rome, Italy",
+        "Maui, Hawaii",
+        "London, England",
+        "Tokyo, Japan",
+        "Barcelona, Spain"
+        ]
+    picked = "You should go to: " + str(random.choice(destinations))
+    return picked
 
+        
+        
