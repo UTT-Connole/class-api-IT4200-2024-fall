@@ -149,4 +149,3 @@ if __name__ == '__main__':
 
     picked = random.choice(destinations)
     return jsonify({"You should go to": picked})
-
