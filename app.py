@@ -123,7 +123,7 @@ def marathon_facts():
     random_fact = random.choice(facts)
     return jsonify(random_fact)
 
-    @app.route('/favoritequote', methods=['GET'])
+@app.route('/favoritequote', methods=['GET'])
 def get_favorite_quote():
     favorite_quote = {
         "quote": "The only way to do great work is to love what you do.",
@@ -131,10 +131,10 @@ def get_favorite_quote():
     }
     return jsonify(favorite_quote)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+    if __name__ == '__main__':
+        app.run(debug=True)
 
-    picked = random.choice(destinations)
+        picked = random.choice(destinations)
     return jsonify({"You should go to": picked})
 
 from flask import Flask, jsonify
