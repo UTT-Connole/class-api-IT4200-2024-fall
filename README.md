@@ -38,6 +38,10 @@ To retrieve a favorite quote, navigate to:
 
 http://127.0.0.1:5000/favoritequote
 
+## Fortune Cookie Endpoint
+
+This API has a `/fortune` endpoint that returns a random fortune in JSON format. 
+
 
 ## Contributors:
 
