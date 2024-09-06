@@ -16,11 +16,6 @@ If you leave one of the variables empty, you will get an error.
 
 Go to http://127.0.0.1:5000/twoManaCombos, get the combo name, and start building your next MTG deck!
 
-# How to use the Quotes Endpoint
-
-Open up the url to http://127.0.0.1:5000/quotes
-Start reading people's favorite quotes!
-
 # How to get to the stoic quotes Endpoint
 go to http://127.0.0.1:5000/quotes for a good quote
 

@@ -9,14 +9,6 @@ app = Flask(__name__)
 def hello_world():
     return "Hello World"
 
-@app.route('/quotes', methods=['GET'])
-def favoriteQuotes():
-        quotes = '''
-        [
-            {"quote": "If more of us valued food and cheer and song above hoarded gold, it would be a merrier world.", "author": Thorin Oakenshield}
-        ]'''
-        return quotes
-
 @app.route('/calc', methods=['GET','POST'])
 def calc_main():
     x = request.args.get('x')
@@ -62,7 +54,8 @@ def fav_quotes():
     {"author": "Seneca", "quote": "We suffer more in imagination than in reality."},
     {"author": "Marcus Aurelius", "quote": "Waste no more time arguing about what a good man should be. Be one."},
     {"author": "Epictetus", "quote": "No man is free who is not master of himself."},
-    {"author": "Seneca", "quote": "Luck is what happens when preparation meets opportunity."}
+    {"author": "Seneca", "quote": "Luck is what happens when preparation meets opportunity."},
+    {"author": "Thorin Oakenshield", "quote": "If more of us valued food and cheer and song above hoarded gold, it would be a merrier world."}
 ]
     quote = random.choice(quotes)
     return jsonify(quote)
