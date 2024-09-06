@@ -117,7 +117,12 @@ def travel():
         "Maui, Hawaii",
         "London, England",
         "Tokyo, Japan",
-        "Barcelona, Spain"
+        "Barcelona, Spain",
+        "Sacramento, California",
+        "Salt Lake, Utah",
+        "Denver, Colorado",
+        "Santa Cruise, California",
+        "London, England"
         ]
     picked = random.choice(destinations)
     return jsonify({"You should go to": picked})
