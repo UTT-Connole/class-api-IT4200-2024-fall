@@ -32,6 +32,13 @@ Go to http://127.0.0.1:5000/travel to be given a randomly chosen travel destinat
 # How to use Marathon Facts Endpoint
 Go to http://127.0.0.1:5000/marathonFacts to learn a random fact about marathons! 
 
+## How to Use the Favorite Quote Endpoint
+
+To retrieve a favorite quote, navigate to:
+
+http://127.0.0.1:5000/favoritequote
+
+
 ## Contributors:
 
 * Laura Coulome
