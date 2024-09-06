@@ -49,6 +49,13 @@ Replace the "blue" at the end with any color of your choosing.
 If the color doesn't exist in the library, you will get an error.
 
 
+## How to Use the Favorite Quote Endpoint
+
+To retrieve a favorite quote, navigate to:
+
+http://127.0.0.1:5000/favoritequote
+
+
 ## Contributors:
 
 * Laura Coulome
