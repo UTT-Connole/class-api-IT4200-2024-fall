@@ -30,7 +30,7 @@ Go to http://127.0.0.1:5000/quotes for a good quote
 Go to http://127.0.0.1:5000/pizzaToppings to finally decide what to put on your pizza!
 
 # How to use Dad Jokes Endpoint
-Go to http://127.0.0.1:5000/dadjoke to laugh so hard you throw up!
+Go to http://127.0.0.1:5000/dadjoke to laugh so hard you throw up! Now with even more hilarious Dad jokes!
 
 # How to use the Travel Randomizer Endpoint
 Go to http://127.0.0.1:5000/travel to be given a randomly chosen travel destination!
