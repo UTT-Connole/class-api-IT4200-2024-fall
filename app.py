@@ -117,7 +117,12 @@ def travel():
         "Maui, Hawaii",
         "London, England",
         "Tokyo, Japan",
-        "Barcelona, Spain"
+        "Barcelona, Spain",
+        "Sacramento, California",
+        "Salt Lake, Utah",
+        "Denver, Colorado",
+        "Santa Cruise, California",
+        "London, England"
         ]
     picked = random.choice(destinations)
     return jsonify({"You should go to": picked})
@@ -144,8 +149,8 @@ def get_favorite_quote():
     }
     return jsonify(favorite_quote)
 
-    if __name__ == '__main__':
-        app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
 
     picked = random.choice(destinations)
 
