@@ -23,6 +23,15 @@ def calc_main():
         result = x + y
     elif op == 'subtract':
         result = x - y
+    elif op == 'multiply':
+        result = x * y
+    elif op == 'divide':
+        if y != 0:
+            result = x / y
+        else:
+            result = "You cannot divide by 0"
+    else:
+        result = "You might have spelled something wrong"
     return str(result)
 
 @app.route('/color', methods=['GET','POST'])
@@ -92,6 +101,10 @@ def dad_joke():
         "What do you call fake spaghetti? An impasta!",
         "Why did the scarecrow win an award? Because he was outstanding in his field!",
         "I would avoid the sushi if I was you. It’s a little fishy."
+        "Today, my son asked 'Can I have a book mark?' and I burst into tears. 11 years old and he still doesn't know my name is Brian. "
+        "I went to the aquarium this weekend, but I didn’t stay long. There’s something fishy about that place."
+        "I gave my handyman a to-do list, but he only did jobs 1, 3, and 5. Turns out he only does odd jobs."
+        "I’m reading a horror story in braille. Something bad is going to happen, I can just feel it."
     ]
     joke = random.choice(jokes)
     return jsonify({"joke": joke})
@@ -134,8 +147,7 @@ def get_favorite_quote():
     if __name__ == '__main__':
         app.run(debug=True)
 
-        picked = random.choice(destinations)
-    return jsonify({"You should go to": picked})
+    picked = random.choice(destinations)
 
 from flask import Flask, jsonify
 import random
@@ -154,3 +166,4 @@ def get_fortune():
 
 if __name__ == '__main__':
     app.run(debug=True)
+#    return jsonify({"You should go to": picked})
