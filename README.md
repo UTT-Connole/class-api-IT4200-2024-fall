@@ -56,6 +56,13 @@ To retrieve a favorite quote, navigate to:
 http://127.0.0.1:5000/favoritequote
 
 
+## How to Use the Favorite Quote Endpoint
+
+To retrieve a favorite quote, navigate to:
+
+http://127.0.0.1:5000/favoritequote
+
+
 ## Contributors:
 
 * Laura Coulome
