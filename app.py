@@ -136,3 +136,21 @@ if __name__ == '__main__':
 
     picked = random.choice(destinations)
     return jsonify({"You should go to": picked})
+
+from flask import Flask, jsonify
+import random
+
+app = Flask(__name__)
+
+@app.route('/fortune', methods=['GET'])
+def get_fortune():
+    fortunes = [
+        "You will find a fortune.",
+        "A fresh start will put you on your way.",
+        "Fortune favors the brave.",
+        "Good news will come to you by mail."
+    ]
+    return jsonify({"fortune": random.choice(fortunes)})
+
+if __name__ == '__main__':
+    app.run(debug=True)
