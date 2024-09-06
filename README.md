@@ -15,6 +15,7 @@ If you leave one of the variables empty, you will get an error.
 Go to http://127.0.0.1:5000/twoManaCombos, get the combo name, and start building your next MTG deck!
 
 # How to get to the stoic quotes Endpoint
+<<<<<<< HEAD
 Go to http://127.0.0.1:5000/quotes for a good quote
 
 # How to use pizzaToppings Endpoint
@@ -58,6 +59,9 @@ If the color doesn't exist in the library, you will get an error.
 Open up the url to http://127.0.0.1:5000/quotes
 Start reading people's favorite quotes!
 >>>>>>> 1dee111 (fixed README add)
+=======
+go to http://127.0.0.1:5000/quotes for a good quote
+>>>>>>> ccf6a5e (removed duplicate quote endpoint and combined all the quotes, removed duplicate endpoint description in README)
 
 ## Contributors:
 
@@ -74,6 +78,7 @@ Start reading people's favorite quotes!
 * Travis Gunter
 * Morgan Andrus
 * Yomi Odubiyi
+<<<<<<< HEAD
 * Brayden Connole
 
 ## Add some Text art to make the repo more welcoming!
@@ -99,3 +104,6 @@ Go Trailblazers!
        `)_/    \  \  )    ( >  ( >
                 \( \(     |/   |/
                 /_(/_(    /_(  /_(
+=======
+* Brayden Connole
+>>>>>>> ccf6a5e (removed duplicate quote endpoint and combined all the quotes, removed duplicate endpoint description in README)

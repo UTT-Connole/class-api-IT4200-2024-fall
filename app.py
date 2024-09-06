@@ -11,6 +11,7 @@ def hello_world():
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 @app.route('/quotes', methods=['GET'])
 def favoriteQuotes():
@@ -21,6 +22,8 @@ def favoriteQuotes():
         return quotes
 
 >>>>>>> e103bcb (fixed merges)
+=======
+>>>>>>> ccf6a5e (removed duplicate quote endpoint and combined all the quotes, removed duplicate endpoint description in README)
 @app.route('/calc', methods=['GET','POST'])
 def calc_main():
     x = request.args.get('x')
