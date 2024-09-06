@@ -58,7 +58,8 @@ def fav_quotes():
     {"author": "Seneca", "quote": "We suffer more in imagination than in reality."},
     {"author": "Marcus Aurelius", "quote": "Waste no more time arguing about what a good man should be. Be one."},
     {"author": "Epictetus", "quote": "No man is free who is not master of himself."},
-    {"author": "Seneca", "quote": "Luck is what happens when preparation meets opportunity."}
+    {"author": "Seneca", "quote": "Luck is what happens when preparation meets opportunity."},
+    {"author": "Thorin Oakenshield", "quote": "If more of us valued food and cheer and song above hoarded gold, it would be a merrier world."}
 ]
     quote = random.choice(quotes)
     return jsonify(quote)
