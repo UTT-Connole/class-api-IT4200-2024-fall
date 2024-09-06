@@ -128,7 +128,11 @@ def marathon_facts():
     random_fact = random.choice(facts)
     return jsonify(random_fact)
 
+<<<<<<< HEAD
 @app.route('/favoritequote', methods=['GET'])
+=======
+    @app.route('/favoritequote', methods=['GET'])
+>>>>>>> 8b1086b (Added code and README)
 def get_favorite_quote():
     favorite_quote = {
         "quote": "The only way to do great work is to love what you do.",
