@@ -23,6 +23,15 @@ def calc_main():
         result = x + y
     elif op == 'subtract':
         result = x - y
+    elif op == 'multiply':
+        result = x * y
+    elif op == 'divide':
+        if y != 0:
+            result = x / y
+        else:
+            result = "You cannot divide by 0"
+    else:
+        result = "You might have spelled something wrong"
     return str(result)
 
 @app.route('/color', methods=['GET','POST'])
@@ -123,7 +132,7 @@ def marathon_facts():
     random_fact = random.choice(facts)
     return jsonify(random_fact)
 
-    @app.route('/favoritequote', methods=['GET'])
+@app.route('/favoritequote', methods=['GET'])
 def get_favorite_quote():
     favorite_quote = {
         "quote": "The only way to do great work is to love what you do.",
@@ -135,7 +144,6 @@ if __name__ == '__main__':
     app.run(debug=True)
 
     picked = random.choice(destinations)
-    return jsonify({"You should go to": picked})
 
 from flask import Flask, jsonify
 import random
@@ -154,3 +162,4 @@ def get_fortune():
 
 if __name__ == '__main__':
     app.run(debug=True)
+#    return jsonify({"You should go to": picked})
