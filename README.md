@@ -25,6 +25,17 @@ Go to http://127.0.0.1:5000/dadjoke to laugh so hard you throw up!
 # How to use the Travel Randomizer Endpoint
 Go to http://127.0.0.1:5000/travel to be given a randomly chosen travel destination!
 
+# How to use Marathon Facts Endpoint
+Go to http://127.0.0.1:5000/marathonFacts to learn a random fact about marathons! 
+Use the template to return a hex code of the color you want "http://127.0.0.1:5000/color?color=blue"
+Replace the "blue" at the end with any color of your choosing.
+If the color doesn't exist in the library, you will get an error.
+
+## How to Use the Favorite Quote Endpoint
+
+To retrieve a favorite quote, navigate to:
+
+http://127.0.0.1:5000/favoritequote
 
 ## Contributors:
 
@@ -39,11 +50,9 @@ Go to http://127.0.0.1:5000/travel to be given a randomly chosen travel destinat
 * Dallin Hougaard
 * Andres
 * Travis Gunter
-* Not Donavan Franco
 * Morgan Andrus
 * Yomi Odubiyi
 * Brayden Connole
-
 
 ## Add some Text art to make the repo more welcoming!
 * ⬛⬛⬛⬛⬛🟩🟩⬛🟩🟩⬛⬛⬛
@@ -69,3 +78,4 @@ Go Trailblazers!
        `)_/    \  \  )    ( >  ( >
                 \( \(     |/   |/
                 /_(/_(    /_(  /_(
+

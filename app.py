@@ -58,7 +58,8 @@ def fav_quotes():
     {"author": "Seneca", "quote": "We suffer more in imagination than in reality."},
     {"author": "Marcus Aurelius", "quote": "Waste no more time arguing about what a good man should be. Be one."},
     {"author": "Epictetus", "quote": "No man is free who is not master of himself."},
-    {"author": "Seneca", "quote": "Luck is what happens when preparation meets opportunity."}
+    {"author": "Seneca", "quote": "Luck is what happens when preparation meets opportunity."},
+    {"author": "Thorin Oakenshield", "quote": "If more of us valued food and cheer and song above hoarded gold, it would be a merrier world."}
 ]
     quote = random.choice(quotes)
     return jsonify(quote)
@@ -105,5 +106,33 @@ def travel():
         "Tokyo, Japan",
         "Barcelona, Spain"
         ]
+    picked = random.choice(destinations)
+    return jsonify({"You should go to": picked})
+
+@app.route('/marathonFacts', methods=['GET'])
+def marathon_facts():
+    facts = [
+        {"fact": "The first marathon was in 1896 during the Athens Olympics.", "category": "history"},
+        {"fact": "The official marathon distance is 26.2 miles (42.195 km).", "category": "distance"},
+        {"fact": "The fastest marathon time for men is 2:01:39.", "category": "records"},
+        {"fact": "The fastest marathon time for women is 2:14:04.", "category": "records"},
+        {"fact": "Eliud Kipchoge ran a marathon in under 2 hours in a special event.", "category": "milestones"},
+        {"fact": "Over 50,000 runners finish the New York City Marathon each year.", "category": "participation"}
+    ]
+    
+    random_fact = random.choice(facts)
+    return jsonify(random_fact)
+
+    @app.route('/favoritequote', methods=['GET'])
+def get_favorite_quote():
+    favorite_quote = {
+        "quote": "The only way to do great work is to love what you do.",
+        "author": "Steve Jobs"
+    }
+    return jsonify(favorite_quote)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
     picked = random.choice(destinations)
     return jsonify({"You should go to": picked})
