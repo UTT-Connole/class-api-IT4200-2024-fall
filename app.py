@@ -23,6 +23,15 @@ def calc_main():
         result = x + y
     elif op == 'subtract':
         result = x - y
+    elif op == 'multiply':
+        result = x * y
+    elif op == 'divide':
+        if y != 0:
+            result = x / y
+        else:
+            result = "You cannot divide by 0"
+    else:
+        result = "You might have spelled something wrong"
     return str(result)
 
 @app.route('/color', methods=['GET','POST'])
@@ -58,7 +67,8 @@ def fav_quotes():
     {"author": "Seneca", "quote": "We suffer more in imagination than in reality."},
     {"author": "Marcus Aurelius", "quote": "Waste no more time arguing about what a good man should be. Be one."},
     {"author": "Epictetus", "quote": "No man is free who is not master of himself."},
-    {"author": "Seneca", "quote": "Luck is what happens when preparation meets opportunity."}
+    {"author": "Seneca", "quote": "Luck is what happens when preparation meets opportunity."},
+    {"author": "Thorin Oakenshield", "quote": "If more of us valued food and cheer and song above hoarded gold, it would be a merrier world."}
 ]
     quote = random.choice(quotes)
     return jsonify(quote)
@@ -98,6 +108,10 @@ def dad_joke():
         "What do you call fake spaghetti? An impasta!",
         "Why did the scarecrow win an award? Because he was outstanding in his field!",
         "I would avoid the sushi if I was you. It’s a little fishy."
+        "Today, my son asked 'Can I have a book mark?' and I burst into tears. 11 years old and he still doesn't know my name is Brian. "
+        "I went to the aquarium this weekend, but I didn’t stay long. There’s something fishy about that place."
+        "I gave my handyman a to-do list, but he only did jobs 1, 3, and 5. Turns out he only does odd jobs."
+        "I’m reading a horror story in braille. Something bad is going to happen, I can just feel it."
     ]
     joke = random.choice(jokes)
     return jsonify({"joke": joke})
@@ -138,3 +152,49 @@ if __name__ == '__main__':
 =======
     picked = random.choice(destinations)
     return jsonify({"You should go to": picked})
+
+@app.route('/marathonFacts', methods=['GET'])
+def marathon_facts():
+    facts = [
+        {"fact": "The first marathon was in 1896 during the Athens Olympics.", "category": "history"},
+        {"fact": "The official marathon distance is 26.2 miles (42.195 km).", "category": "distance"},
+        {"fact": "The fastest marathon time for men is 2:01:39.", "category": "records"},
+        {"fact": "The fastest marathon time for women is 2:14:04.", "category": "records"},
+        {"fact": "Eliud Kipchoge ran a marathon in under 2 hours in a special event.", "category": "milestones"},
+        {"fact": "Over 50,000 runners finish the New York City Marathon each year.", "category": "participation"}
+    ]
+    
+    random_fact = random.choice(facts)
+    return jsonify(random_fact)
+
+@app.route('/favoritequote', methods=['GET'])
+def get_favorite_quote():
+    favorite_quote = {
+        "quote": "The only way to do great work is to love what you do.",
+        "author": "Steve Jobs"
+    }
+    return jsonify(favorite_quote)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+    picked = random.choice(destinations)
+
+from flask import Flask, jsonify
+import random
+
+app = Flask(__name__)
+
+@app.route('/fortune', methods=['GET'])
+def get_fortune():
+    fortunes = [
+        "You will find a fortune.",
+        "A fresh start will put you on your way.",
+        "Fortune favors the brave.",
+        "Good news will come to you by mail."
+    ]
+    return jsonify({"fortune": random.choice(fortunes)})
+
+if __name__ == '__main__':
+    app.run(debug=True)
+#    return jsonify({"You should go to": picked})
