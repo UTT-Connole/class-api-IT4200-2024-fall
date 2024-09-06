@@ -35,11 +35,6 @@ Use the template to return a hex code of the color you want "http://127.0.0.1:50
 Replace the "blue" at the end with any color of your choosing.
 If the color doesn't exist in the library, you will get an error.
 
-# How to use the Quotes Endpoint
-
-Open up the url to http://127.0.0.1:5000/quotes
-Start reading people's favorite quotes!
-
 ## Contributors:
 
 * Laura Coulome
