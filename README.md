@@ -2,6 +2,12 @@
 
 We will be using this repo to create an API for our entire class. We will use Flask for this application and each member of the class will work within this single repo.
 
+# How to install matplotlib
+
+Make sure to run these commands before you run the Flask app. It will install matplotlib
+python3 -m pip install -U pip
+python3 -m pip install -U matplotlib
+
 # How to run and get to your endpoint
 
 To get to your endpoint go to the folder the app is in in a terminal (EX. class-api-IT4200-2024-fall) and run the command “python3 -m flask run”, this will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
@@ -10,7 +16,7 @@ To get to your endpoint go to the folder the app is in in a terminal (EX. class-
 
 Use this template to add or subtract two numbers together "http://127.0.0.1:5000/calc?x=#&y=#&op=#"
 Replace the first two #'s with what ever numbers you would like! The last # is your operator
-Current Operators: add, subtract
+Current Operators: add, subtract, multiply, divide
 If you leave one of the variables empty, you will get an error.
 
 # How to use twoManaCombo Endpoint
