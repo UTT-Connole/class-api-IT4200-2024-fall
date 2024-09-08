@@ -177,3 +177,15 @@ def get_fortune():
 if __name__ == '__main__':
     app.run(debug=True)
 #    return jsonify({"You should go to": picked})
+
+@app.route('/tennisFacts', methods=['GET'])
+def tennis_facts_endpoint():
+    tennis_facts = [
+        {"fact": "The longest tennis match lasted 11 hours and 5 minutes at Wimbledon in 2010.", "category": "records"},
+        {"fact": "The US Open is played on hard courts.", "category": "tournaments"},
+        {"fact": "Serena Williams has 23 Grand Slam singles titles.", "category": "players"},
+        {"fact": "Roger Federer, Rafael Nadal, and Novak Djokovic each have 20 Grand Slam titles.", "category": "players"},
+        {"fact": "'Love' in tennis means zero, from the French 'l'oeuf' meaning egg.", "category": "terminology"},
+        {"fact": "Wimbledon is the oldest tennis tournament, started in 1877.", "category": "history"}
+    ]
+    return jsonify(random.choice(tennis_facts))
