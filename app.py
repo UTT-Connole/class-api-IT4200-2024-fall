@@ -58,7 +58,12 @@ def fav_quotes():
     {"author": "Seneca", "quote": "We suffer more in imagination than in reality."},
     {"author": "Marcus Aurelius", "quote": "Waste no more time arguing about what a good man should be. Be one."},
     {"author": "Epictetus", "quote": "No man is free who is not master of himself."},
-    {"author": "Seneca", "quote": "Luck is what happens when preparation meets opportunity."}
+    {"author": "Seneca", "quote": "Luck is what happens when preparation meets opportunity."},
+    {"author": "Marcus Aurelius", "quote": "Things are not asking to be judged by you."},
+    {"author": "Marcus Aurelius", "quote": "The best revenge is to be unlike hom who performed the injury."},
+    {"author": "Plato", "quote": "We can easily forgive a child who is afraid of the dark; the real tragedy of life is when men are afraid of the light."},
+    {"author": "Plato", "quote": "Wise men talk because they have something to say; fools, because they have to say something."},
+    {"author": "Plato", "quote": "Human behavior flows from threee main sources: desire, emotion, and knowledge."}
 ]
     quote = random.choice(quotes)
     return jsonify(quote)
@@ -122,7 +127,7 @@ def marathon_facts():
     random_fact = random.choice(facts)
     return jsonify(random_fact)
 
-    @app.route('/favoritequote', methods=['GET'])
+@app.route('/favoritequote', methods=['GET'])
 def get_favorite_quote():
     favorite_quote = {
         "quote": "The only way to do great work is to love what you do.",
@@ -133,5 +138,3 @@ def get_favorite_quote():
 if __name__ == '__main__':
     app.run(debug=True)
 
-    picked = random.choice(destinations)
-    return jsonify({"You should go to": picked})
