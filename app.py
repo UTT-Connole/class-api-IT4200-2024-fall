@@ -174,6 +174,18 @@ def get_fortune():
     ]
     return jsonify({"fortune": random.choice(fortunes)})
 
+@app.route('/randomFact', methods=['GET'])
+def random_fact():
+    facts = [
+        {"fact": "Honey never spoils."},
+        {"fact": "Octopuses have three hearts."},
+        {"fact": "Bananas are berries, but strawberries are not."},
+        {"fact": "A day on Venus is longer than a year on Venus."},
+        {"fact": "Sharks have been around longer than trees."}
+    ]
+    selected_fact = random.choice(facts)
+    return jsonify(selected_fact)
+
 if __name__ == '__main__':
     app.run(debug=True)
 #    return jsonify({"You should go to": picked})

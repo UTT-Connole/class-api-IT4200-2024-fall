@@ -58,6 +58,11 @@ If the color doesn't exist in the library, you will get an error.
 
 This API has a `/fortune` endpoint that returns a random fortune in JSON format. 
 
+## How to use the Random Fact Endpoint
+
+To retrieve a random fact, navigate to http://127.0.0.1:5000/randomFact
+
+
 ## Contributors:
 
 * Laura Coulome
