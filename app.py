@@ -174,9 +174,18 @@ def get_fortune():
     ]
     return jsonify({"fortune": random.choice(fortunes)})
 
-if __name__ == '__main__':
-    app.run(debug=True)
-#    return jsonify({"You should go to": picked})
+@app.route('/randomFact', methods=['GET'])
+
+def random_fact():
+    facts = [
+        {"fact": "Honey never spoils."},
+        {"fact": "Octopuses have three hearts."},
+        {"fact": "Bananas are berries, but strawberries are not."},
+        {"fact": "A day on Venus is longer than a year on Venus."},
+        {"fact": "Sharks have been around longer than trees."}
+    ]
+    selected_fact = random.choice(facts)
+    return jsonify(selected_fact)
 
 @app.route('/tennisFacts', methods=['GET'])
 def tennis_facts_endpoint():
@@ -189,3 +198,7 @@ def tennis_facts_endpoint():
         {"fact": "Wimbledon is the oldest tennis tournament, started in 1877.", "category": "history"}
     ]
     return jsonify(random.choice(tennis_facts))
+
+if __name__ == '__main__':
+    app.run(debug=True)
+#    return jsonify({"You should go to": picked})
