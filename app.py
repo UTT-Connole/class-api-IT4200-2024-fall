@@ -68,6 +68,11 @@ def fav_quotes():
     {"author": "Marcus Aurelius", "quote": "Waste no more time arguing about what a good man should be. Be one."},
     {"author": "Epictetus", "quote": "No man is free who is not master of himself."},
     {"author": "Seneca", "quote": "Luck is what happens when preparation meets opportunity."},
+    {"author": "Marcus Aurelius", "quote": "Things are not asking to be judged by you."},
+    {"author": "Marcus Aurelius", "quote": "The best revenge is to be unlike hom who performed the injury."},
+    {"author": "Plato", "quote": "We can easily forgive a child who is afraid of the dark; the real tragedy of life is when men are afraid of the light."},
+    {"author": "Plato", "quote": "Wise men talk because they have something to say; fools, because they have to say something."},
+    {"author": "Plato", "quote": "Human behavior flows from threee main sources: desire, emotion, and knowledge."}
     {"author": "Thorin Oakenshield", "quote": "If more of us valued food and cheer and song above hoarded gold, it would be a merrier world."}
 ]
     quote = random.choice(quotes)
@@ -156,6 +161,7 @@ def get_favorite_quote():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
     picked = random.choice(destinations)
 
