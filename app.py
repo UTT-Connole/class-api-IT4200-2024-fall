@@ -23,6 +23,15 @@ def calc_main():
         result = x + y
     elif op == 'subtract':
         result = x - y
+    elif op == 'multiply':
+        result = x * y
+    elif op == 'divide':
+        if y != 0:
+            result = x / y
+        else:
+            result = "You cannot divide by 0"
+    else:
+        result = "You might have spelled something wrong"
     return str(result)
 
 @app.route('/color', methods=['GET','POST'])
@@ -64,6 +73,7 @@ def fav_quotes():
     {"author": "Plato", "quote": "We can easily forgive a child who is afraid of the dark; the real tragedy of life is when men are afraid of the light."},
     {"author": "Plato", "quote": "Wise men talk because they have something to say; fools, because they have to say something."},
     {"author": "Plato", "quote": "Human behavior flows from threee main sources: desire, emotion, and knowledge."}
+    {"author": "Thorin Oakenshield", "quote": "If more of us valued food and cheer and song above hoarded gold, it would be a merrier world."}
 ]
     quote = random.choice(quotes)
     return jsonify(quote)
@@ -96,6 +106,10 @@ def dad_joke():
         "What do you call fake spaghetti? An impasta!",
         "Why did the scarecrow win an award? Because he was outstanding in his field!",
         "I would avoid the sushi if I was you. It’s a little fishy."
+        "Today, my son asked 'Can I have a book mark?' and I burst into tears. 11 years old and he still doesn't know my name is Brian. "
+        "I went to the aquarium this weekend, but I didn’t stay long. There’s something fishy about that place."
+        "I gave my handyman a to-do list, but he only did jobs 1, 3, and 5. Turns out he only does odd jobs."
+        "I’m reading a horror story in braille. Something bad is going to happen, I can just feel it."
     ]
     joke = random.choice(jokes)
     return jsonify({"joke": joke})
@@ -108,7 +122,17 @@ def travel():
         "Maui, Hawaii",
         "London, England",
         "Tokyo, Japan",
-        "Barcelona, Spain"
+        "Barcelona, Spain",
+        "New York City, New York",
+        "Los Angeles, California",
+        "Dublin, Ireland",
+        "Cairo, Egypt",
+        "Sydney, Australia",
+        "Sacramento, California",
+        "Salt Lake, Utah",
+        "Denver, Colorado",
+        "Santa Cruise, California",
+        "London, England"
         ]
     picked = random.choice(destinations)
     return jsonify({"You should go to": picked})
@@ -138,3 +162,24 @@ def get_favorite_quote():
 if __name__ == '__main__':
     app.run(debug=True)
 
+
+    picked = random.choice(destinations)
+
+from flask import Flask, jsonify
+import random
+
+app = Flask(__name__)
+
+@app.route('/fortune', methods=['GET'])
+def get_fortune():
+    fortunes = [
+        "You will find a fortune.",
+        "A fresh start will put you on your way.",
+        "Fortune favors the brave.",
+        "Good news will come to you by mail."
+    ]
+    return jsonify({"fortune": random.choice(fortunes)})
+
+if __name__ == '__main__':
+    app.run(debug=True)
+#    return jsonify({"You should go to": picked})
