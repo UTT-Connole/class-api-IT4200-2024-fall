@@ -175,6 +175,7 @@ def get_fortune():
     return jsonify({"fortune": random.choice(fortunes)})
 
 @app.route('/randomFact', methods=['GET'])
+
 def random_fact():
     facts = [
         {"fact": "Honey never spoils."},
