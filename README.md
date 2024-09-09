@@ -68,6 +68,8 @@ To retrieve a random fact, navigate to http://127.0.0.1:5000/randomFact
 
 🎾 Go to http://127.0.0.1:5000/tennisFacts to learn fun facts about tennis!
 
+# How to use the Pokefishing Endpoint
+Go to http://127.0.0.1:5000/pokefishing to catch a Magikarp!
 
 ## Contributors:
 
