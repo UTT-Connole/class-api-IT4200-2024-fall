@@ -72,9 +72,9 @@ def fav_quotes():
     {"author": "Marcus Aurelius", "quote": "The best revenge is to be unlike hom who performed the injury."},
     {"author": "Plato", "quote": "We can easily forgive a child who is afraid of the dark; the real tragedy of life is when men are afraid of the light."},
     {"author": "Plato", "quote": "Wise men talk because they have something to say; fools, because they have to say something."},
-    {"author": "Plato", "quote": "Human behavior flows from threee main sources: desire, emotion, and knowledge."}
+    {"author": "Plato", "quote": "Human behavior flows from threee main sources: desire, emotion, and knowledge."},
     {"author": "Thorin Oakenshield", "quote": "If more of us valued food and cheer and song above hoarded gold, it would be a merrier world."}
-]
+    ]
     quote = random.choice(quotes)
     return jsonify(quote)
 
@@ -159,17 +159,6 @@ def get_favorite_quote():
     }
     return jsonify(favorite_quote)
 
-if __name__ == '__main__':
-    app.run(debug=True)
-
-
-    picked = random.choice(destinations)
-
-from flask import Flask, jsonify
-import random
-
-app = Flask(__name__)
-
 @app.route('/fortune', methods=['GET'])
 def get_fortune():
     fortunes = [
@@ -181,7 +170,6 @@ def get_fortune():
     return jsonify({"fortune": random.choice(fortunes)})
 
 @app.route('/randomFact', methods=['GET'])
-
 def random_fact():
     facts = [
         {"fact": "Honey never spoils."},
@@ -205,15 +193,12 @@ def tennis_facts_endpoint():
     ]
     return jsonify(random.choice(tennis_facts))
 
-if __name__ == '__main__':
-    app.run(debug=True)
-
 @app.route('/howToMakeEndpoint', methods=['GET'])
 def get_endpoints():
-	endpointSteps = {
-		"step 1" = " Import Flask "
-		"step 2" = " Create app"
-		"step 3" = " Define endpoint with @app.route"
-		"step 4" = " write the endpoint function"
-	}
-	return jsonify({"Follow these steps": endpointSteps)
+	endpointSteps = [
+		{"step 1":" Import Flask "},
+		{"step 2":" Create app"},
+		{"step 3":" Define endpoint with @app.route"},
+		{"step 4":" write the endpoint function"}
+    ]
+	return jsonify("Follow these steps:"+ str(endpointSteps))
