@@ -176,7 +176,8 @@ def random_fact():
         {"fact": "Octopuses have three hearts."},
         {"fact": "Bananas are berries, but strawberries are not."},
         {"fact": "A day on Venus is longer than a year on Venus."},
-        {"fact": "Sharks have been around longer than trees."}
+        {"fact": "Sharks have been around longer than trees."},
+        {"fact": "The ocean covers 71 percent of the Earth's surface and the average depth is 12,100 feet."}
     ]
     selected_fact = random.choice(facts)
     return jsonify(selected_fact)
