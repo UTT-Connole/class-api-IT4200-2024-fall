@@ -1,66 +1,86 @@
 # Welcome to the class API!
 We will be using this repo to create an API for our entire class. We will use Flask for this application and each member of the class will work within this single repo.
 
-# How to install matplotlib
+## Getting Started
 
-Make sure to run these commands before you run the Flask app. It will install matplotlib
-python3 -m pip install -U pip
-python3 -m pip install -U matplotlib
+### Installation
+Make sure to run these commands before you run the Flask app. It will install the requirements for this app
 
-# How to run and get to your endpoint
+```
+pip install -r requirements.txt
+```
+
+## How to run and get to your endpoint
 To get to your endpoint go to the folder the app is in in a terminal (EX. class-api-IT4200-2024-fall) and run the command “python3 -m flask run”, this will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
 
-# How to use Calculator Endpoint
+## Testing
+
+To run tests locally run:
+
+```
+pytest
+```
+
+You should also be able to run pytest watcher which will rerun tests each time you save a `*.py` file:
+
+```
+ptw .
+```
+
+## Endpoints
+
+### How to use Calculator Endpoint
 Use this template to add or subtract two numbers together "http://127.0.0.1:5000/calc?x=#&y=#&op=#"
 Replace the first two #'s with what ever numbers you would like! The last # is your operator
 Current Operators: add, subtract, multiply, divide
 If you leave one of the variables empty, you will get an error.
 
-# How to use twoManaCombo Endpoint
+### How to use twoManaCombo Endpoint
 Go to http://127.0.0.1:5000/twoManaCombos, get the combo name, and start building your next MTG deck!
 
-# How to get to the stoic quotes Endpoint
+### How to get to the stoic quotes Endpoint
 Go to http://127.0.0.1:5000/quotes for a good random stoic quotes from Plato and others.
 
-# How to use pizzaToppings Endpoint
+### How to use pizzaToppings Endpoint
 Go to http://127.0.0.1:5000/pizzaToppings to finally decide what to put on your pizza!
 
-# How to use Dad Jokes Endpoint
+### How to use Dad Jokes Endpoint
 Go to http://127.0.0.1:5000/dadjoke to laugh so hard you throw up! Now with even more hilarious Dad jokes!
 
-# How to use the Travel Randomizer Endpoint
+### How to use the Travel Randomizer Endpoint
 Go to http://127.0.0.1:5000/travel to be given a randomly chosen travel destination!
 
-# How to use Marathon Facts Endpoint
+### How to use Marathon Facts Endpoint
 Go to http://127.0.0.1:5000/marathonFacts to learn a random fact about marathons! 
 Use the template to return a hex code of the color you want "http://127.0.0.1:5000/color?color=blue"
 Replace the "blue" at the end with any color of your choosing.
 If the color doesn't exist in the library, you will get an error.
 
-# How to use the Quotes Endpoint
+### How to use the Quotes Endpoint
 
 Open up the url to http://127.0.0.1:5000/quotes
 Start reading people's favorite quotes!
 
-## How to Use the Favorite Quote Endpoint
+### How to Use the Favorite Quote Endpoint
 
 To retrieve a favorite quote, navigate to:
 
 http://127.0.0.1:5000/favoritequote
 
-# How to use Color Hexifier endpoint
+### How to use Color Hexifier endpoint
 
 Use the template to return a hex code of the color you want "http://127.0.0.1:5000/color?color=blue"
 Replace the "blue" at the end with any color of your choosing.
 If the color doesn't exist in the library, you will get an error.
 
-## Fortune Cookie Endpoint
+### Fortune Cookie Endpoint
 
 This API has a `/fortune` endpoint that returns a random fortune in JSON format. 
+
 ## Endpoint Endpoint
 Go to http://127.0.0.1:5000/howToMakeEndpoint to learn how to make an endpoint.
 
-## How to use the Random Fact Endpoint
+### How to use the Random Fact Endpoint
 
 To retrieve a random fact, navigate to http://127.0.0.1:5000/randomFact
 
