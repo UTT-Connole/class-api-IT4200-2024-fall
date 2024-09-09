@@ -210,10 +210,10 @@ if __name__ == '__main__':
 
 @app.route('/howToMakeEndpoint', methods=['GET'])
 def get_endpoints():
-	endpointSteps = {
-		"step 1" = " Import Flask "
-		"step 2" = " Create app"
-		"step 3" = " Define endpoint with @app.route"
-		"step 4" = " write the endpoint function"
-	}
-	return jsonify({"Follow these steps": endpointSteps)
+    endpointSteps = {
+        "step 1": "Import Flask",
+        "step 2": "Create app",
+        "step 3": "Define endpoint with @app.route",
+        "step 4": "Write the endpoint function"
+    }
+    return jsonify({"Follow these steps": endpointSteps})
