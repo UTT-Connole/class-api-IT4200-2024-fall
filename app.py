@@ -224,3 +224,6 @@ def get_endpoints():
 		{"step 4":" write the endpoint function"}
     ]
 	return jsonify("Follow these steps:"+ str(endpointSteps))
+
+
+# we built this brick by brick
