@@ -71,6 +71,9 @@ To retrieve a random fact, navigate to http://127.0.0.1:5000/randomFact
 # How to use the Pokefishing Endpoint
 Go to http://127.0.0.1:5000/pokefishing to catch a Magikarp!
 
+# How to Rebase
+ * step 1: STOP, just use merge thingy....
+
 ## Contributors:
 
 * Laura Coulome
