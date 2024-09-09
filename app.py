@@ -193,6 +193,27 @@ def tennis_facts_endpoint():
     ]
     return jsonify(random.choice(tennis_facts))
 
+@app.route('/pokefishing', methods=['GET','POST'])
+def fish():
+    magikarp = [
+        "regular ol' Magikarp",
+        "calico pattern Magikarp",
+        "orange two-tone pattern Magikarp",
+        "pink dapple pattern Magikarp",
+        "gray diamond pattern Magikarp",
+        "purple patches pattern Magikarp",
+        "apricot tiger pattern Magikarp",
+        "brown stripes pattern Magikarp",
+        "orange forehead pattern Magikarp",
+        "blue raindrops pattern Magikarp",
+        "shiny Magikarp"
+        ]
+    caught = random.choice(magikarp)
+    return jsonify({"You caught a": caught "!"})
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
 @app.route('/howToMakeEndpoint', methods=['GET'])
 def get_endpoints():
 	endpointSteps = [
