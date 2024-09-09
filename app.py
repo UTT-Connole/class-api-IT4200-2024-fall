@@ -207,13 +207,4 @@ def tennis_facts_endpoint():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-@app.route('/howToMakeEndpoint', methods=['GET'])
-def get_endpoints():
-	endpointSteps = {
-		"step 1" = " Import Flask "
-		"step 2" = " Create app"
-		"step 3" = " Define endpoint with @app.route"
-		"step 4" = " write the endpoint function"
-	}
-	return jsonify({"Follow these steps": endpointSteps)
+#    return jsonify({"You should go to": picked})
