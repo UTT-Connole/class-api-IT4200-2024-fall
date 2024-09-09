@@ -64,6 +64,8 @@ Go to http://127.0.0.1:5000/howToMakeEndpoint to learn how to make an endpoint.
 
 To retrieve a random fact, navigate to http://127.0.0.1:5000/randomFact
 
+# How to use the Pokefishing Endpoint
+Go to http://127.0.0.1:5000/pokefishing to catch a Magikarp!
 
 ## Contributors:
 
