@@ -42,7 +42,7 @@ If the color doesn't exist in the library, you will get an error.
 Open up the url to http://127.0.0.1:5000/quotes
 Start reading people's favorite quotes!
 
-## How to Use the Favorite Quote Endpoint
+# How to Use the Favorite Quote Endpoint
 
 To retrieve a favorite quote, navigate to:
 
@@ -54,15 +54,19 @@ Use the template to return a hex code of the color you want "http://127.0.0.1:50
 Replace the "blue" at the end with any color of your choosing.
 If the color doesn't exist in the library, you will get an error.
 
-## Fortune Cookie Endpoint
+# How to use Fortune Cookie Endpoint
 
 This API has a `/fortune` endpoint that returns a random fortune in JSON format. 
-## Endpoint Endpoint
+# How to make an Endpoint
 Go to http://127.0.0.1:5000/howToMakeEndpoint to learn how to make an endpoint.
 
-## How to use the Random Fact Endpoint
+# How to use the Random Fact Endpoint
 
 To retrieve a random fact, navigate to http://127.0.0.1:5000/randomFact
+
+# How to use the tennisFacts Endpoint
+
+🎾 Go to http://127.0.0.1:5000/tennisFacts to learn fun facts about tennis!
 
 # How to use the Pokefishing Endpoint
 Go to http://127.0.0.1:5000/pokefishing to catch a Magikarp!
@@ -141,8 +145,7 @@ Go Trailblazers!
 ⠀⠀⠀⠀⢀⠀⠀⠀⠀⢠⡤⠛⠛⠀⠈⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡾⠁⠀⣏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠐⠿⢦⣤⣤⣤⣼⣀⣀⣤⣤⠴⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⠋⠀⠀⠀⠉⠙⠒⠦⠤⠀⠀⠀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠛⠳⠶⠦⠤⣤⣄⣀⣀⠀⠠⠀⠀⢻⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠙⠛⠛⠛⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⢀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠙⠛⠛⠛⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
         *
        /O\
       /_O_\
@@ -155,8 +158,3 @@ Go Trailblazers!
        |||
        |||
        |||
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-
-# How to use the tennisFacts Endpoint
-
-🎾 Go to http://127.0.0.1:5000/tennisFacts to learn fun facts about tennis!
