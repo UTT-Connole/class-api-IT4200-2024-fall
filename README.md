@@ -20,7 +20,7 @@ If you leave one of the variables empty, you will get an error.
 Go to http://127.0.0.1:5000/twoManaCombos, get the combo name, and start building your next MTG deck!
 
 # How to get to the stoic quotes Endpoint
-Go to http://127.0.0.1:5000/quotes for a good quote
+Go to http://127.0.0.1:5000/quotes for a good random stoic quotes from Plato and others.
 
 # How to use pizzaToppings Endpoint
 Go to http://127.0.0.1:5000/pizzaToppings to finally decide what to put on your pizza!
@@ -59,6 +59,11 @@ If the color doesn't exist in the library, you will get an error.
 This API has a `/fortune` endpoint that returns a random fortune in JSON format. 
 ## Endpoint Endpoint
 Go to http://127.0.0.1:5000/howToMakeEndpoint to learn how to make an endpoint.
+
+## How to use the Random Fact Endpoint
+
+To retrieve a random fact, navigate to http://127.0.0.1:5000/randomFact
+
 
 ## Contributors:
 
@@ -148,4 +153,8 @@ Go Trailblazers!
        |||
        |||
        |||
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+
+# How to use the tennisFacts Endpoint
+
+🎾 Go to http://127.0.0.1:5000/tennisFacts to learn fun facts about tennis!
