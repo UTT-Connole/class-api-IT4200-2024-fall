@@ -57,6 +57,8 @@ If the color doesn't exist in the library, you will get an error.
 ## Fortune Cookie Endpoint
 
 This API has a `/fortune` endpoint that returns a random fortune in JSON format. 
+## Endpoint Endpoint
+Go to http://127.0.0.1:5000/howToMakeEndpoint to learn how to make an endpoint.
 
 ## How to use the Random Fact Endpoint
 
@@ -138,7 +140,20 @@ Go Trailblazers!
 ⠀⠀⠀⠐⠿⢦⣤⣤⣤⣼⣀⣀⣤⣤⠴⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⠋⠀⠀⠀⠉⠙⠒⠦⠤⠀⠀⠀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠛⠳⠶⠦⠤⣤⣄⣀⣀⠀⠠⠀⠀⢻⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠙⠛⠛⠛⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⢀⠀⠀⠀⠀⠀⠀⠀
+        *
+       /O\
+      /_O_\
+     /O/_\O\
+    /_O_|_O_\
+   /O/_O_|_O_\
+  /_O_|_O_|_O_\
+ /O/_O_|_O_|_O_\
+/_O_|_O_|_O_|_O_\
+       |||
+       |||
+       |||
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 
 # How to use the tennisFacts Endpoint
 
