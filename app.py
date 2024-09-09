@@ -48,15 +48,18 @@ def color_hexifier():
 
 @app.route('/twoManaCombos', methods=['GET'])
 def random_combo():
-    two_m =[{ "name": "Boros", "color_1": "red", "color_2": "white"},
-            { "name": "Golgari", "color_1": "blue", "color_2": "black"},
+    two_m =[{ "name": "Azorius", "color_1": "white", "color_2": "blue"},
+            { "name": "Boros", "color_1": "red", "color_2": "white"},
+            { "name": "Dimir", "color_1": "blue", "color_2": "black"},
+            { "name": "Golgari", "color_1": "black", "color_2": "green"},
             { "name": "Gruul", "color_1": "red", "color_2": "green"},
+            { "name": "Izzet", "color_1": "blue", "color_2": "red"},
             { "name": "Orzhov", "color_1": "white", "color_2": "black"},
             { "name": "Rakdos", "color_1": "black", "color_2": "red"},
-            { "name": "Selesnya", "color_1": "white", "color_2": "green"}]
+            { "name": "Selesnya", "color_1": "white", "color_2": "green"},
+            { "name": "Simic", "color_1": "blue", "color_2": "black"}]
     r = two_m[random.randrange(len(two_m))]
     return r
-"""print(random_combo()) <-Quoting this out because not really needed? Test it with the route!"""
 
 @app.route('/quotes', methods=['GET'])
 def fav_quotes():
