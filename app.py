@@ -86,18 +86,23 @@ def random_name():
 
 @app.route('/pizzaToppings', methods=['GET'])
 def pizza_toppings():
+    sauces = ["Tomato Sauce", "Alfredo Sauce", "Ranch Sauce"]
     toppings = [
         {"topping": "Pepperoni"},
         {"topping": "Mushrooms"},
-        {"topping": "Chicken"},
         {"topping": "Sausage"},
         {"topping": "Bacon"},
         {"topping": "Extra cheese"},
         {"topping": "Pineapple"},
         {"topping": "Spinach"}
     ]
+    selected_sauce = random.choice(sauces) 
     selected_toppings = random.sample(toppings, 3) 
-    return jsonify(selected_toppings)
+    pizza = {
+        "sauce": selected_sauce,
+        "toppings": selected_toppings
+    }
+    return jsonify(pizza)
 
 @app.route('/dadjoke', methods=['GET'])
 def dad_joke():
