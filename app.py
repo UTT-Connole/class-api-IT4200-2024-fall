@@ -2,12 +2,18 @@ from flask import Flask, request, jsonify
 import random
 import matplotlib
 
-app = Flask(__name__)
 
+def create_app():
+    app = Flask(__name__)
 
-@app.route('/')
-def hello_world():
-    return "Hello World"
+    @app.route('/')
+    def hello_world():
+        return "Hello World"
+
+    return app
+
+app = create_app()
+
 
 @app.route('/calc', methods=['GET','POST'])
 def calc_main():
@@ -218,7 +224,7 @@ def fish():
         "shiny Magikarp"
         ]
     caught = random.choice(magikarp)
-    return jsonify({"You caught a": caught "!"})
+    return jsonify({"You caught a": caught + "!"})
 
 if __name__ == '__main__':
     app.run(debug=True)
