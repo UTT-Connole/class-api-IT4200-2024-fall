@@ -41,6 +41,7 @@ Go to http://127.0.0.1:5000/pizzaToppings to finally decide what to put on your 
 
 ## How to use Dad Jokes Endpoint
 Go to http://127.0.0.1:5000/dadjoke to laugh so hard you throw up! Now with even more hilarious Dad jokes!
+To run tests to verify functionality of the dadjokes endpoint enter "python -m pytest ./test/test_dadjoke.py".
 
 ## How to use the Travel Randomizer Endpoint
 Go to http://127.0.0.1:5000/travel to be given a randomly chosen travel destination!
@@ -84,6 +85,9 @@ To retrieve a random fact, navigate to http://127.0.0.1:5000/randomFact
 
 ## How to use the Pokefishing Endpoint
 Go to http://127.0.0.1:5000/pokefishing to catch a Magikarp!
+
+## How to use the randomWord Endpoint
+Go to http://127.0.0.1:5000/randomWord to add a new word to your vocabulary!
 
 ## How to Rebase
  * step 1: STOP, just use merge thingy....

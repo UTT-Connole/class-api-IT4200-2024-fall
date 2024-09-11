@@ -10,7 +10,7 @@ def create_app():
     def hello_world():
         return "Hello World"
 
-        
+    
     @app.route('/dadjoke', methods=['GET'])
     def dad_joke():
         jokes = [
@@ -25,6 +25,17 @@ def create_app():
         ]
         joke = random.choice(jokes)
         return jsonify({"joke": joke})
+    
+    @app.route('/randomWord', methods=['GET'])
+    def random_word():
+        words = [
+            "Courage", "Perseverance", "Resilience", "Hope", "Strength", 
+            "Creativity", "Compassion", "Wisdom", "Inspiration", "Gratitude", 
+            "Empathy", "Innovation", "Determination", "Optimism", "Focus", 
+            "Integrity", "Kindness", "Mindfulness", "Balance", "Growth"
+        ]
+        selected_word = random.choice(words)
+        return jsonify({"word": selected_word}) 
 
 
     return app
