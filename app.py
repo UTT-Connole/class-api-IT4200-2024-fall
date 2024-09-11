@@ -10,6 +10,34 @@ def create_app():
     def hello_world():
         return "Hello World"
 
+    
+    @app.route('/dadjoke', methods=['GET'])
+    def dad_joke():
+        jokes = [
+            "Why don't skeletons fight each other? They don't have the guts.",
+            "What do you call fake spaghetti? An impasta!",
+            "Why did the scarecrow win an award? Because he was outstanding in his field!",
+            "I would avoid the sushi if I was you. It’s a little fishy.",
+            "Today, my son asked 'Can I have a bookmark?' and I burst into tears. 11 years old and he still doesn't know my name is Brian.",
+            "I went to the aquarium this weekend, but I didn’t stay long. There’s something fishy about that place.",
+            "I gave my handyman a to-do list, but he only did jobs 1, 3, and 5. Turns out he only does odd jobs.",
+            "I’m reading a horror story in braille. Something bad is going to happen, I can just feel it."
+        ]
+        joke = random.choice(jokes)
+        return jsonify({"joke": joke})
+    
+    @app.route('/randomWord', methods=['GET'])
+    def random_word():
+        words = [
+            "Courage", "Perseverance", "Resilience", "Hope", "Strength", 
+            "Creativity", "Compassion", "Wisdom", "Inspiration", "Gratitude", 
+            "Empathy", "Innovation", "Determination", "Optimism", "Focus", 
+            "Integrity", "Kindness", "Mindfulness", "Balance", "Growth"
+        ]
+        selected_word = random.choice(words)
+        return jsonify({"word": selected_word}) 
+
+
     return app
 
 app = create_app()
@@ -112,21 +140,6 @@ def pizza_toppings():
         "toppings": selected_toppings
     }
     return jsonify(pizza)
-
-@app.route('/dadjoke', methods=['GET'])
-def dad_joke():
-    jokes = [
-        "Why don't skeletons fight each other? They don't have the guts.",
-        "What do you call fake spaghetti? An impasta!",
-        "Why did the scarecrow win an award? Because he was outstanding in his field!",
-        "I would avoid the sushi if I was you. It’s a little fishy."
-        "Today, my son asked 'Can I have a book mark?' and I burst into tears. 11 years old and he still doesn't know my name is Brian. "
-        "I went to the aquarium this weekend, but I didn’t stay long. There’s something fishy about that place."
-        "I gave my handyman a to-do list, but he only did jobs 1, 3, and 5. Turns out he only does odd jobs."
-        "I’m reading a horror story in braille. Something bad is going to happen, I can just feel it."
-    ]
-    joke = random.choice(jokes)
-    return jsonify({"joke": joke})
 
 @app.route('/travel', methods=['GET','POST'])
 def travel():
