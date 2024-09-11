@@ -1,13 +1,14 @@
 # Welcome to the class API!
 We will be using this repo to create an API for our entire class. We will use Flask for this application and each member of the class will work within this single repo.
 
-# How to install matplotlib
+## How to install pip requirements
 
-Make sure to run these commands before you run the Flask app. It will install matplotlib
+Make sure to run these commands before you run the Flask app. It will install all the requirements
 
 ```
 pip install -r requirements.txt
 ```
+
 
 # How to run and get to your endpoint
 To get to your endpoint go to the folder the app is in in a terminal (EX. class-api-IT4200-2024-fall) and run the command “python3 -m flask run”, this will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
