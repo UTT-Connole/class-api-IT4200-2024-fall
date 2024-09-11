@@ -4,8 +4,10 @@ We will be using this repo to create an API for our entire class. We will use Fl
 # How to install matplotlib
 
 Make sure to run these commands before you run the Flask app. It will install matplotlib
-python3 -m pip install -U pip
-python3 -m pip install -U matplotlib
+
+```
+pip install -r requirements.txt
+```
 
 # How to run and get to your endpoint
 To get to your endpoint go to the folder the app is in in a terminal (EX. class-api-IT4200-2024-fall) and run the command “python3 -m flask run”, this will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
