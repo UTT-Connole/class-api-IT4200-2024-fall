@@ -37,7 +37,7 @@ Go to http://127.0.0.1:5000/twoManaCombos, get the combo name, and start buildin
 Go to http://127.0.0.1:5000/quotes for a good random stoic quotes from Plato and others.
 
 ## How to use pizzaToppings Endpoint
-Go to http://127.0.0.1:5000/pizzaToppings to finally decide what to put on your pizza!
+Go to http://127.0.0.1:5000/pizzaToppings to finally decide what sauce and toppings to put on your pizza 🍕!
 
 ## How to use Dad Jokes Endpoint
 Go to http://127.0.0.1:5000/dadjoke to laugh so hard you throw up! Now with even more hilarious Dad jokes!
