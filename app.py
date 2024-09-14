@@ -56,6 +56,11 @@ def create_app():
                 result= "something broke?"
                 
         return str(result)
+  
+    @app.route('/convertToBinary', methods=['GET','POST'])
+    def convertToBinary():
+        pass
+
     
     @app.route('/twoManaCombos', methods=['GET'])
     def random_combo():
