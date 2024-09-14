@@ -70,10 +70,32 @@ def create_app():
                 
         return str(result)
     
+    @app.route('/twoManaCombos', methods=['GET'])
+    def random_combo():
+        two_m =[{ "name": "Azorius", "color_1": "white", "color_2": "blue"},
+                { "name": "Boros", "color_1": "red", "color_2": "white"},
+                { "name": "Dimir", "color_1": "blue", "color_2": "black"},
+                { "name": "Golgari", "color_1": "black", "color_2": "green"},
+                { "name": "Gruul", "color_1": "red", "color_2": "green"},
+                { "name": "Izzet", "color_1": "blue", "color_2": "red"},
+                { "name": "Orzhov", "color_1": "white", "color_2": "black"},
+                { "name": "Rakdos", "color_1": "black", "color_2": "red"},
+                { "name": "Selesnya", "color_1": "white", "color_2": "green"},
+                { "name": "Simic", "color_1": "blue", "color_2": "black"}]
+        color = request.args.get('color')
+        if color:
+            filtered_combos = [combo for combo in two_m if color.lower() in [combo['color_1'].lower(), combo['color_2'].lower()]]
+            if not filtered_combos:
+                return jsonify({"error": "No combinations found for the given color"}), 404
+            
+            r = random.choice(filtered_combos)
+        else:
+            r = random.choice(two_m)
+        return jsonify(r)
+
     return app
 
 app = create_app()
-
 
 
 
@@ -89,20 +111,6 @@ def color_hexifier():
     else:
         return "Invalid color name"
 
-@app.route('/twoManaCombos', methods=['GET'])
-def random_combo():
-    two_m =[{ "name": "Azorius", "color_1": "white", "color_2": "blue"},
-            { "name": "Boros", "color_1": "red", "color_2": "white"},
-            { "name": "Dimir", "color_1": "blue", "color_2": "black"},
-            { "name": "Golgari", "color_1": "black", "color_2": "green"},
-            { "name": "Gruul", "color_1": "red", "color_2": "green"},
-            { "name": "Izzet", "color_1": "blue", "color_2": "red"},
-            { "name": "Orzhov", "color_1": "white", "color_2": "black"},
-            { "name": "Rakdos", "color_1": "black", "color_2": "red"},
-            { "name": "Selesnya", "color_1": "white", "color_2": "green"},
-            { "name": "Simic", "color_1": "blue", "color_2": "black"}]
-    r = two_m[random.randrange(len(two_m))]
-    return r
 
 @app.route('/quotes', methods=['GET'])
 def fav_quotes():

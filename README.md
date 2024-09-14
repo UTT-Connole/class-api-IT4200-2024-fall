@@ -32,7 +32,7 @@ They must be spelled exactly like those or else you will get an error
 If you leave any of the variables empty, you will get an error.
 
 ## How to use twoManaCombo Endpoint
-Go to http://127.0.0.1:5000/twoManaCombos, get the combo name, and start building your next MTG deck!
+Go to http://127.0.0.1:5000/twoManaCombos?color=your_color. Specifiy which color you want included in your deck by replacing it with your_color. If you don't want to specify, you can leave it blank. Then, get the combo name, and start building your next MTG deck! ⚪🔵⚫🔴🟢
 
 ## How to get to the stoic quotes Endpoint
 Go to http://127.0.0.1:5000/quotes for a good random stoic quotes from Plato and others.
