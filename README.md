@@ -25,10 +25,11 @@ ptw .
 To get to your endpoint go to the folder the app is in in a terminal (EX. class-api-IT4200-2024-fall) and run the command “python3 -m flask run”, this will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
 
 ## How to use Calculator Endpoint
-Use this template to add or subtract two numbers together "http://127.0.0.1:5000/calc?x=#&y=#&op=#"
-Replace the first two #'s with what ever numbers you would like! The last # is your operator
-Current Operators: add, subtract, multiply, divide
-If you leave one of the variables empty, you will get an error.
+Use this template to add,subtract,multiple,or divide two numbers "http://127.0.0.1:5000/calc?x=#&y=#&op=#"
+Replace the first two #'s with what ever numbers you would like 
+The last # is your operator, The current current operators are: add, subtract, multiply, divide
+They must be spelled exactly like those or else you will get an error
+If you leave any of the variables empty, you will get an error.
 
 ## How to use twoManaCombo Endpoint
 Go to http://127.0.0.1:5000/twoManaCombos, get the combo name, and start building your next MTG deck!
@@ -71,7 +72,8 @@ If the color doesn't exist in the library, you will get an error.
 
 ## How to use Fortune Cookie Endpoint
 
-This API has a `/fortune` endpoint that returns a random fortune in JSON format. 
+This API has a `/fortune` endpoint that returns a random fortune in JSON format.
+
 # How to make an Endpoint
 Go to http://127.0.0.1:5000/howToMakeEndpoint to learn how to make an endpoint.
 
@@ -195,4 +197,4 @@ Go Trailblazers! 🦬
        |||
        |||
        |||
-
+(;-;) lifu

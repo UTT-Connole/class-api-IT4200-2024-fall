@@ -35,38 +35,47 @@ def create_app():
             "Integrity", "Kindness", "Mindfulness", "Balance", "Growth"
         ]
         selected_word = random.choice(words)
-        return jsonify({"word": selected_word}) 
-
-
+        return jsonify({"word": selected_word})
+    
+    @app.route('/calc', methods=['GET','POST'])
+    def calc_main():
+        x = request.args.get('x')
+        y = request.args.get('y')
+        op = request.args.get('op')
+        if x and y and op:
+            x = int(x)
+            y = int(y)
+            op = str(op) #ensuring not anything else
+        else:
+            result = "Invalid Input"
+            
+        if op == 'add':
+            result = x + y
+        elif op == 'subtract':
+            result = x - y
+        elif op == 'multiply':
+            result = x * y
+        elif op == 'divide':
+            if y != 0:
+                result = x / y
+            else:
+                result = "You cannot divide by 0"
+        else:
+            options = {"add", "subtract", "multiply", "divide"}
+            if op not in options:
+                #just checking to see if not an option and lists them if needed
+                result = "You might have spelled something wrong or there is not the option the current options are: add,subtract,multiply,divide"
+            elif op in options:
+                result= "something broke?"
+                
+        return str(result)
+    
     return app
 
 app = create_app()
 
 
-@app.route('/calc', methods=['GET','POST'])
-def calc_main():
-    x = request.args.get('x')
-    y = request.args.get('y')
-    op = request.args.get('op')
-    if x and y and op:
-        x = int(x)
-        y = int(y)
-    else:
-        result = "Invalid Input"
-    if op == 'add':
-        result = x + y
-    elif op == 'subtract':
-        result = x - y
-    elif op == 'multiply':
-        result = x * y
-    elif op == 'divide':
-        if y != 0:
-            result = x / y
-        else:
-            result = "You cannot divide by 0"
-    else:
-        result = "You might have spelled something wrong"
-    return str(result)
+
 
 @app.route('/color', methods=['GET','POST'])
 def color_hexifier():
