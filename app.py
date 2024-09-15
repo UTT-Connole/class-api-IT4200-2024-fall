@@ -275,5 +275,28 @@ def get_endpoints():
     ]
 	return jsonify("Follow these steps:"+ str(endpointSteps))
 
+@app.route('/fruitInfo', methods=['GET'])
+def fruit_info():
+    fruits = {
+        "apple": {"color": "red", "taste": "sweet"},
+        "banana": {"color": "yellow", "taste": "sweet"},
+        "lemon": {"color": "yellow", "taste": "sour"},
+        "orange": {"color": "orange", "taste": "citrus"},
+        "grape": {"color": "purple", "taste": "sweet"},
+        "lime": {"color": "green", "taste": "sour"}
+    }
+    
+    fruit_name = request.args.get('fruit')
+    
+    if fruit_name and fruit_name.lower() in fruits:
+        info = fruits[fruit_name.lower()]
+        return jsonify({
+            "fruit": fruit_name,
+            "color": info["color"],
+            "taste": info["taste"]
+        })
+    else:
+        return jsonify({"error": "Fruit not found. Please try apple, banana, lemon, orange, grape, or lime."}), 404
 
-# we built this brick by brick
+
+# we built this brick by brick and we will never stop
