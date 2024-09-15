@@ -159,7 +159,6 @@ def create_app():
             "toppings": selected_toppings
         }
         return jsonify(pizza)
-
     return app
 
 app = create_app()
