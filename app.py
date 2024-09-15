@@ -92,6 +92,29 @@ def create_app():
         else:
             r = random.choice(two_m)
         return jsonify(r)
+    
+    @app.route('/travel', methods=['GET','POST'])
+    def travel():
+        destinations = [
+            "Paris, France",
+            "Rome, Italy",
+            "Maui, Hawaii",
+            "London, England",
+            "Tokyo, Japan",
+            "Barcelona, Spain",
+            "New York City, New York",
+            "Los Angeles, California",
+            "Dublin, Ireland",
+            "Cairo, Egypt",
+            "Sydney, Australia",
+            "Sacramento, California",
+            "Salt Lake, Utah",
+            "Denver, Colorado",
+            "Santa Cruise, California",
+            "London, England"
+            ]
+        picked = random.choice(destinations)
+        return jsonify({"You should go to": picked})
 
     return app
 
@@ -158,28 +181,6 @@ def pizza_toppings():
     }
     return jsonify(pizza)
 
-@app.route('/travel', methods=['GET','POST'])
-def travel():
-    destinations = [
-        "Paris, France",
-        "Rome, Italy",
-        "Maui, Hawaii",
-        "London, England",
-        "Tokyo, Japan",
-        "Barcelona, Spain",
-        "New York City, New York",
-        "Los Angeles, California",
-        "Dublin, Ireland",
-        "Cairo, Egypt",
-        "Sydney, Australia",
-        "Sacramento, California",
-        "Salt Lake, Utah",
-        "Denver, Colorado",
-        "Santa Cruise, California",
-        "London, England"
-        ]
-    picked = random.choice(destinations)
-    return jsonify({"You should go to": picked})
 
 @app.route('/marathonFacts', methods=['GET'])
 def marathon_facts():
