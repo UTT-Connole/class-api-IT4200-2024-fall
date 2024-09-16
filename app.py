@@ -115,6 +115,15 @@ def create_app():
             ]
         picked = random.choice(destinations)
         return jsonify({"You should go to": picked})
+    
+    @app.route('/factorial', methods=['GET'])
+    def factorial(n):
+        if n < 0:
+            raise ValueError("Factorial is negative")
+        elif n == 0 or n == 1:
+            return 1
+        else:
+            return n * factorial(n - 1)
 
     return app
 
