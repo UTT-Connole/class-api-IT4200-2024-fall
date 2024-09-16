@@ -27,15 +27,20 @@ def create_app():
         return jsonify({"joke": joke})
     
     @app.route('/randomWord', methods=['GET'])
-    def random_word():
-        words = [
-            "Courage", "Perseverance", "Resilience", "Hope", "Strength", 
-            "Creativity", "Compassion", "Wisdom", "Inspiration", "Gratitude", 
-            "Empathy", "Innovation", "Determination", "Optimism", "Focus", 
-            "Integrity", "Kindness", "Mindfulness", "Balance", "Growth"
-        ]
-        selected_word = random.choice(words)
-        return jsonify({"word": selected_word}) 
+   def random_word():
+    words = [
+        "Courage", "Perseverance", "Resilience", "Hope", "Strength", 
+        "Creativity", "Compassion", "Wisdom", "Inspiration", "Gratitude", 
+        "Empathy", "Innovation", "Determination", "Optimism", "Focus", 
+        "Integrity", "Kindness", "Mindfulness", "Balance", "Growth"
+    ]
+    
+    num_words = request.args.get('num_words', default=1, type=int)
+    if num_words < 1 or num_words > len(words):
+        return jsonify({"error": "Invalid number of words requested"}), 400
+    
+    selected_words = random.sample(words, num_words)
+    return jsonify({"words": selected_words})
 
 
     return app
