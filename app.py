@@ -10,6 +10,7 @@ def create_app():
     def hello_world():
         return "Hello World"
 
+
     
     @app.route('/dadjoke', methods=['GET'])
     def dad_joke():
