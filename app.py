@@ -27,51 +27,100 @@ def create_app():
         return jsonify({"joke": joke})
     
     @app.route('/randomWord', methods=['GET'])
-   def random_word():
-    words = [
-        "Courage", "Perseverance", "Resilience", "Hope", "Strength", 
-        "Creativity", "Compassion", "Wisdom", "Inspiration", "Gratitude", 
-        "Empathy", "Innovation", "Determination", "Optimism", "Focus", 
-        "Integrity", "Kindness", "Mindfulness", "Balance", "Growth"
-    ]
+    def random_word():
+        words = [
+            "Courage", "Perseverance", "Resilience", "Hope", "Strength", 
+            "Creativity", "Compassion", "Wisdom", "Inspiration", "Gratitude", 
+            "Empathy", "Innovation", "Determination", "Optimism", "Focus", 
+            "Integrity", "Kindness", "Mindfulness", "Balance", "Growth"
+        ]
+        selected_word = random.choice(words)
+        return jsonify({"word": selected_word})
     
-    num_words = request.args.get('num_words', default=1, type=int)
-    if num_words < 1 or num_words > len(words):
-        return jsonify({"error": "Invalid number of words requested"}), 400
+    @app.route('/calc', methods=['GET','POST'])
+    def calc_main():
+        x = request.args.get('x')
+        y = request.args.get('y')
+        op = request.args.get('op')
+        if x and y and op:
+            x = int(x)
+            y = int(y)
+            op = str(op) #ensuring not anything else
+        else:
+            result = "Invalid Input"
+            
+        if op == 'add':
+            result = x + y
+        elif op == 'subtract':
+            result = x - y
+        elif op == 'multiply':
+            result = x * y
+        elif op == 'divide':
+            if y != 0:
+                result = x / y
+            else:
+                result = "You cannot divide by 0"
+        else:
+            options = {"add", "subtract", "multiply", "divide"}
+            if op not in options:
+                #just checking to see if not an option and lists them if needed
+                result = "You might have spelled something wrong or there is not the option the current options are: add,subtract,multiply,divide"
+            elif op in options:
+                result= "something broke?"
+                
+        return str(result)
     
-    selected_words = random.sample(words, num_words)
-    return jsonify({"words": selected_words})
-
+    @app.route('/twoManaCombos', methods=['GET'])
+    def random_combo():
+        two_m =[{ "name": "Azorius", "color_1": "white", "color_2": "blue"},
+                { "name": "Boros", "color_1": "red", "color_2": "white"},
+                { "name": "Dimir", "color_1": "blue", "color_2": "black"},
+                { "name": "Golgari", "color_1": "black", "color_2": "green"},
+                { "name": "Gruul", "color_1": "red", "color_2": "green"},
+                { "name": "Izzet", "color_1": "blue", "color_2": "red"},
+                { "name": "Orzhov", "color_1": "white", "color_2": "black"},
+                { "name": "Rakdos", "color_1": "black", "color_2": "red"},
+                { "name": "Selesnya", "color_1": "white", "color_2": "green"},
+                { "name": "Simic", "color_1": "blue", "color_2": "black"}]
+        color = request.args.get('color')
+        if color:
+            filtered_combos = [combo for combo in two_m if color.lower() in [combo['color_1'].lower(), combo['color_2'].lower()]]
+            if not filtered_combos:
+                return jsonify({"error": "No combinations found for the given color"}), 404
+            
+            r = random.choice(filtered_combos)
+        else:
+            r = random.choice(two_m)
+        return jsonify(r)
+    
+    @app.route('/travel', methods=['GET','POST'])
+    def travel():
+        destinations = [
+            "Paris, France",
+            "Rome, Italy",
+            "Maui, Hawaii",
+            "London, England",
+            "Tokyo, Japan",
+            "Barcelona, Spain",
+            "New York City, New York",
+            "Los Angeles, California",
+            "Dublin, Ireland",
+            "Cairo, Egypt",
+            "Sydney, Australia",
+            "Sacramento, California",
+            "Salt Lake, Utah",
+            "Denver, Colorado",
+            "Santa Cruise, California",
+            "London, England"
+            ]
+        picked = random.choice(destinations)
+        return jsonify({"You should go to": picked})
 
     return app
 
 app = create_app()
 
 
-@app.route('/calc', methods=['GET','POST'])
-def calc_main():
-    x = request.args.get('x')
-    y = request.args.get('y')
-    op = request.args.get('op')
-    if x and y and op:
-        x = int(x)
-        y = int(y)
-    else:
-        result = "Invalid Input"
-    if op == 'add':
-        result = x + y
-    elif op == 'subtract':
-        result = x - y
-    elif op == 'multiply':
-        result = x * y
-    elif op == 'divide':
-        if y != 0:
-            result = x / y
-        else:
-            result = "You cannot divide by 0"
-    else:
-        result = "You might have spelled something wrong"
-    return str(result)
 
 @app.route('/color', methods=['GET','POST'])
 def color_hexifier():
@@ -85,20 +134,6 @@ def color_hexifier():
     else:
         return "Invalid color name"
 
-@app.route('/twoManaCombos', methods=['GET'])
-def random_combo():
-    two_m =[{ "name": "Azorius", "color_1": "white", "color_2": "blue"},
-            { "name": "Boros", "color_1": "red", "color_2": "white"},
-            { "name": "Dimir", "color_1": "blue", "color_2": "black"},
-            { "name": "Golgari", "color_1": "black", "color_2": "green"},
-            { "name": "Gruul", "color_1": "red", "color_2": "green"},
-            { "name": "Izzet", "color_1": "blue", "color_2": "red"},
-            { "name": "Orzhov", "color_1": "white", "color_2": "black"},
-            { "name": "Rakdos", "color_1": "black", "color_2": "red"},
-            { "name": "Selesnya", "color_1": "white", "color_2": "green"},
-            { "name": "Simic", "color_1": "blue", "color_2": "black"}]
-    r = two_m[random.randrange(len(two_m))]
-    return r
 
 @app.route('/quotes', methods=['GET'])
 def fav_quotes():
@@ -146,28 +181,6 @@ def pizza_toppings():
     }
     return jsonify(pizza)
 
-@app.route('/travel', methods=['GET','POST'])
-def travel():
-    destinations = [
-        "Paris, France",
-        "Rome, Italy",
-        "Maui, Hawaii",
-        "London, England",
-        "Tokyo, Japan",
-        "Barcelona, Spain",
-        "New York City, New York",
-        "Los Angeles, California",
-        "Dublin, Ireland",
-        "Cairo, Egypt",
-        "Sydney, Australia",
-        "Sacramento, California",
-        "Salt Lake, Utah",
-        "Denver, Colorado",
-        "Santa Cruise, California",
-        "London, England"
-        ]
-    picked = random.choice(destinations)
-    return jsonify({"You should go to": picked})
 
 @app.route('/marathonFacts', methods=['GET'])
 def marathon_facts():
@@ -216,6 +229,7 @@ def random_fact():
 
 @app.route('/tennisFacts', methods=['GET'])
 def tennis_facts_endpoint():
+    category = request.args.get('category')
     tennis_facts = [
         {"fact": "The longest tennis match lasted 11 hours and 5 minutes at Wimbledon in 2010.", "category": "records"},
         {"fact": "The US Open is played on hard courts.", "category": "tournaments"},
@@ -224,7 +238,9 @@ def tennis_facts_endpoint():
         {"fact": "'Love' in tennis means zero, from the French 'l'oeuf' meaning egg.", "category": "terminology"},
         {"fact": "Wimbledon is the oldest tennis tournament, started in 1877.", "category": "history"}
     ]
-    return jsonify(random.choice(tennis_facts))
+    if category:
+        tennis_facts = [fact for fact in tennis_facts if fact['category'] == category]
+    return jsonify(tennis_facts)
 
 @app.route('/pokefishing', methods=['GET','POST'])
 def fish():
@@ -260,5 +276,38 @@ def get_endpoints():
     ]
 	return jsonify("Follow these steps:"+ str(endpointSteps))
 
+@app.route('/fruitInfo', methods=['GET'])
+def fruit_info():
+    fruits = {
+        "apple": {"color": "red", "taste": "sweet"},
+        "banana": {"color": "yellow", "taste": "sweet"},
+        "lemon": {"color": "yellow", "taste": "sour"},
+        "orange": {"color": "orange", "taste": "citrus"},
+        "grape": {"color": "purple", "taste": "sweet"},
+        "lime": {"color": "green", "taste": "sour"}
+    }
+    
+    fruit_name = request.args.get('fruit')
+    
+    if fruit_name and fruit_name.lower() in fruits:
+        info = fruits[fruit_name.lower()]
+        return jsonify({
+            "fruit": fruit_name,
+            "color": info["color"],
+            "taste": info["taste"]
+        })
+    else:
+        return jsonify({"error": "Fruit not found. Please try apple, banana, lemon, orange, grape, or lime."}), 404
 
-# we built this brick by brick
+@app.route('/motivation', methods=['GET'])
+def get_motivation():
+    motivational_quotes = [
+        "The only way to do great work is to love what you do.",
+        "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+        "Believe you can and you're halfway there.",
+        "Act as if what you do makes a difference. It does.",
+        "The harder you work for something, the greater you’ll feel when you achieve it."
+    ]
+    selected_quote = random.choice(motivational_quotes)
+    return jsonify({"motivational_quote": selected_quote})
+# we built this brick by brick and we will never stop

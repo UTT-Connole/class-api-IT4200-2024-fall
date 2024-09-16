@@ -24,14 +24,24 @@ ptw .
 ## How to run and get to your endpoint
 To get to your endpoint go to the folder the app is in in a terminal (EX. class-api-IT4200-2024-fall) and run the command “python3 -m flask run”, this will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
 
+## How to use fruit_info Endpoint
+Navigate to http://127.0.0.1:5000/fruitInfo?fruit=apple
+Replace "apple" from the end of the url with the fruit of your choice.
+If the fruit isn't available an error message will come up and you will be given a list of options.
+Choose a fruit from the options given.
+
 ## How to use Calculator Endpoint
-Use this template to add or subtract two numbers together "http://127.0.0.1:5000/calc?x=#&y=#&op=#"
-Replace the first two #'s with what ever numbers you would like! The last # is your operator
-Current Operators: add, subtract, multiply, divide
-If you leave one of the variables empty, you will get an error.
+Use this template to add,subtract,multiple,or divide two numbers "http://127.0.0.1:5000/calc?x=#&y=#&op=#"
+Replace the first two #'s with what ever numbers you would like 
+The last # is your operator, The current current operators are: add, subtract, multiply, divide
+They must be spelled exactly like those or else you will get an error
+If you leave any of the variables empty, you will get an error.
+
+## how to use get motivation
+The /motivation endpoint provides a random motivational quote whenever accessed via a GET request. When a user sends a request to this endpoint, the app responds with one of five pre-defined motivational quotes, returned in JSON format. This allows users to easily retrieve an encouraging message with every request, making it useful for applications or websites where inspiration or daily motivation is desired. Each request will randomly select and serve one quote from the list.
 
 ## How to use twoManaCombo Endpoint
-Go to http://127.0.0.1:5000/twoManaCombos, get the combo name, and start building your next MTG deck!
+Go to http://127.0.0.1:5000/twoManaCombos?color=your_color. Specifiy which color you want included in your deck by replacing it with your_color. If you don't want to specify, you can leave it blank. Then, get the combo name, and start building your next MTG deck! ⚪🔵⚫🔴🟢
 
 ## How to get to the stoic quotes Endpoint
 Go to http://127.0.0.1:5000/quotes for a good random stoic quotes from Plato and others.
@@ -71,7 +81,8 @@ If the color doesn't exist in the library, you will get an error.
 
 ## How to use Fortune Cookie Endpoint
 
-This API has a `/fortune` endpoint that returns a random fortune in JSON format. 
+This API has a `/fortune` endpoint that returns a random fortune in JSON format.
+
 # How to make an Endpoint
 Go to http://127.0.0.1:5000/howToMakeEndpoint to learn how to make an endpoint.
 
@@ -82,6 +93,12 @@ To retrieve a random fact, navigate to http://127.0.0.1:5000/randomFact
 ## How to use the tennisFacts Endpoint
 
 🎾 Go to http://127.0.0.1:5000/tennisFacts to learn fun facts about tennis!
+
+You can retrieve tennis facts using the `/tennisFacts` endpoint. Optionally, you can filter by category:
+
+Example:
+```bash
+curl http://127.0.0.1:5000/tennisFacts?category=players
 
 ## How to use the Pokefishing Endpoint
 Go to http://127.0.0.1:5000/pokefishing to catch a Magikarp!
@@ -195,4 +212,4 @@ Go Trailblazers! 🦬
        |||
        |||
        |||
-
+(;-;) lifu
