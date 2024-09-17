@@ -45,6 +45,8 @@ Go to http://127.0.0.1:5000/quotes for a good random stoic quotes from Plato and
 
 ## How to use pizzaToppings Endpoint
 Go to http://127.0.0.1:5000/pizzaToppings to finally decide what sauce and toppings to put on your pizza 🍕!
+To test if the code is working properly run:
+"python -m pytest ./test/test_toppings.py"
 
 ## How to use Dad Jokes Endpoint
 Go to http://127.0.0.1:5000/dadjoke to laugh so hard you throw up! Now with even more hilarious Dad jokes!
