@@ -157,7 +157,7 @@ Go to http://127.0.0.1:5000/randomWord to add a new word to your vocabulary!
 
 *Only KOOL Kids Will Get This Reference....
 
-![alt text](https://github.com/UTT-Connole/class-api-IT4200-2024-fall/blob/s-branch/images/git%20hw%20edited.png?raw=true)
+![alt text](https://github.com/UTT-Connole/class-api-IT4200-2024-fall/blob/main/images/git%20hw%20edited.png)
 
 
 ```bash
