@@ -18,4 +18,5 @@ def dad_joke():
         "I’m reading a horror story in braille. Something bad is going to happen, I can just feel it."
     ]
     joke = random.choice(jokes)
+    joke = joke.replace("\u2019", "'")  # Replace Unicode with a regular single quote
     return jsonify({"joke": joke})
