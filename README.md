@@ -24,6 +24,12 @@ ptw .
 ## How to run and get to your endpoint
 To get to your endpoint go to the folder the app is in in a terminal (EX. class-api-IT4200-2024-fall) and run the command “python3 -m flask run”, this will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
 
+## How to use fruit_info Endpoint
+Navigate to http://127.0.0.1:5000/fruitInfo?fruit=apple
+Replace "apple" from the end of the url with the fruit of your choice.
+If the fruit isn't available an error message will come up and you will be given a list of options.
+Choose a fruit from the options given.
+
 ## How to use Calculator Endpoint
 Use this template to add,subtract,multiple,or divide two numbers "http://127.0.0.1:5000/calc?x=#&y=#&op=#"
 Replace the first two #'s with what ever numbers you would like 
@@ -39,6 +45,8 @@ Go to http://127.0.0.1:5000/quotes for a good random stoic quotes from Plato and
 
 ## How to use pizzaToppings Endpoint
 Go to http://127.0.0.1:5000/pizzaToppings to finally decide what sauce and toppings to put on your pizza 🍕!
+To test if the code is working properly run:
+"python -m pytest ./test/test_toppings.py"
 
 ## How to use Dad Jokes Endpoint
 Go to http://127.0.0.1:5000/dadjoke to laugh so hard you throw up! Now with even more hilarious Dad jokes!
