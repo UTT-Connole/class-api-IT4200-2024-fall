@@ -1,6 +1,23 @@
 # Welcome to the class API!
 We will be using this repo to create an API for our entire class. We will use Flask for this application and each member of the class will work within this single repo.
 
+## Contributors:
+
+* Laura Coulome
+* Riker Evans
+* Jace Barrett
+* Donavan Franco
+* Christian Bassilios
+* Soren Bybee
+* Keaton Hall
+* Josh Beckstrand
+* Dallin Hougaard
+* Andres
+* Travis Gunter
+* Morgan Andrus
+* Yomi Odubiyi
+* Brayden Connole
+
 ## How to install pip requirements
 
 Make sure to run these commands before you run the Flask app. It will install all the requirements
@@ -181,22 +198,6 @@ It should list the current weather conditions of the selected city
 ## How to Rebase
  * step 1: STOP, just use merge thingy....
 
-## Contributors:
-
-* Laura Coulome
-* Riker Evans
-* Jace Barrett
-* Donavan Franco
-* Christian Bassilios
-* Soren Bybee
-* Keaton Hall
-* Josh Beckstrand
-* Dallin Hougaard
-* Andres
-* Travis Gunter
-* Morgan Andrus
-* Yomi Odubiyi
-* Brayden Connole
 
 ## Welcome to The IT4200 Art Gallery!
 
