@@ -24,6 +24,9 @@ ptw .
 ## How to run and get to your endpoint
 To get to your endpoint go to the folder the app is in in a terminal (EX. class-api-IT4200-2024-fall) and run the command “python3 -m flask run”, this will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
 
+## Factorial Endpoint
+Currently not working, needs to be rewritten -- if you want to ignore it (like I did), comment it out to run pytest lol
+
 ## How to use fruit_info Endpoint
 Navigate to http://127.0.0.1:5000/fruitInfo?fruit=apple
 Replace "apple" from the end of the url with the fruit of your choice.
