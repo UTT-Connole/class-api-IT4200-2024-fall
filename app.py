@@ -89,25 +89,26 @@ def create_app():
     @app.route('/travel', methods=['GET','POST'])
     def travel():
         destinations = [
-            "Paris, France",
-            "Rome, Italy",
-            "Maui, Hawaii",
-            "London, England",
-            "Tokyo, Japan",
-            "Barcelona, Spain",
-            "New York City, New York",
-            "Los Angeles, California",
-            "Dublin, Ireland",
-            "Cairo, Egypt",
-            "Sydney, Australia",
-            "Sacramento, California",
-            "Salt Lake, Utah",
-            "Denver, Colorado",
-            "Santa Cruise, California",
-            "London, England"
+            {"You should go to": "Paris, France", "To fly from SLC it will take ": "9h 50m"},
+            {"You should go to": "Rome, Italy", "To fly from SLC it will take ": "13hr 30m"},
+            {"You should go to": "London, England", "To fly from SLC it will take ": "9hr 30m"},
+            {"You should go to": "Tokyo, Japan", "To fly from SLC it will take ": "13hr 40m"},
+            {"You should go to": "Barcelona, Spain", "To fly from SLC it will take ": "12hr 30m"},
+            {"You should go to": "New York City, New York", "To fly from SLC it will take ": "4hr 35m"},
+            {"You should go to": "Los Angeles, California", "To fly from SLC it will take ": "2hr"},
+            {"You should go to": "Dublin, Ireland", "To fly from SLC it will take ": "11hr 30m"},
+            {"You should go to": "Cairo, Egypt", "To fly from SLC it will take ": "15hr 15m"},
+            {"You should go to": "Sydney, Australia", "To fly from SLC it will take ": "18hr 15m"},
+            {"You should go to": "Sacramento, California", "To fly from SLC it will take ": "1hr 45m"},
+            {"You should go to": "Salt Lake, Utah", "To fly from SLC it will take ": "You're already there silly"},
+            {"You should go to": "Denver, Colorado", "To fly from SLC it will take ": "1hr 35m"},
+            {"You should go to": "Santa Cruz, California", "To fly from SLC it will take ": "2hr"},
             ]
+        
         picked = random.choice(destinations)
-        return jsonify({"You should go to": picked})
+        #location = picked.keys
+        #flighttime = picked.values
+        return jsonify(picked)
     
     @app.route('/factorial', methods=['GET'])
     def factorial(n):
