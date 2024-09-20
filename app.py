@@ -111,6 +111,42 @@ def create_app():
             return 1
         else:
             return n * factorial(n - 1)
+        
+    @app.route('/tennisFacts', methods=['GET'])
+    def tennis_facts_endpoint():
+        category = request.args.get('category')
+        tennis_facts = [
+            {"fact": "The longest tennis match lasted 11 hours and 5 minutes at Wimbledon in 2010.", "category": "records"},
+            {"fact": "The US Open is played on hard courts.", "category": "tournaments"},
+            {"fact": "Serena Williams has 23 Grand Slam singles titles.", "category": "players"},
+            {"fact": "Roger Federer, Rafael Nadal, and Novak Djokovic each have 20 Grand Slam titles.", "category": "players"},
+            {"fact": "'Love' in tennis means zero, from the French 'l'oeuf' meaning egg.", "category": "terminology"},
+            {"fact": "Wimbledon is the oldest tennis tournament, started in 1877.", "category": "history"}
+        ]
+        if category:
+            tennis_facts = [fact for fact in tennis_facts if fact['category'] == category]
+        return jsonify(tennis_facts)
+
+
+    @app.route('/pizzaToppings', methods=['GET'])
+    def pizza_toppings():
+        sauces = ["Tomato Sauce", "Alfredo Sauce", "Ranch Sauce"]
+        toppings = [
+            {"topping": "Pepperoni"},
+            {"topping": "Mushrooms"},
+            {"topping": "Sausage"},
+            {"topping": "Bacon"},
+            {"topping": "Extra cheese"},
+            {"topping": "Pineapple"},
+            {"topping": "Spinach"}
+        ]
+        selected_sauce = random.choice(sauces) 
+        selected_toppings = random.sample(toppings, 3) 
+        pizza = {
+            "sauce": selected_sauce,
+            "toppings": selected_toppings
+        }
+        return jsonify(pizza)
 
     return app
 
@@ -157,26 +193,6 @@ def random_name():
     name = random.choice(names)
     return jsonify({"name": name})
 
-@app.route('/pizzaToppings', methods=['GET'])
-def pizza_toppings():
-    sauces = ["Tomato Sauce", "Alfredo Sauce", "Ranch Sauce"]
-    toppings = [
-        {"topping": "Pepperoni"},
-        {"topping": "Mushrooms"},
-        {"topping": "Sausage"},
-        {"topping": "Bacon"},
-        {"topping": "Extra cheese"},
-        {"topping": "Pineapple"},
-        {"topping": "Spinach"}
-    ]
-    selected_sauce = random.choice(sauces) 
-    selected_toppings = random.sample(toppings, 3) 
-    pizza = {
-        "sauce": selected_sauce,
-        "toppings": selected_toppings
-    }
-    return jsonify(pizza)
-
 
 @app.route('/marathonFacts', methods=['GET'])
 def marathon_facts():
@@ -206,7 +222,10 @@ def get_fortune():
         "You will find a fortune.",
         "A fresh start will put you on your way.",
         "Fortune favors the brave.",
-        "Good news will come to you by mail."
+        "Good news will come to you by mail.",
+        "A beautiful, smart, and loving person will be coming into your life.",
+        "A soft voice may be awfully persuasive.",
+        "All your hard work will soon pay off."
     ]
     return jsonify({"fortune": random.choice(fortunes)})
 
@@ -222,21 +241,6 @@ def random_fact():
     ]
     selected_fact = random.choice(facts)
     return jsonify(selected_fact)
-
-@app.route('/tennisFacts', methods=['GET'])
-def tennis_facts_endpoint():
-    category = request.args.get('category')
-    tennis_facts = [
-        {"fact": "The longest tennis match lasted 11 hours and 5 minutes at Wimbledon in 2010.", "category": "records"},
-        {"fact": "The US Open is played on hard courts.", "category": "tournaments"},
-        {"fact": "Serena Williams has 23 Grand Slam singles titles.", "category": "players"},
-        {"fact": "Roger Federer, Rafael Nadal, and Novak Djokovic each have 20 Grand Slam titles.", "category": "players"},
-        {"fact": "'Love' in tennis means zero, from the French 'l'oeuf' meaning egg.", "category": "terminology"},
-        {"fact": "Wimbledon is the oldest tennis tournament, started in 1877.", "category": "history"}
-    ]
-    if category:
-        tennis_facts = [fact for fact in tennis_facts if fact['category'] == category]
-    return jsonify(tennis_facts)
 
 @app.route('/pokefishing', methods=['GET','POST'])
 def fish():
