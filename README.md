@@ -135,6 +135,9 @@ Go to http://127.0.0.1:5000/pokefishing to catch a Magikarp!
 ## How to use the randomWord Endpoint
 Go to http://127.0.0.1:5000/randomWord to add a new word to your vocabulary!
 
+## How to use the convertToBinary Endpoint
+Go to http://127.0.0.1:5000/convertToBinary?num=# and replace the # with any non-negative whole number!
+
 ## How to Rebase
  * step 1: STOP, just use merge thingy....
 
