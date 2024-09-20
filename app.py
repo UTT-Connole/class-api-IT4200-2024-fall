@@ -56,6 +56,20 @@ def create_app():
                 result= "something broke?"
                 
         return str(result)
+  
+    @app.route('/convertToBinary', methods=['GET','POST'])
+    def convertToBinary():
+        num = request.args.get('num')
+        if "." in num:
+            return "Not compatable with float input"
+        num = int(num)
+        if num >= 0:
+            return bin(num).replace("0b","")
+        else:
+            return "Not compatable with negative input"
+
+
+
     
     @app.route('/twoManaCombos', methods=['GET'])
     def random_combo():
@@ -147,7 +161,6 @@ def create_app():
             "toppings": selected_toppings
         }
         return jsonify(pizza)
-
     return app
 
 app = create_app()
