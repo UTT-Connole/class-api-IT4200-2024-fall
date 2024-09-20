@@ -17,8 +17,4 @@ def test_negative(client):
 
 def test_negative(client):
     response = client.get('/convertToBinary?num=1.1')
-<<<<<<< HEAD
     assert response.data.decode() == 'Not compatable with float input'
-=======
-    assert response.data.decode() == 'Not compatable with float input'
->>>>>>> 12b841b (finished adding convertToBinary and added tests)
