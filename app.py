@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from dadjoke import dadjoke_bp
+from brainrot import brainrot_bp
 import random
 import matplotlib
 
@@ -13,16 +14,7 @@ def create_app():
 
     app.register_blueprint(dadjoke_bp)
     
-    @app.route('/randomWord', methods=['GET'])
-    def random_word():
-        words = [
-            "Courage", "Perseverance", "Resilience", "Hope", "Strength", 
-            "Creativity", "Compassion", "Wisdom", "Inspiration", "Gratitude", 
-            "Empathy", "Innovation", "Determination", "Optimism", "Focus", 
-            "Integrity", "Kindness", "Mindfulness", "Balance", "Growth"
-        ]
-        selected_word = random.choice(words)
-        return jsonify({"word": selected_word})
+    app.register_blueprint(brainrot_bp)
     
     @app.route('/calc', methods=['GET','POST'])
     def calc_main():

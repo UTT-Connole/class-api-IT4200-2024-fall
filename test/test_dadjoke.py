@@ -26,3 +26,24 @@ def test_dadjoke_contains_joke(client):
     assert isinstance(json_data['joke'], str)
     assert len(json_data['joke']) > 0  # Ensure the joke is not an empty string
 
+# New Tests
+
+def test_dadjoke_multiple_requests(client):
+    """Test if multiple requests to the dadjoke endpoint return different jokes"""
+    jokes = set()
+    for _ in range(10):  # Make 10 requests to the endpoint
+        response = client.get('/dadjoke')
+        json_data = response.get_json()
+        jokes.add(json_data['joke'])  # Add the joke to the set
+    
+    # There should be more than 1 unique joke in 10 requests
+    assert len(jokes) > 1, "The same joke was returned for all requests."
+
+def test_dadjoke_joke_format(client):
+    """Test if the joke returned contains no Unicode escape characters like \u2019"""
+    response = client.get('/dadjoke')
+    json_data = response.get_json()
+    joke = json_data['joke']
+    
+    # Ensure the joke contains no Unicode escape sequences like \u2019
+    assert "\\u" not in joke, f"The joke contains Unicode escape characters: {joke}"
