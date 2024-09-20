@@ -60,6 +60,9 @@ def create_app():
     @app.route('/convertToBinary', methods=['GET','POST'])
     def convertToBinary():
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 12b841b (finished adding convertToBinary and added tests)
         num = request.args.get('num')
         if "." in num:
             return "Not compatable with float input"
@@ -68,9 +71,12 @@ def create_app():
             return bin(num).replace("0b","")
         else:
             return "Not compatable with negative input"
+<<<<<<< HEAD
 =======
         pass
 >>>>>>> f8d13cf (added files)
+=======
+>>>>>>> 12b841b (finished adding convertToBinary and added tests)
 
     
     @app.route('/twoManaCombos', methods=['GET'])
