@@ -56,7 +56,10 @@ Go to http://127.0.0.1:5000/dadjoke to laugh so hard you throw up! Now with even
 To run tests to verify functionality of the dadjokes endpoint enter "python -m pytest ./test/test_dadjoke.py".
 
 ## How to use the Travel Randomizer Endpoint
-Go to http://127.0.0.1:5000/travel to be given a randomly chosen travel destination!
+Go to http://127.0.0.1:5000/travel to be given a randomly chosen travel destination! 
+This app will output a popular travel destination in "city, country" JSON format.
+To test functionality, run this script:
+python3 -m pytest ./test/test_travel.py
 
 ## How to use Marathon Facts Endpoint
 Go to http://127.0.0.1:5000/marathonFacts to learn a random fact about marathons! 
