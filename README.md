@@ -99,9 +99,13 @@ To retrieve a random fact, navigate to http://127.0.0.1:5000/randomFact
 
 🎾 Go to http://127.0.0.1:5000/tennisFacts to learn fun facts about tennis!
 
-You can retrieve tennis facts using the `/tennisFacts` endpoint. Optionally, you can filter by category:
+You can retrieve tennis facts using the `/tennisFacts` endpoint.
 
-Example: http://127.0.0.1:5000/tennisFacts?category=players
+## How to use the sportsFacts Endpoint
+
+🏅 Go to http://127.0.0.1:5000/sports_fact to learn fun facts about various sports!
+
+You can retrieve sports facts using the `/sports_fact` endpoint.
 
 ## How to use the Pokefishing Endpoint
 Go to http://127.0.0.1:5000/pokefishing to catch a Magikarp!
