@@ -1,4 +1,6 @@
 from flask import Flask, request, jsonify
+from dadjoke import dadjoke_bp
+from brainrot import brainrot_bp
 import random
 import matplotlib
 
@@ -10,33 +12,11 @@ def create_app():
     def hello_world():
         return "Hello World"
 
-
+ apiibranch
+    app.register_blueprint(dadjoke_bp)
+  main
     
-    @app.route('/dadjoke', methods=['GET'])
-    def dad_joke():
-        jokes = [
-            "Why don't skeletons fight each other? They don't have the guts.",
-            "What do you call fake spaghetti? An impasta!",
-            "Why did the scarecrow win an award? Because he was outstanding in his field!",
-            "I would avoid the sushi if I was you. It’s a little fishy.",
-            "Today, my son asked 'Can I have a bookmark?' and I burst into tears. 11 years old and he still doesn't know my name is Brian.",
-            "I went to the aquarium this weekend, but I didn’t stay long. There’s something fishy about that place.",
-            "I gave my handyman a to-do list, but he only did jobs 1, 3, and 5. Turns out he only does odd jobs.",
-            "I’m reading a horror story in braille. Something bad is going to happen, I can just feel it."
-        ]
-        joke = random.choice(jokes)
-        return jsonify({"joke": joke})
-    
-    @app.route('/randomWord', methods=['GET'])
-    def random_word():
-        words = [
-            "Courage", "Perseverance", "Resilience", "Hope", "Strength", 
-            "Creativity", "Compassion", "Wisdom", "Inspiration", "Gratitude", 
-            "Empathy", "Innovation", "Determination", "Optimism", "Focus", 
-            "Integrity", "Kindness", "Mindfulness", "Balance", "Growth"
-        ]
-        selected_word = random.choice(words)
-        return jsonify({"word": selected_word})
+    app.register_blueprint(brainrot_bp)
     
     @app.route('/calc', methods=['GET','POST'])
     def calc_main():
@@ -70,6 +50,20 @@ def create_app():
                 result= "something broke?"
                 
         return str(result)
+  
+    @app.route('/convertToBinary', methods=['GET','POST'])
+    def convertToBinary():
+        num = request.args.get('num')
+        if "." in num:
+            return "Not compatable with float input"
+        num = int(num)
+        if num >= 0:
+            return bin(num).replace("0b","")
+        else:
+            return "Not compatable with negative input"
+
+
+
     
     @app.route('/twoManaCombos', methods=['GET'])
     def random_combo():
@@ -97,25 +91,26 @@ def create_app():
     @app.route('/travel', methods=['GET','POST'])
     def travel():
         destinations = [
-            "Paris, France",
-            "Rome, Italy",
-            "Maui, Hawaii",
-            "London, England",
-            "Tokyo, Japan",
-            "Barcelona, Spain",
-            "New York City, New York",
-            "Los Angeles, California",
-            "Dublin, Ireland",
-            "Cairo, Egypt",
-            "Sydney, Australia",
-            "Sacramento, California",
-            "Salt Lake, Utah",
-            "Denver, Colorado",
-            "Santa Cruise, California",
-            "London, England"
+            {"You should go to": "Paris, France", "To fly from SLC it will take ": "9h 50m"},
+            {"You should go to": "Rome, Italy", "To fly from SLC it will take ": "13hr 30m"},
+            {"You should go to": "London, England", "To fly from SLC it will take ": "9hr 30m"},
+            {"You should go to": "Tokyo, Japan", "To fly from SLC it will take ": "13hr 40m"},
+            {"You should go to": "Barcelona, Spain", "To fly from SLC it will take ": "12hr 30m"},
+            {"You should go to": "New York City, New York", "To fly from SLC it will take ": "4hr 35m"},
+            {"You should go to": "Los Angeles, California", "To fly from SLC it will take ": "2hr"},
+            {"You should go to": "Dublin, Ireland", "To fly from SLC it will take ": "11hr 30m"},
+            {"You should go to": "Cairo, Egypt", "To fly from SLC it will take ": "15hr 15m"},
+            {"You should go to": "Sydney, Australia", "To fly from SLC it will take ": "18hr 15m"},
+            {"You should go to": "Sacramento, California", "To fly from SLC it will take ": "1hr 45m"},
+            {"You should go to": "Salt Lake, Utah", "To fly from SLC it will take ": "You're already there silly"},
+            {"You should go to": "Denver, Colorado", "To fly from SLC it will take ": "1hr 35m"},
+            {"You should go to": "Santa Cruz, California", "To fly from SLC it will take ": "2hr"},
             ]
+        
         picked = random.choice(destinations)
-        return jsonify({"You should go to": picked})
+        #location = picked.keys
+        #flighttime = picked.values
+        return jsonify(picked)
     
     @app.route('/factorial', methods=['GET'])
     def factorial(n):
@@ -125,7 +120,42 @@ def create_app():
             return 1
         else:
             return n * factorial(n - 1)
+        
+    @app.route('/tennisFacts', methods=['GET'])
+    def tennis_facts_endpoint():
+        category = request.args.get('category')
+        tennis_facts = [
+            {"fact": "The longest tennis match lasted 11 hours and 5 minutes at Wimbledon in 2010.", "category": "records"},
+            {"fact": "The US Open is played on hard courts.", "category": "tournaments"},
+            {"fact": "Serena Williams has 23 Grand Slam singles titles.", "category": "players"},
+            {"fact": "Roger Federer, Rafael Nadal, and Novak Djokovic each have 20 Grand Slam titles.", "category": "players"},
+            {"fact": "'Love' in tennis means zero, from the French 'l'oeuf' meaning egg.", "category": "terminology"},
+            {"fact": "Wimbledon is the oldest tennis tournament, started in 1877.", "category": "history"}
+        ]
+        if category:
+            tennis_facts = [fact for fact in tennis_facts if fact['category'] == category]
+        return jsonify(tennis_facts)
 
+
+    @app.route('/pizzaToppings', methods=['GET'])
+    def pizza_toppings():
+        sauces = ["Tomato Sauce", "Alfredo Sauce", "Ranch Sauce"]
+        toppings = [
+            {"topping": "Pepperoni"},
+            {"topping": "Mushrooms"},
+            {"topping": "Sausage"},
+            {"topping": "Bacon"},
+            {"topping": "Extra cheese"},
+            {"topping": "Pineapple"},
+            {"topping": "Spinach"}
+        ]
+        selected_sauce = random.choice(sauces) 
+        selected_toppings = random.sample(toppings, 3) 
+        pizza = {
+            "sauce": selected_sauce,
+            "toppings": selected_toppings
+        }
+        return jsonify(pizza)
     return app
 
 app = create_app()
@@ -171,26 +201,6 @@ def random_name():
     name = random.choice(names)
     return jsonify({"name": name})
 
-@app.route('/pizzaToppings', methods=['GET'])
-def pizza_toppings():
-    sauces = ["Tomato Sauce", "Alfredo Sauce", "Ranch Sauce"]
-    toppings = [
-        {"topping": "Pepperoni"},
-        {"topping": "Mushrooms"},
-        {"topping": "Sausage"},
-        {"topping": "Bacon"},
-        {"topping": "Extra cheese"},
-        {"topping": "Pineapple"},
-        {"topping": "Spinach"}
-    ]
-    selected_sauce = random.choice(sauces) 
-    selected_toppings = random.sample(toppings, 3) 
-    pizza = {
-        "sauce": selected_sauce,
-        "toppings": selected_toppings
-    }
-    return jsonify(pizza)
-
 
 @app.route('/marathonFacts', methods=['GET'])
 def marathon_facts():
@@ -220,7 +230,10 @@ def get_fortune():
         "You will find a fortune.",
         "A fresh start will put you on your way.",
         "Fortune favors the brave.",
-        "Good news will come to you by mail."
+        "Good news will come to you by mail.",
+        "A beautiful, smart, and loving person will be coming into your life.",
+        "A soft voice may be awfully persuasive.",
+        "All your hard work will soon pay off."
     ]
     return jsonify({"fortune": random.choice(fortunes)})
 
@@ -236,21 +249,6 @@ def random_fact():
     ]
     selected_fact = random.choice(facts)
     return jsonify(selected_fact)
-
-@app.route('/tennisFacts', methods=['GET'])
-def tennis_facts_endpoint():
-    category = request.args.get('category')
-    tennis_facts = [
-        {"fact": "The longest tennis match lasted 11 hours and 5 minutes at Wimbledon in 2010.", "category": "records"},
-        {"fact": "The US Open is played on hard courts.", "category": "tournaments"},
-        {"fact": "Serena Williams has 23 Grand Slam singles titles.", "category": "players"},
-        {"fact": "Roger Federer, Rafael Nadal, and Novak Djokovic each have 20 Grand Slam titles.", "category": "players"},
-        {"fact": "'Love' in tennis means zero, from the French 'l'oeuf' meaning egg.", "category": "terminology"},
-        {"fact": "Wimbledon is the oldest tennis tournament, started in 1877.", "category": "history"}
-    ]
-    if category:
-        tennis_facts = [fact for fact in tennis_facts if fact['category'] == category]
-    return jsonify(tennis_facts)
 
 @app.route('/pokefishing', methods=['GET','POST'])
 def fish():
