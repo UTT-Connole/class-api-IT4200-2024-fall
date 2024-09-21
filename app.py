@@ -26,7 +26,6 @@ def create_app():
         joke = random.choice(jokes)
         return jsonify({"joke": joke})
     
-    @app.route('/randomWord', methods=['GET'])
     def random_word():
         words = [
             "Courage", "Perseverance", "Resilience", "Hope", "Strength", 
@@ -36,6 +35,26 @@ def create_app():
         ]
         selected_word = random.choice(words)
         return jsonify({"word": selected_word}) 
+    @app.route('/factorial', methods=['GET'])
+    def factorial(n):
+        if n < 0:
+            raise ValueError("Factorial is negative")
+        elif n == 0 or n == 1:
+            return 1
+        else:
+            return n * factorial(n - 1)
+        
+    @app.route('/tennis_fact')
+    def tennis_fact():
+        tennis_facts = [
+            "The fastest recorded serve was 163.7 mph by Sam Groth.",
+            "The longest tennis match lasted 11 hours and 5 minutes.",
+            "Wimbledon is the oldest tennis tournament in the world.",
+            "Yellow tennis balls were introduced in 1972.",
+            "Rafael Nadal has won the French Open 14 times."
+        ]
+        fact = random.choice(tennis_facts)
+        return jsonify({"fact": fact})
 
 
     return app
@@ -209,20 +228,6 @@ def random_fact():
     selected_fact = random.choice(facts)
     return jsonify(selected_fact)
 
-@app.route('/tennisFacts', methods=['GET'])
-def tennis_facts_endpoint():
-    category = request.args.get('category')
-    tennis_facts = [
-        {"fact": "The longest tennis match lasted 11 hours and 5 minutes at Wimbledon in 2010.", "category": "records"},
-        {"fact": "The US Open is played on hard courts.", "category": "tournaments"},
-        {"fact": "Serena Williams has 23 Grand Slam singles titles.", "category": "players"},
-        {"fact": "Roger Federer, Rafael Nadal, and Novak Djokovic each have 20 Grand Slam titles.", "category": "players"},
-        {"fact": "'Love' in tennis means zero, from the French 'l'oeuf' meaning egg.", "category": "terminology"},
-        {"fact": "Wimbledon is the oldest tennis tournament, started in 1877.", "category": "history"}
-    ]
-    if category:
-        tennis_facts = [fact for fact in tennis_facts if fact['category'] == category]
-    return jsonify(tennis_facts)
 
 @app.route('/pokefishing', methods=['GET','POST'])
 def fish():
