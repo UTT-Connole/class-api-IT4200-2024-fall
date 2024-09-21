@@ -1,6 +1,5 @@
-import pytest, sys, os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from app import create_app
+import pytest
+from app import create_app 
 
 @pytest.fixture
 def client():
@@ -21,5 +20,16 @@ def test_travel_contains_valid_response(client):
     assert 'You should go to' in json_data
     assert isinstance(json_data['You should go to'], str)
     assert len(json_data['You should go to']) > 0  # Ensure the travel location response is not an empty string
+
+def test_travel_contains_flight_time(client):
+    """Test if the travel endpoint returns a flight time in JSON format"""
+    response = client.get('/travel')
+    json_data = response.get_json()
+    assert 'To fly from SLC it will take ' in json_data
+    assert isinstance(json_data['To fly from SLC it will take '], str)
+    assert len(json_data['To fly from SLC it will take ']) > 0 
+
+
+
     
     
