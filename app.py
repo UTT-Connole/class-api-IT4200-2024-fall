@@ -119,20 +119,29 @@ def create_app():
         else:
             return n * factorial(n - 1)
         
-    @app.route('/tennisFacts', methods=['GET'])
-    def tennis_facts_endpoint():
-        category = request.args.get('category')
+    @app.route('/tennis_fact')
+    def tennis_fact():
         tennis_facts = [
-            {"fact": "The longest tennis match lasted 11 hours and 5 minutes at Wimbledon in 2010.", "category": "records"},
-            {"fact": "The US Open is played on hard courts.", "category": "tournaments"},
-            {"fact": "Serena Williams has 23 Grand Slam singles titles.", "category": "players"},
-            {"fact": "Roger Federer, Rafael Nadal, and Novak Djokovic each have 20 Grand Slam titles.", "category": "players"},
-            {"fact": "'Love' in tennis means zero, from the French 'l'oeuf' meaning egg.", "category": "terminology"},
-            {"fact": "Wimbledon is the oldest tennis tournament, started in 1877.", "category": "history"}
+            "The fastest recorded serve was 163.7 mph by Sam Groth.",
+            "The longest tennis match lasted 11 hours and 5 minutes.",
+            "Wimbledon is the oldest tennis tournament in the world.",
+            "Yellow tennis balls were introduced in 1972.",
+            "Rafael Nadal has won the French Open 14 times."
         ]
-        if category:
-            tennis_facts = [fact for fact in tennis_facts if fact['category'] == category]
-        return jsonify(tennis_facts)
+        fact = random.choice(tennis_facts)
+        return jsonify({"fact": fact})
+    
+    @app.route('/sports_fact')
+    def sports_fact():
+        sports_facts = [
+            "Basketball was invented in 1891 by Dr. James Naismith.",
+            "The first modern Olympic Games were held in Athens in 1896.",
+            "Soccer is the most popular sport in the world.",
+            "Michael Phelps holds the record for the most Olympic gold medals.",
+            "The Super Bowl is the most-watched annual sporting event."
+        ]
+        fact = random.choice(sports_facts)
+        return jsonify({"fact": fact})
 
 
     @app.route('/pizzaToppings', methods=['GET'])
