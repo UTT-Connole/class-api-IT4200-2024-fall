@@ -287,12 +287,11 @@ def animal_info():
     if animal_name and animal_name.lower() in animals:
         info = animals[animal_name.lower()]
         return jsonify({
-            "animal": animal_name,
+            "animal": animal_name.lower(),  # Use lowercase to ensure consistency
             "type": info["type"],
             "sound": info["sound"]
         })
     else:
         return jsonify({"error": "Animal not found. Please try dog, cat, cow, lion, or parrot."}), 404
-
 
 # we built this brick by brick and we will never stop
