@@ -40,6 +40,9 @@ The last # is your operator, The current current operators are: add, subtract, m
 They must be spelled exactly like those or else you will get an error
 If you leave any of the variables empty, you will get an error.
 
+## how to use get motivation
+The /motivation endpoint provides a random motivational quote whenever accessed via a GET request. When a user sends a request to this endpoint, the app responds with one of five pre-defined motivational quotes, returned in JSON format. This allows users to easily retrieve an encouraging message with every request, making it useful for applications or websites where inspiration or daily motivation is desired. Each request will randomly select and serve one quote from the list.
+
 ## How to use twoManaCombo Endpoint
 Go to http://127.0.0.1:5000/twoManaCombos?color=your_color. Specifiy which color you want included in your deck by replacing it with your_color. If you don't want to specify, you can leave it blank. Then, get the combo name, and start building your next MTG deck! ⚪🔵⚫🔴🟢
 
@@ -79,6 +82,14 @@ To retrieve a favorite quote, navigate to:
 http://127.0.0.1:5000/favoritequote
 
 ## How to use Color Hexifier endpoint
+
+#### Get Items
+- **Endpoint**: `/items`
+- **Method**: `GET`
+- **Description**: Returns a list of items. Optionally filter items by a minimum price.
+- **Query Parameters**:
+  - `min_price`: Filters items that have a price greater than or equal to the specified value (default is 0).
+
 
 Use the template to return a hex code of the color you want "http://127.0.0.1:5000/color?color=blue"
 Replace the "blue" at the end with any color of your choosing.
