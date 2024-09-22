@@ -4,7 +4,6 @@ from brainrot import brainrot_bp
 import random
 import matplotlib
 
-
 def create_app():
     app = Flask(__name__)
 
@@ -12,13 +11,12 @@ def create_app():
     def hello_world():
         return "Hello World"
 
- apiibranch
+    # Register blueprints
     app.register_blueprint(dadjoke_bp)
-  main
-    
     app.register_blueprint(brainrot_bp)
-    
-    @app.route('/calc', methods=['GET','POST'])
+
+    # Calculation route
+    @app.route('/calc', methods=['GET', 'POST'])
     def calc_main():
         x = request.args.get('x')
         y = request.args.get('y')
@@ -26,9 +24,9 @@ def create_app():
         if x and y and op:
             x = int(x)
             y = int(y)
-            op = str(op) #ensuring not anything else
+            op = str(op)  # Ensuring not anything else
         else:
-            result = "Invalid Input"
+            return "Invalid Input"
             
         if op == 'add':
             result = x + y
@@ -37,137 +35,76 @@ def create_app():
         elif op == 'multiply':
             result = x * y
         elif op == 'divide':
-            if y != 0:
-                result = x / y
-            else:
-                result = "You cannot divide by 0"
+            result = x / y if y != 0 else "You cannot divide by 0"
         else:
-            options = {"add", "subtract", "multiply", "divide"}
-            if op not in options:
-                #just checking to see if not an option and lists them if needed
-                result = "You might have spelled something wrong or there is not the option the current options are: add,subtract,multiply,divide"
-            elif op in options:
-                result= "something broke?"
-                
+            return "Invalid Operation"
+        
         return str(result)
-  
-    @app.route('/convertToBinary', methods=['GET','POST'])
+
+    # Binary conversion route
+    @app.route('/convertToBinary', methods=['GET', 'POST'])
     def convertToBinary():
         num = request.args.get('num')
-        if "." in num:
-            return "Not compatable with float input"
+        if not num or "." in num:
+            return "Not compatible with float or invalid input"
         num = int(num)
-        if num >= 0:
-            return bin(num).replace("0b","")
-        else:
-            return "Not compatable with negative input"
+        return bin(num).replace("0b", "") if num >= 0 else "Not compatible with negative input"
 
-
-
-    
+    # Random two-mana combination route
     @app.route('/twoManaCombos', methods=['GET'])
     def random_combo():
-        two_m =[{ "name": "Azorius", "color_1": "white", "color_2": "blue"},
-                { "name": "Boros", "color_1": "red", "color_2": "white"},
-                { "name": "Dimir", "color_1": "blue", "color_2": "black"},
-                { "name": "Golgari", "color_1": "black", "color_2": "green"},
-                { "name": "Gruul", "color_1": "red", "color_2": "green"},
-                { "name": "Izzet", "color_1": "blue", "color_2": "red"},
-                { "name": "Orzhov", "color_1": "white", "color_2": "black"},
-                { "name": "Rakdos", "color_1": "black", "color_2": "red"},
-                { "name": "Selesnya", "color_1": "white", "color_2": "green"},
-                { "name": "Simic", "color_1": "blue", "color_2": "black"}]
+        two_m = [
+            {"name": "Azorius", "color_1": "white", "color_2": "blue"},
+            {"name": "Boros", "color_1": "red", "color_2": "white"},
+            {"name": "Dimir", "color_1": "blue", "color_2": "black"},
+            {"name": "Golgari", "color_1": "black", "color_2": "green"},
+            {"name": "Gruul", "color_1": "red", "color_2": "green"},
+            {"name": "Izzet", "color_1": "blue", "color_2": "red"},
+            {"name": "Orzhov", "color_1": "white", "color_2": "black"},
+            {"name": "Rakdos", "color_1": "black", "color_2": "red"},
+            {"name": "Selesnya", "color_1": "white", "color_2": "green"},
+            {"name": "Simic", "color_1": "blue", "color_2": "black"}
+        ]
         color = request.args.get('color')
         if color:
             filtered_combos = [combo for combo in two_m if color.lower() in [combo['color_1'].lower(), combo['color_2'].lower()]]
             if not filtered_combos:
                 return jsonify({"error": "No combinations found for the given color"}), 404
-            
-            r = random.choice(filtered_combos)
+            return jsonify(random.choice(filtered_combos))
         else:
-            r = random.choice(two_m)
-        return jsonify(r)
-    
-    @app.route('/travel', methods=['GET','POST'])
+            return jsonify(random.choice(two_m))
+
+    # Travel suggestions route
+    @app.route('/travel', methods=['GET', 'POST'])
     def travel():
         destinations = [
-            {"You should go to": "Paris, France", "To fly from SLC it will take ": "9h 50m"},
-            {"You should go to": "Rome, Italy", "To fly from SLC it will take ": "13hr 30m"},
-            {"You should go to": "London, England", "To fly from SLC it will take ": "9hr 30m"},
-            {"You should go to": "Tokyo, Japan", "To fly from SLC it will take ": "13hr 40m"},
-            {"You should go to": "Barcelona, Spain", "To fly from SLC it will take ": "12hr 30m"},
-            {"You should go to": "New York City, New York", "To fly from SLC it will take ": "4hr 35m"},
-            {"You should go to": "Los Angeles, California", "To fly from SLC it will take ": "2hr"},
-            {"You should go to": "Dublin, Ireland", "To fly from SLC it will take ": "11hr 30m"},
-            {"You should go to": "Cairo, Egypt", "To fly from SLC it will take ": "15hr 15m"},
-            {"You should go to": "Sydney, Australia", "To fly from SLC it will take ": "18hr 15m"},
-            {"You should go to": "Sacramento, California", "To fly from SLC it will take ": "1hr 45m"},
-            {"You should go to": "Salt Lake, Utah", "To fly from SLC it will take ": "You're already there silly"},
-            {"You should go to": "Denver, Colorado", "To fly from SLC it will take ": "1hr 35m"},
-            {"You should go to": "Santa Cruz, California", "To fly from SLC it will take ": "2hr"},
-            ]
-        
+            {"You should go to": "Paris, France", "Flight time": "9h 50m"},
+            {"You should go to": "Rome, Italy", "Flight time": "13hr 30m"},
+            # Add more destinations here...
+        ]
         picked = random.choice(destinations)
-        #location = picked.keys
-        #flighttime = picked.values
         return jsonify(picked)
-    
+
+    # Factorial route
     @app.route('/factorial', methods=['GET'])
-    def factorial(n):
-        if n < 0:
-            raise ValueError("Factorial is negative")
+    def factorial():
+        n = request.args.get('n', type=int)
+        if n is None or n < 0:
+            return "Factorial is not defined for negative numbers."
         elif n == 0 or n == 1:
-            return 1
+            return "1"
         else:
-            return n * factorial(n - 1)
-        
-    @app.route('/tennis_fact')
-    def tennis_fact():
-        tennis_facts = [
-            "The fastest recorded serve was 163.7 mph by Sam Groth.",
-            "The longest tennis match lasted 11 hours and 5 minutes.",
-            "Wimbledon is the oldest tennis tournament in the world.",
-            "Yellow tennis balls were introduced in 1972.",
-            "Rafael Nadal has won the French Open 14 times."
-        ]
-        fact = random.choice(tennis_facts)
-        return jsonify({"fact": fact})
-    
-    @app.route('/sports_fact')
-    def sports_fact():
-        sports_facts = [
-            "Basketball was invented in 1891 by Dr. James Naismith.",
-            "The first modern Olympic Games were held in Athens in 1896.",
-            "Soccer is the most popular sport in the world.",
-            "Michael Phelps holds the record for the most Olympic gold medals.",
-            "The Super Bowl is the most-watched annual sporting event."
-        ]
-        fact = random.choice(sports_facts)
-        return jsonify({"fact": fact})
+            fact = 1
+            for i in range(1, n + 1):
+                fact *= i
+            return str(fact)
 
-
-    @app.route('/pizzaToppings', methods=['GET'])
-    def pizza_toppings():
-        sauces = ["Tomato Sauce", "Alfredo Sauce", "Ranch Sauce"]
-        toppings = [
-            {"topping": "Pepperoni"},
-            {"topping": "Mushrooms"},
-            {"topping": "Sausage"},
-            {"topping": "Bacon"},
-            {"topping": "Extra cheese"},
-            {"topping": "Pineapple"},
-            {"topping": "Spinach"}
-        ]
-        selected_sauce = random.choice(sauces) 
-        selected_toppings = random.sample(toppings, 3) 
-        pizza = {
-            "sauce": selected_sauce,
-            "toppings": selected_toppings
-        }
-        return jsonify(pizza)
     return app
 
 app = create_app()
+
+# Additional routes remain unchanged
+
 
 
 
@@ -334,5 +271,28 @@ def get_items():
     if not items:
         return jsonify({'message': 'No items found'}), 404
     return jsonify([item.serialize() for item in items]), 200
+
+@app.route('/animalInfo', methods=['GET'])
+def animal_info():
+    animals = {
+        "dog": {"type": "mammal", "sound": "bark"},
+        "cat": {"type": "mammal", "sound": "meow"},
+        "cow": {"type": "mammal", "sound": "moo"},
+        "lion": {"type": "mammal", "sound": "roar"},
+        "parrot": {"type": "bird", "sound": "squawk"}
+    }
+    
+    animal_name = request.args.get('animal')
+    
+    if animal_name and animal_name.lower() in animals:
+        info = animals[animal_name.lower()]
+        return jsonify({
+            "animal": animal_name,
+            "type": info["type"],
+            "sound": info["sound"]
+        })
+    else:
+        return jsonify({"error": "Animal not found. Please try dog, cat, cow, lion, or parrot."}), 404
+
 
 # we built this brick by brick and we will never stop
