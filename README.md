@@ -156,6 +156,9 @@ Go to http://127.0.0.1:5000/brainrot to add a new word to your vocabulary!
 ## How to use the convertToBinary Endpoint
 Go to http://127.0.0.1:5000/convertToBinary?num=# and replace the # with any non-negative whole number!
 
+## How to use the animalInfo Enpoint
+Go to http://127.0.0.1:5000/animalInfo?animal=dog and replace the "dog" at the end with any animal!
+
 ## How to Rebase
  * step 1: STOP, just use merge thingy....
 
