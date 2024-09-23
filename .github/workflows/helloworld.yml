@@ -11,5 +11,8 @@ jobs:
       - name: run echo
         run: echo "Hello, world!"
 
+      - name: install dependencies
+        run: pip install -r requirements.txt
+
       - name: run test
         run: pytest .
