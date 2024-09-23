@@ -142,6 +142,7 @@ def create_app():
 
 
     @app.route('/pizzaToppings', methods=['GET'])
+
     def pizza_toppings():
         sauces = ["Tomato Sauce", "Alfredo Sauce", "Ranch Sauce"]
         toppings = [
@@ -153,13 +154,22 @@ def create_app():
             {"topping": "Pineapple"},
             {"topping": "Spinach"}
         ]
-        selected_sauce = random.choice(sauces) 
+        crusts = ["Hand Tossed", "Handmade Pan", "Crunchy Thin Crust"]
+
+        selected_crust = random.choice(crusts)
+        selected_sauce = random.choice(sauces)  
         selected_toppings = random.sample(toppings, 3) 
+
         pizza = {
+            "crust": selected_crust,
             "sauce": selected_sauce,
             "toppings": selected_toppings
         }
+
         return jsonify(pizza)
+
+
+
     return app
 
 app = create_app()
