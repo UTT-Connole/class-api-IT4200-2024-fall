@@ -12,9 +12,7 @@ def create_app():
     def hello_world():
         return "Hello World"
 
- apiibranch
     app.register_blueprint(dadjoke_bp)
-  main
     
     app.register_blueprint(brainrot_bp)
     
@@ -113,13 +111,10 @@ def create_app():
         return jsonify(picked)
     
     @app.route('/factorial', methods=['GET'])
-    def factorial(n):
-        if n < 0:
-            raise ValueError("Factorial is negative")
-        elif n == 0 or n == 1:
-            return 1
-        else:
-            return n * factorial(n - 1)
+    def factorial():
+        n = request.args.get('n')
+        return ""
+
         
     @app.route('/tennis_fact')
     def tennis_fact():
