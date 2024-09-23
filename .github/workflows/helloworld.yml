@@ -1,6 +1,9 @@
 name: hello world
 
 on:
+  push:
+    branches:
+      - dependencies  
   pull_request:
     branches:
       - main
