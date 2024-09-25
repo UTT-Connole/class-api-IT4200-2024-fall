@@ -5,3 +5,6 @@ def test_zero(client):
 
 def test_fail(client):
     assert False
+
+def test_True(client):
+    assert True
