@@ -1,10 +1,7 @@
-from flask import Flask, request, jsonify
-from dadjoke import dadjoke_bp
-from brainrot import brainrot_bp
+from flask import Flask, request, jsonify, render_template
 from binaryconvert import convertToBinary_bp
 import random
 import matplotlib
-
 
 
 def create_app():
@@ -13,13 +10,55 @@ def create_app():
     @app.route('/')
     def hello_world():
         return "Hello World"
-
-    app.register_blueprint(dadjoke_bp)
     
-    app.register_blueprint(brainrot_bp)
-
     app.register_blueprint(convertToBinary_bp)
     
+    @app.route('/dadjoke', methods=['GET'])
+    def dad_joke():
+        jokes = [
+        "Why don't skeletons fight each other? They don't have the guts.",
+        "What do you call fake spaghetti? An impasta!",
+        "Why did the scarecrow win an award? Because he was outstanding in his field!",
+        "I would avoid the sushi if I was you. It’s a little fishy.",
+        "Today, my son asked 'Can I have a bookmark?' and I burst into tears. 11 years old and he still doesn't know my name is Brian.",
+        "I went to the aquarium this weekend, but I didn’t stay long. There’s something fishy about that place.",
+        "I gave my handyman a to-do list, but he only did jobs 1, 3, and 5. Turns out he only does odd jobs.",
+        "I’m reading a horror story in braille. Something bad is going to happen, I can just feel it."
+        ]
+        joke = random.choice(jokes)
+        joke = joke.replace("\u2019", "'") 
+        return jsonify({"joke": joke})
+
+    @app.route('/brainrot', methods=['GET'])
+    def brainrot():
+        words = [
+            "Sigma", "Skibidi", "Kai Cenat", "Erm what the Sigma", "Rizz", 
+            "Gyatt", "Sussy Sigma", "Sussy Imposter", "Griddy on em"
+        ]
+        selected_word = random.choice(words)
+        # Render the HTML template with the selected word
+        return render_template('brainrot.html', brainrot_word=selected_word) 
+    
+    @app.route('/quotes', methods=['GET'])
+    def fav_quotes():
+        quotes = [
+        {"author": "Marcus Aurelius", "quote": "You have power over your mind - not outside events. Realize this, and you will find strength."},
+        {"author": "Marcus Aurelius", "quote": "The happiness of your life depends upon the quality of your thoughts."},
+        {"author": "Epictetus", "quote": "It's not what happens to you, but how you react to it that matters."},
+        {"author": "Seneca", "quote": "We suffer more in imagination than in reality."},
+        {"author": "Marcus Aurelius", "quote": "Waste no more time arguing about what a good man should be. Be one."},
+        {"author": "Epictetus", "quote": "No man is free who is not master of himself."},
+        {"author": "Seneca", "quote": "Luck is what happens when preparation meets opportunity."},
+        {"author": "Marcus Aurelius", "quote": "Things are not asking to be judged by you."},
+        {"author": "Marcus Aurelius", "quote": "The best revenge is to be unlike hom who performed the injury."},
+        {"author": "Plato", "quote": "We can easily forgive a child who is afraid of the dark; the real tragedy of life is when men are afraid of the light."},
+        {"author": "Plato", "quote": "Wise men talk because they have something to say; fools, because they have to say something."},
+        {"author": "Plato", "quote": "Human behavior flows from threee main sources: desire, emotion, and knowledge."},
+        {"author": "Thorin Oakenshield", "quote": "If more of us valued food and cheer and song above hoarded gold, it would be a merrier world."}
+        ]
+        quote = random.choice(quotes)
+        return jsonify(quote)
+
     @app.route('/calc', methods=['GET','POST'])
     def calc_main():
         x = request.args.get('x')
@@ -182,27 +221,6 @@ def color_hexifier():
         return f"The hex code for {color_name} is {hex_code}"
     else:
         return "Invalid color name"
-
-
-@app.route('/quotes', methods=['GET'])
-def fav_quotes():
-    quotes = [
-    {"author": "Marcus Aurelius", "quote": "You have power over your mind - not outside events. Realize this, and you will find strength."},
-    {"author": "Marcus Aurelius", "quote": "The happiness of your life depends upon the quality of your thoughts."},
-    {"author": "Epictetus", "quote": "It's not what happens to you, but how you react to it that matters."},
-    {"author": "Seneca", "quote": "We suffer more in imagination than in reality."},
-    {"author": "Marcus Aurelius", "quote": "Waste no more time arguing about what a good man should be. Be one."},
-    {"author": "Epictetus", "quote": "No man is free who is not master of himself."},
-    {"author": "Seneca", "quote": "Luck is what happens when preparation meets opportunity."},
-    {"author": "Marcus Aurelius", "quote": "Things are not asking to be judged by you."},
-    {"author": "Marcus Aurelius", "quote": "The best revenge is to be unlike hom who performed the injury."},
-    {"author": "Plato", "quote": "We can easily forgive a child who is afraid of the dark; the real tragedy of life is when men are afraid of the light."},
-    {"author": "Plato", "quote": "Wise men talk because they have something to say; fools, because they have to say something."},
-    {"author": "Plato", "quote": "Human behavior flows from threee main sources: desire, emotion, and knowledge."},
-    {"author": "Thorin Oakenshield", "quote": "If more of us valued food and cheer and song above hoarded gold, it would be a merrier world."}
-    ]
-    quote = random.choice(quotes)
-    return jsonify(quote)
 
 @app.route('/randomName', methods=['GET'])
 def random_name():
