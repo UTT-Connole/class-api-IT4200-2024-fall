@@ -22,7 +22,11 @@ ptw .
 ```
 
 ## How to run and get to your endpoint
-To get to your endpoint go to the folder the app is in in a terminal (EX. class-api-IT4200-2024-fall) and run the command “python3 -m flask run”, this will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
+To get to your endpoint go to the folder the app is in in a terminal (EX. class-api-IT4200-2024-fall) and run the following command:
+```
+python3 -m flask run
+``` 
+This will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
 
 ## Factorial Endpoint
 Currently not working, needs to be rewritten -- if you want to ignore it (like I did), comment it out to run pytest lol
@@ -160,7 +164,7 @@ Go to http://127.0.0.1:5000/pokefishing to catch a Magikarp!
 Go to http://127.0.0.1:5000/brainrot to add a new word to your vocabulary!
 
 ## How to use the convertToBinary Endpoint
-Go to http://127.0.0.1:5000/convertToBinary?num=# and replace the # with any non-negative whole number!
+Go to http://127.0.0.1:5000/convertToBinary?num=# and replace the # with any non-negative whole number! Don't even think about putting in floats, strings, or blanks. I have tested all of those cases and you will get appropriate responses for each!
 
 ## How to Rebase
  * step 1: STOP, just use merge thingy....
