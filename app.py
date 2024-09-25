@@ -22,34 +22,27 @@ def create_app():
         x = request.args.get('x')
         y = request.args.get('y')
         op = request.args.get('op')
-        if x and y and op:
+        
+        if not (x and y and op):
+            return "Invalid Input"
+        
+        try:
             x = int(x)
             y = int(y)
-            op = str(op) #ensuring not anything else
-        else:
-            result = "Invalid Input"
-            
-        if op == 'add':
-            result = x + y
-        elif op == 'subtract':
-            result = x - y
-        elif op == 'multiply':
-            result = x * y
-        elif op == 'divide':
-            if y != 0:
-                result = x / y
-            else:
-                result = "You cannot divide by 0"
-        else:
-            options = {"add", "subtract", "multiply", "divide"}
-            if op not in options:
-                #just checking to see if not an option and lists them if needed
-                result = "You might have spelled something wrong or there is not the option the current options are: add,subtract,multiply,divide"
-            elif op in options:
-                result= "something broke?"
-                
+        except ValueError:
+            return "Invalid Input"
+        
+        operations = {
+            'add': x + y,
+            'subtract': x - y,
+            'multiply': x * y,
+            'divide': x / y if y != 0 else "You cannot divide by 0"
+        }
+        
+        result = operations.get(op, "You might have spelled something wrong or there is not the option. The current options are: add, subtract, multiply, divide")
+        
         return str(result)
-  
+
     @app.route('/convertToBinary', methods=['GET','POST'])
     def convertToBinary():
         num = request.args.get('num')

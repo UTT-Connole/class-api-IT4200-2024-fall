@@ -33,12 +33,18 @@ Replace "apple" from the end of the url with the fruit of your choice.
 If the fruit isn't available an error message will come up and you will be given a list of options.
 Choose a fruit from the options given.
 
-## How to use Calculator Endpoint
-Use this template to add,subtract,multiple,or divide two numbers "http://127.0.0.1:5000/calc?x=#&y=#&op=#"
-Replace the first two #'s with what ever numbers you would like 
-The last # is your operator, The current current operators are: add, subtract, multiply, divide
-They must be spelled exactly like those or else you will get an error
-If you leave any of the variables empty, you will get an error.
+## How to Use the Calculator Endpoint
+
+Use the following template to add, subtract, multiply, or divide two numbers: 
+`http://127.0.0.1:5000/calc?x=<number>&y=<number>&op=<operator>`
+- Replace `<number>` with the numbers you want to use.
+- Replace `<operator>` with one of the following operations: `add`, `subtract`, `multiply`, `divide`.
+
+### Important Notes:
+- The operators must be spelled exactly as shown above, or you will receive an error.
+- If any of the variables (`x`, `y`, or `op`) are missing, you will receive an error.
+
+
 
 ## how to use get motivation
 The /motivation endpoint provides a random motivational quote whenever accessed via a GET request. When a user sends a request to this endpoint, the app responds with one of five pre-defined motivational quotes, returned in JSON format. This allows users to easily retrieve an encouraging message with every request, making it useful for applications or websites where inspiration or daily motivation is desired. Each request will randomly select and serve one quote from the list.
