@@ -20,6 +20,8 @@ or
 ```
 ptw .
 ```
+## How to make an Endpoint
+Go to http://127.0.0.1:5000/howToMakeEndpoint to learn how to make an endpoint.
 
 ## How to run and get to your endpoint
 To get to your endpoint go to the folder the app is in in a terminal (EX. class-api-IT4200-2024-fall) and run the following command:
@@ -50,7 +52,7 @@ Use the following template to add, subtract, multiply, or divide two numbers:
 
 
 
-## how to use get motivation
+## How to use the motivation Endpoint
 The /motivation endpoint provides a random motivational quote whenever accessed via a GET request. When a user sends a request to this endpoint, the app responds with one of five pre-defined motivational quotes, returned in JSON format. This allows users to easily retrieve an encouraging message with every request, making it useful for applications or websites where inspiration or daily motivation is desired. Each request will randomly select and serve one quote from the list.
 
 ## How to use twoManaCombo Endpoint
@@ -108,9 +110,6 @@ If the color doesn't exist in the library, you will get an error.
 ## How to use Fortune Cookie Endpoint
 
 This API has a `/fortune` endpoint that returns a random fortune in JSON format.
-
-# How to make an Endpoint
-Go to http://127.0.0.1:5000/howToMakeEndpoint to learn how to make an endpoint.
 
 ## How to use the Random Fact Endpoint
 
