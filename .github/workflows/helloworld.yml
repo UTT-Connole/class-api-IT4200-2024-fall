@@ -1,4 +1,4 @@
-name: hello world
+name: Unit Tests
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
       - main
 
 jobs:
-   hello:
+   test:
       runs-on: ubuntu-latest
 
       steps:
