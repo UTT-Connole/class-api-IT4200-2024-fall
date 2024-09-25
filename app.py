@@ -11,6 +11,8 @@ def create_app():
     def hello_world():
         return "Hello World"
     
+    app.register_blueprint(convertToBinary_bp)
+    
     @app.route('/dadjoke', methods=['GET'])
     def dad_joke():
         jokes = [
