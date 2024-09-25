@@ -13,8 +13,16 @@ def test_zero(client):
 
 def test_negative(client):
     response = client.get('/convertToBinary?num=-1')
-    assert response.data.decode() == 'Not compatable with negative input'
+    assert response.data.decode() == 'Not compatible with negative input'
 
 def test_float(client):
     response = client.get('/convertToBinary?num=1.1')
-    assert response.data.decode() == 'Not compatable with float input'
+    assert response.data.decode() == 'Not compatible with float input'
+
+def test_str(client):
+    response = client.get('/convertToBinary?num=abc')
+    assert response.data.decode() == 'Please input a valid number'
+
+def test_blank(client):
+    response = client.get('/convertToBinary?num=')
+    assert response.data.decode() == 'Please input a valid number'

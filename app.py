@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from dadjoke import dadjoke_bp
 from brainrot import brainrot_bp
+from binaryconvert import convertToBinary_bp
 import random
 import matplotlib
 
@@ -16,6 +17,8 @@ def create_app():
     app.register_blueprint(dadjoke_bp)
     
     app.register_blueprint(brainrot_bp)
+
+    app.register_blueprint(convertToBinary_bp)
     
     @app.route('/calc', methods=['GET','POST'])
     def calc_main():
@@ -42,20 +45,6 @@ def create_app():
         result = operations.get(op, "You might have spelled something wrong or there is not the option. The current options are: add, subtract, multiply, divide")
         
         return str(result)
-
-    @app.route('/convertToBinary', methods=['GET','POST'])
-    def convertToBinary():
-        num = request.args.get('num')
-        if "." in num:
-            return "Not compatable with float input"
-        num = int(num)
-        if num >= 0:
-            return bin(num).replace("0b","")
-        else:
-            return "Not compatable with negative input"
-
-
-
     
     @app.route('/twoManaCombos', methods=['GET'])
     def random_combo():
