@@ -169,6 +169,18 @@ def create_app():
 
         return jsonify(pizza)
 
+    @app.route('/fortune', methods=['GET'])
+    def get_fortune():
+        fortunes = [
+            "You will find a fortune.",
+            "A fresh start will put you on your way.",
+            "Fortune favors the brave.",
+            "Good news will come to you by mail.",
+            "A beautiful, smart, and loving person will be coming into your life.",
+            "A soft voice may be awfully persuasive.",
+            "All your hard work will soon pay off."
+        ]
+        return jsonify({"fortune": random.choice(fortunes)})
 
 
     return app
@@ -239,18 +251,6 @@ def get_favorite_quote():
     }
     return jsonify(favorite_quote)
 
-@app.route('/fortune', methods=['GET'])
-def get_fortune():
-    fortunes = [
-        "You will find a fortune.",
-        "A fresh start will put you on your way.",
-        "Fortune favors the brave.",
-        "Good news will come to you by mail.",
-        "A beautiful, smart, and loving person will be coming into your life.",
-        "A soft voice may be awfully persuasive.",
-        "All your hard work will soon pay off."
-    ]
-    return jsonify({"fortune": random.choice(fortunes)})
 
 @app.route('/randomFact', methods=['GET'])
 def random_fact():
