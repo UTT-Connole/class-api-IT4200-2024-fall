@@ -35,7 +35,7 @@ def test_quotes_uniqueness(client):
     # Ensure there is some variety in the quotes
     assert len(unique_quotes) > 1, "The same quote was returned for all requests." if len(unique_quotes) <= 1 else "Less than 2 unique quotes returned."
 
-
+# adding tests
 def test_quotes_endpoint(client):
     response = client.get('/quotes')
     assert response.status_code == 200
