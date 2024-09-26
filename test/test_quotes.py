@@ -34,3 +34,20 @@ def test_quotes_uniqueness(client):
 
     # Ensure there is some variety in the quotes
     assert len(unique_quotes) > 1, "The same quote was returned for all requests." if len(unique_quotes) <= 1 else "Less than 2 unique quotes returned."
+
+
+def test_quotes_endpoint(client):
+    response = client.get('/quotes')
+    assert response.status_code == 200
+    data = response.get_json()
+    assert "quote" in data
+    assert "author" in data
+
+def test_quotes_author_exists(client):
+    response = client.get('/quotes')
+    assert response.status_code == 200
+    data = response.get_json()
+
+    # Check if the author is one of the known authors in the list
+    valid_authors = ["Marcus Aurelius", "Epictetus", "Seneca", "Plato", "Thorin Oakenshield"]
+    assert data["author"] in valid_authors, f"Unexpected author: {data['author']}"
