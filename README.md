@@ -61,6 +61,8 @@ Go to http://127.0.0.1:5000/twoManaCombos?color=your_color. Specifiy which color
 ## How to get to the stoic quotes Endpoint
 Go to http://127.0.0.1:5000/quotes for a good random stoic quotes from Plato and others.
 
+to test python3 -m unittest test_quotes.py 
+
 ## How to use pizzaToppings Endpoint
 Go to http://127.0.0.1:5000/pizzaToppings to finally decide what sauce and toppings to put on your pizza 🍕!
 To test if the code is working properly run:
@@ -92,6 +94,8 @@ Start reading people's favorite quotes!
 To retrieve a favorite quote, navigate to:
 
 http://127.0.0.1:5000/favoritequote
+
+
 
 ## How to use Color Hexifier endpoint
 
