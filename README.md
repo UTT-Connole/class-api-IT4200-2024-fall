@@ -55,6 +55,9 @@ Use the following template to add, subtract, multiply, or divide two numbers:
 ## How to use the motivation Endpoint
 The /motivation endpoint provides a random motivational quote whenever accessed via a GET request. When a user sends a request to this endpoint, the app responds with one of five pre-defined motivational quotes, returned in JSON format. This allows users to easily retrieve an encouraging message with every request, making it useful for applications or websites where inspiration or daily motivation is desired. Each request will randomly select and serve one quote from the list.
 
+## how to use get motivation
+The /motivation endpoint provides a random motivational quote whenever accessed via a GET request. When a user sends a request to this endpoint, the app responds with one of five pre-defined motivational quotes, returned in JSON format. This allows users to easily retrieve an encouraging message with every request, making it useful for applications or websites where inspiration or daily motivation is desired. Each request will randomly select and serve one quote from the list.
+
 ## How to use twoManaCombo Endpoint
 Go to http://127.0.0.1:5000/twoManaCombos?color=your_color. Specifiy which color you want included in your deck by replacing it with your_color. If you don't want to specify, you can leave it blank. Then, get the combo name, and start building your next MTG deck! ⚪🔵⚫🔴🟢
 
@@ -123,11 +126,16 @@ To retrieve a random fact, navigate to http://127.0.0.1:5000/randomFact
 
 🎾 Go to http://127.0.0.1:5000/tennisFacts to learn fun facts about tennis!
 
+
+## This Flask API provides a /fortune endpoint that returns a random fortune message in JSON format. To run the app, install dependencies using pip install -r requirements.txt, start it with python app.py, and use pytest to run tests.
+
+You can retrieve tennis facts using the `/tennisFacts` endpoint. Optionally, you can filter by category:
 You can retrieve tennis facts using the `/tennisFacts` endpoint.
 
 ## How to use the sportsFacts Endpoint
 
 🏅 Go to http://127.0.0.1:5000/sports_fact to learn fun facts about various sports!
+
 
 You can retrieve sports facts using the `/sports_fact` endpoint.
 
