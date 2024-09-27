@@ -147,6 +147,15 @@ def create_app():
                 result *= i
             return jsonify(result=result), 200
         
+    @app.route('/power', methods=['GET'])
+    def power():
+        base = request.args.get('base', type=int)
+        exp = request.args.get('exp', type=int)
+        if base is None or exp is None:
+            return "Invalid Input", 400
+        result = base ** exp
+        return jsonify(result=result), 200
+        
     @app.route('/tennis_fact')
     def tennis_fact():
         tennis_facts = [

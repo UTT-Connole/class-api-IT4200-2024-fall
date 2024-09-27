@@ -31,7 +31,12 @@ python3 -m flask run
 This will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
 
 ## Factorial Endpoint
-Currently not working, needs to be rewritten -- if you want to ignore it (like I did), comment it out to run pytest lol
+Go to http://127.0.0.1:5000/factorial?n=5
+But replace the value of n with whatever number you want to see the factorial of.
+
+## Power Endpoint
+Go to http://127.0.0.1:5000/power?base=2&exp=4
+But replace the values of base and exp with whatever numbers you want.
 
 ## How to use fruit_info Endpoint
 Navigate to http://127.0.0.1:5000/fruitInfo?fruit=apple
