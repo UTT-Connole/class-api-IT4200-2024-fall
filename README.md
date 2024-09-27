@@ -110,6 +110,9 @@ To retrieve a random fact, navigate to http://127.0.0.1:5000/randomFact
 
 🎾 Go to http://127.0.0.1:5000/tennisFacts to learn fun facts about tennis!
 
+
+## This Flask API provides a /fortune endpoint that returns a random fortune message in JSON format. To run the app, install dependencies using pip install -r requirements.txt, start it with python app.py, and use pytest to run tests.
+
 You can retrieve tennis facts using the `/tennisFacts` endpoint. Optionally, you can filter by category:
 
 Example: http://127.0.0.1:5000/tennisFacts?category=players

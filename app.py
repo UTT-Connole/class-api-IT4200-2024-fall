@@ -12,9 +12,7 @@ def create_app():
     def hello_world():
         return "Hello World"
 
- apiibranch
     app.register_blueprint(dadjoke_bp)
-  main
     
     app.register_blueprint(brainrot_bp)
     
@@ -326,4 +324,8 @@ def get_items():
         return jsonify({'message': 'No items found'}), 404
     return jsonify([item.serialize() for item in items]), 200
 
+@app.route('/fortune', methods=['GET'])
+def get_fortune():
+    fortune = "You will have a great day!"
+    return jsonify({'fortune': fortune}), 200
 # we built this brick by brick and we will never stop
