@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template
 from binaryconvert import convertToBinary_bp
 import random
 import matplotlib
+import requests
 
 
 def create_app():
@@ -128,8 +129,6 @@ def create_app():
             ]
         
         picked = random.choice(destinations)
-        #location = picked.keys
-        #flighttime = picked.values
         return jsonify(picked)
     
     @app.route('/factorial', methods=['GET'])
@@ -214,6 +213,36 @@ def create_app():
             "All your hard work will soon pay off."
         ]
         return jsonify({"fortune": random.choice(fortunes)})
+    
+    @app.route('/color', methods=['GET','POST'])
+    def color_hexifier():
+        color_name = request.args.get('color')
+    
+        print(f"Received color name: {color_name}")
+    
+        if color_name and color_name.lower() in matplotlib.colors.CSS4_COLORS:
+            hex_code = matplotlib.colors.CSS4_COLORS[color_name.lower()]
+            return f"The hex code for {color_name} is {hex_code}"
+        else:
+            return "Invalid color name"
+        
+    WEATHER_API_KEY = 'a5b6f8eb1b20b57f80fa87f940e02857'
+    @app.route('/weather/<city>', methods=['GET'])
+    def weather(city):
+        url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={WEATHER_API_KEY}&units=imperial'
+        response = requests.get(url)
+        #Returns error if invalid city is entered
+        if response.status_code != 200:
+            return jsonify({"error": "City not found or API error."}), 404
+        
+        data = response.json()
+        weather_data = {
+            "temperature": f"{data['main']['temp']}°F",
+            "condition": data['weather'][0]['description'],
+            "humidity": f"{data['main']['humidity']}%",
+            "wind_speed": f"{data['wind']['speed']} mph"
+        }
+        return jsonify(weather_data)
 
     @app.route('/fruitInfo', methods=['GET'])
     def fruit_info():
@@ -244,17 +273,7 @@ app = create_app()
 
 
 
-@app.route('/color', methods=['GET','POST'])
-def color_hexifier():
-    color_name = request.args.get('color')
-    
-    print(f"Received color name: {color_name}")
-    
-    if color_name and color_name.lower() in matplotlib.colors.CSS4_COLORS:
-        hex_code = matplotlib.colors.CSS4_COLORS[color_name.lower()]
-        return f"The hex code for {color_name} is {hex_code}"
-    else:
-        return "Invalid color name"
+
 
 @app.route('/randomName', methods=['GET'])
 def random_name():
