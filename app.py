@@ -146,6 +146,15 @@ def create_app():
                 result *= i
             return jsonify(result=result), 200
         
+    @app.route('/power', methods=['GET'])
+    def power():
+        base = request.args.get('base', type=int)
+        exp = request.args.get('exp', type=int)
+        if base is None or exp is None:
+            return "Invalid Input", 400
+        result = base ** exp
+        return jsonify(result=result), 200
+        
     @app.route('/tennis_fact')
     def tennis_fact():
         tennis_facts = [
@@ -242,6 +251,27 @@ def create_app():
         }
         return jsonify(weather_data)
 
+    @app.route('/pokefishing', methods=['GET','POST'])
+    def fish():
+        magikarp = [
+            "a regular ol' Magikarp",
+            "a calico pattern Magikarp",
+            "a orange two-tone pattern Magikarp",
+            "a pink dapple pattern Magikarp",
+            "a gray diamond pattern Magikarp",
+            "a purple patches pattern Magikarp",
+            "a apricot tiger pattern Magikarp",
+            "a brown stripes pattern Magikarp",
+            "a orange forehead pattern Magikarp",
+            "a blue raindrops pattern Magikarp",
+            "a shiny Magikarp",
+            "a... Oh no, it's a Gyarados!!",
+            "a Goldeen and it's the biggest you've ever seen",
+            "nothing... But you did see a Mudkip riding on a Lotad"
+            ]
+        caught = random.choice(magikarp)
+        return jsonify({"You caught": caught + "!"})
+
     @app.route('/fruitInfo', methods=['GET'])
     def fruit_info():
         fruits = {
@@ -269,16 +299,11 @@ def create_app():
 
 app = create_app()
 
-
-
-
-
 @app.route('/randomName', methods=['GET'])
 def random_name():
     names = ["Alice", "Bob", "Charlie", "Diana"]
     name = random.choice(names)
     return jsonify({"name": name})
-
 
 @app.route('/marathonFacts', methods=['GET'])
 def marathon_facts():
@@ -302,7 +327,6 @@ def get_favorite_quote():
     }
     return jsonify(favorite_quote)
 
-
 @app.route('/randomFact', methods=['GET'])
 def random_fact():
     facts = [
@@ -315,27 +339,6 @@ def random_fact():
     ]
     selected_fact = random.choice(facts)
     return jsonify(selected_fact)
-
-@app.route('/pokefishing', methods=['GET','POST'])
-def fish():
-    magikarp = [
-        "a regular ol' Magikarp",
-        "a calico pattern Magikarp",
-        "a orange two-tone pattern Magikarp",
-        "a pink dapple pattern Magikarp",
-        "a gray diamond pattern Magikarp",
-        "a purple patches pattern Magikarp",
-        "a apricot tiger pattern Magikarp",
-        "a brown stripes pattern Magikarp",
-        "a orange forehead pattern Magikarp",
-        "a blue raindrops pattern Magikarp",
-        "a shiny Magikarp",
-        "a... Oh no, it's a Gyarados!!",
-        "a Goldeen and it's the biggest you've ever seen",
-        "nothing... But you did see a Mudkip riding on a Lotad"
-        ]
-    caught = random.choice(magikarp)
-    return jsonify({"You caught": caught + "!"})
 
 if __name__ == '__main__':
     app.run(debug=True)
