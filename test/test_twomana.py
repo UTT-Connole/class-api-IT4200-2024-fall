@@ -12,6 +12,12 @@ def test_correct_output(client):
     assert isinstance(json_data, dict)
     assert len(json_data) == 3
 
+def test_specified_output(client):
+    test_color = "green"
+    response = client.get(f'/twoManaCombos?color={test_color}')
+    json_data = response.get_json()
+    assert 'color_1' in json_data and 'color_2' in json_data
+
 def test_invalid_color(client):
     test_color = 'purple'
     response = client.get(f'/twoManaCombos?color={test_color}')

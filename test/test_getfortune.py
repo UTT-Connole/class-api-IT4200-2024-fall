@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import pytest, sys, os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from app import app
@@ -7,6 +8,8 @@ def client():
     app.config['TESTING'] = True
     client = app.test_client()
     yield client
+=======
+>>>>>>> 99d7ee1869ad828012739d2f0e373d6fa7e68139
 
 def test_fortune_status_code(client):
     """Test if the fortune endpoint returns a 200 status code"""
@@ -19,6 +22,7 @@ def test_fortune_structure(client):
     json_data = response.get_json()
     assert 'fortune' in json_data
 
+<<<<<<< HEAD
 def test_fortune_content(client):
     """Test if the fortune returned is from the predefined list"""
     valid_fortunes = [
@@ -31,6 +35,8 @@ def test_fortune_content(client):
     json_data = response.get_json()
     assert json_data['fortune'] in valid_fortunes
 
+=======
+>>>>>>> 99d7ee1869ad828012739d2f0e373d6fa7e68139
 def test_fortune_not_empty(client):
     """Test if the returned fortune is not an empty string"""
     response = client.get('/fortune')
