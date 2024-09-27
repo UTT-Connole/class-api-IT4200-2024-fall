@@ -150,14 +150,17 @@ def create_app():
     @app.route('/tennis_fact')
     def tennis_fact():
         tennis_facts = [
-            "The fastest recorded serve was 163.7 mph by Sam Groth.",
-            "The longest tennis match lasted 11 hours and 5 minutes.",
-            "Wimbledon is the oldest tennis tournament in the world.",
-            "Yellow tennis balls were introduced in 1972.",
-            "Rafael Nadal has won the French Open 14 times."
+            {"fact": "The fastest serve was 163.7 mph by Sam Groth.", "category": "speed"},
+            {"fact": "The longest match lasted 11 hours and 5 minutes.", "category": "record"},
+            {"fact": "Wimbledon is the oldest tournament.", "category": "history"},
+            {"fact": "Yellow tennis balls were introduced in 1972.", "category": "history"},
+            {"fact": "Nadal has won the French Open 14 times.", "category": "achievement"}
         ]
-        fact = random.choice(tennis_facts)
-        return jsonify({"fact": fact})
+        category = request.args.get('category')
+        facts = [fact for fact in tennis_facts if fact['category'] == category] if category else tennis_facts
+        if not facts:
+            facts = tennis_facts
+        return jsonify(random.choice(facts))
     
     @app.route('/sports_fact')
     def sports_fact():
@@ -212,6 +215,28 @@ def create_app():
         ]
         return jsonify({"fortune": random.choice(fortunes)})
 
+    @app.route('/fruitInfo', methods=['GET'])
+    def fruit_info():
+        fruits = {
+            "apple": {"color": "red", "taste": "sweet"},
+            "banana": {"color": "yellow", "taste": "sweet"},
+            "lemon": {"color": "yellow", "taste": "sour"},
+            "orange": {"color": "orange", "taste": "citrus"},
+            "grape": {"color": "purple", "taste": "sweet"},
+            "lime": {"color": "green", "taste": "sour"}
+        }
+    
+        fruit_name = request.args.get('fruit')
+    
+        if fruit_name and fruit_name.lower() in fruits:
+            info = fruits[fruit_name.lower()]
+            return jsonify({
+                "fruit": fruit_name,
+                "color": info["color"],
+                "taste": info["taste"]
+            })
+        else:
+            return jsonify({"error": "Fruit not found. Please try apple, banana, lemon, orange, grape, or lime."}), 404
 
     return app
 
@@ -308,28 +333,6 @@ def get_endpoints():
     ]
 	return jsonify("Follow these steps:"+ str(endpointSteps))
 
-@app.route('/fruitInfo', methods=['GET'])
-def fruit_info():
-    fruits = {
-        "apple": {"color": "red", "taste": "sweet"},
-        "banana": {"color": "yellow", "taste": "sweet"},
-        "lemon": {"color": "yellow", "taste": "sour"},
-        "orange": {"color": "orange", "taste": "citrus"},
-        "grape": {"color": "purple", "taste": "sweet"},
-        "lime": {"color": "green", "taste": "sour"}
-    }
-    
-    fruit_name = request.args.get('fruit')
-    
-    if fruit_name and fruit_name.lower() in fruits:
-        info = fruits[fruit_name.lower()]
-        return jsonify({
-            "fruit": fruit_name,
-            "color": info["color"],
-            "taste": info["taste"]
-        })
-    else:
-        return jsonify({"error": "Fruit not found. Please try apple, banana, lemon, orange, grape, or lime."}), 404
 
 @app.route('/motivation', methods=['GET'])
 def get_motivation():

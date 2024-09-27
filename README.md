@@ -123,7 +123,8 @@ To retrieve a random fact, navigate to http://127.0.0.1:5000/randomFact
 
 🎾 Go to http://127.0.0.1:5000/tennisFacts to learn fun facts about tennis!
 
-You can retrieve tennis facts using the `/tennisFacts` endpoint.
+You can retrieve tennis facts using the `/tennisFacts` endpoint. 
+Use the optional `category` parameter to filter facts by type (e.g., speed, record).
 
 ## How to use the sportsFacts Endpoint
 
