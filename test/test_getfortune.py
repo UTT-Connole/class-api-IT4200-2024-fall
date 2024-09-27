@@ -1,3 +1,4 @@
+
 import pytest, sys, os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from app import app
@@ -30,7 +31,7 @@ def test_fortune_content(client):
     response = client.get('/fortune')
     json_data = response.get_json()
     assert json_data['fortune'] in valid_fortunes
-
+    
 def test_fortune_not_empty(client):
     """Test if the returned fortune is not an empty string"""
     response = client.get('/fortune')

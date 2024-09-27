@@ -1,6 +1,5 @@
-from flask import Flask, request, jsonify
-from dadjoke import dadjoke_bp
-from brainrot import brainrot_bp
+from flask import Flask, request, jsonify, render_template
+from binaryconvert import convertToBinary_bp
 import random
 import matplotlib
 
@@ -11,57 +10,80 @@ def create_app():
     @app.route('/')
     def hello_world():
         return "Hello World"
+    
+    app.register_blueprint(convertToBinary_bp)
+    
+    @app.route('/dadjoke', methods=['GET'])
+    def dad_joke():
+        jokes = [
+        "Why don't skeletons fight each other? They don't have the guts.",
+        "What do you call fake spaghetti? An impasta!",
+        "Why did the scarecrow win an award? Because he was outstanding in his field!",
+        "I would avoid the sushi if I was you. It’s a little fishy.",
+        "Today, my son asked 'Can I have a bookmark?' and I burst into tears. 11 years old and he still doesn't know my name is Brian.",
+        "I went to the aquarium this weekend, but I didn’t stay long. There’s something fishy about that place.",
+        "I gave my handyman a to-do list, but he only did jobs 1, 3, and 5. Turns out he only does odd jobs.",
+        "I’m reading a horror story in braille. Something bad is going to happen, I can just feel it."
+        ]
+        joke = random.choice(jokes)
+        joke = joke.replace("\u2019", "'") 
+        return jsonify({"joke": joke})
 
-    app.register_blueprint(dadjoke_bp)
+    @app.route('/brainrot', methods=['GET'])
+    def brainrot():
+        words = [
+            "Sigma", "Skibidi", "Kai Cenat", "Erm what the Sigma", "Rizz", 
+            "Gyatt", "Sussy Sigma", "Sussy Imposter", "Griddy on em"
+        ]
+        selected_word = random.choice(words)
+        # Render the HTML template with the selected word
+        return render_template('brainrot.html', brainrot_word=selected_word) 
     
-    app.register_blueprint(brainrot_bp)
-    
+    @app.route('/quotes', methods=['GET'])
+    def fav_quotes():
+        quotes = [
+        {"author": "Marcus Aurelius", "quote": "You have power over your mind - not outside events. Realize this, and you will find strength."},
+        {"author": "Marcus Aurelius", "quote": "The happiness of your life depends upon the quality of your thoughts."},
+        {"author": "Epictetus", "quote": "It's not what happens to you, but how you react to it that matters."},
+        {"author": "Seneca", "quote": "We suffer more in imagination than in reality."},
+        {"author": "Marcus Aurelius", "quote": "Waste no more time arguing about what a good man should be. Be one."},
+        {"author": "Epictetus", "quote": "No man is free who is not master of himself."},
+        {"author": "Seneca", "quote": "Luck is what happens when preparation meets opportunity."},
+        {"author": "Marcus Aurelius", "quote": "Things are not asking to be judged by you."},
+        {"author": "Marcus Aurelius", "quote": "The best revenge is to be unlike hom who performed the injury."},
+        {"author": "Plato", "quote": "We can easily forgive a child who is afraid of the dark; the real tragedy of life is when men are afraid of the light."},
+        {"author": "Plato", "quote": "Wise men talk because they have something to say; fools, because they have to say something."},
+        {"author": "Plato", "quote": "Human behavior flows from threee main sources: desire, emotion, and knowledge."},
+        {"author": "Thorin Oakenshield", "quote": "If more of us valued food and cheer and song above hoarded gold, it would be a merrier world."}
+        ]
+        quote = random.choice(quotes)
+        return jsonify(quote)
+
     @app.route('/calc', methods=['GET','POST'])
     def calc_main():
         x = request.args.get('x')
         y = request.args.get('y')
         op = request.args.get('op')
-        if x and y and op:
+        
+        if not (x and y and op):
+            return "Invalid Input"
+        
+        try:
             x = int(x)
             y = int(y)
-            op = str(op) #ensuring not anything else
-        else:
-            result = "Invalid Input"
-            
-        if op == 'add':
-            result = x + y
-        elif op == 'subtract':
-            result = x - y
-        elif op == 'multiply':
-            result = x * y
-        elif op == 'divide':
-            if y != 0:
-                result = x / y
-            else:
-                result = "You cannot divide by 0"
-        else:
-            options = {"add", "subtract", "multiply", "divide"}
-            if op not in options:
-                #just checking to see if not an option and lists them if needed
-                result = "You might have spelled something wrong or there is not the option the current options are: add,subtract,multiply,divide"
-            elif op in options:
-                result= "something broke?"
-                
+        except ValueError:
+            return "Invalid Input"
+        
+        operations = {
+            'add': x + y,
+            'subtract': x - y,
+            'multiply': x * y,
+            'divide': x / y if y != 0 else "You cannot divide by 0"
+        }
+        
+        result = operations.get(op, "You might have spelled something wrong or there is not the option. The current options are: add, subtract, multiply, divide")
+        
         return str(result)
-  
-    @app.route('/convertToBinary', methods=['GET','POST'])
-    def convertToBinary():
-        num = request.args.get('num')
-        if "." in num:
-            return "Not compatable with float input"
-        num = int(num)
-        if num >= 0:
-            return bin(num).replace("0b","")
-        else:
-            return "Not compatable with negative input"
-
-
-
     
     @app.route('/twoManaCombos', methods=['GET'])
     def random_combo():
@@ -111,31 +133,47 @@ def create_app():
         return jsonify(picked)
     
     @app.route('/factorial', methods=['GET'])
-    def factorial(n):
+    def factorial():
+        n = request.args.get('n', type=int)
+        if n is None:
+            return "error", 400
         if n < 0:
-            raise ValueError("Factorial is negative")
+            return "error", 400
         elif n == 0 or n == 1:
-            return 1
+            return jsonify(result=1), 200
         else:
-            return n * factorial(n - 1)
+            result = 1
+            for i in range (2, n + 1):
+                result *= i
+            return jsonify(result=result), 200
         
-    @app.route('/tennisFacts', methods=['GET'])
-    def tennis_facts_endpoint():
-        category = request.args.get('category')
+    @app.route('/tennis_fact')
+    def tennis_fact():
         tennis_facts = [
-            {"fact": "The longest tennis match lasted 11 hours and 5 minutes at Wimbledon in 2010.", "category": "records"},
-            {"fact": "The US Open is played on hard courts.", "category": "tournaments"},
-            {"fact": "Serena Williams has 23 Grand Slam singles titles.", "category": "players"},
-            {"fact": "Roger Federer, Rafael Nadal, and Novak Djokovic each have 20 Grand Slam titles.", "category": "players"},
-            {"fact": "'Love' in tennis means zero, from the French 'l'oeuf' meaning egg.", "category": "terminology"},
-            {"fact": "Wimbledon is the oldest tennis tournament, started in 1877.", "category": "history"}
+            "The fastest recorded serve was 163.7 mph by Sam Groth.",
+            "The longest tennis match lasted 11 hours and 5 minutes.",
+            "Wimbledon is the oldest tennis tournament in the world.",
+            "Yellow tennis balls were introduced in 1972.",
+            "Rafael Nadal has won the French Open 14 times."
         ]
-        if category:
-            tennis_facts = [fact for fact in tennis_facts if fact['category'] == category]
-        return jsonify(tennis_facts)
+        fact = random.choice(tennis_facts)
+        return jsonify({"fact": fact})
+    
+    @app.route('/sports_fact')
+    def sports_fact():
+        sports_facts = [
+            "Basketball was invented in 1891 by Dr. James Naismith.",
+            "The first modern Olympic Games were held in Athens in 1896.",
+            "Soccer is the most popular sport in the world.",
+            "Michael Phelps holds the record for the most Olympic gold medals.",
+            "The Super Bowl is the most-watched annual sporting event."
+        ]
+        fact = random.choice(sports_facts)
+        return jsonify({"fact": fact})
 
 
     @app.route('/pizzaToppings', methods=['GET'])
+
     def pizza_toppings():
         sauces = ["Tomato Sauce", "Alfredo Sauce", "Ranch Sauce"]
         toppings = [
@@ -147,13 +185,34 @@ def create_app():
             {"topping": "Pineapple"},
             {"topping": "Spinach"}
         ]
-        selected_sauce = random.choice(sauces) 
+        crusts = ["Hand Tossed", "Handmade Pan", "Crunchy Thin Crust"]
+
+        selected_crust = random.choice(crusts)
+        selected_sauce = random.choice(sauces)  
         selected_toppings = random.sample(toppings, 3) 
+
         pizza = {
+            "crust": selected_crust,
             "sauce": selected_sauce,
             "toppings": selected_toppings
         }
+
         return jsonify(pizza)
+
+    @app.route('/fortune', methods=['GET'])
+    def get_fortune():
+        fortunes = [
+            "You will find a fortune.",
+            "A fresh start will put you on your way.",
+            "Fortune favors the brave.",
+            "Good news will come to you by mail.",
+            "A beautiful, smart, and loving person will be coming into your life.",
+            "A soft voice may be awfully persuasive.",
+            "All your hard work will soon pay off."
+        ]
+        return jsonify({"fortune": random.choice(fortunes)})
+
+
     return app
 
 app = create_app()
@@ -171,27 +230,6 @@ def color_hexifier():
         return f"The hex code for {color_name} is {hex_code}"
     else:
         return "Invalid color name"
-
-
-@app.route('/quotes', methods=['GET'])
-def fav_quotes():
-    quotes = [
-    {"author": "Marcus Aurelius", "quote": "You have power over your mind - not outside events. Realize this, and you will find strength."},
-    {"author": "Marcus Aurelius", "quote": "The happiness of your life depends upon the quality of your thoughts."},
-    {"author": "Epictetus", "quote": "It's not what happens to you, but how you react to it that matters."},
-    {"author": "Seneca", "quote": "We suffer more in imagination than in reality."},
-    {"author": "Marcus Aurelius", "quote": "Waste no more time arguing about what a good man should be. Be one."},
-    {"author": "Epictetus", "quote": "No man is free who is not master of himself."},
-    {"author": "Seneca", "quote": "Luck is what happens when preparation meets opportunity."},
-    {"author": "Marcus Aurelius", "quote": "Things are not asking to be judged by you."},
-    {"author": "Marcus Aurelius", "quote": "The best revenge is to be unlike hom who performed the injury."},
-    {"author": "Plato", "quote": "We can easily forgive a child who is afraid of the dark; the real tragedy of life is when men are afraid of the light."},
-    {"author": "Plato", "quote": "Wise men talk because they have something to say; fools, because they have to say something."},
-    {"author": "Plato", "quote": "Human behavior flows from threee main sources: desire, emotion, and knowledge."},
-    {"author": "Thorin Oakenshield", "quote": "If more of us valued food and cheer and song above hoarded gold, it would be a merrier world."}
-    ]
-    quote = random.choice(quotes)
-    return jsonify(quote)
 
 @app.route('/randomName', methods=['GET'])
 def random_name():
@@ -222,18 +260,6 @@ def get_favorite_quote():
     }
     return jsonify(favorite_quote)
 
-@app.route('/fortune', methods=['GET'])
-def get_fortune():
-    fortunes = [
-        "You will find a fortune.",
-        "A fresh start will put you on your way.",
-        "Fortune favors the brave.",
-        "Good news will come to you by mail.",
-        "A beautiful, smart, and loving person will be coming into your life.",
-        "A soft voice may be awfully persuasive.",
-        "All your hard work will soon pay off."
-    ]
-    return jsonify({"fortune": random.choice(fortunes)})
 
 @app.route('/randomFact', methods=['GET'])
 def random_fact():

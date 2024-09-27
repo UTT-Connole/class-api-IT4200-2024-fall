@@ -1,5 +1,6 @@
 import pytest
 from app import create_app
+import json
 
 @pytest.fixture
 def client():
@@ -8,19 +9,19 @@ def client():
     with app.test_client() as client:
         yield client
 
-def test_pizza_toppings_status_code(client):
-    """Test if the /pizzaToppings endpoint returns a 200 status code"""
-    response = client.get('/pizzaToppings')
-    assert response.status_code == 200
-
-def test_pizza_toppings_response_structure(client):
-    """Test if the /pizzaToppings endpoint returns a valid JSON structure"""
+def test_pizza_contains_valid_crust(client):
+    """Test if the pizza contains a valid crust option."""
     response = client.get('/pizzaToppings')
     json_data = response.get_json()
     
-    assert 'sauce' in json_data
-    assert 'toppings' in json_data
-    assert isinstance(json_data['sauce'], str) 
-    assert isinstance(json_data['toppings'], list)  
-    assert len(json_data['toppings']) == 3 
+    valid_crusts = ["Hand Tossed", "Handmade Pan", "Crunchy Thin Crust"]
+    assert json_data['crust'] in valid_crusts  
 
+def test_pizza_contains_three_toppings(client):
+    """Test if the pizza contains exactly three toppings."""
+    response = client.get('/pizzaToppings')
+    json_data = response.get_json()
+    
+    assert len(json_data['toppings']) == 3 
+    for topping in json_data['toppings']:
+        assert 'topping' in topping 
