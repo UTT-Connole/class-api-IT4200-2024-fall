@@ -364,8 +364,6 @@ def get_motivation():
     ]
     selected_quote = random.choice(motivational_quotes)
     return jsonify({"motivational_quote": selected_quote})
-<<<<<<< HEAD
-=======
 @app.route('/items', methods=['GET'])
 def get_items():
     min_price = request.args.get('min_price', default=0, type=int)
@@ -374,5 +372,26 @@ def get_items():
         return jsonify({'message': 'No items found'}), 404
     return jsonify([item.serialize() for item in items]), 200
 
->>>>>>> 99d7ee1869ad828012739d2f0e373d6fa7e68139
+def create_app():
+    app = Flask(__name__)
+
+    @app.route('/basketballFacts', methods=['GET'])
+    def get_basketball_facts():
+        basketball_facts = [
+            "Michael Jordan has won six NBA championships.",
+            "Kareem Abdul-Jabbar is the all-time leading scorer in NBA history.",
+            "The NBA was founded in New York City on June 6, 1946.",
+            "Wilt Chamberlain scored 100 points in a single game.",
+            "The Boston Celtics have the most NBA titles with 17 championships."
+        ]
+        selected_fact = random.choice(basketball_facts)
+        return jsonify({"basketball_fact": selected_fact})
+
+    # The return statement is indented correctly inside the `create_app` function.
+    return app
+
+if __name__ == '__main__':
+    # This section is only for running the app manually.
+    app = create_app()
+    app.run(debug=True)
 # we built this brick by brick and we will never stop

@@ -135,6 +135,9 @@ Use the optional `category` parameter to filter facts by type (e.g., speed, reco
 
 You can retrieve sports facts using the `/sports_fact` endpoint.
 
+## how to use basketball facts
+This Flask-based API provides random basketball facts through a simple GET endpoint, returning a JSON response with each request. It includes unit tests to ensure the endpoint functions correctly, providing a reliable source of basketball trivia.
+
 ## How to use the Pokefishing Endpoint
 Go to http://127.0.0.1:5000/pokefishing to catch a Magikarp!
 ```bash
