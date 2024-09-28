@@ -160,7 +160,7 @@ def create_app():
         if not facts:
             facts = tennis_facts
         return jsonify(random.choice(facts))
-    
+  
     @app.route('/sports_fact')
     def sports_fact():
         sports_facts = [
@@ -173,9 +173,7 @@ def create_app():
         fact = random.choice(sports_facts)
         return jsonify({"fact": fact})
 
-
     @app.route('/pizzaToppings', methods=['GET'])
-
     def pizza_toppings():
         sauces = ["Tomato Sauce", "Alfredo Sauce", "Ranch Sauce"]
         toppings = [
@@ -351,7 +349,6 @@ def get_endpoints():
 		{"step 4":" write the endpoint function"}
     ]
 	return jsonify("Follow these steps:"+ str(endpointSteps))
-
 
 @app.route('/motivation', methods=['GET'])
 def get_motivation():
