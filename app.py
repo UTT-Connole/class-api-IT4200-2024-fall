@@ -134,8 +134,16 @@ def create_app():
     
     @app.route('/factorial', methods=['GET'])
     def factorial():
-        n = request.args.get('n')
-        return ""
+        try:
+            number = int(request.args.get('number'))
+            if number < 0:
+                return jsonify({'error': 'Invalid input'}), 400
+            result = 1
+            for i in range(1, number + 1):
+                result *= i
+            return jsonify({'result': result}), 200
+        except (ValueError, TypeError):
+            return jsonify({'error': 'Invalid input'}), 400
 
         
     @app.route('/tennis_fact')

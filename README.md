@@ -31,7 +31,7 @@ python3 -m flask run
 This will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
 
 ## Factorial Endpoint
-Currently not working, needs to be rewritten -- if you want to ignore it (like I did), comment it out to run pytest lol
+Calculates the factorial of the given non negative int, returns an error for negative numbers.
 
 ## How to use fruit_info Endpoint
 Navigate to http://127.0.0.1:5000/fruitInfo?fruit=apple
@@ -92,6 +92,7 @@ Start reading people's favorite quotes!
 To retrieve a favorite quote, navigate to:
 
 http://127.0.0.1:5000/favoritequote
+
 
 ## How to use Color Hexifier endpoint
 
