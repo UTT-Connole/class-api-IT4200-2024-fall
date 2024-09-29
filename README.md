@@ -1,6 +1,23 @@
 # Welcome to the class API!
 We will be using this repo to create an API for our entire class. We will use Flask for this application and each member of the class will work within this single repo.
 
+## Contributors:
+
+* Laura Coulome
+* Riker Evans
+* Jace Barrett
+* Donavan Franco
+* Christian Bassilios
+* Soren Bybee
+* Keaton Hall
+* Josh Beckstrand
+* Dallin Hougaard
+* Andres
+* Travis Gunter
+* Morgan Andrus
+* Yomi Odubiyi
+* Brayden Connole
+
 ## How to install pip requirements
 
 Make sure to run these commands before you run the Flask app. It will install all the requirements
@@ -61,6 +78,8 @@ Go to http://127.0.0.1:5000/twoManaCombos?color=your_color. Specifiy which color
 ## How to get to the stoic quotes Endpoint
 Go to http://127.0.0.1:5000/quotes for a good random stoic quotes from Plato and others.
 
+to test python3 -m unittest test_quotes.py 
+
 ## How to use pizzaToppings Endpoint
 Go to http://127.0.0.1:5000/pizzaToppings to finally decide what sauce and toppings to put on your pizza 🍕!
 To test if the code is working properly run:
@@ -120,7 +139,8 @@ To retrieve a random fact, navigate to http://127.0.0.1:5000/randomFact
 
 🎾 Go to http://127.0.0.1:5000/tennisFacts to learn fun facts about tennis!
 
-You can retrieve tennis facts using the `/tennisFacts` endpoint.
+You can retrieve tennis facts using the `/tennisFacts` endpoint. 
+Use the optional `category` parameter to filter facts by type (e.g., speed, record).
 
 ## How to use the sportsFacts Endpoint
 
@@ -166,25 +186,17 @@ Go to http://127.0.0.1:5000/brainrot to add a new word to your vocabulary!
 ## How to use the convertToBinary Endpoint
 Go to http://127.0.0.1:5000/convertToBinary?num=# and replace the # with any non-negative whole number! Don't even think about putting in floats, strings, or blanks. I have tested all of those cases and you will get appropriate responses for each!
 
+## How to use the live weather endpoint
+Install "requests" module using "pip install requests" (Sorry about that)
+Pick a city you want live weather in and put it after /weather/ in the URL
+Example: http://127.0.0.1:5000/weather/Seattle
+It should list the current weather conditions of the selected city
+
+
+
 ## How to Rebase
  * step 1: STOP, just use merge thingy....
 
-## Contributors:
-
-* Laura Coulome
-* Riker Evans
-* Jace Barrett
-* Donavan Franco
-* Christian Bassilios
-* Soren Bybee
-* Keaton Hall
-* Josh Beckstrand
-* Dallin Hougaard
-* Andres
-* Travis Gunter
-* Morgan Andrus
-* Yomi Odubiyi
-* Brayden Connole
 
 ## Welcome to The IT4200 Art Gallery!
 

@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template
 from binaryconvert import convertToBinary_bp
 import random
 import matplotlib
+import requests
 
 
 def create_app():
@@ -128,36 +129,40 @@ def create_app():
             ]
         
         picked = random.choice(destinations)
-        #location = picked.keys
-        #flighttime = picked.values
         return jsonify(picked)
     
     @app.route('/factorial', methods=['GET'])
     def factorial():
         try:
-            number = int(request.args.get('number'))
-            if number < 0:
-                return jsonify({'error': 'Invalid input'}), 400
+            n = request.args.get('n', type=int)
+            if n is None:
+              return "error", 400
+            if n < 0:
+              return "error", 400
             result = 1
-            for i in range(1, number + 1):
+            for i in range(2, number + 1):
                 result *= i
             return jsonify({'result': result}), 200
-        except (ValueError, TypeError):
+        except ValueError:
             return jsonify({'error': 'Invalid input'}), 400
+
 
         
     @app.route('/tennis_fact')
     def tennis_fact():
         tennis_facts = [
-            "The fastest recorded serve was 163.7 mph by Sam Groth.",
-            "The longest tennis match lasted 11 hours and 5 minutes.",
-            "Wimbledon is the oldest tennis tournament in the world.",
-            "Yellow tennis balls were introduced in 1972.",
-            "Rafael Nadal has won the French Open 14 times."
+            {"fact": "The fastest serve was 163.7 mph by Sam Groth.", "category": "speed"},
+            {"fact": "The longest match lasted 11 hours and 5 minutes.", "category": "record"},
+            {"fact": "Wimbledon is the oldest tournament.", "category": "history"},
+            {"fact": "Yellow tennis balls were introduced in 1972.", "category": "history"},
+            {"fact": "Nadal has won the French Open 14 times.", "category": "achievement"}
         ]
-        fact = random.choice(tennis_facts)
-        return jsonify({"fact": fact})
-    
+        category = request.args.get('category')
+        facts = [fact for fact in tennis_facts if fact['category'] == category] if category else tennis_facts
+        if not facts:
+            facts = tennis_facts
+        return jsonify(random.choice(facts))
+  
     @app.route('/sports_fact')
     def sports_fact():
         sports_facts = [
@@ -170,9 +175,7 @@ def create_app():
         fact = random.choice(sports_facts)
         return jsonify({"fact": fact})
 
-
     @app.route('/pizzaToppings', methods=['GET'])
-
     def pizza_toppings():
         sauces = ["Tomato Sauce", "Alfredo Sauce", "Ranch Sauce"]
         toppings = [
@@ -210,7 +213,59 @@ def create_app():
             "All your hard work will soon pay off."
         ]
         return jsonify({"fortune": random.choice(fortunes)})
+    
+    @app.route('/color', methods=['GET','POST'])
+    def color_hexifier():
+        color_name = request.args.get('color')
+    
+        print(f"Received color name: {color_name}")
+    
+        if color_name and color_name.lower() in matplotlib.colors.CSS4_COLORS:
+            hex_code = matplotlib.colors.CSS4_COLORS[color_name.lower()]
+            return f"The hex code for {color_name} is {hex_code}"
+        else:
+            return "Invalid color name"
+        
+    WEATHER_API_KEY = 'a5b6f8eb1b20b57f80fa87f940e02857'
+    @app.route('/weather/<city>', methods=['GET'])
+    def weather(city):
+        url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={WEATHER_API_KEY}&units=imperial'
+        response = requests.get(url)
+        #Returns error if invalid city is entered
+        if response.status_code != 200:
+            return jsonify({"error": "City not found or API error."}), 404
+        
+        data = response.json()
+        weather_data = {
+            "temperature": f"{data['main']['temp']}°F",
+            "condition": data['weather'][0]['description'],
+            "humidity": f"{data['main']['humidity']}%",
+            "wind_speed": f"{data['wind']['speed']} mph"
+        }
+        return jsonify(weather_data)
 
+    @app.route('/fruitInfo', methods=['GET'])
+    def fruit_info():
+        fruits = {
+            "apple": {"color": "red", "taste": "sweet"},
+            "banana": {"color": "yellow", "taste": "sweet"},
+            "lemon": {"color": "yellow", "taste": "sour"},
+            "orange": {"color": "orange", "taste": "citrus"},
+            "grape": {"color": "purple", "taste": "sweet"},
+            "lime": {"color": "green", "taste": "sour"}
+        }
+    
+        fruit_name = request.args.get('fruit')
+    
+        if fruit_name and fruit_name.lower() in fruits:
+            info = fruits[fruit_name.lower()]
+            return jsonify({
+                "fruit": fruit_name,
+                "color": info["color"],
+                "taste": info["taste"]
+            })
+        else:
+            return jsonify({"error": "Fruit not found. Please try apple, banana, lemon, orange, grape, or lime."}), 404
 
     return app
 
@@ -218,17 +273,7 @@ app = create_app()
 
 
 
-@app.route('/color', methods=['GET','POST'])
-def color_hexifier():
-    color_name = request.args.get('color')
-    
-    print(f"Received color name: {color_name}")
-    
-    if color_name and color_name.lower() in matplotlib.colors.CSS4_COLORS:
-        hex_code = matplotlib.colors.CSS4_COLORS[color_name.lower()]
-        return f"The hex code for {color_name} is {hex_code}"
-    else:
-        return "Invalid color name"
+
 
 @app.route('/randomName', methods=['GET'])
 def random_name():
@@ -306,29 +351,6 @@ def get_endpoints():
 		{"step 4":" write the endpoint function"}
     ]
 	return jsonify("Follow these steps:"+ str(endpointSteps))
-
-@app.route('/fruitInfo', methods=['GET'])
-def fruit_info():
-    fruits = {
-        "apple": {"color": "red", "taste": "sweet"},
-        "banana": {"color": "yellow", "taste": "sweet"},
-        "lemon": {"color": "yellow", "taste": "sour"},
-        "orange": {"color": "orange", "taste": "citrus"},
-        "grape": {"color": "purple", "taste": "sweet"},
-        "lime": {"color": "green", "taste": "sour"}
-    }
-    
-    fruit_name = request.args.get('fruit')
-    
-    if fruit_name and fruit_name.lower() in fruits:
-        info = fruits[fruit_name.lower()]
-        return jsonify({
-            "fruit": fruit_name,
-            "color": info["color"],
-            "taste": info["taste"]
-        })
-    else:
-        return jsonify({"error": "Fruit not found. Please try apple, banana, lemon, orange, grape, or lime."}), 404
 
 @app.route('/motivation', methods=['GET'])
 def get_motivation():
