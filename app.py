@@ -140,7 +140,7 @@ def create_app():
             if n < 0:
               return "error", 400
             result = 1
-            for i in range(2, number + 1):
+            for i in range(2, n + 1):
                 result *= i
             return jsonify({'result': result}), 200
         except ValueError:
