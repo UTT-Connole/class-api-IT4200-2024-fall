@@ -75,6 +75,9 @@ Use the following template to add, subtract, multiply, or divide two numbers:
 ## How to use the motivation Endpoint
 The /motivation endpoint provides a random motivational quote whenever accessed via a GET request. When a user sends a request to this endpoint, the app responds with one of five pre-defined motivational quotes, returned in JSON format. This allows users to easily retrieve an encouraging message with every request, making it useful for applications or websites where inspiration or daily motivation is desired. Each request will randomly select and serve one quote from the list.
 
+## how to use get motivation
+The /motivation endpoint provides a random motivational quote whenever accessed via a GET request. When a user sends a request to this endpoint, the app responds with one of five pre-defined motivational quotes, returned in JSON format. This allows users to easily retrieve an encouraging message with every request, making it useful for applications or websites where inspiration or daily motivation is desired. Each request will randomly select and serve one quote from the list.
+
 ## How to use twoManaCombo Endpoint
 Go to http://127.0.0.1:5000/twoManaCombos?color=your_color. Specifiy which color you want included in your deck by replacing it with your_color. If you don't want to specify, you can leave it blank. Then, get the combo name, and start building your next MTG deck! ⚪🔵⚫🔴🟢
 
@@ -151,6 +154,9 @@ Use the optional `category` parameter to filter facts by type (e.g., speed, reco
 🏅 Go to http://127.0.0.1:5000/sports_fact to learn fun facts about various sports!
 
 You can retrieve sports facts using the `/sports_fact` endpoint.
+
+## how to use basketball facts
+This Flask-based API provides random basketball facts through a simple GET endpoint, returning a JSON response with each request. It includes unit tests to ensure the endpoint functions correctly, providing a reliable source of basketball trivia.
 
 ## How to use the Pokefishing Endpoint
 Go to http://127.0.0.1:5000/pokefishing to catch a Magikarp!

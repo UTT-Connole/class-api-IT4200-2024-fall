@@ -8,6 +8,18 @@ import requests
 def create_app():
     app = Flask(__name__)
 
+    @app.route('/basketballFacts', methods=['GET'])
+    def get_basketball_facts():
+        basketball_facts = [
+            "Michael Jordan has won six NBA championships.",
+            "Kareem Abdul-Jabbar is the all-time leading scorer in NBA history.",
+            "The NBA was founded in New York City on June 6, 1946.",
+            "Wilt Chamberlain scored 100 points in a single game.",
+            "The Boston Celtics have the most NBA titles with 17 championships."
+        ]
+        selected_fact = random.choice(basketball_facts)
+        return jsonify({"basketball_fact": selected_fact})
+
     @app.route('/')
     def hello_world():
         return "Hello World"
