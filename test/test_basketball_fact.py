@@ -1,8 +1,3 @@
-def client():
-    app = create_app()  # Assuming create_app initializes your Flask app
-    app.testing = True
-    with app.test_client() as client:
-        yield client
 
 # Test to check the status code of /basketballFacts
 def test_basketball_facts_status_code(client):
