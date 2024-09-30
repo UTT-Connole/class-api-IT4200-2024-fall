@@ -48,7 +48,12 @@ python3 -m flask run
 This will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
 
 ## Factorial Endpoint
-Currently not working, needs to be rewritten -- if you want to ignore it (like I did), comment it out to run pytest lol
+Go to http://127.0.0.1:5000/factorial?n=5
+But replace the value of n with whatever number you want to see the factorial of.
+
+## Power Endpoint
+Go to http://127.0.0.1:5000/power?base=2&exp=4
+But replace the values of base and exp with whatever numbers you want.
 
 ## How to use fruit_info Endpoint
 Navigate to http://127.0.0.1:5000/fruitInfo?fruit=apple
@@ -66,8 +71,6 @@ Use the following template to add, subtract, multiply, or divide two numbers:
 ### Important Notes:
 - The operators must be spelled exactly as shown above, or you will receive an error.
 - If any of the variables (`x`, `y`, or `op`) are missing, you will receive an error.
-
-
 
 ## How to use the motivation Endpoint
 The /motivation endpoint provides a random motivational quote whenever accessed via a GET request. When a user sends a request to this endpoint, the app responds with one of five pre-defined motivational quotes, returned in JSON format. This allows users to easily retrieve an encouraging message with every request, making it useful for applications or websites where inspiration or daily motivation is desired. Each request will randomly select and serve one quote from the list.
@@ -193,7 +196,8 @@ Pick a city you want live weather in and put it after /weather/ in the URL
 Example: http://127.0.0.1:5000/weather/Seattle
 It should list the current weather conditions of the selected city
 
-
+## How to use the pokefishing Endpoint
+Go to http://127.0.0.1:5000/pokefishing, then just refresh the page over and over and over again to see all your different catches!
 
 ## How to Rebase
  * step 1: STOP, just use merge thingy....
