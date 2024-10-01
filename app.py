@@ -2,7 +2,6 @@ from flask import Flask, request, jsonify, render_template
 from binaryconvert import convertToBinary_bp
 import random
 import matplotlib
-import requests
 
 
 def create_app():
@@ -193,14 +192,18 @@ def create_app():
     @app.route('/sports_fact')
     def sports_fact():
         sports_facts = [
-            "Basketball was invented in 1891 by Dr. James Naismith.",
-            "The first modern Olympic Games were held in Athens in 1896.",
-            "Soccer is the most popular sport in the world.",
-            "Michael Phelps holds the record for the most Olympic gold medals.",
-            "The Super Bowl is the most-watched annual sporting event."
+            {"fact": "Basketball was invented in 1891 by Dr. James Naismith.", "category": "history"},
+            {"fact": "The first modern Olympic Games were held in Athens in 1896.", "category": "history"},
+            {"fact": "Soccer is the most popular sport in the world.", "category": "popularity"},
+            {"fact": "Michael Phelps holds the record for the most Olympic gold medals.", "category": "achievement"},
+            {"fact": "The Super Bowl is the most-watched annual sporting event.", "category": "popularity"}
         ]
-        fact = random.choice(sports_facts)
-        return jsonify({"fact": fact})
+        category = request.args.get('category')
+        facts = [fact for fact in sports_facts if fact['category'] == category] if category else sports_facts
+        if not facts:
+            facts = sports_facts
+        selected_fact = random.choice(facts)
+        return jsonify(selected_fact)
 
     @app.route('/pizzaToppings', methods=['GET'])
     def pizza_toppings():
