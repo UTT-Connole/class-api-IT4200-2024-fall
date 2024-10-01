@@ -36,39 +36,21 @@ def create_app():
     @app.route('/greet/<name>', methods=['GET'])
     def greet_with_name(name):
         return jsonify({"message": f"Hello, {name}!"})
-      
+
     @app.route('/')
     def hello_world():
         return "Hello World"
     
     app.register_blueprint(convertToBinary_bp)
     
-    @app.route('/dadjoke', methods=['GET'])
-    def dad_joke():
-        jokes = [
-        "Why don't skeletons fight each other? They don't have the guts.",
-        "What do you call fake spaghetti? An impasta!",
-        "Why did the scarecrow win an award? Because he was outstanding in his field!",
-        "I would avoid the sushi if I was you. It’s a little fishy.",
-        "Today, my son asked 'Can I have a bookmark?' and I burst into tears. 11 years old and he still doesn't know my name is Brian.",
-        "I went to the aquarium this weekend, but I didn’t stay long. There’s something fishy about that place.",
-        "I gave my handyman a to-do list, but he only did jobs 1, 3, and 5. Turns out he only does odd jobs.",
-        "I’m reading a horror story in braille. Something bad is going to happen, I can just feel it."
-        ]
-        joke = random.choice(jokes)
-        joke = joke.replace("\u2019", "'") 
-        return jsonify({"joke": joke})
+    app.register_blueprint(dadjoke_bp)
 
-    @app.route('/brainrot', methods=['GET'])
-    def brainrot():
-        words = [
-            "Sigma", "Skibidi", "Kai Cenat", "Erm what the Sigma", "Rizz", 
-            "Gyatt", "Sussy Sigma", "Sussy Imposter", "Griddy on em"
-        ]
-        selected_word = random.choice(words)
-        # Render the HTML template with the selected word
-        return render_template('brainrot.html', brainrot_word=selected_word) 
+    app.register_blueprint(brainrot_bp)
+
+    app.register_blueprint(motivation_bp)
     
+    app.register_blueprint(calc_bp)
+
     @app.route('/quotes', methods=['GET'])
     def fav_quotes():
         quotes = [
@@ -88,32 +70,6 @@ def create_app():
         ]
         quote = random.choice(quotes)
         return jsonify(quote)
-
-    @app.route('/calc', methods=['GET','POST'])
-    def calc_main():
-        x = request.args.get('x')
-        y = request.args.get('y')
-        op = request.args.get('op')
-        
-        if not (x and y and op):
-            return "Invalid Input"
-        
-        try:
-            x = int(x)
-            y = int(y)
-        except ValueError:
-            return "Invalid Input"
-        
-        operations = {
-            'add': x + y,
-            'subtract': x - y,
-            'multiply': x * y,
-            'divide': x / y if y != 0 else "You cannot divide by 0"
-        }
-        
-        result = operations.get(op, "You might have spelled something wrong or there is not the option. The current options are: add, subtract, multiply, divide")
-        
-        return str(result)
     
     @app.route('/twoManaCombos', methods=['GET'])
     def random_combo():
@@ -382,17 +338,6 @@ def get_endpoints():
     ]
 	return jsonify("Follow these steps:"+ str(endpointSteps))
 
-@app.route('/motivation', methods=['GET'])
-def get_motivation():
-    motivational_quotes = [
-        "The only way to do great work is to love what you do.",
-        "Success is not final, failure is not fatal: It is the courage to continue that counts.",
-        "Believe you can and you're halfway there.",
-        "Act as if what you do makes a difference. It does.",
-        "The harder you work for something, the greater you’ll feel when you achieve it."
-    ]
-    selected_quote = random.choice(motivational_quotes)
-    return jsonify({"motivational_quote": selected_quote})
 @app.route('/items', methods=['GET'])
 def get_items():
     min_price = request.args.get('min_price', default=0, type=int)
