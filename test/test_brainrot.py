@@ -16,7 +16,7 @@ def test_brainrot_contains_word(client):
     """Test if the brainrot endpoint returns a valid word in the HTML response"""
     response = client.get('/brainrot')
     assert response.status_code == 200  # Ensure the request was successful
-    assert b'Injecting Brainrot:' in response.data  # Check if the phrase is in the HTML
+    assert b'Injecting Brainrot Vocab:' in response.data  # Check if the phrase is in the HTML
     assert b'<strong>' in response.data  # Ensure there is a strong tag for the word
 
     # Optionally, you can extract the word from the HTML and verify its type
