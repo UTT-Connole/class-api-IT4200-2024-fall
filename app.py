@@ -3,6 +3,7 @@ from binaryconvert import convertToBinary_bp
 from endpoints.dadjoke import dadjoke_bp
 from endpoints.brainrot import brainrot_bp
 from endpoints.motivation import motivation_bp
+from endpoints.calc import calc_bp
 import random
 import matplotlib
 #import requests   -App wont run with this not commented out.
@@ -30,7 +31,7 @@ def create_app():
     @app.route('/greet/<name>', methods=['GET'])
     def greet_with_name(name):
         return jsonify({"message": f"Hello, {name}!"})
-      
+
     @app.route('/')
     def hello_world():
         return "Hello World"
@@ -42,6 +43,8 @@ def create_app():
     app.register_blueprint(brainrot_bp)
 
     app.register_blueprint(motivation_bp)
+    
+    app.register_blueprint(calc_bp)
 
     @app.route('/quotes', methods=['GET'])
     def fav_quotes():
@@ -62,32 +65,6 @@ def create_app():
         ]
         quote = random.choice(quotes)
         return jsonify(quote)
-
-    @app.route('/calc', methods=['GET','POST'])
-    def calc_main():
-        x = request.args.get('x')
-        y = request.args.get('y')
-        op = request.args.get('op')
-        
-        if not (x and y and op):
-            return "Invalid Input"
-        
-        try:
-            x = int(x)
-            y = int(y)
-        except ValueError:
-            return "Invalid Input"
-        
-        operations = {
-            'add': x + y,
-            'subtract': x - y,
-            'multiply': x * y,
-            'divide': x / y if y != 0 else "You cannot divide by 0"
-        }
-        
-        result = operations.get(op, "You might have spelled something wrong or there is not the option. The current options are: add, subtract, multiply, divide")
-        
-        return str(result)
     
     @app.route('/twoManaCombos', methods=['GET'])
     def random_combo():

@@ -42,4 +42,18 @@ def test_calc_divide_by_zero(client):
 def test_calc_invalid_operator(client):
     """Test invalid operator"""
     response = client.get('/calc?x=10&y=5&op=wrong')
-    assert response.data.decode() == 'You might have spelled something wrong or there is not the option. The current options are: add, subtract, multiply, divide'
+    available_operations = 'add, subtract, multiply, divide, mod'
+    expected_message = f"You might have spelled something wrong or there is not the option. The current options are: {available_operations}"
+    assert response.data.decode() == expected_message
+
+#Tests mod operator
+def test_calc_mod(client):
+    """Test the mod operation"""
+    response = client.get('/calc?x=10&y=3&op=mod')
+    assert response.data.decode() == '1'
+
+#Tests mod by 0
+def test_calc_mod_by_zero(client):
+    """Test mod by zero"""
+    response = client.get('/calc?x=10&y=0&op=mod')
+    assert response.data.decode() == 'You cannot take modulus by 0'
