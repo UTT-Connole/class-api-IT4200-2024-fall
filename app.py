@@ -27,7 +27,7 @@ def create_app():
     @app.route('/greet/<name>', methods=['GET'])
     def greet_with_name(name):
         return jsonify({"message": f"Hello, {name}!"})
-    
+      
     @app.route('/')
     def hello_world():
         return "Hello World"
