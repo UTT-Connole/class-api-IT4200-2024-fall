@@ -19,7 +19,15 @@ def create_app():
         ]
         selected_fact = random.choice(basketball_facts)
         return jsonify({"basketball_fact": selected_fact})
+    
+    @app.route('/greet', methods=['GET'])
+    def greet():
+        return jsonify({"message": "Hello, Welcome to the API!"})
 
+    @app.route('/greet/<name>', methods=['GET'])
+    def greet_with_name(name):
+        return jsonify({"message": f"Hello, {name}!"})
+      
     @app.route('/')
     def hello_world():
         return "Hello World"
