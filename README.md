@@ -56,11 +56,17 @@ But replace the value of n with whatever number you want to see the factorial of
 Go to http://127.0.0.1:5000/power?base=2&exp=4
 But replace the values of base and exp with whatever numbers you want.
 
-## How to use fruit_info Endpoint
-Navigate to http://127.0.0.1:5000/fruitInfo?fruit=apple
-Replace "apple" from the end of the url with the fruit of your choice.
-If the fruit isn't available an error message will come up and you will be given a list of options.
-Choose a fruit from the options given.
+## How to Use the Fruit Info Endpoint
+
+Navigate to `http://127.0.0.1:5000/fruitInfo?fruit=<fruit_name>`
+- Replace `<fruit_name>` with the name of the fruit you want information about.
+- If the fruit isn't available, an error message will appear, and you will be given a list of available options.
+- Choose a fruit from the options provided.
+
+### Important Notes:
+- Ensure the fruit name is spelled correctly to avoid errors.
+- If the fruit is not available, you will need to select from the provided options.
+
 
 ## How to Use the Calculator Endpoint
 
@@ -72,6 +78,7 @@ Use the following template to add, subtract, multiply, or divide two numbers:
 ### Important Notes:
 - The operators must be spelled exactly as shown above, or you will receive an error.
 - If any of the variables (`x`, `y`, or `op`) are missing, you will receive an error.
+- To test this endpoint you can use ptw ./test/test_calc.py
 
 ## How to use the motivation Endpoint
 The /motivation endpoint provides a random motivational quote whenever accessed via a GET request. When a user sends a request to this endpoint, the app responds with one of five pre-defined motivational quotes, returned in JSON format. This allows users to easily retrieve an encouraging message with every request, making it useful for applications or websites where inspiration or daily motivation is desired. Each request will randomly select and serve one quote from the list.
