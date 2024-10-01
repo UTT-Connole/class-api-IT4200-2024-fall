@@ -1,5 +1,9 @@
 from flask import Flask, request, jsonify, render_template
 from binaryconvert import convertToBinary_bp
+from endpoints.dadjoke import dadjoke_bp
+from endpoints.brainrot import brainrot_bp
+from endpoints.motivation import motivation_bp
+from endpoints.calc import calc_bp
 import random
 import matplotlib
 #import requests   -App wont run with this not commented out.
