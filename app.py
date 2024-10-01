@@ -12,6 +12,12 @@ import matplotlib
 def create_app():
     app = Flask(__name__)
 
+    @app.route('/generateName', methods=['GET'])
+    def generate_name():
+        names = ["Eve", "Jack", "Liam", "Mia"]
+        name = random.choice(names)
+        return jsonify({"name": name})
+
     @app.route('/basketballFacts', methods=['GET'])
     def get_basketball_facts():
         basketball_facts = [
@@ -153,14 +159,19 @@ def create_app():
     @app.route('/sports_fact')
     def sports_fact():
         sports_facts = [
-            "Basketball was invented in 1891 by Dr. James Naismith.",
-            "The first modern Olympic Games were held in Athens in 1896.",
-            "Soccer is the most popular sport in the world.",
-            "Michael Phelps holds the record for the most Olympic gold medals.",
-            "The Super Bowl is the most-watched annual sporting event."
+            {"fact": "Basketball was invented in 1891 by Dr. James Naismith.", "category": "history"},
+            {"fact": "The first modern Olympic Games were held in Athens in 1896.", "category": "history"},
+            {"fact": "Soccer is the most popular sport in the world.", "category": "popularity"},
+            {"fact": "Michael Phelps holds the record for the most Olympic gold medals.", "category": "achievement"},
+            {"fact": "The Super Bowl is the most-watched annual sporting event.", "category": "popularity"}
         ]
-        fact = random.choice(sports_facts)
-        return jsonify({"fact": fact})
+
+        category = request.args.get('category')
+        facts = [fact for fact in sports_facts if fact['category'] == category] if category else sports_facts
+        if not facts:
+            facts = sports_facts
+        selected_fact = random.choice(facts)
+        return jsonify(selected_fact)
 
     @app.route('/pizzaToppings', methods=['GET'])
     def pizza_toppings():
@@ -279,11 +290,6 @@ def create_app():
 
 app = create_app()
 
-@app.route('/randomName', methods=['GET'])
-def random_name():
-    names = ["Alice", "Bob", "Charlie", "Diana"]
-    name = random.choice(names)
-    return jsonify({"name": name})
 
 @app.route('/marathonFacts', methods=['GET'])
 def marathon_facts():

@@ -181,7 +181,12 @@ Use the optional `category` parameter to filter facts by type (e.g., speed, reco
 
 🏅 Go to http://127.0.0.1:5000/sports_fact to learn fun facts about various sports!
 
-You can retrieve sports facts using the `/sports_fact` endpoint.
+You can retrieve sports facts using the `/sports_fact` endpoint. You can use the 'category' parameter to filter the facts!
+
+## How to use the Generate Name Endpoint
+
+To get a randomly generated name, visit the following URL:
+http://127.0.0.1:5000/randomName
 
 ## how to use basketball facts
 This Flask-based API provides random basketball facts through a simple GET endpoint, returning a JSON response with each request. It includes unit tests to ensure the endpoint functions correctly, providing a reliable source of basketball trivia.
