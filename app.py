@@ -1,12 +1,22 @@
 from flask import Flask, request, jsonify, render_template
 from binaryconvert import convertToBinary_bp
+from endpoints.dadjoke import dadjoke_bp
+from endpoints.brainrot import brainrot_bp
+from endpoints.motivation import motivation_bp
+from endpoints.calc import calc_bp
 import random
 import matplotlib
-import requests
+#import requests   -App wont run with this not commented out.
 
 
 def create_app():
     app = Flask(__name__)
+
+    @app.route('/generateName', methods=['GET'])
+    def generate_name():
+        names = ["Eve", "Jack", "Liam", "Mia"]
+        name = random.choice(names)
+        return jsonify({"name": name})
 
     @app.route('/basketballFacts', methods=['GET'])
     def get_basketball_facts():
@@ -27,39 +37,21 @@ def create_app():
     @app.route('/greet/<name>', methods=['GET'])
     def greet_with_name(name):
         return jsonify({"message": f"Hello, {name}!"})
-      
+
     @app.route('/')
     def hello_world():
         return "Hello World"
     
     app.register_blueprint(convertToBinary_bp)
     
-    @app.route('/dadjoke', methods=['GET'])
-    def dad_joke():
-        jokes = [
-        "Why don't skeletons fight each other? They don't have the guts.",
-        "What do you call fake spaghetti? An impasta!",
-        "Why did the scarecrow win an award? Because he was outstanding in his field!",
-        "I would avoid the sushi if I was you. It’s a little fishy.",
-        "Today, my son asked 'Can I have a bookmark?' and I burst into tears. 11 years old and he still doesn't know my name is Brian.",
-        "I went to the aquarium this weekend, but I didn’t stay long. There’s something fishy about that place.",
-        "I gave my handyman a to-do list, but he only did jobs 1, 3, and 5. Turns out he only does odd jobs.",
-        "I’m reading a horror story in braille. Something bad is going to happen, I can just feel it."
-        ]
-        joke = random.choice(jokes)
-        joke = joke.replace("\u2019", "'") 
-        return jsonify({"joke": joke})
+    app.register_blueprint(dadjoke_bp)
 
-    @app.route('/brainrot', methods=['GET'])
-    def brainrot():
-        words = [
-            "Sigma", "Skibidi", "Kai Cenat", "Erm what the Sigma", "Rizz", 
-            "Gyatt", "Sussy Sigma", "Sussy Imposter", "Griddy on em"
-        ]
-        selected_word = random.choice(words)
-        # Render the HTML template with the selected word
-        return render_template('brainrot.html', brainrot_word=selected_word) 
+    app.register_blueprint(brainrot_bp)
+
+    app.register_blueprint(motivation_bp)
     
+    app.register_blueprint(calc_bp)
+
     @app.route('/quotes', methods=['GET'])
     def fav_quotes():
         quotes = [
@@ -79,32 +71,6 @@ def create_app():
         ]
         quote = random.choice(quotes)
         return jsonify(quote)
-
-    @app.route('/calc', methods=['GET','POST'])
-    def calc_main():
-        x = request.args.get('x')
-        y = request.args.get('y')
-        op = request.args.get('op')
-        
-        if not (x and y and op):
-            return "Invalid Input"
-        
-        try:
-            x = int(x)
-            y = int(y)
-        except ValueError:
-            return "Invalid Input"
-        
-        operations = {
-            'add': x + y,
-            'subtract': x - y,
-            'multiply': x * y,
-            'divide': x / y if y != 0 else "You cannot divide by 0"
-        }
-        
-        result = operations.get(op, "You might have spelled something wrong or there is not the option. The current options are: add, subtract, multiply, divide")
-        
-        return str(result)
     
     @app.route('/twoManaCombos', methods=['GET'])
     def random_combo():
@@ -189,18 +155,23 @@ def create_app():
         if not facts:
             facts = tennis_facts
         return jsonify(random.choice(facts))
-  
+
     @app.route('/sports_fact')
     def sports_fact():
         sports_facts = [
-            "Basketball was invented in 1891 by Dr. James Naismith.",
-            "The first modern Olympic Games were held in Athens in 1896.",
-            "Soccer is the most popular sport in the world.",
-            "Michael Phelps holds the record for the most Olympic gold medals.",
-            "The Super Bowl is the most-watched annual sporting event."
+            {"fact": "Basketball was invented in 1891 by Dr. James Naismith.", "category": "history"},
+            {"fact": "The first modern Olympic Games were held in Athens in 1896.", "category": "history"},
+            {"fact": "Soccer is the most popular sport in the world.", "category": "popularity"},
+            {"fact": "Michael Phelps holds the record for the most Olympic gold medals.", "category": "achievement"},
+            {"fact": "The Super Bowl is the most-watched annual sporting event.", "category": "popularity"}
         ]
-        fact = random.choice(sports_facts)
-        return jsonify({"fact": fact})
+
+        category = request.args.get('category')
+        facts = [fact for fact in sports_facts if fact['category'] == category] if category else sports_facts
+        if not facts:
+            facts = sports_facts
+        selected_fact = random.choice(facts)
+        return jsonify(selected_fact)
 
     @app.route('/pizzaToppings', methods=['GET'])
     def pizza_toppings():
@@ -319,11 +290,6 @@ def create_app():
 
 app = create_app()
 
-@app.route('/randomName', methods=['GET'])
-def random_name():
-    names = ["Alice", "Bob", "Charlie", "Diana"]
-    name = random.choice(names)
-    return jsonify({"name": name})
 
 @app.route('/marathonFacts', methods=['GET'])
 def marathon_facts():
@@ -373,17 +339,6 @@ def get_endpoints():
     ]
 	return jsonify("Follow these steps:"+ str(endpointSteps))
 
-@app.route('/motivation', methods=['GET'])
-def get_motivation():
-    motivational_quotes = [
-        "The only way to do great work is to love what you do.",
-        "Success is not final, failure is not fatal: It is the courage to continue that counts.",
-        "Believe you can and you're halfway there.",
-        "Act as if what you do makes a difference. It does.",
-        "The harder you work for something, the greater you’ll feel when you achieve it."
-    ]
-    selected_quote = random.choice(motivational_quotes)
-    return jsonify({"motivational_quote": selected_quote})
 @app.route('/items', methods=['GET'])
 def get_items():
     min_price = request.args.get('min_price', default=0, type=int)

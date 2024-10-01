@@ -37,8 +37,6 @@ or
 ```
 ptw .
 ```
-## How to make an Endpoint
-Go to http://127.0.0.1:5000/howToMakeEndpoint to learn how to make an endpoint.
 
 ## How to run and get to your endpoint
 To get to your endpoint go to the folder the app is in in a terminal (EX. class-api-IT4200-2024-fall) and run the following command:
@@ -46,6 +44,9 @@ To get to your endpoint go to the folder the app is in in a terminal (EX. class-
 python3 -m flask run
 ``` 
 This will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
+
+## How to make an Endpoint
+Go to http://127.0.0.1:5000/howToMakeEndpoint to learn how to make an endpoint.
 
 ## Factorial Endpoint
 Go to http://127.0.0.1:5000/factorial?n=5
@@ -55,22 +56,40 @@ But replace the value of n with whatever number you want to see the factorial of
 Go to http://127.0.0.1:5000/power?base=2&exp=4
 But replace the values of base and exp with whatever numbers you want.
 
-## How to use fruit_info Endpoint
-Navigate to http://127.0.0.1:5000/fruitInfo?fruit=apple
-Replace "apple" from the end of the url with the fruit of your choice.
-If the fruit isn't available an error message will come up and you will be given a list of options.
-Choose a fruit from the options given.
+## How to Use the Fruit Info Endpoint
+
+Navigate to `http://127.0.0.1:5000/fruitInfo?fruit=<fruit_name>`
+- Replace `<fruit_name>` with the name of the fruit you want information about.
+- If the fruit isn't available, an error message will appear, and you will be given a list of available options.
+- Choose a fruit from the options provided.
+
+### Important Notes:
+- Ensure the fruit name is spelled correctly to avoid errors.
+- If the fruit is not available, you will need to select from the provided options.
+
 
 ## How to Use the Calculator Endpoint
+
+### Manual Way
 
 Use the following template to add, subtract, multiply, or divide two numbers: 
 `http://127.0.0.1:5000/calc?x=<number>&y=<number>&op=<operator>`
 - Replace `<number>` with the numbers you want to use.
 - Replace `<operator>` with one of the following operations: `add`, `subtract`, `multiply`, `divide`.
 
+For square or square root operations, use the following template:
+`http://127.0.0.1:5000/calc?x=<number>&op=<operator>`
+- Replace `<number>` with the number you want to use.
+- Replace `<operator>` with either `square` or `sqrt`.
+
 ### Important Notes:
 - The operators must be spelled exactly as shown above, or you will receive an error.
-- If any of the variables (`x`, `y`, or `op`) are missing, you will receive an error.
+- If any of the variables (`x`, `y`, or `op`) are missing (Unless specified), you will receive an error.
+- To test this endpoint you can use `ptw ./test/test_calc.py`
+
+### Using HTML Form
+
+You can also use an HTML form to interact with the calculator endpoint. The form allows you to input values and select operations, then submit the form to see the result. 
 
 ## How to use the motivation Endpoint
 The /motivation endpoint provides a random motivational quote whenever accessed via a GET request. When a user sends a request to this endpoint, the app responds with one of five pre-defined motivational quotes, returned in JSON format. This allows users to easily retrieve an encouraging message with every request, making it useful for applications or websites where inspiration or daily motivation is desired. Each request will randomly select and serve one quote from the list.
@@ -162,7 +181,12 @@ Use the optional `category` parameter to filter facts by type (e.g., speed, reco
 
 🏅 Go to http://127.0.0.1:5000/sports_fact to learn fun facts about various sports!
 
-You can retrieve sports facts using the `/sports_fact` endpoint.
+You can retrieve sports facts using the `/sports_fact` endpoint. You can use the 'category' parameter to filter the facts!
+
+## How to use the Generate Name Endpoint
+
+To get a randomly generated name, visit the following URL:
+http://127.0.0.1:5000/randomName
 
 ## how to use basketball facts
 This Flask-based API provides random basketball facts through a simple GET endpoint, returning a JSON response with each request. It includes unit tests to ensure the endpoint functions correctly, providing a reliable source of basketball trivia.
@@ -254,3 +278,12 @@ Go Trailblazers! 🦬
 (;-;) lifu
 
 ```
+
+## About Us 
+
+```bash
+#Soren Bybee: 
+  Interests: Hiking, Rock Climbing, Mountain Biking, and Playing Video Games.
+    - Add me up on Discord(sorenbybee) if your looking to play Rainbow Six Siege on PC.
+    - If you need someone to approve your pull requests here is my number: (530-363-6531)
+

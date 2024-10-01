@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <script>
+        function toggleYField() {
+            const op = document.getElementById('op').value;
+            const yField = document.getElementById('y-field');
+            yField.style.display = (op === 'square' || op === 'sqrt') ? 'none' : 'block';
+        }
+    </script>
+</head>
+<body>
+    <h1>Calculator</h1>
+    <form action="/calc" method="get">
+        <label for="x">X:</label>
+        <input type="number" id="x" name="x" required><br><br>
+        <div id="y-field">
+            <label for="y">Y:</label>
+            <input type="number" id="y" name="y"><br><br>
+        </div>
+        <label for="op">Operation:</label>
+        <select id="op" name="op" onchange="toggleYField()">
+            <option value="add">Add</option>
+            <option value="subtract">Subtract</option>
+            <option value="multiply">Multiply</option>
+            <option value="divide">Divide</option>
+            <option value="mod">Modulus</option>
+            <option value="square">Square</option>
+            <option value="sqrt">Square Root</option>
+        </select><br><br>
+        <button type="submit">Calculate</button>
+    </form>
+    <br>
+    <h2>Result:</h2>
+    <p id="result">{{ result }}</p>
+</body>
+</html>
