@@ -20,13 +20,8 @@ def test_five(client):
 def test_ten(client):
     response = client.get('/factorial?n=10')
     assert response.status_code == 200
-
-def test_negative(client):
-    response = client.get('/factorial?n=-1')
-    assert response.status_code == 400
     assert b"3628800" in response.data
 
-# test a negative number
 def test_negative(client):
     response = client.get('/factorial?n=-1')
     assert response.status_code == 400

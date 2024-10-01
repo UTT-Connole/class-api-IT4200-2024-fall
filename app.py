@@ -2,11 +2,32 @@ from flask import Flask, request, jsonify, render_template
 from binaryconvert import convertToBinary_bp
 import random
 import matplotlib
+import requests
 
 
 def create_app():
     app = Flask(__name__)
 
+    @app.route('/basketballFacts', methods=['GET'])
+    def get_basketball_facts():
+        basketball_facts = [
+            "Michael Jordan has won six NBA championships.",
+            "Kareem Abdul-Jabbar is the all-time leading scorer in NBA history.",
+            "The NBA was founded in New York City on June 6, 1946.",
+            "Wilt Chamberlain scored 100 points in a single game.",
+            "The Boston Celtics have the most NBA titles with 17 championships."
+        ]
+        selected_fact = random.choice(basketball_facts)
+        return jsonify({"basketball_fact": selected_fact})
+    
+    @app.route('/greet', methods=['GET'])
+    def greet():
+        return jsonify({"message": "Hello, Welcome to the API!"})
+
+    @app.route('/greet/<name>', methods=['GET'])
+    def greet_with_name(name):
+        return jsonify({"message": f"Hello, {name}!"})
+      
     @app.route('/')
     def hello_world():
         return "Hello World"
@@ -128,8 +149,6 @@ def create_app():
             ]
         
         picked = random.choice(destinations)
-        #location = picked.keys
-        #flighttime = picked.values
         return jsonify(picked)
     
     @app.route('/factorial', methods=['GET'])
@@ -159,15 +178,18 @@ def create_app():
     @app.route('/tennis_fact')
     def tennis_fact():
         tennis_facts = [
-            "The fastest recorded serve was 163.7 mph by Sam Groth.",
-            "The longest tennis match lasted 11 hours and 5 minutes.",
-            "Wimbledon is the oldest tennis tournament in the world.",
-            "Yellow tennis balls were introduced in 1972.",
-            "Rafael Nadal has won the French Open 14 times."
+            {"fact": "The fastest serve was 163.7 mph by Sam Groth.", "category": "speed"},
+            {"fact": "The longest match lasted 11 hours and 5 minutes.", "category": "record"},
+            {"fact": "Wimbledon is the oldest tournament.", "category": "history"},
+            {"fact": "Yellow tennis balls were introduced in 1972.", "category": "history"},
+            {"fact": "Nadal has won the French Open 14 times.", "category": "achievement"}
         ]
-        fact = random.choice(tennis_facts)
-        return jsonify({"fact": fact})
-    
+        category = request.args.get('category')
+        facts = [fact for fact in tennis_facts if fact['category'] == category] if category else tennis_facts
+        if not facts:
+            facts = tennis_facts
+        return jsonify(random.choice(facts))
+  
     @app.route('/sports_fact')
     def sports_fact():
         sports_facts = [
@@ -180,9 +202,7 @@ def create_app():
         fact = random.choice(sports_facts)
         return jsonify({"fact": fact})
 
-
     @app.route('/pizzaToppings', methods=['GET'])
-
     def pizza_toppings():
         sauces = ["Tomato Sauce", "Alfredo Sauce", "Ranch Sauce"]
         toppings = [
@@ -220,32 +240,90 @@ def create_app():
             "All your hard work will soon pay off."
         ]
         return jsonify({"fortune": random.choice(fortunes)})
+    
+    @app.route('/color', methods=['GET','POST'])
+    def color_hexifier():
+        color_name = request.args.get('color')
+    
+        print(f"Received color name: {color_name}")
+    
+        if color_name and color_name.lower() in matplotlib.colors.CSS4_COLORS:
+            hex_code = matplotlib.colors.CSS4_COLORS[color_name.lower()]
+            return f"The hex code for {color_name} is {hex_code}"
+        else:
+            return "Invalid color name"
+        
+    WEATHER_API_KEY = 'a5b6f8eb1b20b57f80fa87f940e02857'
+    @app.route('/weather/<city>', methods=['GET'])
+    def weather(city):
+        url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={WEATHER_API_KEY}&units=imperial'
+        response = requests.get(url)
+        #Returns error if invalid city is entered
+        if response.status_code != 200:
+            return jsonify({"error": "City not found or API error."}), 404
+        
+        data = response.json()
+        weather_data = {
+            "temperature": f"{data['main']['temp']}°F",
+            "condition": data['weather'][0]['description'],
+            "humidity": f"{data['main']['humidity']}%",
+            "wind_speed": f"{data['wind']['speed']} mph"
+        }
+        return jsonify(weather_data)
 
+    @app.route('/pokefishing', methods=['GET','POST'])
+    def fish():
+        magikarp = [
+            "a regular ol' Magikarp",
+            "a calico pattern Magikarp",
+            "a orange two-tone pattern Magikarp",
+            "a pink dapple pattern Magikarp",
+            "a gray diamond pattern Magikarp",
+            "a purple patches pattern Magikarp",
+            "a apricot tiger pattern Magikarp",
+            "a brown stripes pattern Magikarp",
+            "a orange forehead pattern Magikarp",
+            "a blue raindrops pattern Magikarp",
+            "a shiny Magikarp",
+            "a... Oh no, it's a Gyarados!!",
+            "a Goldeen and it's the biggest you've ever seen",
+            "nothing... But you did see a Mudkip riding on a Lotad"
+            ]
+        caught = random.choice(magikarp)
+        return jsonify({"You caught": caught + "!"})
+
+    @app.route('/fruitInfo', methods=['GET'])
+    def fruit_info():
+        fruits = {
+            "apple": {"color": "red", "taste": "sweet"},
+            "banana": {"color": "yellow", "taste": "sweet"},
+            "lemon": {"color": "yellow", "taste": "sour"},
+            "orange": {"color": "orange", "taste": "citrus"},
+            "grape": {"color": "purple", "taste": "sweet"},
+            "lime": {"color": "green", "taste": "sour"}
+        }
+    
+        fruit_name = request.args.get('fruit')
+    
+        if fruit_name and fruit_name.lower() in fruits:
+            info = fruits[fruit_name.lower()]
+            return jsonify({
+                "fruit": fruit_name,
+                "color": info["color"],
+                "taste": info["taste"]
+            })
+        else:
+            return jsonify({"error": "Fruit not found. Please try apple, banana, lemon, orange, grape, or lime."}), 404
 
     return app
 
 app = create_app()
-
-
-
-@app.route('/color', methods=['GET','POST'])
-def color_hexifier():
-    color_name = request.args.get('color')
-    
-    print(f"Received color name: {color_name}")
-    
-    if color_name and color_name.lower() in matplotlib.colors.CSS4_COLORS:
-        hex_code = matplotlib.colors.CSS4_COLORS[color_name.lower()]
-        return f"The hex code for {color_name} is {hex_code}"
-    else:
-        return "Invalid color name"
 
 @app.route('/randomName', methods=['GET'])
 def random_name():
     names = ["Alice", "Bob", "Charlie", "Diana"]
     name = random.choice(names)
     return jsonify({"name": name})
-
 
 @app.route('/marathonFacts', methods=['GET'])
 def marathon_facts():
@@ -269,7 +347,6 @@ def get_favorite_quote():
     }
     return jsonify(favorite_quote)
 
-
 @app.route('/randomFact', methods=['GET'])
 def random_fact():
     facts = [
@@ -283,27 +360,6 @@ def random_fact():
     selected_fact = random.choice(facts)
     return jsonify(selected_fact)
 
-@app.route('/pokefishing', methods=['GET','POST'])
-def fish():
-    magikarp = [
-        "a regular ol' Magikarp",
-        "a calico pattern Magikarp",
-        "a orange two-tone pattern Magikarp",
-        "a pink dapple pattern Magikarp",
-        "a gray diamond pattern Magikarp",
-        "a purple patches pattern Magikarp",
-        "a apricot tiger pattern Magikarp",
-        "a brown stripes pattern Magikarp",
-        "a orange forehead pattern Magikarp",
-        "a blue raindrops pattern Magikarp",
-        "a shiny Magikarp",
-        "a... Oh no, it's a Gyarados!!",
-        "a Goldeen and it's the biggest you've ever seen",
-        "nothing... But you did see a Mudkip riding on a Lotad"
-        ]
-    caught = random.choice(magikarp)
-    return jsonify({"You caught": caught + "!"})
-
 if __name__ == '__main__':
     app.run(debug=True)
 
@@ -316,29 +372,6 @@ def get_endpoints():
 		{"step 4":" write the endpoint function"}
     ]
 	return jsonify("Follow these steps:"+ str(endpointSteps))
-
-@app.route('/fruitInfo', methods=['GET'])
-def fruit_info():
-    fruits = {
-        "apple": {"color": "red", "taste": "sweet"},
-        "banana": {"color": "yellow", "taste": "sweet"},
-        "lemon": {"color": "yellow", "taste": "sour"},
-        "orange": {"color": "orange", "taste": "citrus"},
-        "grape": {"color": "purple", "taste": "sweet"},
-        "lime": {"color": "green", "taste": "sour"}
-    }
-    
-    fruit_name = request.args.get('fruit')
-    
-    if fruit_name and fruit_name.lower() in fruits:
-        info = fruits[fruit_name.lower()]
-        return jsonify({
-            "fruit": fruit_name,
-            "color": info["color"],
-            "taste": info["taste"]
-        })
-    else:
-        return jsonify({"error": "Fruit not found. Please try apple, banana, lemon, orange, grape, or lime."}), 404
 
 @app.route('/motivation', methods=['GET'])
 def get_motivation():

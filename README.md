@@ -1,6 +1,23 @@
 # Welcome to the class API!
 We will be using this repo to create an API for our entire class. We will use Flask for this application and each member of the class will work within this single repo.
 
+## Contributors:
+
+* Laura Coulome
+* Riker Evans
+* Jace Barrett
+* Donavan Franco
+* Christian Bassilios
+* Soren Bybee
+* Keaton Hall
+* Josh Beckstrand
+* Dallin Hougaard
+* Andres
+* Travis Gunter
+* Morgan Andrus
+* Yomi Odubiyi
+* Brayden Connole
+
 ## How to install pip requirements
 
 Make sure to run these commands before you run the Flask app. It will install all the requirements
@@ -55,9 +72,10 @@ Use the following template to add, subtract, multiply, or divide two numbers:
 - The operators must be spelled exactly as shown above, or you will receive an error.
 - If any of the variables (`x`, `y`, or `op`) are missing, you will receive an error.
 
-
-
 ## How to use the motivation Endpoint
+The /motivation endpoint provides a random motivational quote whenever accessed via a GET request. When a user sends a request to this endpoint, the app responds with one of five pre-defined motivational quotes, returned in JSON format. This allows users to easily retrieve an encouraging message with every request, making it useful for applications or websites where inspiration or daily motivation is desired. Each request will randomly select and serve one quote from the list.
+
+## how to use get motivation
 The /motivation endpoint provides a random motivational quote whenever accessed via a GET request. When a user sends a request to this endpoint, the app responds with one of five pre-defined motivational quotes, returned in JSON format. This allows users to easily retrieve an encouraging message with every request, making it useful for applications or websites where inspiration or daily motivation is desired. Each request will randomly select and serve one quote from the list.
 
 ## How to use twoManaCombo Endpoint
@@ -88,6 +106,15 @@ Go to http://127.0.0.1:5000/marathonFacts to learn a random fact about marathons
 Use the template to return a hex code of the color you want "http://127.0.0.1:5000/color?color=blue"
 Replace the "blue" at the end with any color of your choosing.
 If the color doesn't exist in the library, you will get an error.
+
+### /greet
+- **Method:** GET
+- **Description:** Returns a welcome message.
+- **Example Response:**
+  ```json
+  {
+    "message": "Hello, Welcome to the API!"
+  }
 
 ## How to use the Quotes Endpoint
 
@@ -128,13 +155,17 @@ To retrieve a random fact, navigate to http://127.0.0.1:5000/randomFact
 
 🎾 Go to http://127.0.0.1:5000/tennisFacts to learn fun facts about tennis!
 
-You can retrieve tennis facts using the `/tennisFacts` endpoint.
+You can retrieve tennis facts using the `/tennisFacts` endpoint. 
+Use the optional `category` parameter to filter facts by type (e.g., speed, record).
 
 ## How to use the sportsFacts Endpoint
 
 🏅 Go to http://127.0.0.1:5000/sports_fact to learn fun facts about various sports!
 
 You can retrieve sports facts using the `/sports_fact` endpoint.
+
+## how to use basketball facts
+This Flask-based API provides random basketball facts through a simple GET endpoint, returning a JSON response with each request. It includes unit tests to ensure the endpoint functions correctly, providing a reliable source of basketball trivia.
 
 ## How to use the Pokefishing Endpoint
 Go to http://127.0.0.1:5000/pokefishing to catch a Magikarp!
@@ -174,25 +205,18 @@ Go to http://127.0.0.1:5000/brainrot to add a new word to your vocabulary!
 ## How to use the convertToBinary Endpoint
 Go to http://127.0.0.1:5000/convertToBinary?num=# and replace the # with any non-negative whole number! Don't even think about putting in floats, strings, or blanks. I have tested all of those cases and you will get appropriate responses for each!
 
+## How to use the live weather endpoint
+Install "requests" module using "pip install requests" (Sorry about that)
+Pick a city you want live weather in and put it after /weather/ in the URL
+Example: http://127.0.0.1:5000/weather/Seattle
+It should list the current weather conditions of the selected city
+
+## How to use the pokefishing Endpoint
+Go to http://127.0.0.1:5000/pokefishing, then just refresh the page over and over and over again to see all your different catches!
+
 ## How to Rebase
  * step 1: STOP, just use merge thingy....
 
-## Contributors:
-
-* Laura Coulome
-* Riker Evans
-* Jace Barrett
-* Donavan Franco
-* Christian Bassilios
-* Soren Bybee
-* Keaton Hall
-* Josh Beckstrand
-* Dallin Hougaard
-* Andres
-* Travis Gunter
-* Morgan Andrus
-* Yomi Odubiyi
-* Brayden Connole
 
 ## Welcome to The IT4200 Art Gallery!
 
