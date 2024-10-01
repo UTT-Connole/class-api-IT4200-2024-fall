@@ -3,7 +3,7 @@ def test_zero(client):
     response = client.get('/factorial?n=0')
     assert response.status_code == 200
     assert b"1" in response.data
-  
+
 # test for 1
 def test_one(client):
     response = client.get('/factorial?n=1')
