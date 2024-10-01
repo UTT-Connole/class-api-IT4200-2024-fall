@@ -261,5 +261,6 @@ Go Trailblazers! 🦬
 ```bash
 #Soren Bybee: 
   Interests: Hiking, Rock Climbing, Mountain Biking, and Playing Video Games.
-    Add me up on Discord(sorenbybee) if your looking to play Rainbow Six Siege on PC.
+    - Add me up on Discord(sorenbybee) if your looking to play Rainbow Six Siege on PC.
+    - If you need someone to approve your pull requests here is my number: (530-363-6531)
 
