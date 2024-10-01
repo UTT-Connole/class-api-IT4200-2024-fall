@@ -70,15 +70,26 @@ Navigate to `http://127.0.0.1:5000/fruitInfo?fruit=<fruit_name>`
 
 ## How to Use the Calculator Endpoint
 
+### Manual Way
+
 Use the following template to add, subtract, multiply, or divide two numbers: 
 `http://127.0.0.1:5000/calc?x=<number>&y=<number>&op=<operator>`
 - Replace `<number>` with the numbers you want to use.
 - Replace `<operator>` with one of the following operations: `add`, `subtract`, `multiply`, `divide`.
 
+For square or square root operations, use the following template:
+`http://127.0.0.1:5000/calc?x=<number>&op=<operator>`
+- Replace `<number>` with the number you want to use.
+- Replace `<operator>` with either `square` or `sqrt`.
+
 ### Important Notes:
 - The operators must be spelled exactly as shown above, or you will receive an error.
-- If any of the variables (`x`, `y`, or `op`) are missing, you will receive an error.
-- To test this endpoint you can use ptw ./test/test_calc.py
+- If any of the variables (`x`, `y`, or `op`) are missing (Unless specified), you will receive an error.
+- To test this endpoint you can use `ptw ./test/test_calc.py`
+
+### Using HTML Form
+
+You can also use an HTML form to interact with the calculator endpoint. The form allows you to input values and select operations, then submit the form to see the result. 
 
 ## How to use the motivation Endpoint
 The /motivation endpoint provides a random motivational quote whenever accessed via a GET request. When a user sends a request to this endpoint, the app responds with one of five pre-defined motivational quotes, returned in JSON format. This allows users to easily retrieve an encouraging message with every request, making it useful for applications or websites where inspiration or daily motivation is desired. Each request will randomly select and serve one quote from the list.
