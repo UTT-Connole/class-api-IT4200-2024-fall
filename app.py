@@ -7,6 +7,12 @@ import matplotlib
 def create_app():
     app = Flask(__name__)
 
+    @app.route('/generateName', methods=['GET'])
+    def generate_name():
+        names = ["Eve", "Jack", "Liam", "Mia"]
+        name = random.choice(names)
+        return jsonify({"name": name})
+    
     @app.route('/basketballFacts', methods=['GET'])
     def get_basketball_facts():
         basketball_facts = [
@@ -318,15 +324,11 @@ def create_app():
         else:
             return jsonify({"error": "Fruit not found. Please try apple, banana, lemon, orange, grape, or lime."}), 404
 
+
     return app
 
 app = create_app()
 
-@app.route('/randomName', methods=['GET'])
-def random_name():
-    names = ["Alice", "Bob", "Charlie", "Diana"]
-    name = random.choice(names)
-    return jsonify({"name": name})
 
 @app.route('/marathonFacts', methods=['GET'])
 def marathon_facts():
