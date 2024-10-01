@@ -37,8 +37,6 @@ or
 ```
 ptw .
 ```
-## How to make an Endpoint
-Go to http://127.0.0.1:5000/howToMakeEndpoint to learn how to make an endpoint.
 
 ## How to run and get to your endpoint
 To get to your endpoint go to the folder the app is in in a terminal (EX. class-api-IT4200-2024-fall) and run the following command:
@@ -46,6 +44,9 @@ To get to your endpoint go to the folder the app is in in a terminal (EX. class-
 python3 -m flask run
 ``` 
 This will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
+
+## How to make an Endpoint
+Go to http://127.0.0.1:5000/howToMakeEndpoint to learn how to make an endpoint.
 
 ## Factorial Endpoint
 Go to http://127.0.0.1:5000/factorial?n=5
@@ -254,3 +255,12 @@ Go Trailblazers! 🦬
 (;-;) lifu
 
 ```
+
+## About Us 
+
+```bash
+#Soren Bybee: 
+  Interests: Hiking, Rock Climbing, Mountain Biking, and Playing Video Games.
+    - Add me up on Discord(sorenbybee) if your looking to play Rainbow Six Siege on PC.
+    - If you need someone to approve your pull requests here is my number: (530-363-6531)
+

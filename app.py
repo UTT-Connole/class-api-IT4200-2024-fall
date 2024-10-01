@@ -1,8 +1,11 @@
 from flask import Flask, request, jsonify, render_template
 from binaryconvert import convertToBinary_bp
+from endpoints.dadjoke import dadjoke_bp
+from endpoints.brainrot import brainrot_bp
+from endpoints.motivation import motivation_bp
 import random
 import matplotlib
-import requests
+#import requests   -App wont run with this not commented out.
 
 
 def create_app():
@@ -34,32 +37,12 @@ def create_app():
     
     app.register_blueprint(convertToBinary_bp)
     
-    @app.route('/dadjoke', methods=['GET'])
-    def dad_joke():
-        jokes = [
-        "Why don't skeletons fight each other? They don't have the guts.",
-        "What do you call fake spaghetti? An impasta!",
-        "Why did the scarecrow win an award? Because he was outstanding in his field!",
-        "I would avoid the sushi if I was you. It’s a little fishy.",
-        "Today, my son asked 'Can I have a bookmark?' and I burst into tears. 11 years old and he still doesn't know my name is Brian.",
-        "I went to the aquarium this weekend, but I didn’t stay long. There’s something fishy about that place.",
-        "I gave my handyman a to-do list, but he only did jobs 1, 3, and 5. Turns out he only does odd jobs.",
-        "I’m reading a horror story in braille. Something bad is going to happen, I can just feel it."
-        ]
-        joke = random.choice(jokes)
-        joke = joke.replace("\u2019", "'") 
-        return jsonify({"joke": joke})
+    app.register_blueprint(dadjoke_bp)
 
-    @app.route('/brainrot', methods=['GET'])
-    def brainrot():
-        words = [
-            "Sigma", "Skibidi", "Kai Cenat", "Erm what the Sigma", "Rizz", 
-            "Gyatt", "Sussy Sigma", "Sussy Imposter", "Griddy on em"
-        ]
-        selected_word = random.choice(words)
-        # Render the HTML template with the selected word
-        return render_template('brainrot.html', brainrot_word=selected_word) 
-    
+    app.register_blueprint(brainrot_bp)
+
+    app.register_blueprint(motivation_bp)
+
     @app.route('/quotes', methods=['GET'])
     def fav_quotes():
         quotes = [
@@ -373,17 +356,6 @@ def get_endpoints():
     ]
 	return jsonify("Follow these steps:"+ str(endpointSteps))
 
-@app.route('/motivation', methods=['GET'])
-def get_motivation():
-    motivational_quotes = [
-        "The only way to do great work is to love what you do.",
-        "Success is not final, failure is not fatal: It is the courage to continue that counts.",
-        "Believe you can and you're halfway there.",
-        "Act as if what you do makes a difference. It does.",
-        "The harder you work for something, the greater you’ll feel when you achieve it."
-    ]
-    selected_quote = random.choice(motivational_quotes)
-    return jsonify({"motivational_quote": selected_quote})
 @app.route('/items', methods=['GET'])
 def get_items():
     min_price = request.args.get('min_price', default=0, type=int)
