@@ -149,7 +149,7 @@ def create_app():
         if not facts:
             facts = tennis_facts
         return jsonify(random.choice(facts))
-  
+
     @app.route('/sports_fact')
     def sports_fact():
         sports_facts = [
