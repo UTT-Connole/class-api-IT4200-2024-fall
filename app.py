@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template
 from binaryconvert import convertToBinary_bp
 import random
 import matplotlib
-#import requests
+#import requests   -App wont run with this not commented out.
 
 def create_app():
     app = Flask(__name__)
