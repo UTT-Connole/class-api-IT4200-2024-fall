@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, render_template
-from binaryconvert import convertToBinary_bp
+from endpoints.marathonfacts import marathonFacts_bp
+from endpoints.binaryconvert import convertToBinary_bp
 from endpoints.dadjoke import dadjoke_bp
 from endpoints.brainrot import brainrot_bp
 from endpoints.motivation import motivation_bp
@@ -41,6 +42,8 @@ def create_app():
     @app.route('/')
     def hello_world():
         return "Hello World"
+    
+    app.register_blueprint(marathonFacts_bp)
     
     app.register_blueprint(convertToBinary_bp)
     
@@ -325,21 +328,6 @@ def create_app():
     return app
 
 app = create_app()
-
-
-@app.route('/marathonFacts', methods=['GET'])
-def marathon_facts():
-    facts = [
-        {"fact": "The first marathon was in 1896 during the Athens Olympics.", "category": "history"},
-        {"fact": "The official marathon distance is 26.2 miles (42.195 km).", "category": "distance"},
-        {"fact": "The fastest marathon time for men is 2:01:39.", "category": "records"},
-        {"fact": "The fastest marathon time for women is 2:14:04.", "category": "records"},
-        {"fact": "Eliud Kipchoge ran a marathon in under 2 hours in a special event.", "category": "milestones"},
-        {"fact": "Over 50,000 runners finish the New York City Marathon each year.", "category": "participation"}
-    ]
-    
-    random_fact = random.choice(facts)
-    return jsonify(random_fact)
 
 @app.route('/favoritequote', methods=['GET'])
 def get_favorite_quote():
