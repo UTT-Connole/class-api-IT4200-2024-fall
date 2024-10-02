@@ -119,18 +119,41 @@ def create_app():
     
     @app.route('/factorial', methods=['GET'])
     def factorial():
-        n = request.args.get('n', type=int)
-        if n is None:
+        n = request.args.getlist('n', type=int)
+
+        if not n:
             return "error", 400
-        if n < 0:
-            return "error", 400
-        elif n == 0 or n == 1:
-            return jsonify(result=1), 200
-        else:
-            result = 1
-            for i in range (2, n + 1):
-                result *= i
-            return jsonify(result=result), 200
+        
+        if len(n) == 1:
+            n = n[0]
+            if n < 0:
+                return "error", 400
+            elif n == 0 or n ==1:
+                return jsonify(result=1), 200
+            else:
+                result = 1
+                for i in range(2, n + 1):
+                    result *= i
+                return jsonify(result=result), 200
+            
+        def calculate_factorial(num):
+            if num < 0:
+                return "error"
+            elif num == 0 or num ==1:
+                return 1
+            else:
+                result = 1
+                for i in range(2, num + 1):
+                    result *= i
+                return result
+        resultList = []
+        for num in n:
+            result = calculate_factorial(num)
+            if result == "error":
+                return f"error for {num}", 400
+            resultList.append(result)
+
+        return jsonify(result=resultList), 200
         
     @app.route('/power', methods=['GET'])
     def power():
@@ -286,6 +309,19 @@ def create_app():
         else:
             return jsonify({"error": "Fruit not found. Please try apple, banana, lemon, orange, grape, or lime."}), 404
 
+    @app.route('/randomFact', methods=['GET'])
+    def random_fact():
+        facts = [
+            {"fact": "Honey never spoils."},
+            {"fact": "Octopuses have three hearts."},
+            {"fact": "Bananas are berries, but strawberries are not."},
+            {"fact": "A day on Venus is longer than a year on Venus."},
+            {"fact": "Sharks have been around longer than trees."},
+            {"fact": "The ocean covers 71 percent of the Earth's surface and the average depth is 12,100 feet."}
+        ]
+        selected_fact = random.choice(facts)
+        return jsonify(selected_fact)
+
     return app
 
 app = create_app()
@@ -312,22 +348,6 @@ def get_favorite_quote():
         "author": "Steve Jobs"
     }
     return jsonify(favorite_quote)
-
-@app.route('/randomFact', methods=['GET'])
-def random_fact():
-    facts = [
-        {"fact": "Honey never spoils."},
-        {"fact": "Octopuses have three hearts."},
-        {"fact": "Bananas are berries, but strawberries are not."},
-        {"fact": "A day on Venus is longer than a year on Venus."},
-        {"fact": "Sharks have been around longer than trees."},
-        {"fact": "The ocean covers 71 percent of the Earth's surface and the average depth is 12,100 feet."}
-    ]
-    selected_fact = random.choice(facts)
-    return jsonify(selected_fact)
-
-if __name__ == '__main__':
-    app.run(debug=True)
 
 @app.route('/howToMakeEndpoint', methods=['GET'])
 def get_endpoints():
