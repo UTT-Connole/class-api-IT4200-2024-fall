@@ -100,6 +100,9 @@ The /motivation endpoint provides a random motivational quote whenever accessed 
 ## How to use twoManaCombo Endpoint
 Go to http://127.0.0.1:5000/twoManaCombos?color=your_color. Specifiy which color you want included in your deck by replacing it with your_color. If you don't want to specify, you can leave it blank. Then, get the combo name, and start building your next MTG deck! ⚪🔵⚫🔴🟢
 
+## How to use MTGmana Endpoint
+Go to http://127.0.0.1:5000/MTGmana and learn about what each mana color is known for!🕊️🌊⚰️🔥🌿
+
 ## How to get to the stoic quotes Endpoint
 Go to http://127.0.0.1:5000/quotes for a good random stoic quotes from Plato and others.
 
