@@ -121,10 +121,14 @@ To test functionality, run this script:
 python3 -m pytest ./test/test_travel.py
 
 ## How to use Marathon Facts Endpoint
-Go to http://127.0.0.1:5000/marathonFacts to learn a random fact about marathons! 
+Go to http://127.0.0.1:5000/marathonFacts to learn a random fact about marathons!
+
+## How to use the Color Endpoint
 Use the template to return a hex code of the color you want "http://127.0.0.1:5000/color?color=blue"
 Replace the "blue" at the end with any color of your choosing.
 If the color doesn't exist in the library, you will get an error.
+
+## Greeting Endpoint
 
 ### /greet
 - **Method:** GET
@@ -147,16 +151,14 @@ To retrieve a favorite quote, navigate to:
 http://127.0.0.1:5000/favoritequote
 
 
-
-## How to use Color Hexifier endpoint
-
-#### Get Items
+## Get Items Endpoint
 - **Endpoint**: `/items`
 - **Method**: `GET`
 - **Description**: Returns a list of items. Optionally filter items by a minimum price.
 - **Query Parameters**:
   - `min_price`: Filters items that have a price greater than or equal to the specified value (default is 0).
 
+## How to use Color Hexifier endpoint
 
 Use the template to return a hex code of the color you want "http://127.0.0.1:5000/color?color=blue"
 Replace the "blue" at the end with any color of your choosing.
