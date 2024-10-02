@@ -50,7 +50,7 @@ Go to http://127.0.0.1:5000/howToMakeEndpoint to learn how to make an endpoint.
 
 ## Factorial Endpoint
 Go to http://127.0.0.1:5000/factorial?n=5
-But replace the value of n with whatever number you want to see the factorial of.
+But replace the value of n with whatever number you want to see the factorial of. You can also add more factorials by doing ?n=5&n=4&n=3 and so on.
 
 ## Power Endpoint
 Go to http://127.0.0.1:5000/power?base=2&exp=4
@@ -237,6 +237,9 @@ It should list the current weather conditions of the selected city
 
 ## How to use the pokefishing Endpoint
 Go to http://127.0.0.1:5000/pokefishing, then just refresh the page over and over and over again to see all your different catches!
+
+## How to use the randomFact Endpoint
+Go to http://127.0.0.1:5000/randomFact, then refresh the page to see different facts.
 
 ## How to Rebase
  * step 1: STOP, just use merge thingy....
