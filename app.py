@@ -5,6 +5,7 @@ from endpoints.dadjoke import dadjoke_bp
 from endpoints.brainrot import brainrot_bp
 from endpoints.motivation import motivation_bp
 from endpoints.calc import calc_bp
+from endpoints.mtg import mtg_bp
 import random
 import matplotlib
 #import requests   -App wont run with this not commented out.
@@ -55,6 +56,8 @@ def create_app():
     
     app.register_blueprint(calc_bp)
 
+    app.register_blueprint(mtg_bp)
+
     @app.route('/quotes', methods=['GET'])
     def fav_quotes():
         quotes = [
@@ -74,29 +77,6 @@ def create_app():
         ]
         quote = random.choice(quotes)
         return jsonify(quote)
-    
-    @app.route('/twoManaCombos', methods=['GET'])
-    def random_combo():
-        two_m =[{ "name": "Azorius", "color_1": "white", "color_2": "blue"},
-                { "name": "Boros", "color_1": "red", "color_2": "white"},
-                { "name": "Dimir", "color_1": "blue", "color_2": "black"},
-                { "name": "Golgari", "color_1": "black", "color_2": "green"},
-                { "name": "Gruul", "color_1": "red", "color_2": "green"},
-                { "name": "Izzet", "color_1": "blue", "color_2": "red"},
-                { "name": "Orzhov", "color_1": "white", "color_2": "black"},
-                { "name": "Rakdos", "color_1": "black", "color_2": "red"},
-                { "name": "Selesnya", "color_1": "white", "color_2": "green"},
-                { "name": "Simic", "color_1": "blue", "color_2": "black"}]
-        color = request.args.get('color')
-        if color:
-            filtered_combos = [combo for combo in two_m if color.lower() in [combo['color_1'].lower(), combo['color_2'].lower()]]
-            if not filtered_combos:
-                return jsonify({"error": "No combinations found for the given color"}), 404
-            
-            r = random.choice(filtered_combos)
-        else:
-            r = random.choice(two_m)
-        return jsonify(r)
     
     @app.route('/travel', methods=['GET','POST'])
     def travel():
@@ -181,7 +161,7 @@ def create_app():
         if not facts:
             facts = tennis_facts
         return jsonify(random.choice(facts))
-
+  
     @app.route('/sports_fact')
     def sports_fact():
         sports_facts = [
@@ -191,13 +171,11 @@ def create_app():
             {"fact": "Michael Phelps holds the record for the most Olympic gold medals.", "category": "achievement"},
             {"fact": "The Super Bowl is the most-watched annual sporting event.", "category": "popularity"}
         ]
-
         category = request.args.get('category')
         facts = [fact for fact in sports_facts if fact['category'] == category] if category else sports_facts
         if not facts:
             facts = sports_facts
-        selected_fact = random.choice(facts)
-        return jsonify(selected_fact)
+        return jsonify(random.choice(facts))
 
     @app.route('/pizzaToppings', methods=['GET'])
     def pizza_toppings():
@@ -347,6 +325,17 @@ def get_endpoints():
     ]
 	return jsonify("Follow these steps:"+ str(endpointSteps))
 
+@app.route('/motivation', methods=['GET'])
+def get_motivation():
+    motivational_quotes = [
+        "The only way to do great work is to love what you do.",
+        "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+        "Believe you can and you're halfway there.",
+        "Act as if what you do makes a difference. It does.",
+        "The harder you work for something, the greater you’ll feel when you achieve it."
+    ]
+    selected_quote = random.choice(motivational_quotes)
+    return jsonify({"motivational_quote": selected_quote})
 @app.route('/items', methods=['GET'])
 def get_items():
     min_price = request.args.get('min_price', default=0, type=int)
