@@ -150,6 +150,7 @@ Start reading people's favorite quotes!
 ## How to Use the Favorite Quote Endpoint
 
 To retrieve a favorite quote, navigate to:
+Update: You can add your own favorite quote now too!!
 
 http://127.0.0.1:5000/favoritequote
 
