@@ -303,17 +303,24 @@ def create_app():
         selected_fact = random.choice(facts)
         return jsonify(selected_fact)
 
+    @app.route('/favoritequote', methods=['GET', 'POST'])
+    def get_favorite_quote():
+        favorite_quote = {
+         "quote": "The only way to do great work is to love what you do.",
+         "author": "Steve Jobs"
+        }
+        quotes = [favorite_quote]
+        if request.method == 'GET':
+            return jsonify(favorite_quote)  
+
+        elif request.method == 'POST':
+            new_quote = request.json 
+            quotes.append(new_quote)  
+            return jsonify({"message": "New favorite quote added!", "quote": new_quote}), 201
+
     return app
 
 app = create_app()
-
-@app.route('/favoritequote', methods=['GET'])
-def get_favorite_quote():
-    favorite_quote = {
-        "quote": "The only way to do great work is to love what you do.",
-        "author": "Steve Jobs"
-    }
-    return jsonify(favorite_quote)
 
 @app.route('/howToMakeEndpoint', methods=['GET'])
 def get_endpoints():
