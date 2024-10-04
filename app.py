@@ -6,6 +6,7 @@ from endpoints.brainrot import brainrot_bp
 from endpoints.motivation import motivation_bp
 from endpoints.calc import calc_bp
 from endpoints.mtg import mtg_bp
+from endpoints.pizza import pizza_bp
 import random
 import matplotlib
 #import requests   -App wont run with this not commented out.
@@ -57,6 +58,8 @@ def create_app():
     app.register_blueprint(calc_bp)
 
     app.register_blueprint(mtg_bp)
+
+    app.register_blueprint(pizza_bp)
 
     @app.route('/quotes', methods=['GET'])
     def fav_quotes():
@@ -193,7 +196,7 @@ def create_app():
 
         selected_crust = random.choice(crusts)
         selected_sauce = random.choice(sauces)  
-        selected_toppings = random.sample(toppings, 3) 
+        selected_toppings = random.sample(toppings, 3)  # This should correctly choose dictionaries
 
         pizza = {
             "crust": selected_crust,
@@ -202,6 +205,7 @@ def create_app():
         }
 
         return jsonify(pizza)
+
 
     @app.route('/fortune', methods=['GET'])
     def get_fortune():

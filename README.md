@@ -109,7 +109,7 @@ Go to http://127.0.0.1:5000/quotes for a good random stoic quotes from Plato and
 to test python3 -m unittest test_quotes.py 
 
 ## How to use pizzaToppings Endpoint
-Go to http://127.0.0.1:5000/pizzaToppings to finally decide what sauce and toppings to put on your pizza 🍕!
+Too lazy to think of what pizza to order? Just go to http://127.0.0.1:5000/pizzaToppings and get your crust, sauce and toppings randomly chosen, surely you will like the outcome.
 To test if the code is working properly run:
 "python -m pytest ./test/test_toppings.py"
 
