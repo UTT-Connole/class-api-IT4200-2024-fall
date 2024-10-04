@@ -4,7 +4,6 @@ import json
 
 @pytest.fixture
 def client():
-    """Create and configure a new app instance for each test."""
     app = create_app()
     app.config['TESTING'] = True
     with app.test_client() as client:
