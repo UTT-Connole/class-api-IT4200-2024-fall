@@ -1,0 +1,17 @@
+name: Bump version
+on:
+  push:
+    branches:
+      - main
+      - semveraction
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Github Tag with semantic versioning
+        id: tag
+        uses: hennejg/github-tag-action@v4.3.1    
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - run: echo "${{ steps.tagging.outputs.new_tag }}"
