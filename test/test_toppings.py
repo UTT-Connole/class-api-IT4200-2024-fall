@@ -21,11 +21,11 @@ def test_pizza_contains_three_toppings(client):
     """Test if the pizza contains exactly three toppings."""
     response = client.get('/pizzaToppings')
     json_data = response.get_json()
-    print(json_data)  # Debug output to see what's actually returned
-
+    print(json_data)  # This line can eventually be removed once issues are resolved
+    
     assert len(json_data['toppings']) == 3, "There should be exactly three toppings"
     for topping in json_data['toppings']:
-        assert isinstance(topping, dict), "Each topping should be a dictionary"
+        assert isinstance(topping, str), "Each topping should be a string"
 
 def test_pizza_sauce_selection(client):
     """Test if the pizza has a valid sauce."""

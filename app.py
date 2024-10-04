@@ -196,7 +196,7 @@ def create_app():
 
         selected_crust = random.choice(crusts)
         selected_sauce = random.choice(sauces)  
-        selected_toppings = random.sample(toppings, 3) 
+        selected_toppings = random.sample(toppings, 3)  # This should correctly choose dictionaries
 
         pizza = {
             "crust": selected_crust,
@@ -205,6 +205,7 @@ def create_app():
         }
 
         return jsonify(pizza)
+
 
     @app.route('/fortune', methods=['GET'])
     def get_fortune():
