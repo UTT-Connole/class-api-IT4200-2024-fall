@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-      - semveraction
+      - semverdal
 jobs:
   build:
     runs-on: ubuntu-latest
