@@ -10,8 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Github Tag with semantic versioning
-        id: tag
+        id: tagging
         uses: hennejg/github-tag-action@v4.3.1    
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          default_bump: patch
+          tag_prefix: ""
+          release_branches: main
+          create_annotated_tag: True
+          dry_run: True
       - run: echo "${{ steps.tagging.outputs.new_tag }}"
