@@ -212,7 +212,7 @@ def create_app():
         response = requests.get(url)
         #Returns error if invalid city is entered
         if response.status_code != 200:
-            return jsonify({"error": "City not found or API error."}), 404
+            return ({"error": "City not found or API error."}), 404
         
         data = response.json()
         weather_data = {
@@ -221,7 +221,7 @@ def create_app():
             "humidity": f"{data['main']['humidity']}%",
             "wind_speed": f"{data['wind']['speed']} mph"
         }
-        return jsonify(weather_data)
+        return (weather_data)
 
     @app.route('/pokefishing', methods=['GET','POST'])
     def fish():

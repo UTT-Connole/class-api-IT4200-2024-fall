@@ -240,6 +240,7 @@ Install "requests" module using "pip install requests" (Sorry about that)
 Pick a city you want live weather in and put it after /weather/ in the URL
 Example: http://127.0.0.1:5000/weather/Seattle
 It should list the current weather conditions of the selected city
+Do NOT comment out the "import requests" statement on app.py or else this endpoint won't work (I'm looking at you Soren).
 
 ## How to use the pokefishing Endpoint
 Go to http://127.0.0.1:5000/pokefishing, then just refresh the page over and over and over again to see all your different catches!
