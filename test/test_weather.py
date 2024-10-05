@@ -1,10 +1,5 @@
+import pytest
 from app import create_app 
-
-def client():
-    app = create_app()
-    app.config['TESTING'] = True
-    with app.test_client() as client:
-        yield client
         
 #def test_weather_content_type(client):
 #    """Test if the weather endpoint returns a response in JSON format"""
