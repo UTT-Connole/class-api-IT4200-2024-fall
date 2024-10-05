@@ -19,4 +19,4 @@ jobs:
           release_branches: main
           create_annotated_tag: True
           dry_run: True
-      - run: echo "${{ steps.tagging.outputs.new_tag }}"
+      # - run: echo "${{ steps.tagging.outputs.new_tag }}"
