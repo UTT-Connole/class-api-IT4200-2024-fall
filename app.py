@@ -295,19 +295,25 @@ def create_app():
             quotes.append(new_quote)  
             return jsonify({"message": "New favorite quote added!", "quote": new_quote}), 201
 
+    @app.route('/howToMakeEndpoint', methods=['GET'])
+    def get_endpoints():
+        endpointSteps = [
+		    {"step 1":" Import Flask "},
+		    {"step 2":" Create app"},
+		    {"step 3":" Define endpoint with @app.route"},
+		    {"step 4":" write the endpoint function"}
+        ]  
+        return jsonify("Follow these steps:"+ str(endpointSteps))
+
+
+
     return app
+
+
 
 app = create_app()
 
-@app.route('/howToMakeEndpoint', methods=['GET'])
-def get_endpoints():
-	endpointSteps = [
-		{"step 1":" Import Flask "},
-		{"step 2":" Create app"},
-		{"step 3":" Define endpoint with @app.route"},
-		{"step 4":" write the endpoint function"}
-    ]
-	return jsonify("Follow these steps:"+ str(endpointSteps))
+
 
 @app.route('/motivation', methods=['GET'])
 def get_motivation():
