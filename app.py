@@ -9,7 +9,7 @@ from endpoints.mtg import mtg_bp
 from endpoints.pizza import pizza_bp
 import random
 import matplotlib
-#import requests   -App wont run with this not commented out.
+import requests
 
 
 def create_app():
