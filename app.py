@@ -180,33 +180,6 @@ def create_app():
             facts = sports_facts
         return jsonify(random.choice(facts))
 
-    @app.route('/pizzaToppings', methods=['GET'])
-    def pizza_toppings():
-        sauces = ["Tomato Sauce", "Alfredo Sauce", "Ranch Sauce"]
-        toppings = [
-            {"topping": "Pepperoni"},
-            {"topping": "Mushrooms"},
-            {"topping": "Sausage"},
-            {"topping": "Bacon"},
-            {"topping": "Extra cheese"},
-            {"topping": "Pineapple"},
-            {"topping": "Spinach"}
-        ]
-        crusts = ["Hand Tossed", "Handmade Pan", "Crunchy Thin Crust"]
-
-        selected_crust = random.choice(crusts)
-        selected_sauce = random.choice(sauces)  
-        selected_toppings = random.sample(toppings, 3)  # This should correctly choose dictionaries
-
-        pizza = {
-            "crust": selected_crust,
-            "sauce": selected_sauce,
-            "toppings": selected_toppings
-        }
-
-        return jsonify(pizza)
-
-
     @app.route('/fortune', methods=['GET'])
     def get_fortune():
         fortunes = [
