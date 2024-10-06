@@ -3,15 +3,20 @@ on:
   push:
     branches:
       - main
-      - semveraction
+      - semverdal
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
       - name: Github Tag with semantic versioning
-        id: tag
+        id: tagging
         uses: hennejg/github-tag-action@v4.3.1    
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-      - run: echo "${{ steps.tagging.outputs.new_tag }}"
+          default_bump: patch
+          tag_prefix: ""
+          release_branches: main
+          create_annotated_tag: True
+          # dry_run: True # For running without pushing the calculated tag
+      # - run: echo "${{ steps.tagging.outputs.new_tag }}" # For testing calculated tag
