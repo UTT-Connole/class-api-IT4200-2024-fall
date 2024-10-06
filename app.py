@@ -9,7 +9,7 @@ from endpoints.mtg import mtg_bp
 from endpoints.pizza import pizza_bp
 import random
 import matplotlib
-#import requests   -App wont run with this not commented out.
+import requests
 
 
 def create_app():
@@ -180,33 +180,6 @@ def create_app():
             facts = sports_facts
         return jsonify(random.choice(facts))
 
-    @app.route('/pizzaToppings', methods=['GET'])
-    def pizza_toppings():
-        sauces = ["Tomato Sauce", "Alfredo Sauce", "Ranch Sauce"]
-        toppings = [
-            {"topping": "Pepperoni"},
-            {"topping": "Mushrooms"},
-            {"topping": "Sausage"},
-            {"topping": "Bacon"},
-            {"topping": "Extra cheese"},
-            {"topping": "Pineapple"},
-            {"topping": "Spinach"}
-        ]
-        crusts = ["Hand Tossed", "Handmade Pan", "Crunchy Thin Crust"]
-
-        selected_crust = random.choice(crusts)
-        selected_sauce = random.choice(sauces)  
-        selected_toppings = random.sample(toppings, 3)  # This should correctly choose dictionaries
-
-        pizza = {
-            "crust": selected_crust,
-            "sauce": selected_sauce,
-            "toppings": selected_toppings
-        }
-
-        return jsonify(pizza)
-
-
     @app.route('/fortune', methods=['GET'])
     def get_fortune():
         fortunes = [
@@ -239,7 +212,7 @@ def create_app():
         response = requests.get(url)
         #Returns error if invalid city is entered
         if response.status_code != 200:
-            return jsonify({"error": "City not found or API error."}), 404
+            return ({"error": "City not found or API error."}), 404
         
         data = response.json()
         weather_data = {
@@ -248,7 +221,7 @@ def create_app():
             "humidity": f"{data['main']['humidity']}%",
             "wind_speed": f"{data['wind']['speed']} mph"
         }
-        return jsonify(weather_data)
+        return (weather_data)
 
     @app.route('/pokefishing', methods=['GET','POST'])
     def fish():
@@ -322,19 +295,25 @@ def create_app():
             quotes.append(new_quote)  
             return jsonify({"message": "New favorite quote added!", "quote": new_quote}), 201
 
+    @app.route('/howToMakeEndpoint', methods=['GET'])
+    def get_endpoints():
+        endpointSteps = [
+		    {"step 1":" Import Flask "},
+		    {"step 2":" Create app"},
+		    {"step 3":" Define endpoint with @app.route"},
+		    {"step 4":" write the endpoint function"}
+        ]  
+        return jsonify("Follow these steps:"+ str(endpointSteps))
+
+
+
     return app
+
+
 
 app = create_app()
 
-@app.route('/howToMakeEndpoint', methods=['GET'])
-def get_endpoints():
-	endpointSteps = [
-		{"step 1":" Import Flask "},
-		{"step 2":" Create app"},
-		{"step 3":" Define endpoint with @app.route"},
-		{"step 4":" write the endpoint function"}
-    ]
-	return jsonify("Follow these steps:"+ str(endpointSteps))
+
 
 @app.route('/motivation', methods=['GET'])
 def get_motivation():
