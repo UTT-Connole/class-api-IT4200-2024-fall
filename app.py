@@ -1,5 +1,12 @@
 from flask import Flask, request, jsonify, render_template
-from binaryconvert import convertToBinary_bp
+from endpoints.marathonfacts import marathonFacts_bp
+from endpoints.binaryconvert import convertToBinary_bp
+from endpoints.dadjoke import dadjoke_bp
+from endpoints.brainrot import brainrot_bp
+from endpoints.motivation import motivation_bp
+from endpoints.calc import calc_bp
+from endpoints.mtg import mtg_bp
+from endpoints.pizza import pizza_bp
 import random
 import matplotlib
 import requests
@@ -8,38 +15,52 @@ import requests
 def create_app():
     app = Flask(__name__)
 
+    @app.route('/generateName', methods=['GET'])
+    def generate_name():
+        names = ["Eve", "Jack", "Liam", "Mia"]
+        name = random.choice(names)
+        return jsonify({"name": name})
+
+    @app.route('/basketballFacts', methods=['GET'])
+    def get_basketball_facts():
+        basketball_facts = [
+            "Michael Jordan has won six NBA championships.",
+            "Kareem Abdul-Jabbar is the all-time leading scorer in NBA history.",
+            "The NBA was founded in New York City on June 6, 1946.",
+            "Wilt Chamberlain scored 100 points in a single game.",
+            "The Boston Celtics have the most NBA titles with 17 championships."
+        ]
+        selected_fact = random.choice(basketball_facts)
+        return jsonify({"basketball_fact": selected_fact})
+    
+    @app.route('/greet', methods=['GET'])
+    def greet():
+        return jsonify({"message": "Hello, Welcome to the API!"})
+
+    @app.route('/greet/<name>', methods=['GET'])
+    def greet_with_name(name):
+        return jsonify({"message": f"Hello, {name}!"})
+
     @app.route('/')
     def hello_world():
         return "Hello World"
     
+    app.register_blueprint(marathonFacts_bp)
+    
     app.register_blueprint(convertToBinary_bp)
     
-    @app.route('/dadjoke', methods=['GET'])
-    def dad_joke():
-        jokes = [
-        "Why don't skeletons fight each other? They don't have the guts.",
-        "What do you call fake spaghetti? An impasta!",
-        "Why did the scarecrow win an award? Because he was outstanding in his field!",
-        "I would avoid the sushi if I was you. It’s a little fishy.",
-        "Today, my son asked 'Can I have a bookmark?' and I burst into tears. 11 years old and he still doesn't know my name is Brian.",
-        "I went to the aquarium this weekend, but I didn’t stay long. There’s something fishy about that place.",
-        "I gave my handyman a to-do list, but he only did jobs 1, 3, and 5. Turns out he only does odd jobs.",
-        "I’m reading a horror story in braille. Something bad is going to happen, I can just feel it."
-        ]
-        joke = random.choice(jokes)
-        joke = joke.replace("\u2019", "'") 
-        return jsonify({"joke": joke})
+    app.register_blueprint(dadjoke_bp)
 
-    @app.route('/brainrot', methods=['GET'])
-    def brainrot():
-        words = [
-            "Sigma", "Skibidi", "Kai Cenat", "Erm what the Sigma", "Rizz", 
-            "Gyatt", "Sussy Sigma", "Sussy Imposter", "Griddy on em"
-        ]
-        selected_word = random.choice(words)
-        # Render the HTML template with the selected word
-        return render_template('brainrot.html', brainrot_word=selected_word) 
+    app.register_blueprint(brainrot_bp)
+
+    app.register_blueprint(motivation_bp)
     
+    app.register_blueprint(calc_bp)
+
+    app.register_blueprint(mtg_bp)
+
+    app.register_blueprint(pizza_bp)
+
     @app.route('/quotes', methods=['GET'])
     def fav_quotes():
         quotes = [
@@ -59,55 +80,6 @@ def create_app():
         ]
         quote = random.choice(quotes)
         return jsonify(quote)
-
-    @app.route('/calc', methods=['GET','POST'])
-    def calc_main():
-        x = request.args.get('x')
-        y = request.args.get('y')
-        op = request.args.get('op')
-        
-        if not (x and y and op):
-            return "Invalid Input"
-        
-        try:
-            x = int(x)
-            y = int(y)
-        except ValueError:
-            return "Invalid Input"
-        
-        operations = {
-            'add': x + y,
-            'subtract': x - y,
-            'multiply': x * y,
-            'divide': x / y if y != 0 else "You cannot divide by 0"
-        }
-        
-        result = operations.get(op, "You might have spelled something wrong or there is not the option. The current options are: add, subtract, multiply, divide")
-        
-        return str(result)
-    
-    @app.route('/twoManaCombos', methods=['GET'])
-    def random_combo():
-        two_m =[{ "name": "Azorius", "color_1": "white", "color_2": "blue"},
-                { "name": "Boros", "color_1": "red", "color_2": "white"},
-                { "name": "Dimir", "color_1": "blue", "color_2": "black"},
-                { "name": "Golgari", "color_1": "black", "color_2": "green"},
-                { "name": "Gruul", "color_1": "red", "color_2": "green"},
-                { "name": "Izzet", "color_1": "blue", "color_2": "red"},
-                { "name": "Orzhov", "color_1": "white", "color_2": "black"},
-                { "name": "Rakdos", "color_1": "black", "color_2": "red"},
-                { "name": "Selesnya", "color_1": "white", "color_2": "green"},
-                { "name": "Simic", "color_1": "blue", "color_2": "black"}]
-        color = request.args.get('color')
-        if color:
-            filtered_combos = [combo for combo in two_m if color.lower() in [combo['color_1'].lower(), combo['color_2'].lower()]]
-            if not filtered_combos:
-                return jsonify({"error": "No combinations found for the given color"}), 404
-            
-            r = random.choice(filtered_combos)
-        else:
-            r = random.choice(two_m)
-        return jsonify(r)
     
     @app.route('/travel', methods=['GET','POST'])
     def travel():
@@ -133,18 +105,50 @@ def create_app():
     
     @app.route('/factorial', methods=['GET'])
     def factorial():
-        n = request.args.get('n', type=int)
-        if n is None:
+        n = request.args.getlist('n', type=int)
+
+        if not n:
             return "error", 400
-        if n < 0:
-            return "error", 400
-        elif n == 0 or n == 1:
-            return jsonify(result=1), 200
-        else:
-            result = 1
-            for i in range (2, n + 1):
-                result *= i
-            return jsonify(result=result), 200
+        
+        if len(n) == 1:
+            n = n[0]
+            if n < 0:
+                return "error", 400
+            elif n == 0 or n ==1:
+                return jsonify(result=1), 200
+            else:
+                result = 1
+                for i in range(2, n + 1):
+                    result *= i
+                return jsonify(result=result), 200
+            
+        def calculate_factorial(num):
+            if num < 0:
+                return "error"
+            elif num == 0 or num ==1:
+                return 1
+            else:
+                result = 1
+                for i in range(2, num + 1):
+                    result *= i
+                return result
+        resultList = []
+        for num in n:
+            result = calculate_factorial(num)
+            if result == "error":
+                return f"error for {num}", 400
+            resultList.append(result)
+
+        return jsonify(result=resultList), 200
+        
+    @app.route('/power', methods=['GET'])
+    def power():
+        base = request.args.get('base', type=int)
+        exp = request.args.get('exp', type=int)
+        if base is None or exp is None:
+            return "Invalid Input", 400
+        result = base ** exp
+        return jsonify(result=result), 200
         
     @app.route('/tennis_fact')
     def tennis_fact():
@@ -164,40 +168,17 @@ def create_app():
     @app.route('/sports_fact')
     def sports_fact():
         sports_facts = [
-            "Basketball was invented in 1891 by Dr. James Naismith.",
-            "The first modern Olympic Games were held in Athens in 1896.",
-            "Soccer is the most popular sport in the world.",
-            "Michael Phelps holds the record for the most Olympic gold medals.",
-            "The Super Bowl is the most-watched annual sporting event."
+            {"fact": "Basketball was invented in 1891 by Dr. James Naismith.", "category": "history"},
+            {"fact": "The first modern Olympic Games were held in Athens in 1896.", "category": "history"},
+            {"fact": "Soccer is the most popular sport in the world.", "category": "popularity"},
+            {"fact": "Michael Phelps holds the record for the most Olympic gold medals.", "category": "achievement"},
+            {"fact": "The Super Bowl is the most-watched annual sporting event.", "category": "popularity"}
         ]
-        fact = random.choice(sports_facts)
-        return jsonify({"fact": fact})
-
-    @app.route('/pizzaToppings', methods=['GET'])
-    def pizza_toppings():
-        sauces = ["Tomato Sauce", "Alfredo Sauce", "Ranch Sauce"]
-        toppings = [
-            {"topping": "Pepperoni"},
-            {"topping": "Mushrooms"},
-            {"topping": "Sausage"},
-            {"topping": "Bacon"},
-            {"topping": "Extra cheese"},
-            {"topping": "Pineapple"},
-            {"topping": "Spinach"}
-        ]
-        crusts = ["Hand Tossed", "Handmade Pan", "Crunchy Thin Crust"]
-
-        selected_crust = random.choice(crusts)
-        selected_sauce = random.choice(sauces)  
-        selected_toppings = random.sample(toppings, 3) 
-
-        pizza = {
-            "crust": selected_crust,
-            "sauce": selected_sauce,
-            "toppings": selected_toppings
-        }
-
-        return jsonify(pizza)
+        category = request.args.get('category')
+        facts = [fact for fact in sports_facts if fact['category'] == category] if category else sports_facts
+        if not facts:
+            facts = sports_facts
+        return jsonify(random.choice(facts))
 
     @app.route('/fortune', methods=['GET'])
     def get_fortune():
@@ -231,7 +212,7 @@ def create_app():
         response = requests.get(url)
         #Returns error if invalid city is entered
         if response.status_code != 200:
-            return jsonify({"error": "City not found or API error."}), 404
+            return ({"error": "City not found or API error."}), 404
         
         data = response.json()
         weather_data = {
@@ -240,7 +221,28 @@ def create_app():
             "humidity": f"{data['main']['humidity']}%",
             "wind_speed": f"{data['wind']['speed']} mph"
         }
-        return jsonify(weather_data)
+        return (weather_data)
+
+    @app.route('/pokefishing', methods=['GET','POST'])
+    def fish():
+        magikarp = [
+            "a regular ol' Magikarp",
+            "a calico pattern Magikarp",
+            "a orange two-tone pattern Magikarp",
+            "a pink dapple pattern Magikarp",
+            "a gray diamond pattern Magikarp",
+            "a purple patches pattern Magikarp",
+            "a apricot tiger pattern Magikarp",
+            "a brown stripes pattern Magikarp",
+            "a orange forehead pattern Magikarp",
+            "a blue raindrops pattern Magikarp",
+            "a shiny Magikarp",
+            "a... Oh no, it's a Gyarados!!",
+            "a Goldeen and it's the biggest you've ever seen",
+            "nothing... But you did see a Mudkip riding on a Lotad"
+            ]
+        caught = random.choice(magikarp)
+        return jsonify({"You caught": caught + "!"})
 
     @app.route('/fruitInfo', methods=['GET'])
     def fruit_info():
@@ -265,90 +267,53 @@ def create_app():
         else:
             return jsonify({"error": "Fruit not found. Please try apple, banana, lemon, orange, grape, or lime."}), 404
 
+    @app.route('/randomFact', methods=['GET'])
+    def random_fact():
+        facts = [
+            {"fact": "Honey never spoils."},
+            {"fact": "Octopuses have three hearts."},
+            {"fact": "Bananas are berries, but strawberries are not."},
+            {"fact": "A day on Venus is longer than a year on Venus."},
+            {"fact": "Sharks have been around longer than trees."},
+            {"fact": "The ocean covers 71 percent of the Earth's surface and the average depth is 12,100 feet."}
+        ]
+        selected_fact = random.choice(facts)
+        return jsonify(selected_fact)
+
+    @app.route('/favoritequote', methods=['GET', 'POST'])
+    def get_favorite_quote():
+        favorite_quote = {
+         "quote": "The only way to do great work is to love what you do.",
+         "author": "Steve Jobs"
+        }
+        quotes = [favorite_quote]
+        if request.method == 'GET':
+            return jsonify(favorite_quote)  
+
+        elif request.method == 'POST':
+            new_quote = request.json 
+            quotes.append(new_quote)  
+            return jsonify({"message": "New favorite quote added!", "quote": new_quote}), 201
+
+    @app.route('/howToMakeEndpoint', methods=['GET'])
+    def get_endpoints():
+        endpointSteps = [
+		    {"step 1":" Import Flask "},
+		    {"step 2":" Create app"},
+		    {"step 3":" Define endpoint with @app.route"},
+		    {"step 4":" write the endpoint function"}
+        ]  
+        return jsonify("Follow these steps:"+ str(endpointSteps))
+
+
+
     return app
+
+
 
 app = create_app()
 
 
-
-
-
-@app.route('/randomName', methods=['GET'])
-def random_name():
-    names = ["Alice", "Bob", "Charlie", "Diana"]
-    name = random.choice(names)
-    return jsonify({"name": name})
-
-
-@app.route('/marathonFacts', methods=['GET'])
-def marathon_facts():
-    facts = [
-        {"fact": "The first marathon was in 1896 during the Athens Olympics.", "category": "history"},
-        {"fact": "The official marathon distance is 26.2 miles (42.195 km).", "category": "distance"},
-        {"fact": "The fastest marathon time for men is 2:01:39.", "category": "records"},
-        {"fact": "The fastest marathon time for women is 2:14:04.", "category": "records"},
-        {"fact": "Eliud Kipchoge ran a marathon in under 2 hours in a special event.", "category": "milestones"},
-        {"fact": "Over 50,000 runners finish the New York City Marathon each year.", "category": "participation"}
-    ]
-    
-    random_fact = random.choice(facts)
-    return jsonify(random_fact)
-
-@app.route('/favoritequote', methods=['GET'])
-def get_favorite_quote():
-    favorite_quote = {
-        "quote": "The only way to do great work is to love what you do.",
-        "author": "Steve Jobs"
-    }
-    return jsonify(favorite_quote)
-
-
-@app.route('/randomFact', methods=['GET'])
-def random_fact():
-    facts = [
-        {"fact": "Honey never spoils."},
-        {"fact": "Octopuses have three hearts."},
-        {"fact": "Bananas are berries, but strawberries are not."},
-        {"fact": "A day on Venus is longer than a year on Venus."},
-        {"fact": "Sharks have been around longer than trees."},
-        {"fact": "The ocean covers 71 percent of the Earth's surface and the average depth is 12,100 feet."}
-    ]
-    selected_fact = random.choice(facts)
-    return jsonify(selected_fact)
-
-@app.route('/pokefishing', methods=['GET','POST'])
-def fish():
-    magikarp = [
-        "a regular ol' Magikarp",
-        "a calico pattern Magikarp",
-        "a orange two-tone pattern Magikarp",
-        "a pink dapple pattern Magikarp",
-        "a gray diamond pattern Magikarp",
-        "a purple patches pattern Magikarp",
-        "a apricot tiger pattern Magikarp",
-        "a brown stripes pattern Magikarp",
-        "a orange forehead pattern Magikarp",
-        "a blue raindrops pattern Magikarp",
-        "a shiny Magikarp",
-        "a... Oh no, it's a Gyarados!!",
-        "a Goldeen and it's the biggest you've ever seen",
-        "nothing... But you did see a Mudkip riding on a Lotad"
-        ]
-    caught = random.choice(magikarp)
-    return jsonify({"You caught": caught + "!"})
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
-@app.route('/howToMakeEndpoint', methods=['GET'])
-def get_endpoints():
-	endpointSteps = [
-		{"step 1":" Import Flask "},
-		{"step 2":" Create app"},
-		{"step 3":" Define endpoint with @app.route"},
-		{"step 4":" write the endpoint function"}
-    ]
-	return jsonify("Follow these steps:"+ str(endpointSteps))
 
 @app.route('/motivation', methods=['GET'])
 def get_motivation():
