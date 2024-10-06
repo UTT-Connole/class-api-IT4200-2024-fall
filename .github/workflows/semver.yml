@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-      - semverdal
+      - semver2
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,4 +19,3 @@ jobs:
           release_branches: main
           create_annotated_tag: True
           # dry_run: True # For running without pushing the calculated tag
-      # - run: echo "${{ steps.tagging.outputs.new_tag }}" # For testing calculated tag
