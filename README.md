@@ -19,7 +19,7 @@ We will be using this repo to create an API for our entire class. We will use Fl
 * Brayden Connole
 
 ## Commit instructions for developers
-A GitHub action has been created for automatic semantic version tagging using this repository: https://github.com/marketplace/actions/github-tag-with-semantic-versioning. It uses https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines as commit message guidelines.
+A GitHub action has been created for automatic semantic version tagging using this repository: [Github tag with sematic versioning](https://github.com/marketplace/actions/github-tag-with-semantic-versioning). It uses [Angular Commit Message Conventions](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines) as commit message guidelines.
 
 Here is an example of the release type that will be done based on a commit messages:
 
