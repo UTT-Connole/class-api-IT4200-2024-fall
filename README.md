@@ -206,22 +206,29 @@ This will start the server. From there navigate to the url and your desired endp
 
 ## Contributors
 
-* Andres
-* Brayden Connole
-* Christian Bassilios
-* Dallin Hougaard
-* Donavan Franco
-* Jace Barrett
-* Josh Beckstrand
-* Keaton Hall
 * Laura Coulome
-* Morgan Andrus
 * Riker Evans
+* Jace Barrett
+* Donavan Franco
+* Christian Bassilios
 * Soren Bybee
+* Keaton Hall
+* Josh Beckstrand
+* Dallin Hougaard
+* Andres
 * Travis Gunter
+* Morgan Andrus
 * Yomi Odubiyi
+* Brayden Connole
 
 ## About The Contributors
+
+```bash
+#Soren Bybee: 
+  Interests: Hiking, Rock Climbing, Mountain Biking, and Playing Video Games.
+    - Add me up on Discord(sorenbybee) if your looking to play Rainbow Six Siege on PC.
+    - If you need someone to approve your pull requests here is my number: (530-363-6531)
+```
 
 ```bash
 #Soren Bybee: 
