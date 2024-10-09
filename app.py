@@ -16,6 +16,41 @@ import requests
 def create_app():
     app = Flask(__name__)
 
+    @app.route('/basketballFacts', methods=['GET'])
+    def get_basketball_facts():
+        basketball_facts = [
+            "Michael Jordan has won six NBA championships.",
+            "Kareem Abdul-Jabbar is the all-time leading scorer in NBA history.",
+            "The NBA was founded in New York City on June 6, 1946.",
+            "Wilt Chamberlain scored 100 points in a single game.",
+            "The Boston Celtics have the most NBA titles with 17 championships."
+        ]
+        selected_fact = random.choice(basketball_facts)
+        return jsonify({"basketball_fact": selected_fact})
+    
+    @app.route('/wrestling_fact', methods=['GET'])
+    def wrestling_fact():
+        wrestling_facts = [
+            "Hulk Hogan won his first WWF Championship in 1984.",
+            "The Undertaker has a 25-2 WrestleMania record.",
+            "Stone Cold Steve Austin's 'Austin 3:16' speech revolutionized wrestling promos.",
+            "Ric Flair is a 16-time world champion.",
+            "Shawn Michaels is known as 'Mr. WrestleMania' for his outstanding performances on the big stage."
+        ]
+        fact = random.choice(wrestling_facts)
+        return jsonify({"fact": fact})
+
+    @app.route('/swimming_fact', methods=['GET'])
+    def swimming_fact():
+        facts = [
+            "Swimming is one of the best aerobic exercises.",
+            "Michael Phelps has won 23 Olympic gold medals.",
+            "The front crawl is the fastest swimming stroke.",
+            "Humans have been swimming for thousands of years.",
+            "Swimming burns more calories than running."
+        ]
+        return jsonify({"fact": facts[0]})
+
     @app.route('/generateName', methods=['GET'])
     def generate_name():
         names = ["Eve", "Jack", "Liam", "Mia"]

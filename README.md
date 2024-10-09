@@ -46,6 +46,93 @@ python3 -m flask run
 ``` 
 This will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
 
+## Factorial Endpoint
+Go to http://127.0.0.1:5000/factorial?n=5
+But replace the value of n with whatever number you want to see the factorial of.
+
+## Power Endpoint
+Go to http://127.0.0.1:5000/power?base=2&exp=4
+But replace the values of base and exp with whatever numbers you want.
+
+## How to use fruit_info Endpoint
+Navigate to http://127.0.0.1:5000/fruitInfo?fruit=apple
+Replace "apple" from the end of the url with the fruit of your choice.
+If the fruit isn't available an error message will come up and you will be given a list of options.
+Choose a fruit from the options given.
+
+## How to Use the Calculator Endpoint
+
+Use the following template to add, subtract, multiply, or divide two numbers: 
+`http://127.0.0.1:5000/calc?x=<number>&y=<number>&op=<operator>`
+- Replace `<number>` with the numbers you want to use.
+- Replace `<operator>` with one of the following operations: `add`, `subtract`, `multiply`, `divide`.
+
+### Important Notes:
+- The operators must be spelled exactly as shown above, or you will receive an error.
+- If any of the variables (`x`, `y`, or `op`) are missing, you will receive an error.
+
+## How to use the motivation Endpoint
+The /motivation endpoint provides a random motivational quote whenever accessed via a GET request. When a user sends a request to this endpoint, the app responds with one of five pre-defined motivational quotes, returned in JSON format. This allows users to easily retrieve an encouraging message with every request, making it useful for applications or websites where inspiration or daily motivation is desired. Each request will randomly select and serve one quote from the list.
+
+## how to use get motivation
+The /motivation endpoint provides a random motivational quote whenever accessed via a GET request. When a user sends a request to this endpoint, the app responds with one of five pre-defined motivational quotes, returned in JSON format. This allows users to easily retrieve an encouraging message with every request, making it useful for applications or websites where inspiration or daily motivation is desired. Each request will randomly select and serve one quote from the list.
+
+## How to use twoManaCombo Endpoint
+Go to http://127.0.0.1:5000/twoManaCombos?color=your_color. Specifiy which color you want included in your deck by replacing it with your_color. If you don't want to specify, you can leave it blank. Then, get the combo name, and start building your next MTG deck! ⚪🔵⚫🔴🟢
+
+## How to get to the stoic quotes Endpoint
+Go to http://127.0.0.1:5000/quotes for a good random stoic quotes from Plato and others.
+
+to test python3 -m unittest test_quotes.py 
+
+## How to use pizzaToppings Endpoint
+Go to http://127.0.0.1:5000/pizzaToppings to finally decide what sauce and toppings to put on your pizza 🍕!
+To test if the code is working properly run:
+"python -m pytest ./test/test_toppings.py"
+
+## How to use Dad Jokes Endpoint
+Go to http://127.0.0.1:5000/dadjoke to laugh so hard you throw up! Now with even more hilarious Dad jokes!
+To run tests to verify functionality of the dadjokes endpoint enter "python -m pytest ./test/test_dadjoke.py".
+
+## How to use the Travel Randomizer Endpoint
+Go to http://127.0.0.1:5000/travel to be given a randomly chosen travel destination! 
+This app will output a popular travel destination in "city, country" JSON format.
+To test functionality, run this script:
+python3 -m pytest ./test/test_travel.py
+
+## Facts API
+This Flask-based API provides random facts about swimming and wrestling.
+
+Endpoints
+Swimming Fact: GET /swimming_fact
+Returns a random swimming fact.
+Wrestling Fact: GET /wrestling_fact
+Returns a random wrestling fact.
+
+
+
+## How to use Marathon Facts Endpoint
+Go to http://127.0.0.1:5000/marathonFacts to learn a random fact about marathons! 
+Use the template to return a hex code of the color you want "http://127.0.0.1:5000/color?color=blue"
+Replace the "blue" at the end with any color of your choosing.
+If the color doesn't exist in the library, you will get an error.
+
+### /greet
+- **Method:** GET
+- **Description:** Returns a welcome message.
+- **Example Response:**
+  ```json
+  {
+    "message": "Hello, Welcome to the API!"
+  }
+
+## How to use the Quotes Endpoint
+
+Open up the url to http://127.0.0.1:5000/quotes
+Start reading people's favorite quotes!
+
+## How to Use the Favorite Quote Endpoint
+=======
 ### Available Endpoints
 
 - **Basketball Facts Endpoint**
@@ -222,6 +309,14 @@ This will start the server. From there navigate to the url and your desired endp
 * Brayden Connole
 
 ## About The Contributors
+
+
+## how to use basketball facts
+This Flask-based API provides random basketball facts through a simple GET endpoint, returning a JSON response with each request. It includes unit tests to ensure the endpoint functions correctly, providing a reliable source of basketball trivia.
+
+## How to use the Pokefishing Endpoint
+Go to http://127.0.0.1:5000/pokefishing to catch a Magikarp!
+
 
 ```bash
 #Soren Bybee: 
