@@ -71,6 +71,11 @@ def create_app():
         ]
         quote = random.choice(quotes)
         return jsonify(quote)
+    @app.route('/animalGuesser', methods=['GET'])
+    def animal_guesser():
+        animals = ["lion", "tiger", "elephant", "giraffe", "zebra", "panda", "koala"]
+        random_animal = random.choice(animals)
+        return jsonify({"animal": random_animal})
     
     @app.route('/travel', methods=['GET','POST'])
     def travel():
@@ -271,6 +276,10 @@ def create_app():
     return app
 
 
+    
+
+
+
 
 app = create_app()
 
@@ -294,5 +303,7 @@ def get_items():
     if not items:
         return jsonify({'message': 'No items found'}), 404
     return jsonify([item.serialize() for item in items]), 200
+
+
 
 # we built this brick by brick and we will never stop
