@@ -230,7 +230,6 @@ This will start the server. From there navigate to the url and your desired endp
     - If you need someone to approve your pull requests here is my number: (530-363-6531)
 ```
 
-
 ## Welcome to The IT4200 Art Gallery!
 
 
