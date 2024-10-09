@@ -217,7 +217,15 @@ Go to http://127.0.0.1:5000/pokefishing to catch a Magikarp!
 Go to http://127.0.0.1:5000/brainrot to add a new word to your vocabulary!
 
 ## How to use the convertToBinary Endpoint
-Go to http://127.0.0.1:5000/convertToBinary?num=# and replace the # with any non-negative whole number! Don't even think about putting in floats, strings, or blanks. I have tested all of those cases and you will get appropriate responses for each!
+This endpoint can convert any Decimal number into Binary and vice-versa!
+
+Go to http://127.0.0.1:5000/convertToBinary?num=#&type=decimal and replace the # with any non-negative whole number! 
+
+or
+
+Go to http://127.0.0.1:5000/convertToBinary?num=#&type=binary and replace the # with any binary number!
+
+Don't even think about putting in floats, strings, or blanks. I have tested all of those cases and you will get appropriate responses for each!
 
 ## How to use the live weather endpoint
 Install "requests" module using "pip install requests" (Sorry about that)
