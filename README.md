@@ -95,6 +95,11 @@ This will start the server. From there navigate to the url and your desired endp
   - **Description**: Retrieve a favorite quote. Update: You can add your own favorite quote now too!!
   - **Test File**: test_favorite_quote.py
 
+- **AnimalEndpoint**
+  - **Endpoint**: `GET /animalGuesser`
+  - **Description**: The Animal Guesser API provides a simple way to randomly guess an animal from a predefined list. 
+  - **Test File**: test_animal.py
+
 - **Fortune Cookie Endpoint**
   - **Endpoint**: `GET /fortune`
   - **Description**: Returns a random fortune in JSON format.
