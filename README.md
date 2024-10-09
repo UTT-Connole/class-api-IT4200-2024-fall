@@ -101,6 +101,17 @@ This app will output a popular travel destination in "city, country" JSON format
 To test functionality, run this script:
 python3 -m pytest ./test/test_travel.py
 
+## Facts API
+This Flask-based API provides random facts about swimming and wrestling.
+
+Endpoints
+Swimming Fact: GET /swimming_fact
+Returns a random swimming fact.
+Wrestling Fact: GET /wrestling_fact
+Returns a random wrestling fact.
+
+
+
 ## How to use Marathon Facts Endpoint
 Go to http://127.0.0.1:5000/marathonFacts to learn a random fact about marathons! 
 Use the template to return a hex code of the color you want "http://127.0.0.1:5000/color?color=blue"
