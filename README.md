@@ -201,20 +201,20 @@ This will start the server. From there navigate to the url and your desired endp
 
 ## Contributors
 
-* Laura Coulome
-* Riker Evans
-* Jace Barrett
-* Donavan Franco
-* Christian Bassilios
-* Soren Bybee
-* Keaton Hall
-* Josh Beckstrand
-* Dallin Hougaard
 * Andres
-* Travis Gunter
-* Morgan Andrus
-* Yomi Odubiyi
 * Brayden Connole
+* Christian Bassilios
+* Dallin Hougaard
+* Donavan Franco
+* Jace Barrett
+* Josh Beckstrand
+* Keaton Hall
+* Laura Coulome
+* Morgan Andrus
+* Soren Bybee
+* Travis Gunter
+* Yomi Odubiyi
+* Riker Evans
 
 ## About The Contributors
 
