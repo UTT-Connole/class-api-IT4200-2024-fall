@@ -306,34 +306,30 @@ def create_app():
         ]  
         return jsonify("Follow these steps:"+ str(endpointSteps))
 
-
+    @app.route('/motivation', methods=['GET'])
+    def get_motivation():
+        motivational_quotes = [
+            "The only way to do great work is to love what you do.",
+            "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+            "Believe you can and you're halfway there.",
+            "Act as if what you do makes a difference. It does.",
+            "The harder you work for something, the greater you’ll feel when you achieve it."
+        ]
+        selected_quote = random.choice(motivational_quotes)
+        return jsonify({"motivational_quote": selected_quote})
+    
+    @app.route('/items', methods=['GET'])
+    def get_items():
+        min_price = request.args.get('min_price', default=0, type=int)
+        items = Item.query.filter(Item.price >= min_price).all()
+        if not items:
+            return jsonify({'message': 'No items found'}), 404
+        return jsonify([item.serialize() for item in items]), 200
 
     return app
 
 
 app = create_app()
-
-
-
-@app.route('/motivation', methods=['GET'])
-def get_motivation():
-    motivational_quotes = [
-        "The only way to do great work is to love what you do.",
-        "Success is not final, failure is not fatal: It is the courage to continue that counts.",
-        "Believe you can and you're halfway there.",
-        "Act as if what you do makes a difference. It does.",
-        "The harder you work for something, the greater you’ll feel when you achieve it."
-    ]
-    selected_quote = random.choice(motivational_quotes)
-    return jsonify({"motivational_quote": selected_quote})
-@app.route('/items', methods=['GET'])
-def get_items():
-    min_price = request.args.get('min_price', default=0, type=int)
-    items = Item.query.filter(Item.price >= min_price).all()
-    if not items:
-        return jsonify({'message': 'No items found'}), 404
-    return jsonify([item.serialize() for item in items]), 200
-
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000, debug=True)

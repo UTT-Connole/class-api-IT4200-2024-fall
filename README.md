@@ -207,7 +207,7 @@ Start reading people's favorite quotes!
 - **Get Items Endpoint**
   - **Endpoint**: `GET /items`
   - **Description**: Returns a list of items. Optionally filter items by a minimum price. Query parameter `min_price` filters items that have a price greater than or equal to the specified value (default is 0).
-  - **Test File**: test_get_items.py
+  - **Test File**: test_get_items.py test_items.py
 
 - **Greeting Endpoint**
   - **Endpoint**: `GET /greet`
@@ -243,7 +243,7 @@ Start reading people's favorite quotes!
 - **Motivation Endpoint**
   - **Endpoint**: `GET /motivation`
   - **Description**: The /motivation endpoint provides a random motivational quote whenever accessed via a GET request. When a user sends a request to this endpoint, the app responds with one of five pre-defined motivational quotes, returned in JSON format.
-  - **Test File**: test_motivation.py
+  - **Test File**: test_motivation.py test_get_motivation.py
 
 - **Pizza Toppings Endpoint**
   - **Endpoint**: `GET /pizzaToppings`
@@ -289,6 +289,7 @@ Start reading people's favorite quotes!
   - **Endpoint**: `GET /twoManaCombos?color=your_color`
   - **Description**: Go to http://127.0.0.1:5000/twoManaCombos?color=your_color. Specify which color you want included in your deck by replacing it with your_color. ⚪🔵⚫🔴🟢
   - **Test File**: test_twomana.py
+
 
 
 ## Contributors
