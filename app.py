@@ -106,11 +106,21 @@ def create_app():
         ]
         quote = random.choice(quotes)
         return jsonify(quote)
+    
     @app.route('/animalGuesser', methods=['GET'])
     def animal_guesser():
         animals = ["lion", "tiger", "elephant", "giraffe", "zebra", "panda", "koala"]
         random_animal = random.choice(animals)
-        return jsonify({"animal": random_animal})
+
+        guess = request.args.get('guess', '').lower()
+
+        if guess == random_animal:
+            return jsonify({"result": "Correct! You guessed the animal!"}), 200
+        elif guess:
+            hint = f"The animal starts with '{random_animal[0]}'. Try again!"
+            return jsonify({"result": "Incorrect guess", "hint": hint}), 200
+        else:
+            return jsonify({"animal": random_animal}), 200
     
     @app.route('/travel', methods=['GET','POST'])
     def travel():
