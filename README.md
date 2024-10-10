@@ -50,7 +50,7 @@ This will start the server. From there navigate to the url and your desired endp
 
 - **AnimalEndpoint**
   - **Endpoint**: `GET /animalGuesser`
-  - **Description**: The Animal Guesser API provides a simple way to randomly guess an animal from a predefined list. 
+  - **Description**: The Animal Guesser will randomly guess an animal from a predefined list. If the user makes a guess, it checks the guess against the selected animal. If the guess is correct, it returns a success message. If the guess is incorrect, it returns a message with a hint that reveals the first letter of the animal. EX: /animalGuesser?guess=lion
   - **Test File**: test_animal.py
 
 - **Basketball Facts Endpoint**
