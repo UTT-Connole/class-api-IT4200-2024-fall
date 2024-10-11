@@ -81,8 +81,15 @@ This will start the server. From there navigate to the url and your desired endp
   - **Test File**: test_color_hexifier.py
 
 - **Convert To Binary Endpoint**
-  - **Endpoint**: `GET /convertToBinary?num=#`
-  - **Description**: Go to http://127.0.0.1:5000/convertToBinary?num=# and replace the # with any non-negative whole number! Don't even think about putting in floats, strings, or blanks. I have tested all of those cases and you will get appropriate responses for each!
+  - **Endpoint**: `GET /convertToBinary?num=#&type=decimal`
+  - **Description**: Go to http://127.0.0.1:5000/convertToBinary?num=#&type=decimal to get the binary convertion of any non-negative whole number!
+   Don't even think about putting in floats, strings, or blanks. I have tested all of those cases and you will get appropriate responses for each!
+  - **Test File**: test_binaryconvert.py
+
+- **Convert To Decimal Endpoint**
+  - **Endpoint**: `GET /convertToBinary?num=#&type=binary`
+  - **Description**: Go to http://127.0.0.1:5000/convertToBinary?num=#&type=binary to get the decimal number of any binary number!
+   Don't even think about putting in floats, strings, or blanks. I have tested all of those cases and you will get appropriate responses for each!
   - **Test File**: test_binaryconvert.py
 
 - **Dad Jokes Endpoint**
@@ -145,7 +152,7 @@ This will start the server. From there navigate to the url and your desired endp
 
 - **Marathon Facts Endpoint**
   - **Endpoint**: `GET /marathonFacts`
-  - **Description**: Learn a random fact about marathons!
+  - **Description**: Learn a random fact about marathons! Now returns in plain text!
   - **Test File**: test_marathonfacts.py
 
 - **MTG Mana Endpoint**
@@ -206,20 +213,20 @@ This will start the server. From there navigate to the url and your desired endp
 
 ## Contributors
 
-* Andres
-* Brayden Connole
-* Christian Bassilios
-* Dallin Hougaard
-* Donavan Franco
-* Jace Barrett
-* Josh Beckstrand
-* Keaton Hall
 * Laura Coulome
-* Morgan Andrus
 * Riker Evans
+* Jace Barrett
+* Donavan Franco
+* Christian Bassilios
 * Soren Bybee
+* Keaton Hall
+* Josh Beckstrand
+* Dallin Hougaard
+* Andres
 * Travis Gunter
+* Morgan Andrus
 * Yomi Odubiyi
+* Brayden Connole
 
 ## About The Contributors
 
@@ -230,6 +237,12 @@ This will start the server. From there navigate to the url and your desired endp
     - If you need someone to approve your pull requests here is my number: (530-363-6531)
 ```
 
+```bash
+#Soren Bybee: 
+  Interests: Hiking, Rock Climbing, Mountain Biking, and Playing Video Games.
+    - Add me up on Discord(sorenbybee) if your looking to play Rainbow Six Siege on PC.
+    - If you need someone to approve your pull requests here is my number: (530-363-6531)
+```
 
 ## Welcome to The IT4200 Art Gallery!
 

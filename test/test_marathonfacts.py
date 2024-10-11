@@ -18,7 +18,16 @@ def test_data_pull(client):
     response = client.get('/marathonFacts')
     
     # Parse the JSON response
-    response_data = response.get_json()
+    response_data = response.data.decode('utf-8')  # Flask returns the response as bytes, so decode to string
     
-    # Check if the response contains a valid fact from the predefined list
-    assert response_data in facts
+    # Ensure the response contains "Category:" and "Fact:"
+    assert "Category:" in response_data
+    assert "Fact:" in response_data
+    
+    # Check that one of the facts and categories from the list is in the response
+    valid_responses = [
+        "Category: " + fact["category"] + "<br><br>" + "Fact: " + fact["fact"]
+        for fact in facts
+    ]
+    
+    assert response_data in valid_responses
