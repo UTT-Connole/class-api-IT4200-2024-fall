@@ -8,6 +8,7 @@ from endpoints.calc import calc_bp
 from endpoints.mtg import mtg_bp
 from endpoints.allsportfacts import allsportfacts_bp
 from endpoints.pizza import pizza_bp
+import os
 import random
 import matplotlib
 import requests
@@ -216,7 +217,7 @@ def create_app():
         else:
             return "Invalid color name"
         
-    WEATHER_API_KEY = 'a5b6f8eb1b20b57f80fa87f940e02857'
+    WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
     @app.route('/weather/<city>', methods=['GET'])
     def weather(city):
         url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={WEATHER_API_KEY}&units=imperial'
