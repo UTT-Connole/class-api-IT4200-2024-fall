@@ -1,7 +1,7 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint
 import random
 
-# Create a blueprint for convertToBinary
+# Create a blueprint for marathonFacts
 marathonFacts_bp = Blueprint('marathonFacts', __name__)
 
 @marathonFacts_bp.route('/marathonFacts', methods=['GET'])
@@ -16,4 +16,4 @@ def marathon_facts():
     ]
     
     random_fact = random.choice(facts)
-    return jsonify(random_fact)
+    return "Category: " + random_fact["category"] + "<br><br>" + "Fact: " + random_fact["fact"]
