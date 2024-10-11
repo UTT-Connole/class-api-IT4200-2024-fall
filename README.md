@@ -152,7 +152,7 @@ This will start the server. From there navigate to the url and your desired endp
 
 - **Marathon Facts Endpoint**
   - **Endpoint**: `GET /marathonFacts`
-  - **Description**: Learn a random fact about marathons!
+  - **Description**: Learn a random fact about marathons! Now returns in plain text!
   - **Test File**: test_marathonfacts.py
 
 - **MTG Mana Endpoint**
