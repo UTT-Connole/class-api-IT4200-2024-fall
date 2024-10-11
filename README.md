@@ -47,12 +47,12 @@ python3 -m flask run
 This will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
 
 ### Available Endpoints
-[AnimalEndpoint](#AnimalEndpoint)
+[Animal Endpoint](#Animal)
 
-Basketball Facts Endpoint
+[Basketball Facts Endpoint](#Basketball)
 
-**Brainrot Endpoint**
-**Calculator Endpoint**
+[Brainrot Endpoint](#Brainrot)
+[**Calculator Endpoint**](#Calculator)
 **Color Hexifier Endpoint**
 **Convert To Binary Endpoint**
 **Convert To Decimal Endpoint**
@@ -79,22 +79,22 @@ Basketball Facts Endpoint
 **Travel Randomizer Endpoint**
 **Two Mana Combo Endpoint**
 
-- <a name="AnimalEndpoint">**AnimalEndpoint**</a>
+- <a name="Animal">**Animal Endpoint**</a>
   - **Endpoint**: `GET /animalGuesser`
   - **Description**: The Animal Guesser will randomly guess an animal from a predefined list. If the user makes a guess, it checks the guess against the selected animal. If the guess is correct, it returns a success message. If the guess is incorrect, it returns a message with a hint that reveals the first letter of the animal. EX: /animalGuesser?guess=lion
   - **Test File**: test_animal.py
 
-- **Basketball Facts Endpoint**
+- <a name="Basketball">**Basketball Facts Endpoint**</a>
   - **Endpoint**: `GET /basketballFacts`
   - **Description**: Provides random basketball facts through a simple GET endpoint, returning a JSON response with each request. It includes unit tests to ensure the endpoint functions correctly, providing a reliable source of basketball trivia.
   - **Test File**: test_basketball_fact.py
 
-- **Brainrot Endpoint**
+- <a name="Brainrot">**Brainrot Endpoint**</a>
   - **Endpoint**: `GET /brainrot`
   - **Description**: Add a new word to your vocabulary!
   - **Test File**: test_brainrot.py
 
-- **Calculator Endpoint**
+- <a name="Calculator">**Calculator Endpoint**</a>
   - **Endpoint**: `GET /calc?x=<number>&y=<number>&op=<operator>`
   - **Description**: Use the following template to add, subtract, multiply, or divide two numbers: `http://127.0.0.1:5000/calc?x=<number>&y=<number>&op=<operator>`. Replace `<number>` with the numbers you want to use, and replace `<operator>` with one of the following operations: `add`, `subtract`, `multiply`, `divide`.
     
