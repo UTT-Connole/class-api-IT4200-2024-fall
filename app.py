@@ -8,6 +8,7 @@ from endpoints.calc import calc_bp
 from endpoints.mtg import mtg_bp
 from endpoints.allsportfacts import allsportfacts_bp
 from endpoints.pizza import pizza_bp
+from endpoints.photogallery import photogallery_bp
 import random
 import matplotlib
 import requests
@@ -86,6 +87,8 @@ def create_app():
     app.register_blueprint(pizza_bp)
 
     app.register_blueprint(allsportfacts_bp)
+
+    app.register_blueprint(photogallery_bp)
 
     @app.route('/quotes', methods=['GET'])
     def fav_quotes():
@@ -324,18 +327,6 @@ def create_app():
 app = create_app()
 
 
-
-@app.route('/motivation', methods=['GET'])
-def get_motivation():
-    motivational_quotes = [
-        "The only way to do great work is to love what you do.",
-        "Success is not final, failure is not fatal: It is the courage to continue that counts.",
-        "Believe you can and you're halfway there.",
-        "Act as if what you do makes a difference. It does.",
-        "The harder you work for something, the greater you’ll feel when you achieve it."
-    ]
-    selected_quote = random.choice(motivational_quotes)
-    return jsonify({"motivational_quote": selected_quote})
 @app.route('/items', methods=['GET'])
 def get_items():
     min_price = request.args.get('min_price', default=0, type=int)
