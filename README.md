@@ -81,8 +81,15 @@ This will start the server. From there navigate to the url and your desired endp
   - **Test File**: test_color_hexifier.py
 
 - **Convert To Binary Endpoint**
-  - **Endpoint**: `GET /convertToBinary?num=#`
-  - **Description**: Go to http://127.0.0.1:5000/convertToBinary?num=# and replace the # with any non-negative whole number! Don't even think about putting in floats, strings, or blanks. I have tested all of those cases and you will get appropriate responses for each!
+  - **Endpoint**: `GET /convertToBinary?num=#&type=decimal`
+  - **Description**: Go to http://127.0.0.1:5000/convertToBinary?num=#&type=decimal to get the binary convertion of any non-negative whole number!
+   Don't even think about putting in floats, strings, or blanks. I have tested all of those cases and you will get appropriate responses for each!
+  - **Test File**: test_binaryconvert.py
+
+- **Convert To Decimal Endpoint**
+  - **Endpoint**: `GET /convertToBinary?num=#&type=binary`
+  - **Description**: Go to http://127.0.0.1:5000/convertToBinary?num=#&type=binary to get the decimal number of any binary number!
+   Don't even think about putting in floats, strings, or blanks. I have tested all of those cases and you will get appropriate responses for each!
   - **Test File**: test_binaryconvert.py
 
 - **Dad Jokes Endpoint**
