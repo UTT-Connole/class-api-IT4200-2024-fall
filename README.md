@@ -48,7 +48,9 @@ This will start the server. From there navigate to the url and your desired endp
 
 ### Available Endpoints
 [**AnimalEndpoint**](#AnimalEndpoint)
+
 **Basketball Facts Endpoint**
+
 **Brainrot Endpoint**
 **Calculator Endpoint**
 **Color Hexifier Endpoint**
