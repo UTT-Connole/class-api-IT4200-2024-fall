@@ -47,8 +47,37 @@ python3 -m flask run
 This will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
 
 ### Available Endpoints
+[**AnimalEndpoint**](#AnimalEndpoint)
+**Basketball Facts Endpoint**
+**Brainrot Endpoint**
+**Calculator Endpoint**
+**Color Hexifier Endpoint**
+**Convert To Binary Endpoint**
+**Convert To Decimal Endpoint**
+**Dad Jokes Endpoint**
+**Factorial Endpoint**
+**Favorite Quote Endpoint**
+**Fortune Cookie Endpoint**
+**Fruit Info Endpoint**
+**Generate Name Endpoint**
+**Get Items Endpoint**
+**Greeting Endpoint**
+**Live Weather Endpoint**
+**Make an Endpoint**
+**Marathon Facts Endpoint**
+**MTG Mana Endpoint**
+**Motivation Endpoint**
+**Pizza Toppings Endpoint**
+**Pokefishing Endpoint**
+**Power Endpoint**
+**Random Fact Endpoint**
+**Sports Facts Endpoint**
+**Stoic Quotes Endpoint**
+**Tennis Facts Endpoint**
+**Travel Randomizer Endpoint**
+**Two Mana Combo Endpoint**
 
-- **AnimalEndpoint**
+- <a name="AnimalEndpoint">**AnimalEndpoint**</a>
   - **Endpoint**: `GET /animalGuesser`
   - **Description**: The Animal Guesser will randomly guess an animal from a predefined list. If the user makes a guess, it checks the guess against the selected animal. If the guess is correct, it returns a success message. If the guess is incorrect, it returns a message with a hint that reveals the first letter of the animal. EX: /animalGuesser?guess=lion
   - **Test File**: test_animal.py
@@ -229,13 +258,6 @@ This will start the server. From there navigate to the url and your desired endp
 * Brayden Connole
 
 ## About The Contributors
-
-```bash
-#Soren Bybee: 
-  Interests: Hiking, Rock Climbing, Mountain Biking, and Playing Video Games.
-    - Add me up on Discord(sorenbybee) if your looking to play Rainbow Six Siege on PC.
-    - If you need someone to approve your pull requests here is my number: (530-363-6531)
-```
 
 ```bash
 #Soren Bybee: 
