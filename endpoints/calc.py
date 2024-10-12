@@ -28,7 +28,9 @@ def calc_main():
         'divide': (x / y if y != 0 else "You cannot divide by 0"),
         'mod': (x % y if y != 0 else "You cannot take modulus by 0"),
         'square': x * x,
-        'sqrt': (x ** 0.5 if x >= 0 else "Cannot take square root of a negative number")
+        'sqrt': (x ** 0.5 if x >= 0 else "Cannot take square root of a negative number"),
+        'decimal': (bin(x).replace("0b","") if x >= 0 else "Not compatible with negative input"),
+        'binary': ((str(int(str(x), 2))) if all(c in '01' for c in str(x)) and x >= 0 else "Not compatible format to convert to binary")
     }
 
     if op not in operations:
@@ -41,5 +43,5 @@ def calc_main():
 # For the tests in testing/test_calc.py to get the operations
 @calc_bp.route('/calcop', methods=['GET'])
 def calc_operators():
-    operations = ['add', 'subtract', 'multiply', 'divide', 'mod', 'square', 'sqrt']
+    operations = ['add', 'subtract', 'multiply', 'divide', 'mod', 'square', 'sqrt','decimal','binary']
     return jsonify(operations)
