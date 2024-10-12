@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 10px;
+        }
+        .gallery img {
+            margin: 10px;
+            max-width: 200px;
+            max-height: 200px;
+            border: 2px solid #dddddd;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Photo Gallery</h1>
+    <div class="gallery">
+        {% for image in images %}
+            <img src="{{ url_for('photogallery.serve_image', filename=image) }}" alt="{{ image }}">
+        {% endfor %}
+    </div>
+</body>
+</html>
