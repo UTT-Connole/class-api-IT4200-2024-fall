@@ -68,29 +68,18 @@ This will start the server. From there navigate to the url and your desired endp
   - **Description**: Use the following template to add, subtract, multiply, or divide two numbers: `http://127.0.0.1:5000/calc?x=<number>&y=<number>&op=<operator>`. Replace `<number>` with the numbers you want to use, and replace `<operator>` with one of the following operations: `add`, `subtract`, `multiply`, `divide`.
     
     For square or square root operations, use the following template: `http://127.0.0.1:5000/calc?x=<number>&op=<operator>`. Replace `<number>` with the number you want to use, and replace `<operator>` with either `square` or `sqrt`.
+
+    For binary and decimal converstions, use the following template: `http://127.0.0.1:5000/calc?x=<number>&op=<operator>`. Replace `<number>` with the number you want to conver to binary or decimal with either `decimal` or `binary` respectively.
   - **Important Notes**: 
     - The operators must be spelled exactly as shown above, or you will receive an error.
     - If any of the variables (`x`, `y`, or `op`) are missing (Unless specified), you will receive an error.
     - You can also use an HTML form to interact with the calculator endpoint. The form allows you to input values and select operations, then submit the form to see the result. 
   - **Test File**: test_calc.py
 
-
 - **Color Hexifier Endpoint**
   - **Endpoint**: `GET /color?color=blue`
   - **Description**: Use the template to return a hex code of the color you want "http://127.0.0.1:5000/color?color=blue". Replace the "blue" at the end with any color of your choosing. If the color doesn't exist in the library, you will get an error.
   - **Test File**: test_color_hexifier.py
-
-- **Convert To Binary Endpoint**
-  - **Endpoint**: `GET /convertToBinary?num=#&type=decimal`
-  - **Description**: Go to http://127.0.0.1:5000/convertToBinary?num=#&type=decimal to get the binary convertion of any non-negative whole number!
-   Don't even think about putting in floats, strings, or blanks. I have tested all of those cases and you will get appropriate responses for each!
-  - **Test File**: test_binaryconvert.py
-
-- **Convert To Decimal Endpoint**
-  - **Endpoint**: `GET /convertToBinary?num=#&type=binary`
-  - **Description**: Go to http://127.0.0.1:5000/convertToBinary?num=#&type=binary to get the decimal number of any binary number!
-   Don't even think about putting in floats, strings, or blanks. I have tested all of those cases and you will get appropriate responses for each!
-  - **Test File**: test_binaryconvert.py
 
 - **Dad Jokes Endpoint**
   - **Endpoint**: `GET /dadjoke`
