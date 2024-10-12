@@ -11,11 +11,70 @@ import os
 from endpoints.photogallery import photogallery_bp
 import random
 import matplotlib
-import requests
-
 
 def create_app():
     app = Flask(__name__)
+
+    facts = {
+    "random": [
+        "Honey never spoils.",
+        "Octopuses have three hearts.",
+        "Bananas are berries, but strawberries are not.",
+        "A day on Venus is longer than a year on Venus.",
+        "Sharks have been around longer than trees.",
+        "The ocean covers 71 percent of the Earth's surface and the average depth is 12,100 feet."
+    ],
+    "swimming": [
+        "Swimming is one of the best aerobic exercises.",
+        "Michael Phelps has won 23 Olympic gold medals.",
+        "The front crawl is the fastest swimming stroke.",
+        "Humans have been swimming for thousands of years.",
+        "Swimming burns more calories than running."
+    ],
+    "wrestling": [
+        "Hulk Hogan won his first WWF Championship in 1984.",
+        "The Undertaker has a 25-2 WrestleMania record.",
+        "Stone Cold Steve Austin's 'Austin 3:16' speech revolutionized wrestling promos.",
+        "Ric Flair is a 16-time world champion.",
+        "Shawn Michaels is known as 'Mr. WrestleMania' for his outstanding performances on the big stage."
+    ],
+    "basketball": [
+        "Michael Jordan has won six NBA championships.",
+        "Kareem Abdul-Jabbar is the all-time leading scorer in NBA history.",
+        "The NBA was founded in New York City on June 6, 1946.",
+        "Wilt Chamberlain scored 100 points in a single game.",
+        "The Boston Celtics have the most NBA titles with 17 championships."
+    ]
+    }
+
+    @app.route('/allFacts', methods=['GET'])
+    def all_facts():
+        category = request.args.get('category', '').lower()
+
+        if category in facts:
+            fact = random.choice(facts[category])
+            return jsonify({"fact": fact})
+        all_facts_flat = [fact for category_facts in facts.values() for fact in category_facts]
+        random_fact = random.choice(all_facts_flat)
+        return jsonify({"fact": random_fact})
+    
+    @app.route('/facts', methods=['GET'])
+    def get_facts():
+        return jsonify(facts)
+
+    @app.route('/generateName', methods=['GET'])
+    def generate_name():
+        names = ["Eve", "Jack", "Liam", "Mia"]
+        name = random.choice(names)
+        return jsonify({"name": name})
+    
+    @app.route('/greet', methods=['GET'])
+    def greet():
+        return jsonify({"message": "Hello, Welcome to the API!"})
+
+    @app.route('/greet/<name>', methods=['GET'])
+    def greet_with_name(name):
+        return jsonify({"message": f"Hello, {name}!"})
 
     @app.route('/')
     def hello_world():
@@ -154,12 +213,6 @@ def create_app():
             })
         else:
             return jsonify({"error": "Fruit not found. Please try apple, banana, lemon, orange, grape, or lime."}), 404
-        
-    @app.route('/generateName', methods=['GET'])
-    def generate_name():
-        names = ["Eve", "Jack", "Liam", "Mia"]
-        name = random.choice(names)
-        return jsonify({"name": name})
     
     @app.route('/items', methods=['GET'])
     def get_items():
@@ -168,14 +221,6 @@ def create_app():
         if not items:
             return jsonify({'message': 'No items found'}), 404
         return jsonify([item.serialize() for item in items]), 200
-
-    @app.route('/greet', methods=['GET'])
-    def greet():
-        return jsonify({"message": "Hello, Welcome to the API!"})
-
-    @app.route('/greet/<name>', methods=['GET'])
-    def greet_with_name(name):
-        return jsonify({"message": f"Hello, {name}!"})
 
     WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
     @app.route('/weather/<city>', methods=['GET'])

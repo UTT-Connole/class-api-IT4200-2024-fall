@@ -49,17 +49,17 @@ This will start the server. From there navigate to the url and your desired endp
 ### Available Endpoints
 [**Animal Endpoint**](#Animal) | [**Basketball Facts Endpoint**](#Basketball) | [**Brainrot Endpoint**](#Brainrot) | [**Calculator Endpoint**](#Calculator) | [**Color Hexifier Endpoint**](#Hexifier) | [**Convert To Binary Endpoint**](#Binary) | [**Convert To Decimal Endpoint**](#Decimal) | [**Dad Jokes Endpoint**](#Dad) | [**Factorial Endpoint**](#Factorial) | [**Favorite Quote Endpoint**](#Favorite) | [**Fortune Cookie Endpoint**](#Fortune) | [**Fruit Info Endpoint**](#Fruit) | [**Generate Name Endpoint**](#Name) | [**Get Items Endpoint**](#Items) | [**Greeting Endpoint**](#Greeting) | [**Live Weather Endpoint**](#Weather) | [**Make an Endpoint**](#Make) | [**Marathon Facts Endpoint**](#Marathon) | [**MTG Mana Endpoint**](#MTG) | [**Motivation Endpoint**](#Motivation) | [**Photo Gallery Endpoint**](#Photo) | [**Pizza Toppings Endpoint**](#Pizza) | [**Pokefishing Endpoint**](#Pokefishing) | [**Power Endpoint**](#Power) | [**Random Fact Endpoint**](#Random) | [**Sports Facts Endpoint**](#Sports) | [**Stoic Quotes Endpoint**](#Stoic) | [**Tennis Facts Endpoint**](#Tennis) | [**Travel Randomizer Endpoint**](#Travel) | [**Two Mana Combo Endpoint**](#Combo)
 
-- <a name="Animal">**Animal Endpoint**</a>
+- <a name="All Facts">**All Facts Endpoint**</a>
+  - **Endpoint**: 'GET /allFacts'
+  - **Description**: The All Facts endpoint is a consolidated endpoint of facts about various topics. Just going to the /allFacts endpoint will return a random fact from any category. But specifying a category, like random, swimming, basketball, and wrestling will return a random fact about that category. EX: /allFacts?category=swimming
+  - **Test File**: test_allfacts.py
+
+- **AnimalEndpoint**
   - **Endpoint**: `GET /animalGuesser`
   - **Description**: The Animal Guesser will randomly guess an animal from a predefined list. If the user makes a guess, it checks the guess against the selected animal. If the guess is correct, it returns a success message. If the guess is incorrect, it returns a message with a hint that reveals the first letter of the animal. EX: /animalGuesser?guess=lion
   - **Test File**: test_animal.py
 
-- <a name="Basketball">**Basketball Facts Endpoint**</a>
-  - **Endpoint**: `GET /basketballFacts`
-  - **Description**: Provides random basketball facts through a simple GET endpoint, returning a JSON response with each request. It includes unit tests to ensure the endpoint functions correctly, providing a reliable source of basketball trivia.
-  - **Test File**: test_basketball_fact.py
-
-- <a name="Brainrot">**Brainrot Endpoint**</a>
+- **Brainrot Endpoint**
   - **Endpoint**: `GET /brainrot`
   - **Description**: Add a new word to your vocabulary!
   - **Test File**: test_brainrot.py
@@ -188,16 +188,6 @@ This will start the server. From there navigate to the url and your desired endp
   - **Endpoint**: `GET /power?base=<value>&exp=<value>`
   - **Description**: Go to http://127.0.0.1:5000/power?base=2&exp=4. Replace the values of `base` and `exp` with whatever numbers you want.
 - **Test File**: test_power.py
-
-- <a name="Random">**Random Fact Endpoint**</a>
-  - **Endpoint**: `GET /randomFact`
-  - **Description**: Retrieve a random fact and use the category parameter!
-  - **Test File**: test_randomFact.py
-
-- <a name="Sports">**Sports Facts Endpoint**</a>
-  - **Endpoint**: `GET /sports_fact`
-  - **Description**: Learn fun facts about various sports! Use the 'category' parameter to filter the facts! 🏅
-  - **Test File**: test_sportsfacts.py
 
 - <a name="Stoic">**Stoic Quotes Endpoint**</a>
   - **Endpoint**: `GET /quotes`
