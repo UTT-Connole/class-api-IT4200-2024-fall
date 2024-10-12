@@ -166,6 +166,11 @@ This will start the server. From there navigate to the url and your desired endp
   - **Description**: The /motivation endpoint provides a random motivational quote whenever accessed via a GET request. When a user sends a request to this endpoint, the app responds with one of five pre-defined motivational quotes, returned in JSON format.
   - **Test File**: test_motivation.py
 
+- **Photo Gallery Endpoint**
+  - **Endpoint**: `GET /photogallery`
+  - **Description**: Go checkout the art gallery complied by yours truly. !Add your own images to the images folder to see them on the endpoint! !NO Adult Content allowed! 
+  - **Test File**: test_photogallery.py
+
 - **Pizza Toppings Endpoint**
   - **Endpoint**: `GET /pizzaToppings`
   - **Description**: Too lazy to think of what pizza to order? Get your crust, sauce and toppings randomly chosen. 
