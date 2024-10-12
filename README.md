@@ -47,11 +47,7 @@ python3 -m flask run
 This will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
 
 ### Available Endpoints
-[**Animal Endpoint**](#Animal)
-
-[**Basketball Facts Endpoint**](#Basketball)
-
-[**Brainrot Endpoint**](#Brainrot)
+[**Animal Endpoint**](#Animal) | [**Basketball Facts Endpoint**](#Basketball) | [**Brainrot Endpoint**](#Brainrot)
 
 [**Calculator Endpoint**](#Calculator)
 
