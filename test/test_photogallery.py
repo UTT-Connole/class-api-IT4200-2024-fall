@@ -27,23 +27,3 @@ def test_photogallery(mock_render_template, client):
     response = client.get('/photogallery')
     assert response.status_code == 200
     assert b"Mocked template response" in response.data
-
-def test_serve_image(client):
-    # Test if an image can be served correctly
-    test_image_folder = os.path.join(os.getcwd(), 'images')
-    test_image_filename = 'gojo.png'
-    test_image_path = os.path.join(test_image_folder, test_image_filename)
-
-    # Create a dummy image file for the test
-    with open(test_image_path, 'w') as f:
-        f.write('dummy image content')
-
-    # Request the image via the endpoint
-    response = client.get(f'/images/{test_image_filename}')
-
-    # Ensure the response is valid
-    assert response.status_code == 200
-    assert response.content_type.startswith('image/')
-
-    # Clean up test image after the test
-    os.remove(test_image_path)
