@@ -51,45 +51,15 @@ This will start the server. From there navigate to the url and your desired endp
 
 [**Color Hexifier Endpoint**](#Hexifier) | [**Convert To Binary Endpoint**](#Binary) | [**Convert To Decimal Endpoint**](#Decimal) | [**Dad Jokes Endpoint**](#Dad)
 
-[**Factorial Endpoint**](#Factorial)
+[**Factorial Endpoint**](#Factorial) | [**Favorite Quote Endpoint**](#Favorite) | [**Fortune Cookie Endpoint**](#Fortune) | [**Fruit Info Endpoint**](#Fruit)
 
-[**Favorite Quote Endpoint**](#Favorite)
+[**Generate Name Endpoint**](#Name) | [**Get Items Endpoint**](#Items) | [**Greeting Endpoint**](#Greeting) | [**Live Weather Endpoint**](#Weather)
 
-[**Fortune Cookie Endpoint**](#Fortune)
+[**Make an Endpoint**](#Make) | [**Marathon Facts Endpoint**](#Marathon) | [**MTG Mana Endpoint**](#MTG) | [**Motivation Endpoint**](#Motivation)
 
-[**Fruit Info Endpoint**](#Fruit)
+[**Pizza Toppings Endpoint**](#Pizza) | [**Pokefishing Endpoint**](#Pokefishing) | [**Power Endpoint**](#Power) | [**Random Fact Endpoint**](#Random)
 
-[**Generate Name Endpoint**](#Name)
-
-[**Get Items Endpoint**](#Items)
-
-[**Greeting Endpoint**](#Greeting)
-
-[**Live Weather Endpoint**](#Weather)
-
-[**Make an Endpoint**](#Make)
-
-[**Marathon Facts Endpoint**](#Marathon)
-
-[**MTG Mana Endpoint**](#MTG)
-
-[**Motivation Endpoint**](#Motivation)
-
-[**Pizza Toppings Endpoint**](#Pizza)
-
-[**Pokefishing Endpoint**](#Pokefishing)
-
-[**Power Endpoint**](#Power)
-
-[**Random Fact Endpoint**](#Random)
-
-[**Sports Facts Endpoint**](#Sports)
-
-[**Stoic Quotes Endpoint**](#Stoic)
-
-[**Tennis Facts Endpoint**](#Tennis)
-
-[**Travel Randomizer Endpoint**](#Travel)
+[**Sports Facts Endpoint**](#Sports) | [**Stoic Quotes Endpoint**](#Stoic) | [**Tennis Facts Endpoint**](#Tennis) | [**Travel Randomizer Endpoint**](#Travel)
 
 [**Two Mana Combo Endpoint**](#Combo)
 
