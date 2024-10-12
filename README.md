@@ -145,6 +145,7 @@ This will start the server. From there navigate to the url and your desired endp
   - **Description**: Pick a city you want live weather in and put it after /weather/ in the URL. Example: http://127.0.0.1:5000/weather/Seattle. It should list the current weather conditions of the selected city.
   - **Test File**: test_weather.py
 
+
 - **Make an Endpoint**
   - **Endpoint**: `GET /howToMakeEndpoint`
   - **Description**: Learn how to make an endpoint.
@@ -229,13 +230,6 @@ This will start the server. From there navigate to the url and your desired endp
 * Brayden Connole
 
 ## About The Contributors
-
-```bash
-#Soren Bybee: 
-  Interests: Hiking, Rock Climbing, Mountain Biking, and Playing Video Games.
-    - Add me up on Discord(sorenbybee) if your looking to play Rainbow Six Siege on PC.
-    - If you need someone to approve your pull requests here is my number: (530-363-6531)
-```
 
 ```bash
 #Soren Bybee: 

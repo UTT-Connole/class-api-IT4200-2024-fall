@@ -11,5 +11,6 @@ COPY templates templates
 COPY endpoints endpoints
 COPY app.py app.py
 
+ENV WEATHER_API_KEY=$WEATHER_API_KEY
 
 CMD ["python", "app.py"]
