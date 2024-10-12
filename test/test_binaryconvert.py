@@ -1,56 +1,76 @@
 
 def test_status_code(client):
-    response = client.get('/convertToBinary?num=1&type=decimal')
+    response = client.get('/calc?x=5&y=&op=decimal')
     assert response.status_code == 200
     
 def test_decimal(client):
-    response = client.get('/convertToBinary?num=5&type=decimal')
-    assert response.data.decode() == '101'
+    response = client.get('/calc?x=5&y=&op=decimal')
+    assert response.status_code == 200
+    html_data = response.get_data(as_text=True)
+    assert '101' in html_data
 
 def test_binary(client):
-    response = client.get('/convertToBinary?num=101&type=binary')
-    assert response.data.decode() == '5'
+    response = client.get('/calc?x=101&y=&op=binary')
+    assert response.status_code == 200
+    html_data = response.get_data(as_text=True)
+    assert '5' in html_data
 
 def test_decimal_zero(client):
-    response = client.get('/convertToBinary?num=0&type=decimal')
-    assert response.data.decode() == '0'
+    response = client.get('/calc?x=0&y=&op=decimal')
+    assert response.status_code == 200
+    html_data = response.get_data(as_text=True)
+    assert '0' in html_data
 
 def test_binary_zero(client):
-    response = client.get('/convertToBinary?num=0&type=binary')
-    assert response.data.decode() == '0'
+    response = client.get('/calc?x=0&y=&op=binary')
+    assert response.status_code == 200
+    html_data = response.get_data(as_text=True)
+    assert '0' in html_data
 
 def test_decimal_negative(client):
-    response = client.get('/convertToBinary?num=-1&type=decimal')
-    assert response.data.decode() == 'Not compatible with negative input'
+    response = client.get('/calc?x=-1&y=&op=decimal')
+    assert response.status_code == 200
+    html_data = response.get_data(as_text=True)
+    assert 'Not compatible with negative input' in html_data
 
 def test_binary_negative(client):
-    response = client.get('/convertToBinary?num=-101&type=binary')
-    assert response.data.decode() == 'Not compatible with negative input'
+    response = client.get('/calc?x=-1&y=&op=binary')
+    assert response.status_code == 200
+    html_data = response.get_data(as_text=True)
+    assert 'Not compatible format to convert to binary' in html_data
 
 def test_decimal_float(client):
-    response = client.get('/convertToBinary?num=1.1&type=decimal')
-    assert response.data.decode() == 'Not compatible with float input'
+    response = client.get('/calc?x=5.5&y=&op=decimal')
+    assert response.status_code == 200
+    html_data = response.get_data(as_text=True)
+    assert 'Invalid Input' in html_data
 
 def test_binary_float(client):
-    response = client.get('/convertToBinary?num=101.1&type=binary')
-    assert response.data.decode() == 'Not compatible with float input'
+    response = client.get('/calc?x=5.5&y=&op=binary')
+    assert response.status_code == 200
+    html_data = response.get_data(as_text=True)
+    assert 'Invalid Input' in html_data
 
 def test_decimal_str(client):
-    response = client.get('/convertToBinary?num=abc&type=decimal')
-    assert response.data.decode() == 'Please input a valid number'
+    response = client.get('/calc?x=abc&y=&op=decimal')
+    assert response.status_code == 200
+    html_data = response.get_data(as_text=True)
+    assert 'Invalid Input' in html_data
 
 def test_binary_str(client):
-    response = client.get('/convertToBinary?num=abc&type=binary')
-    assert response.data.decode() == 'Please input a valid number'
+    response = client.get('/calc?x=abc&y=&op=binary')
+    assert response.status_code == 200
+    html_data = response.get_data(as_text=True)
+    assert 'Invalid Input' in html_data
 
 def test_decimal_blank(client):
-    response = client.get('/convertToBinary?num=&type=decimal')
-    assert response.data.decode() == 'Please input a valid number'
+    response = client.get('/calc?x=&y=&op=decimal')
+    assert response.status_code == 200
+    html_data = response.get_data(as_text=True)
+    assert '0' in html_data
 
 def test_binary_blank(client):
-    response = client.get('/convertToBinary?num=&type=binary')
-    assert response.data.decode() == 'Please input a valid number'
-
-def test_type_blank(client):
-    response = client.get('/convertToBinary?num=101&type=')
-    assert response.data.decode() == 'Invalid Type. Please use [decimal] for Decimal to Binary converstions and [binary] for Binary to Decimal converstions'
+    response = client.get('/calc?x=&y=&op=binary')
+    assert response.status_code == 200
+    html_data = response.get_data(as_text=True)
+    assert '0' in html_data

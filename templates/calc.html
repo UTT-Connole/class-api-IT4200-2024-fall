@@ -8,7 +8,7 @@
         function toggleYField() {
             const op = document.getElementById('op').value;
             const yField = document.getElementById('y-field');
-            yField.style.display = (op === 'square' || op === 'sqrt') ? 'none' : 'block';
+            yField.style.display = (op === 'square' || op === 'sqrt' || op === 'binary' || op === 'decimal') ? 'none' : 'block';
         }
     </script>
 </head>
@@ -30,6 +30,8 @@
             <option value="mod">Modulus</option>
             <option value="square">Square</option>
             <option value="sqrt">Square Root</option>
+            <option value="decimal">Convert to Binary</option>
+            <option value="binary">Convert to Decimal</option>
         </select><br><br>
         <button type="submit">Calculate</button>
     </form>
