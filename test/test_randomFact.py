@@ -21,3 +21,9 @@ def test_randomFactContent(client):
         "The ocean covers 71 percent of the Earth's surface and the average depth is 12,100 feet."
     ]
     assert json_data['fact'] in predefined_facts
+
+def test_randomFactTotalCount(client):
+    response = client.get('/randomFact')
+    json_data = response.get_json()
+    assert response.status_code == 200
+    assert json_data['totalFacts'] == 6 

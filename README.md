@@ -148,7 +148,7 @@ This will start the server. From there navigate to the url and your desired endp
 
 - **Make an Endpoint**
   - **Endpoint**: `GET /howToMakeEndpoint`
-  - **Description**: Learn how to make an endpoint.
+  - **Description**: Learn how to make an endpoint step by step!
   - **Test File**: test_howtomakeendpoint.py
 
 - **Marathon Facts Endpoint**
@@ -188,7 +188,7 @@ This will start the server. From there navigate to the url and your desired endp
 
 - **Random Fact Endpoint**
   - **Endpoint**: `GET /randomFact`
-  - **Description**: Retrieve a random fact!
+  - **Description**: Retrieve a random fact and use the category parameter!
   - **Test File**: test_randomFact.py
 
 - **Sports Facts Endpoint**
