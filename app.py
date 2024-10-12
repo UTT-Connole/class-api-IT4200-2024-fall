@@ -293,7 +293,8 @@ def create_app():
             {"fact": "The ocean covers 71 percent of the Earth's surface and the average depth is 12,100 feet."}
         ]
         selected_fact = random.choice(facts)
-        return jsonify(selected_fact)
+        fact_count = len(facts)  # Count of total facts
+        return jsonify({"fact": selected_fact['fact'], "totalFacts": fact_count})
 
     @app.route('/favoritequote', methods=['GET', 'POST'])
     def get_favorite_quote():
@@ -313,12 +314,19 @@ def create_app():
     @app.route('/howToMakeEndpoint', methods=['GET'])
     def get_endpoints():
         endpointSteps = [
-		    {"step 1":" Import Flask "},
-		    {"step 2":" Create app"},
-		    {"step 3":" Define endpoint with @app.route"},
-		    {"step 4":" write the endpoint function"}
-        ]  
-        return jsonify("Follow these steps:"+ str(endpointSteps))
+            {"step 1": "Import Flask"},
+            {"step 2": "Create app"},
+            {"step 3": "Define endpoint with @app.route"},
+            {"step 4": "Write the endpoint function"}
+        ]
+        step = request.args.get('step')
+        if step and step.isdigit():
+            step_num = int(step) - 1
+            if 0 <= step_num < len(endpointSteps): 
+             return jsonify(endpointSteps[step_num])
+            return jsonify({"error": "Invalid step number"}), 400
+
+        return jsonify(endpointSteps)
 
 
 
