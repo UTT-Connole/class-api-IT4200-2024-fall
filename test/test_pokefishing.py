@@ -12,6 +12,6 @@ def test_structure(client):
     assert "You caught" in json_data, "The response should have the key 'You caught'."
 
 def test_nonEmptyResponse(client):
-    response = client.get('pokefishing')
+    response = client.get('/pokefishing')
     catch = response.json["You caught"]
     assert catch.strip() != "", "The 'You caught' value should not be empty."
