@@ -173,7 +173,7 @@ This will start the server. From there navigate to the url and your desired endp
 
 - <a name="Pokefishing">**Pokefishing Endpoint**</a>
   - **Endpoint**: `GET /pokefishing`
-  - **Description**: Catch a Magikarp!
+  - **Description**: Catch a Magikarp! Refresh the page to cast your line again. Don't forget to reel it in!
   - **Test File**: test_pokefishing.py
 
 - <a name="Power">**Power Endpoint**</a>
