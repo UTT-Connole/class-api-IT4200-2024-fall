@@ -47,7 +47,7 @@ python3 -m flask run
 This will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
 
 ### Available Endpoints
-[**Animal Endpoint**](#Animal) | [**Basketball Facts Endpoint**](#Basketball) | [**Brainrot Endpoint**](#Brainrot) | [**Calculator Endpoint**](#Calculator) | [**Color Hexifier Endpoint**](#Hexifier) | [**Convert To Binary Endpoint**](#Binary) | [**Convert To Decimal Endpoint**](#Decimal) | [**Dad Jokes Endpoint**](#Dad) | [**Factorial Endpoint**](#Factorial) | [**Favorite Quote Endpoint**](#Favorite) | [**Fortune Cookie Endpoint**](#Fortune) | [**Fruit Info Endpoint**](#Fruit) | [**Generate Name Endpoint**](#Name) | [**Get Items Endpoint**](#Items) | [**Greeting Endpoint**](#Greeting) | [**Live Weather Endpoint**](#Weather) | [**Make an Endpoint**](#Make) | [**Marathon Facts Endpoint**](#Marathon) | [**MTG Mana Endpoint**](#MTG) | [**Motivation Endpoint**](#Motivation) | [**Pizza Toppings Endpoint**](#Pizza) | [**Pokefishing Endpoint**](#Pokefishing) | [**Power Endpoint**](#Power) | [**Random Fact Endpoint**](#Random) | [**Sports Facts Endpoint**](#Sports) | [**Stoic Quotes Endpoint**](#Stoic) | [**Tennis Facts Endpoint**](#Tennis) | [**Travel Randomizer Endpoint**](#Travel) | [**Two Mana Combo Endpoint**](#Combo)
+[**Animal Endpoint**](#Animal) | [**Basketball Facts Endpoint**](#Basketball) | [**Brainrot Endpoint**](#Brainrot) | [**Calculator Endpoint**](#Calculator) | [**Color Hexifier Endpoint**](#Hexifier) | [**Convert To Binary Endpoint**](#Binary) | [**Convert To Decimal Endpoint**](#Decimal) | [**Dad Jokes Endpoint**](#Dad) | [**Factorial Endpoint**](#Factorial) | [**Favorite Quote Endpoint**](#Favorite) | [**Fortune Cookie Endpoint**](#Fortune) | [**Fruit Info Endpoint**](#Fruit) | [**Generate Name Endpoint**](#Name) | [**Get Items Endpoint**](#Items) | [**Greeting Endpoint**](#Greeting) | [**Live Weather Endpoint**](#Weather) | [**Make an Endpoint**](#Make) | [**Marathon Facts Endpoint**](#Marathon) | [**MTG Mana Endpoint**](#MTG) | [**Motivation Endpoint**](#Motivation) | [**Photo Gallery Endpoint**](#Photo) | [**Pizza Toppings Endpoint**](#Pizza) | [**Pokefishing Endpoint**](#Pokefishing) | [**Power Endpoint**](#Power) | [**Random Fact Endpoint**](#Random) | [**Sports Facts Endpoint**](#Sports) | [**Stoic Quotes Endpoint**](#Stoic) | [**Tennis Facts Endpoint**](#Tennis) | [**Travel Randomizer Endpoint**](#Travel) | [**Two Mana Combo Endpoint**](#Combo)
 
 - <a name="Animal">**Animal Endpoint**</a>
   - **Endpoint**: `GET /animalGuesser`
@@ -65,16 +65,19 @@ This will start the server. From there navigate to the url and your desired endp
   - **Test File**: test_brainrot.py
 
 - <a name="Calculator">**Calculator Endpoint**</a>
-  - **Endpoint**: `GET /calc?x=<number>&y=<number>&op=<operator>`
-  - **Description**: Use the following template to add, subtract, multiply, or divide two numbers: `http://127.0.0.1:5000/calc?x=<number>&y=<number>&op=<operator>`. Replace `<number>` with the numbers you want to use, and replace `<operator>` with one of the following operations: `add`, `subtract`, `multiply`, `divide`.
+  - **Endpoint**: `GET /calc?x=<number>&y=<number>&op=<operator>` or `POST /calc`
+  - **Description**: Use the following template to add, subtract, multiply, divide, or find the modulus of two numbers: `http://127.0.0.1:5000/calc?x=<number>&y=<number>&op=<operator>`. Replace `<number>` with the numbers you want to use, and replace `<operator>` with one of the following operations: `add`, `subtract`, `multiply`, `divide`, `mod`, `power`.
     
     For square or square root operations, use the following template: `http://127.0.0.1:5000/calc?x=<number>&op=<operator>`. Replace `<number>` with the number you want to use, and replace `<operator>` with either `square` or `sqrt`.
+
+    For binary and decimal conversions, use the following template: `http://127.0.0.1:5000/calc?x=<number>&op=<operator>`. Replace `<number>` with the number you want to convert to binary or decimal with either `decimal` or `binary` respectively.
+
+    You can also use an HTML form to interact with the calculator endpoint. The form allows you to input values and select operations, then submit the form to see the result.
   - **Important Notes**: 
     - The operators must be spelled exactly as shown above, or you will receive an error.
-    - If any of the variables (`x`, `y`, or `op`) are missing (Unless specified), you will receive an error.
-    - You can also use an HTML form to interact with the calculator endpoint. The form allows you to input values and select operations, then submit the form to see the result. 
-  - **Test File**: test_calc.py
-
+    - If any of the variables (`x`, `y`, or `op`) are missing (unless specified), you will receive an error.
+    - If no parameters are provided, the endpoint will render an HTML form for input.
+  - **Test File**: `test_calc.py`
 
 - <a name="Hexifier">**Color Hexifier Endpoint**</a>
   - **Endpoint**: `GET /color?color=blue`
@@ -148,7 +151,7 @@ This will start the server. From there navigate to the url and your desired endp
 
 - <a name="Make">**Make an Endpoint**</a>
   - **Endpoint**: `GET /howToMakeEndpoint`
-  - **Description**: Learn how to make an endpoint.
+  - **Description**: Learn how to make an endpoint step by step!
   - **Test File**: test_howtomakeendpoint.py
 
 - <a name="Marathon">**Marathon Facts Endpoint**</a>
@@ -165,6 +168,11 @@ This will start the server. From there navigate to the url and your desired endp
   - **Endpoint**: `GET /motivation`
   - **Description**: The /motivation endpoint provides a random motivational quote whenever accessed via a GET request. When a user sends a request to this endpoint, the app responds with one of five pre-defined motivational quotes, returned in JSON format.
   - **Test File**: test_motivation.py
+
+- <a name="Photo">**Photo Gallery Endpoint**</a>
+  - **Endpoint**: `GET /photogallery`
+  - **Description**: Go checkout the art gallery complied by yours truly. !Add your own images to the images folder to see them on the endpoint! !NO Adult Content allowed! 
+  - **Test File**: test_photogallery.py
 
 - <a name="Pizza">**Pizza Toppings Endpoint**</a>
   - **Endpoint**: `GET /pizzaToppings`
@@ -183,7 +191,7 @@ This will start the server. From there navigate to the url and your desired endp
 
 - <a name="Random">**Random Fact Endpoint**</a>
   - **Endpoint**: `GET /randomFact`
-  - **Description**: Retrieve a random fact!
+  - **Description**: Retrieve a random fact and use the category parameter!
   - **Test File**: test_randomFact.py
 
 - <a name="Sports">**Sports Facts Endpoint**</a>
