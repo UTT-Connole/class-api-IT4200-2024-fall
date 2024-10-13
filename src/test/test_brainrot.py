@@ -1,5 +1,5 @@
 import pytest
-from app import create_app
+from src.app import create_app
 
 
 def test_random_word_status_code(client):

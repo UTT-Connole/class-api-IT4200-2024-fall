@@ -1,4 +1,4 @@
-import pytest, app
+import pytest, src.app as app
 
 def test_status(client):
     response = client.get('/fortune')

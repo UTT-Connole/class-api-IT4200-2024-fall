@@ -1,5 +1,5 @@
 import pytest
-from app import create_app 
+from src.app import create_app 
         
 #def test_weather_content_type(client):
 #    """Test if the weather endpoint returns a response in JSON format"""

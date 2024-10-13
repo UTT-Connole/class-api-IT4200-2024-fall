@@ -1,16 +1,15 @@
 FROM python:3.9-slim
 
+WORKDIR /app
 
-EXPOSE 5000
-COPY requirements.txt requirements.txt
+COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
-COPY __init__.py __init__.py
-COPY templates templates
-COPY endpoints endpoints
-COPY app.py app.py
+COPY src/ .
 
 ENV WEATHER_API_KEY=$WEATHER_API_KEY
 
-CMD ["python", "app.py"]
+EXPOSE 5000
+
+CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0"]
