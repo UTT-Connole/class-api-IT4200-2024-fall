@@ -256,7 +256,7 @@ def create_app():
         if success:
             caught = random.choice(magikarp)
         else:
-            caught = "Oops, you forgot to reel it in"
+            caught = "... Oops, you forgot to reel it in"
         return jsonify({"You caught": caught + "!"})
 
     @app.route('/fruitInfo', methods=['GET'])
