@@ -240,7 +240,11 @@ def create_app():
             "a Goldeen and it's the biggest you've ever seen",
             "nothing... But you did see a Mudkip riding on a Lotad"
             ]
-        caught = random.choice(magikarp)
+        success = random.choice([True, False])
+        if success:
+            caught = random.choice(magikarp)
+        else:
+            caught = "... Oops, you forgot to reel it in"
         return jsonify({"You caught": caught + "!"})
 
     @app.route('/power', methods=['GET'])
