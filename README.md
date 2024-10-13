@@ -64,17 +64,19 @@ This will start the server. From there navigate to the url and your desired endp
   - **Test File**: test_brainrot.py
 
 - **Calculator Endpoint**
-  - **Endpoint**: `GET /calc?x=<number>&y=<number>&op=<operator>`
-  - **Description**: Use the following template to add, subtract, multiply, or divide two numbers: `http://127.0.0.1:5000/calc?x=<number>&y=<number>&op=<operator>`. Replace `<number>` with the numbers you want to use, and replace `<operator>` with one of the following operations: `add`, `subtract`, `multiply`, `divide`.
+  - **Endpoint**: `GET /calc?x=<number>&y=<number>&op=<operator>` or `POST /calc`
+  - **Description**: Use the following template to add, subtract, multiply, divide, or find the modulus of two numbers: `http://127.0.0.1:5000/calc?x=<number>&y=<number>&op=<operator>`. Replace `<number>` with the numbers you want to use, and replace `<operator>` with one of the following operations: `add`, `subtract`, `multiply`, `divide`, `mod`, `power`.
     
     For square or square root operations, use the following template: `http://127.0.0.1:5000/calc?x=<number>&op=<operator>`. Replace `<number>` with the number you want to use, and replace `<operator>` with either `square` or `sqrt`.
 
-    For binary and decimal converstions, use the following template: `http://127.0.0.1:5000/calc?x=<number>&op=<operator>`. Replace `<number>` with the number you want to conver to binary or decimal with either `decimal` or `binary` respectively.
+    For binary and decimal conversions, use the following template: `http://127.0.0.1:5000/calc?x=<number>&op=<operator>`. Replace `<number>` with the number you want to convert to binary or decimal with either `decimal` or `binary` respectively.
+
+    You can also use an HTML form to interact with the calculator endpoint. The form allows you to input values and select operations, then submit the form to see the result.
   - **Important Notes**: 
     - The operators must be spelled exactly as shown above, or you will receive an error.
-    - If any of the variables (`x`, `y`, or `op`) are missing (Unless specified), you will receive an error.
-    - You can also use an HTML form to interact with the calculator endpoint. The form allows you to input values and select operations, then submit the form to see the result. 
-  - **Test File**: test_calc.py
+    - If any of the variables (`x`, `y`, or `op`) are missing (unless specified), you will receive an error.
+    - If no parameters are provided, the endpoint will render an HTML form for input.
+  - **Test File**: `test_calc.py`
 
 - **Color Hexifier Endpoint**
   - **Endpoint**: `GET /color?color=blue`
