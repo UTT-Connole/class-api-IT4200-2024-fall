@@ -35,7 +35,7 @@ ptw .
 ```
 ### To run a test on a specific endpoint:
 ```
-python3 -m pytest ./test/test_nameoffile.py
+python3 -m pytest src/test/test_nameoffile.py
 ``` 
 
 ## API Endpoint Information
