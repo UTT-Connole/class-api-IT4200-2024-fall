@@ -6,9 +6,10 @@ COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
-COPY src/ .
+COPY src/ /app/src
 
 ENV WEATHER_API_KEY=$WEATHER_API_KEY
+ENV PYTHONPATH=/app/src
 
 EXPOSE 5000
 
