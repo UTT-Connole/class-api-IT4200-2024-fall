@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify, render_template
 
 calc_bp = Blueprint('calc', __name__)
 
-@calc_bp.route('/calc', methods=['GET', 'POST'])
+
 def calc_main():
     x = request.args.get('x')
     y = request.args.get('y')

@@ -7,6 +7,7 @@ from endpoints.calc import calc_bp
 from endpoints.mtg import mtg_bp
 from endpoints.allsportfacts import allsportfacts_bp
 from endpoints.pizza import pizza_bp
+from endpoints.version import version_bp
 import os
 from endpoints.photogallery import photogallery_bp
 import random
@@ -107,8 +108,8 @@ def create_app():
     @app.route('/favoritequote', methods=['GET', 'POST'])
     def get_favorite_quote():
         favorite_quote = {
-         "quote": "The only way to do great work is to love what you do.",
-         "author": "Steve Jobs"
+        "quote": "The only way to do great work is to love what you do.",
+        "author": "Steve Jobs"
         }
         quotes = [favorite_quote]
         if request.method == 'GET':
@@ -207,7 +208,7 @@ def create_app():
         if step and step.isdigit():
             step_num = int(step) - 1
             if 0 <= step_num < len(endpointSteps): 
-             return jsonify(endpointSteps[step_num])
+                return jsonify(endpointSteps[step_num])
             return jsonify({"error": "Invalid step number"}), 400
 
         return jsonify(endpointSteps)
@@ -221,6 +222,8 @@ def create_app():
     app.register_blueprint(photogallery_bp)
 
     app.register_blueprint(pizza_bp)
+    
+    app.register_blueprint(version_bp)
 
     @app.route('/pokefishing', methods=['GET','POST'])
     def fish():
