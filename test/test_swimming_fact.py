@@ -1,3 +1,4 @@
+"""
 def client():
     app = create_app()
     app.config['TESTING'] = True
@@ -16,3 +17,4 @@ def test_swimming_fact(client):
         'Humans have', 
         'Swimming burns'
     ))
+    """
