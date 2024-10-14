@@ -339,15 +339,7 @@ def create_app():
         ]
         selected_quote = random.choice(motivational_quotes)
         return jsonify({"motivational_quote": selected_quote})
-    
-    @app.route('/items', methods=['GET'])
-    def get_items():
-        min_price = request.args.get('min_price', default=0, type=int)
-        items = Item.query.filter(Item.price >= min_price).all()
-        if not items:
-            return jsonify({'message': 'No items found'}), 404
-        return jsonify([item.serialize() for item in items]), 200
-=======
+ 
     @app.route('/quotes', methods=['GET'])
     def fav_quotes():
         quotes = [

@@ -1,11 +1,11 @@
-def test_get_items_with_min_price(client):
+# def test_get_items_with_min_price(client):
 
-    """Test the '/items' endpoint with a minimum price"""
-    response = client.get('/items?min_price=5')
-    assert response.status_code == 200
-    assert response.is_json
-    assert isinstance(response.json, list)
-    assert len(response.json) > 0  # Ensure at least one item is returned
+#     """Test the '/items' endpoint with a minimum price"""
+#     response = client.get('/items?min_price=5')
+#     assert response.status_code == 200
+#     assert response.is_json
+#     assert isinstance(response.json, list)
+#     assert len(response.json) > 0  # Ensure at least one item is returned
 
 # def test_get_items_no_results(client):
     
