@@ -103,7 +103,7 @@ This will start the server. From there navigate to the url and your desired endp
 
 - <a name="Factorial">**Factorial Endpoint**</a>
   - **Endpoint**: `GET /factorial?n=<value>`
-  - **Description**: Go to http://127.0.0.1:5000/factorial?n=5. Replace the value of `n` with whatever number you want to see the factorial of. You can also add more factorials by doing `?n=5&n=4&n=3` and so on.
+  - **Description**: Go to http://127.0.0.1:5000/factorial?n=5. Replace the value of `n` with whatever number you want to see the factorial of. You can also add more factorials by doing `?n=5&n=4&n=3` and so on. Try larger numers as well!
   - **Test File**: test_factorial.py
 
 - <a name="Favorite">**Favorite Quote Endpoint**</a>
@@ -135,7 +135,7 @@ This will start the server. From there navigate to the url and your desired endp
 
 - <a name="Greeting">**Greeting Endpoint**</a>
   - **Endpoint**: `GET /greet`
-  - **Description**: Returns a welcome message.
+  - **Description**: Returns a welcome message with a name now!.
   - **Example Response:**
   ```json
     {

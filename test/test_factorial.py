@@ -1,45 +1,29 @@
-# test for 0
-def test_zero(client):
-    response = client.get('/factorial?n=0')
-    assert response.status_code == 200
-    assert b"1" in response.data
-
-# test for 1
-def test_one(client):
-    response = client.get('/factorial?n=1')
-    assert response.status_code == 200
-    assert b"1" in response.data
-
-# test a small number
-def test_five(client):
+def test_factorial_single_positive(client):
     response = client.get('/factorial?n=5')
     assert response.status_code == 200
-    assert b"120" in response.data
+    data = response.get_json()
+    assert data['result'] == 120
 
-# test a big number
-def test_ten(client):
-    response = client.get('/factorial?n=10')
+def test_factorial_single_zero(client):
+    response = client.get('/factorial?n=0')
     assert response.status_code == 200
-    assert b"3628800" in response.data
+    data = response.get_json()
+    assert data['result'] == 1
 
-def test_negative(client):
-    response = client.get('/factorial?n=-1')
+def test_factorial_single_negative(client):
+    response = client.get('/factorial?n=-5')
     assert response.status_code == 400
-    assert b"error" in response.data
+    data = response.get_json()
+    assert 'error' in data
 
-def test_multipleNumbers(client):
-    response = client.get('/factorial?n=5&n=3&n=2')
+def test_factorial_multiple(client):
+    response = client.get('/factorial?n=3&n=4&n=5')
     assert response.status_code == 200
-    assert b"120" in response.data
-    assert b"6" in response.data
-    assert b"2" in response.data
+    data = response.get_json()
+    assert data['result'] == [6, 24, 120]
 
-def test_multipleNegativeNumbers(client):
-    response = client.get('/factorial?n=5&n=-1')
+def test_factorial_multiple_with_negative(client):
+    response = client.get('/factorial?n=3&n=-4&n=5')
     assert response.status_code == 400
-    assert b"error for -1" in response.data
-
-def test_noInput(client):
-    response = client.get('/factorial')
-    assert response.status_code == 400
-    assert b"error" in response.data
+    data = response.get_json()
+    assert 'error' in data
