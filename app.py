@@ -344,6 +344,20 @@ def create_app():
         quote = random.choice(quotes)
         return jsonify(quote)
     
+    @app.route('/netflix-shows', methods=['GET'])
+    def get_netflix_shows():
+        netflix_shows = [
+            {"title": "Stranger Things", "fact": "The Demogorgon suit was mostly practical effects."},
+            {"title": "The Witcher", "fact": "Henry Cavill performed many of his own stunts."},
+            {"title": "Money Heist", "fact": "The show was initially a flop in Spain before Netflix acquired it."},
+            {"title": "The Crown", "fact": "Claire Foy was paid less than Matt Smith despite being the lead."},
+            {"title": "Narcos", "fact": "The show initially faced criticism for its portrayal of Colombian culture."},
+            {"title": "BoJack Horseman", "fact": "The show used celebrity guest stars who played exaggerated versions of themselves."},
+            {"title": "Black Mirror", "fact": "The show explores the dark side of technology and modern society."}
+        ]
+        selected_show = random.choice(netflix_shows)
+        return jsonify({"netflix_show": selected_show})
+
     @app.route('/travel', methods=['GET','POST'])
     def travel():
         destinations = [
@@ -366,6 +380,19 @@ def create_app():
         picked = random.choice(destinations)
         return jsonify(picked)
 
+    @app.route('/study-facts', methods=['GET'])
+    def get_study_facts():
+        study_facts = [
+            "The Pomodoro Technique helps improve focus by working in 25-minute intervals.",
+            "Exercise before studying can enhance learning and memory.",
+            "Short, frequent study sessions are more effective than long, infrequent ones.",
+            "Taking handwritten notes improves memory more than typing.",
+            "Sleep plays a crucial role in memory consolidation after studying."
+        ]
+        selected_fact = random.choice(study_facts)
+        return jsonify({"study_fact": selected_fact})
+
+
     @app.route('/wrestling_fact', methods=['GET'])
     def wrestling_fact():
         wrestling_facts = [
@@ -377,7 +404,6 @@ def create_app():
         ]
         fact = random.choice(wrestling_facts)
         return jsonify({"fact": fact})
-
     return app
 
 
