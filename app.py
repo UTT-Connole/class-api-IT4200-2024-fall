@@ -11,6 +11,9 @@ import os
 from endpoints.photogallery import photogallery_bp
 import random
 import matplotlib
+import time
+from decimal import Decimal, getcontext 
+
 
 def create_app():
     app = Flask(__name__)
@@ -70,12 +73,11 @@ def create_app():
     
     @app.route('/greet', methods=['GET'])
     def greet():
+        name = request.args.get('name')
+        if name:
+            return jsonify({"message": f"Hello, {name}!"})
         return jsonify({"message": "Hello, Welcome to the API!"})
-
-    @app.route('/greet/<name>', methods=['GET'])
-    def greet_with_name(name):
-        return jsonify({"message": f"Hello, {name}!"})
-
+        
     @app.route('/')
     def hello_world():
         return "Hello World"
@@ -128,41 +130,53 @@ def create_app():
     @app.route('/factorial', methods=['GET'])
     def factorial():
         n = request.args.getlist('n', type=int)
+        as_string = request.args.get('as_string', 'false').lower() == 'true'
+        max_allowed = 1000 
 
         if not n:
-            return "error", 400
-        
-        if len(n) == 1:
-            n = n[0]
-            if n < 0:
-                return "error", 400
-            elif n == 0 or n ==1:
-                return jsonify(result=1), 200
-            else:
-                result = 1
-                for i in range(2, n + 1):
-                    result *= i
-                return jsonify(result=result), 200
-            
+            return jsonify({"error": "No input provided"}), 400
+
+        getcontext().prec = 1000  
+
         def calculate_factorial(num):
             if num < 0:
                 return "error"
-            elif num == 0 or num ==1:
-                return 1
+            elif num == 0 or num == 1:
+                return Decimal(1)
+            elif num > max_allowed:
+                return "too large"
             else:
-                result = 1
+                result = Decimal(1)
                 for i in range(2, num + 1):
                     result *= i
                 return result
-        resultList = []
-        for num in n:
-            result = calculate_factorial(num)
-            if result == "error":
-                return f"error for {num}", 400
-            resultList.append(result)
 
-        return jsonify(result=resultList), 200
-    
+        start_time = time.time()
+
+        if len(n) == 1:
+            result = calculate_factorial(n[0])
+            if result == "error":
+                return jsonify({"error": "Invalid input: negative number"}), 400
+            elif result == "too large":
+                return jsonify({"error": f"Input too large. Maximum allowed is {max_allowed}"}), 400
+            
+            calc_time = time.time() - start_time
+            if as_string:
+                return jsonify(result=str(result), calculation_time=calc_time), 200
+            return jsonify(result=float(result), calculation_time=calc_time), 200
+        else:
+            resultList = []
+            for num in n:
+                result = calculate_factorial(num)
+                if result == "error":
+                    return jsonify({"error": f"Invalid input: negative number {num}"}), 400
+                elif result == "too large":
+                    return jsonify({"error": f"Input {num} too large. Maximum allowed is {max_allowed}"}), 400
+                resultList.append(str(result) if as_string else float(result))
+
+            calc_time = time.time() - start_time
+            return jsonify(result=resultList, calculation_time=calc_time), 200
+        
     @app.route('/favoritequote', methods=['GET', 'POST'])
     def get_favorite_quote():
         favorite_quote = {
