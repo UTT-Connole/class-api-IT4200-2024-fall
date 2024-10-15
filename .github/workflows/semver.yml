@@ -5,7 +5,7 @@ on:
     branches:
       - main
       - semver3
-      - sb
+      
 
 jobs:
   build:
