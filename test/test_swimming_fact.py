@@ -1,9 +1,3 @@
-"""
-def client():
-    app = create_app()
-    app.config['TESTING'] = True
-    with app.test_client() as client:
-        yield client
 
 def test_swimming_fact(client):
     response = client.get('/swimming_fact')
@@ -17,4 +11,4 @@ def test_swimming_fact(client):
         'Humans have', 
         'Swimming burns'
     ))
-    """
+    
