@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-      - semver3
+      - dallinweek8
 jobs:
   build:
     permissions: write-all
