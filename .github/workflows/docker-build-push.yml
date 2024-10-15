@@ -28,7 +28,7 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker tag bubbaj/class-api-it4200-2024-fall:latest bubbaj/class-api-it4200-2024-fall:${{ env.VERSION }}
+          docker tag bubbaj/class-api-it4200-2024-fall:${{ env.VERSION }}
 
       - name: Push Docker Image
         run: |
