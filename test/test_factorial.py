@@ -25,5 +25,14 @@ def test_factorial_multiple(client):
 def test_factorial_multiple_with_negative(client):
     response = client.get('/factorial?n=3&n=-4&n=5')
     assert response.status_code == 400
-    data = response.get_json()
-    assert 'error' in data
+    assert b"No negative numbers:" in response.data
+
+def test_noInput(client):
+    response = client.get('/factorial')
+    assert response.status_code == 400
+    assert b"error" in response.data
+
+def test_float(client):
+    response = client.get('/factorial?n=5.5')
+    assert response.status_code == 400
+    assert b"error" in response.data
