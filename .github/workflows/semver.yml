@@ -33,5 +33,3 @@ jobs:
           git add VERSION
           git commit -m "chore: update VERSION file to ${{ steps.tagging.outputs.new_tag }}"
           git push origin ${{ github.ref }}
-
-      # (Optional) Add any other steps you need, such as running tests or building the Docker image
