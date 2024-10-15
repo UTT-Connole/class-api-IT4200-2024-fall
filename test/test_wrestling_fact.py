@@ -1,9 +1,4 @@
-"""
-def client():
-    app = create_app()
-    app.config['TESTING'] = True
-    with app.test_client() as client:
-        yield client
+
 
 def test_wrestling_fact(client):
     response = client.get('/wrestling_fact')
@@ -17,4 +12,3 @@ def test_wrestling_fact(client):
         'Ric Flair', 
         'Shawn Michaels'
     ))
-    """
