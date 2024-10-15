@@ -47,7 +47,7 @@ python3 -m flask run
 This will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
 
 ### Available Endpoints
-[**Animal Endpoint**](#Animal) | [**Basketball Facts Endpoint**](#Basketball) | [**Brainrot Endpoint**](#Brainrot) | [**Calculator Endpoint**](#Calculator) | [**Color Hexifier Endpoint**](#Hexifier) | [**Convert To Binary Endpoint**](#Binary) | [**Convert To Decimal Endpoint**](#Decimal) | [**Dad Jokes Endpoint**](#Dad) | [**Factorial Endpoint**](#Factorial) | [**Favorite Quote Endpoint**](#Favorite) | [**Fortune Cookie Endpoint**](#Fortune) | [**Fruit Info Endpoint**](#Fruit) | [**Generate Name Endpoint**](#Name) | [**Get Items Endpoint**](#Items) | [**Greeting Endpoint**](#Greeting) | [**Live Weather Endpoint**](#Weather) | [**Make an Endpoint**](#Make) | [**Marathon Facts Endpoint**](#Marathon) | [**MTG Mana Endpoint**](#MTG) | [**Motivation Endpoint**](#Motivation) | [**Photo Gallery Endpoint**](#Photo) | [**Pizza Toppings Endpoint**](#Pizza) | [**Pokefishing Endpoint**](#Pokefishing) | [**Power Endpoint**](#Power) | [**Random Fact Endpoint**](#Random) | [**Sports Facts Endpoint**](#Sports) | [**Stoic Quotes Endpoint**](#Stoic) | [**Tennis Facts Endpoint**](#Tennis) | [**Travel Randomizer Endpoint**](#Travel) | [**Two Mana Combo Endpoint**](#Combo)
+[**Animal Endpoint**](#Animal) | [**Basketball Facts Endpoint**](#Basketball) | [**Brainrot Endpoint**](#Brainrot) | [**Calculator Endpoint**](#Calculator) | [**Color Hexifier Endpoint**](#Hexifier) | [**Convert To Binary Endpoint**](#Binary) | [**Convert To Decimal Endpoint**](#Decimal) | [**Dad Jokes Endpoint**](#Dad) | [**Factorial Endpoint**](#Factorial) | [**Favorite Quote Endpoint**](#Favorite) | [**Fortune Cookie Endpoint**](#Fortune) | [**Fruit Info Endpoint**](#Fruit) | [**Generate Name Endpoint**](#Name) | [**Get Items Endpoint**](#Items) | [**Greeting Endpoint**](#Greeting) | [**Live Weather Endpoint**](#Weather) | [**Make an Endpoint**](#Make) | [**Marathon Facts Endpoint**](#Marathon) | [**MTG Mana Endpoint**](#MTG) | [**Motivation Endpoint**](#Motivation) | [**Photo Gallery Endpoint**](#Photo) | [**Pizza Toppings Endpoint**](#Pizza) | [**Pokefishing Endpoint**](#Pokefishing) | [**Power Endpoint**](#Power) | [**Random Fact Endpoint**](#Random) | [**Swimming Facts Endpoint**](#Sports) |[**Sports Facts Endpoint**](#Sports) | [**Stoic Quotes Endpoint**](#Stoic) | [**Tennis Facts Endpoint**](#Tennis) | [**Travel Randomizer Endpoint**](#Travel) | [**Two Mana Combo Endpoint**](#Combo)| [**Wrestling Facts Endpoint**](#Sports)
 
 - <a name="All Facts">**All Facts Endpoint**</a>
   - **Endpoint**: 'GET /allFacts'
@@ -194,6 +194,11 @@ This will start the server. From there navigate to the url and your desired endp
   - **Description**: Get a good random stoic quote from Plato and others.
   - **Test File**: test_quotes.py
 
+- <a name="Swimming">**Swimming fact Endpoint**</a>
+  - **Endpoint**: `GET /quotes`
+  - **Description**: learn fun facts about swimming.
+  - **Test File**: test_swimming_fact.py
+
 - <a name="Tennis">**Tennis Facts Endpoint**</a>
   - **Endpoint**: `GET /tennisFacts`
   - **Description**: 🎾 Learn fun facts about tennis!
@@ -209,7 +214,10 @@ This will start the server. From there navigate to the url and your desired endp
   - **Description**: Go to http://127.0.0.1:5000/twoManaCombos?color=your_color. Specify which color you want included in your deck by replacing it with your_color. ⚪🔵⚫🔴🟢
   - **Test File**: test_twomana.py
 
-
+- <a name="Wrestling">**Wrestling fact Endpoint**</a>
+  - **Endpoint**: `GET /quotes`
+  - **Description**: learn fun facts about wrestling.
+  - **Test File**: test_wrestling_fact.py
 
 ## Contributors
 
