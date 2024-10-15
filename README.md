@@ -242,7 +242,7 @@ This will start the server. From there navigate to the url and your desired endp
 
 *Only KOOL Kids Will Get This Reference....
 
-![alt text](https://github.com/UTT-Connole/class-api-IT4200-2024-fall/blob/main/images/git%20hw%20edited.png)
+![alt text](https://github.com/UTT-Connole/class-api-IT4200-2024-fall/blob/main/images/gojo.jpg)
 
 
 ```bash

@@ -1,0 +1,59 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Dockerfile'
+      - 'app.py'
+      - 'endpoints/**'
+      - '.github/workflows/**'
+
+jobs:
+  bump-version:
+    name: Bump Version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Bump Version
+        id: bump_version
+        run: |
+          # Logic to bump the version (update version in a file)
+          # Assuming you use a file like VERSION or package.json
+          # If using a version file, it might look like this:
+          version=$(cat VERSION)
+          new_version=$(echo $version | awk -F. -v OFS=. '{$NF++; print}')
+          echo $new_version > VERSION
+          echo "New version is $new_version"
+
+      - name: Commit New Version
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add VERSION
+          git commit -m "Bump version to $new_version"
+          git push
+
+  build-and-push:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    needs: bump-version  # This makes sure this step waits for the bump-version step to complete
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Log in to DockerHub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Build Docker Image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/flask-app:latest .
+          docker tag ${{ secrets.DOCKER_USERNAME }}/flask-app:latest ${{ secrets.DOCKER_USERNAME }}/flask-app:${{ steps.bump_version.outputs.new_version }}
+
+      - name: Push Docker Image
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/flask-app:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/flask-app:${{ steps.bump_version.outputs.new_version }}
