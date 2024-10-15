@@ -33,5 +33,4 @@ jobs:
 
       - name: Push Docker Image
         run: |
-          docker push bubbaj/class-api-it4200-2024-fall:latest
           docker push bubbaj/class-api-it4200-2024-fall:${{ env.VERSION }}
