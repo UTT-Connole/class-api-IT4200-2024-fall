@@ -10,10 +10,9 @@ from endpoints.pizza import pizza_bp
 import os
 from endpoints.photogallery import photogallery_bp
 import random
-import matplotlib
 import time
 from decimal import Decimal, getcontext 
-
+import matplotlib, math
 
 def create_app():
     app = Flask(__name__)
@@ -127,6 +126,7 @@ def create_app():
         
     app.register_blueprint(dadjoke_bp)
 
+    factorialCache = {}
     @app.route('/factorial', methods=['GET'])
     def factorial():
         n = request.args.getlist('n', type=int)
@@ -136,46 +136,24 @@ def create_app():
         if not n:
             return jsonify({"error": "No input provided"}), 400
 
-        getcontext().prec = 1000  
+        resultList = []
 
-        def calculate_factorial(num):
+        for num in n:
             if num < 0:
-                return "error"
-            elif num == 0 or num == 1:
-                return Decimal(1)
-            elif num > max_allowed:
-                return "too large"
-            else:
-                result = Decimal(1)
-                for i in range(2, num + 1):
-                    result *= i
-                return result
-
-        start_time = time.time()
-
-        if len(n) == 1:
-            result = calculate_factorial(n[0])
-            if result == "error":
-                return jsonify({"error": "Invalid input: negative number"}), 400
-            elif result == "too large":
-                return jsonify({"error": f"Input too large. Maximum allowed is {max_allowed}"}), 400
+                return jsonify({"error": f"No negative numbers: {num}"}), 400
             
-            calc_time = time.time() - start_time
-            if as_string:
-                return jsonify(result=str(result), calculation_time=calc_time), 200
-            return jsonify(result=float(result), calculation_time=calc_time), 200
-        else:
-            resultList = []
-            for num in n:
-                result = calculate_factorial(num)
-                if result == "error":
-                    return jsonify({"error": f"Invalid input: negative number {num}"}), 400
-                elif result == "too large":
-                    return jsonify({"error": f"Input {num} too large. Maximum allowed is {max_allowed}"}), 400
-                resultList.append(str(result) if as_string else float(result))
+            if num in factorialCache:
+                result = factorialCache[num]
+            else:
+                result = math.factorial(num)
+                factorialCache[num] = result
+            
+            resultList.append(result)
 
-            calc_time = time.time() - start_time
-            return jsonify(result=resultList, calculation_time=calc_time), 200
+        if len(resultList) == 1:
+            return jsonify(result=resultList[0]), 200 
+        else:
+            return jsonify(result=resultList), 200
         
     @app.route('/favoritequote', methods=['GET', 'POST'])
     def get_favorite_quote():
@@ -308,8 +286,12 @@ def create_app():
 
     @app.route('/power', methods=['GET'])
     def power():
-        base = request.args.get('base', type=int)
-        exp = request.args.get('exp', type=int)
+        base = request.args.get('base', type=float)
+        exp = request.args.get('exp', type=float)
+
+        if base == 0 and exp < 0:
+            return "Cannot raise 0 to a negative number", 400
+
         if base is None or exp is None:
             return "Invalid Input", 400
         result = base ** exp
