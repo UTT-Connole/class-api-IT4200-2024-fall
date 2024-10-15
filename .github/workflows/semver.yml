@@ -1,15 +1,19 @@
 name: Bump version
+
 on:
   push:
     branches:
       - main
       - semver3
+      
+
 jobs:
   build:
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
+      
       - name: Github Tag with semantic versioning
         id: tagging
         uses: hennejg/github-tag-action@v4.3.1    
@@ -19,3 +23,18 @@ jobs:
           tag_prefix: ""
           release_branches: main
           create_annotated_tag: True
+      
+      # Step to update the VERSION file
+      - name: Update VERSION file
+        run: |
+          # Extract the version without the suffix
+          version="${{ steps.tagging.outputs.new_tag }}"
+          version_only=$(echo "$version" | cut -d'-' -f1)  # Get only the part before the first '-'
+          
+          echo "$version_only" > VERSION
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add VERSION
+          git commit -m "chore: update VERSION file to $version_only"
+          git push origin ${{ github.ref }}
+
