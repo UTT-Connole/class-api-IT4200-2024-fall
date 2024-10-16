@@ -7,6 +7,7 @@ from endpoints.calc import calc_bp
 from endpoints.mtg import mtg_bp
 from endpoints.allsportfacts import allsportfacts_bp
 from endpoints.pizza import pizza_bp
+from endpoints.version import version_bp
 import os
 from endpoints.photogallery import photogallery_bp
 import random
@@ -67,8 +68,18 @@ def create_app():
     @app.route('/generateName', methods=['GET'])
     def generate_name():
         names = ["Eve", "Jack", "Liam", "Mia"]
-        name = random.choice(names)
+        length = request.args.get('length', default=None, type=int)
+    
+        if length:
+            filtered_names = [name for name in names if len(name) == length]
+            if not filtered_names:
+                return jsonify({"error": f"No names found with length {length}"}), 400
+            name = random.choice(filtered_names)
+        else:
+            name = random.choice(names)
+    
         return jsonify({"name": name})
+
     
     @app.route('/greet', methods=['GET'])
     def greet():
@@ -158,6 +169,7 @@ def create_app():
             quotes.append(new_quote)  
             return jsonify({"message": "New favorite quote added!", "quote": new_quote}), 201
     
+    
     @app.route('/fortune', methods=['GET'])
     def get_fortune():
         fortunes = [
@@ -169,7 +181,10 @@ def create_app():
             "A soft voice may be awfully persuasive.",
             "All your hard work will soon pay off."
         ]
-        return jsonify({"fortune": random.choice(fortunes)})
+        count = request.args.get('count', default=1, type=int)
+        if count < 1:
+            count = 1
+        return jsonify({"fortunes": random.sample(fortunes, min(count, len(fortunes)))})
     
     @app.route('/fruitInfo', methods=['GET'])
     def fruit_info():
@@ -246,6 +261,8 @@ def create_app():
     app.register_blueprint(photogallery_bp)
 
     app.register_blueprint(pizza_bp)
+    
+    app.register_blueprint(version_bp)
 
     @app.route('/pokefishing', methods=['GET','POST'])
     def fish():

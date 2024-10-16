@@ -68,7 +68,7 @@ This will start the server. From there navigate to the url and your desired endp
   - **Endpoint**: `GET /calc?x=<number>&y=<number>&op=<operator>` or `POST /calc`
   - **Description**: Use the following template to add, subtract, multiply, divide, or find the modulus of two numbers: `http://127.0.0.1:5000/calc?x=<number>&y=<number>&op=<operator>`. Replace `<number>` with the numbers you want to use, and replace `<operator>` with one of the following operations: `add`, `subtract`, `multiply`, `divide`, `mod`, `power`.
     
-    For square or square root operations, use the following template: `http://127.0.0.1:5000/calc?x=<number>&op=<operator>`. Replace `<number>` with the number you want to use, and replace `<operator>` with either `square` or `sqrt`.
+    For square, square root, or cube operations, use the following template: `http://127.0.0.1:5000/calc?x=<number>&op=<operator>`. Replace `<number>` with the number you want to use, and replace `<operator>` with either `square`, `sqrt`, or `cube`.
 
     For binary and decimal conversions, use the following template: `http://127.0.0.1:5000/calc?x=<number>&op=<operator>`. Replace `<number>` with the number you want to convert to binary or decimal with either `decimal` or `binary` respectively.
 
@@ -78,6 +78,15 @@ This will start the server. From there navigate to the url and your desired endp
     - If any of the variables (`x`, `y`, or `op`) are missing (unless specified), you will receive an error.
     - If no parameters are provided, the endpoint will render an HTML form for input.
   - **Test File**: `test_calc.py`
+  
+- <a name="Version"> **Version Endpoints**</a>
+  - **Endpoint**: `GET /version`
+  - **Description**: Returns the latest version of the repository based on the latest tag.
+  - **Test File**: test_version.py
+
+  - **Endpoint**: `GET /current-version`
+  - **Description**: Returns the current working version of the application based on the current commit.
+  - **Test File**: test_version.py
 
 - <a name="Hexifier">**Color Hexifier Endpoint**</a>
   - **Endpoint**: `GET /color?color=blue`
@@ -113,8 +122,8 @@ This will start the server. From there navigate to the url and your desired endp
 
 - <a name="Fortune">**Fortune Cookie Endpoint**</a>
   - **Endpoint**: `GET /fortune`
-  - **Description**: Returns a random fortune in JSON format.
-  - **Test File**: test_fortune.py
+  - **Description**: Returns a random fortune in JSON format. You can specify the count parameter to request multiple fortunes.
+  - **Test File**: test_getfortune.py
 
 - <a name="Fruit">**Fruit Info Endpoint**</a>
   - **Endpoint**: `GET /fruitInfo?fruit=<fruit_name>`
@@ -125,7 +134,7 @@ This will start the server. From there navigate to the url and your desired endp
 
 - <a name="Name">**Generate Name Endpoint**</a>
   - **Endpoint**: `GET /randomName`
-  - **Description**: Get a randomly generated name.
+  - **Description**: Get a randomly generated name. You can specify the length parameter to filter names by a specific length.
   - **Test File**: test_generate_name.py
 
 - <a name="Items">**Get Items Endpoint**</a>
