@@ -11,6 +11,8 @@ jobs:
   bump-version:
     permissions: write-all
     runs-on: ubuntu-latest
+    outputs:
+      new_version: ${{ steps.tagging.outputs.new_tag }}  # Capture the new version tag
     steps:
       - uses: actions/checkout@master
       
@@ -23,14 +25,6 @@ jobs:
           tag_prefix: ""
           release_branches: main
           create_annotated_tag: True
-
-      - name: Extract version number
-        id: extract_version
-        run: |
-          # Extract the part before the first '-' if it exists
-          version="${{ steps.tagging.outputs.new_tag }}"
-          version_only=$(echo "$version" | cut -d'-' -f1)
-          echo "VERSION_ONLY=$version_only" >> $GITHUB_ENV
 
   build-and-push:
     name: Build and Push Docker Image
@@ -45,8 +39,8 @@ jobs:
       
       - name: Build Docker Image
         run: |
-          docker build -t bubbaj/class-api-it4200-2024-fall:${{ env.VERSION_ONLY }} .
+          docker build -t bubbaj/class-api-it4200-2024-fall:${{ needs.bump-version.outputs.new_version }} .
       
       - name: Push Docker Image
         run: |
-          docker push bubbaj/class-api-it4200-2024-fall:${{ env.VERSION_ONLY }}
+          docker push bubbaj/class-api-it4200-2024-fall:${{ needs.bump-version.outputs.new_version }}
