@@ -113,8 +113,8 @@ This will start the server. From there navigate to the url and your desired endp
 
 - <a name="Fortune">**Fortune Cookie Endpoint**</a>
   - **Endpoint**: `GET /fortune`
-  - **Description**: Returns a random fortune in JSON format.
-  - **Test File**: test_fortune.py
+  - **Description**: Returns a random fortune in JSON format. You can specify the count parameter to request multiple fortunes.
+  - **Test File**: test_getfortune.py
 
 - <a name="Fruit">**Fruit Info Endpoint**</a>
   - **Endpoint**: `GET /fruitInfo?fruit=<fruit_name>`
@@ -125,7 +125,7 @@ This will start the server. From there navigate to the url and your desired endp
 
 - <a name="Name">**Generate Name Endpoint**</a>
   - **Endpoint**: `GET /randomName`
-  - **Description**: Get a randomly generated name.
+  - **Description**: Get a randomly generated name. You can specify the length parameter to filter names by a specific length.
   - **Test File**: test_generate_name.py
 
 - <a name="Items">**Get Items Endpoint**</a>
