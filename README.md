@@ -47,19 +47,19 @@ python3 -m flask run
 This will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
 
 ### Available Endpoints
-[**Animal Endpoint**](#Animal) | [**Basketball Facts Endpoint**](#Basketball) | [**Brainrot Endpoint**](#Brainrot) | [**Calculator Endpoint**](#Calculator) | [**Color Hexifier Endpoint**](#Hexifier) | [**Convert To Binary Endpoint**](#Binary) | [**Convert To Decimal Endpoint**](#Decimal) | [**Dad Jokes Endpoint**](#Dad) | [**Factorial Endpoint**](#Factorial) | [**Favorite Quote Endpoint**](#Favorite) | [**Fortune Cookie Endpoint**](#Fortune) | [**Fruit Info Endpoint**](#Fruit) | [**Generate Name Endpoint**](#Name) | [**Get Items Endpoint**](#Items) | [**Greeting Endpoint**](#Greeting) | [**Live Weather Endpoint**](#Weather) | [**Make an Endpoint**](#Make) | [**Marathon Facts Endpoint**](#Marathon) | [**MTG Mana Endpoint**](#MTG) | [**Motivation Endpoint**](#Motivation) | [**Netflix Show Endpoint**] | [**Photo Gallery Endpoint**](#Photo) | [**Pizza Toppings Endpoint**](#Pizza) | [**Pokefishing Endpoint**](#Pokefishing) | [**Power Endpoint**](#Power) | [**Random Fact Endpoint**](#Random) | [**Swimming Facts Endpoint**](#Sports) |[**Sports Facts Endpoint**](#Sports) | [**Study Fact Endpoint**](#Study) | [**Stoic Quotes Endpoint**](#Stoic) | [**Tennis Facts Endpoint**](#Tennis) | [**Travel Randomizer Endpoint**](#Travel) | [**Two Mana Combo Endpoint**](#Combo)| [**Wrestling Facts Endpoint**](#Sports)
+[**All Facts Endpoint**](#AllFacts) | [**Animal Endpoint**](#Animal) | [**Brainrot Endpoint**](#Brainrot) | [**Calculator Endpoint**](#Calculator) | [**Color Hexifier Endpoint**](#Hexifier) | [**Convert To Binary Endpoint**](#Binary) | [**Convert To Decimal Endpoint**](#Decimal) | [**Dad Jokes Endpoint**](#Dad) | [**Factorial Endpoint**](#Factorial) | [**Favorite Quote Endpoint**](#Favorite) | [**Fortune Cookie Endpoint**](#Fortune) | [**Fruit Info Endpoint**](#Fruit) | [**Generate Name Endpoint**](#Name) | [**Get Items Endpoint**](#Items) | [**Greeting Endpoint**](#Greeting) | [**Live Weather Endpoint**](#Weather) | [**Make an Endpoint**](#Make) | [**Marathon Facts Endpoint**](#Marathon) | [**MTG Mana Endpoint**](#MTG) | [**Motivation Endpoint**](#Motivation) | [**Netflix Show Endpoint**](#Netflix) | [**Photo Gallery Endpoint**](#Photo) | [**Pizza Toppings Endpoint**](#Pizza) | [**Pokefishing Endpoint**](#Pokefishing) | [**Power Endpoint**](#Power) | [**Random Fact Endpoint**](#Random) | [**Swimming Facts Endpoint**](#Swim) |[**Sports Facts Endpoint**](#Sports) | [**Study Fact Endpoint**](#Study) | [**Stoic Quotes Endpoint**](#Stoic) | [**Tennis Facts Endpoint**](#Tennis) | [**Travel Randomizer Endpoint**](#Travel) | [**Two Mana Combo Endpoint**](#Combo)| [**Wrestling Facts Endpoint**](#Sports)
 
-- <a name="All Facts">**All Facts Endpoint**</a>
+- <a name="AllFacts">**All Facts Endpoint**</a>
   - **Endpoint**: 'GET /allFacts'
   - **Description**: The All Facts endpoint is a consolidated endpoint of facts about various topics. Just going to the /allFacts endpoint will return a random fact from any category. But specifying a category, like random, swimming, basketball, and wrestling will return a random fact about that category. EX: /allFacts?category=swimming
   - **Test File**: test_allfacts.py
 
-- **AnimalEndpoint**
+- <a name="Animal">**Animal Endpoint**</a>
   - **Endpoint**: `GET /animalGuesser`
   - **Description**: The Animal Guesser will randomly guess an animal from a predefined list. If the user makes a guess, it checks the guess against the selected animal. If the guess is correct, it returns a success message. If the guess is incorrect, it returns a message with a hint that reveals the first letter of the animal. EX: /animalGuesser?guess=lion
   - **Test File**: test_animal.py
 
-- **Brainrot Endpoint**
+- <a name="Brainrot">**Brainrot Endpoint**</a>
   - **Endpoint**: `GET /brainrot`
   - **Description**: Add a new word to your vocabulary!
   - **Test File**: test_brainrot.py
@@ -133,7 +133,7 @@ This will start the server. From there navigate to the url and your desired endp
     - If the fruit is not available, you will need to select from the provided options.
 
 - <a name="Name">**Generate Name Endpoint**</a>
-  - **Endpoint**: `GET /randomName`
+  - **Endpoint**: `GET /generateName`
   - **Description**: Get a randomly generated name. You can specify the length parameter to filter names by a specific length.
   - **Test File**: test_generate_name.py
 
@@ -178,7 +178,7 @@ This will start the server. From there navigate to the url and your desired endp
   - **Description**: The /motivation endpoint provides a random motivational quote whenever accessed via a GET request. When a user sends a request to this endpoint, the app responds with one of five pre-defined motivational quotes, returned in JSON format.
   - **Test File**: test_motivation.py test_get_motivation.py
 
-- <a name="NetflixShows">**Netflix Shows Endpoint**</a>
+- <a name="Netflix">**Netflix Shows Endpoint**</a>
   - **Endpoint**: `GET /netflix-shows`
   - **Description**: Get a random fun fact about your favorite Netflix shows! Add your own shows and facts to the source code to see them on the endpoint! !NO Adult Content allowed!
   - **Test File**: `test_netflix_shows.py`
@@ -208,18 +208,18 @@ This will start the server. From there navigate to the url and your desired endp
   - **Description**: Get a good random stoic quote from Plato and others.
   - **Test File**: test_quotes.py
 
-- <a name="StudyFacts">**Study Facts Endpoint**</a>
+- <a name="Study">**Study Facts Endpoint**</a>
   - **Endpoint**: `GET /study-facts`
   - **Description**: Retrieve random study tips and facts to enhance your learning experience! Add your own tips to the source code to see them on the endpoint! !NO Adult Content allowed!
   - **Test File**: `test_study_facts.py`
 
-- <a name="Swimming">**Swimming fact Endpoint**</a>
-  - **Endpoint**: `GET /quotes`
+- <a name="Swim">**Swimming fact Endpoint**</a>
+  - **Endpoint**: `GET /swimming_fact`
   - **Description**: learn fun facts about swimming.
   - **Test File**: test_swimming_fact.py
 
 - <a name="Tennis">**Tennis Facts Endpoint**</a>
-  - **Endpoint**: `GET /tennisFacts`
+  - **Endpoint**: `GET /tennis_fact`
   - **Description**: 🎾 Learn fun facts about tennis!
   - **Test File**: test_tennisfacts_.py
 
@@ -234,7 +234,7 @@ This will start the server. From there navigate to the url and your desired endp
   - **Test File**: test_twomana.py
 
 - <a name="Wrestling">**Wrestling fact Endpoint**</a>
-  - **Endpoint**: `GET /quotes`
+  - **Endpoint**: `GET /wrestling_fact`
   - **Description**: learn fun facts about wrestling.
   - **Test File**: test_wrestling_fact.py
 
