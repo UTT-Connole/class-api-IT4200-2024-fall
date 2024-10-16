@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - semver3
+      - testvereveryonestoppushingstuffplz
       
 
 jobs:
@@ -23,6 +23,7 @@ jobs:
           tag_prefix: ""
           release_branches: main
           create_annotated_tag: True
+      - run: echo "${{ steps.tagging.outputs.new_tag }}"
       
       # Step to update the VERSION file
       - name: Update VERSION file
