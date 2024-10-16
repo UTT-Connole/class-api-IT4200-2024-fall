@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - semver3
+      - s-issue
       
 
 jobs:
@@ -38,3 +39,8 @@ jobs:
           git commit -m "chore: update VERSION file to $version_only"
           git push origin ${{ github.ref }}
 
+      - name: Debugging Version Tag
+        run: |
+          echo "Full version: $version"
+          echo "Version only: $version_only"
+        
