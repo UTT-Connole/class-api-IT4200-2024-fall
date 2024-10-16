@@ -1,7 +1,7 @@
 function toggleYField() {
     const op = document.getElementById('op').value;
     const yField = document.getElementById('y-field');
-    yField.style.display = (op === 'square' || op === 'sqrt' || op === 'binary' || op === 'decimal') ? 'none' : 'block';
+    yField.style.display = (op === 'square' || op === 'sqrt' || op === 'binary' || op === 'decimal' || op === 'cube') ? 'none' : 'block';
 }
 
 document.querySelector('form').addEventListener('submit', async function(event) {

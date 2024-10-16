@@ -9,6 +9,7 @@ RUN pip install -r requirements.txt
 COPY __init__.py __init__.py
 COPY templates templates
 COPY endpoints endpoints
+COPY static static
 COPY app.py app.py
 
 ENV WEATHER_API_KEY=$WEATHER_API_KEY
