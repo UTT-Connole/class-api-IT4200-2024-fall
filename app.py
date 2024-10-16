@@ -7,6 +7,7 @@ from endpoints.calc import calc_bp
 from endpoints.mtg import mtg_bp
 from endpoints.allsportfacts import allsportfacts_bp
 from endpoints.pizza import pizza_bp
+from endpoints.version import version_bp
 import os
 from endpoints.photogallery import photogallery_bp
 import random
@@ -260,6 +261,8 @@ def create_app():
     app.register_blueprint(photogallery_bp)
 
     app.register_blueprint(pizza_bp)
+    
+    app.register_blueprint(version_bp)
 
     @app.route('/pokefishing', methods=['GET','POST'])
     def fish():

@@ -68,7 +68,7 @@ This will start the server. From there navigate to the url and your desired endp
   - **Endpoint**: `GET /calc?x=<number>&y=<number>&op=<operator>` or `POST /calc`
   - **Description**: Use the following template to add, subtract, multiply, divide, or find the modulus of two numbers: `http://127.0.0.1:5000/calc?x=<number>&y=<number>&op=<operator>`. Replace `<number>` with the numbers you want to use, and replace `<operator>` with one of the following operations: `add`, `subtract`, `multiply`, `divide`, `mod`, `power`.
     
-    For square or square root operations, use the following template: `http://127.0.0.1:5000/calc?x=<number>&op=<operator>`. Replace `<number>` with the number you want to use, and replace `<operator>` with either `square` or `sqrt`.
+    For square, square root, or cube operations, use the following template: `http://127.0.0.1:5000/calc?x=<number>&op=<operator>`. Replace `<number>` with the number you want to use, and replace `<operator>` with either `square`, `sqrt`, or `cube`.
 
     For binary and decimal conversions, use the following template: `http://127.0.0.1:5000/calc?x=<number>&op=<operator>`. Replace `<number>` with the number you want to convert to binary or decimal with either `decimal` or `binary` respectively.
 
@@ -78,6 +78,15 @@ This will start the server. From there navigate to the url and your desired endp
     - If any of the variables (`x`, `y`, or `op`) are missing (unless specified), you will receive an error.
     - If no parameters are provided, the endpoint will render an HTML form for input.
   - **Test File**: `test_calc.py`
+  
+- <a name="Version"> **Version Endpoints**</a>
+  - **Endpoint**: `GET /version`
+  - **Description**: Returns the latest version of the repository based on the latest tag.
+  - **Test File**: test_version.py
+
+  - **Endpoint**: `GET /current-version`
+  - **Description**: Returns the current working version of the application based on the current commit.
+  - **Test File**: test_version.py
 
 - <a name="Hexifier">**Color Hexifier Endpoint**</a>
   - **Endpoint**: `GET /color?color=blue`
