@@ -12,6 +12,8 @@ Here is an example of the release type that will be done based on a commit messa
 | `feat(pencil): add 'graphiteWidth' option`                                                                                                                                                       | Minor Release |
 | `perf(pencil): remove graphiteWidth option`<br><br>`BREAKING CHANGE: The graphiteWidth option has been removed.`<br>`The default graphite width of 10mm is always used for performance reasons.` | Major Release |
 
+If no commit message contains any information, then **default_bump** (currently set to minor) will be used. For major changes, using the exact given format including the line spacing is required. All others do not require any extra lines.
+
 ### Other commit options
 
 * **feat**: A new feature
@@ -24,8 +26,6 @@ Here is an example of the release type that will be done based on a commit messa
 * **test**: Adding missing or correcting existing tests
 * **chore**: Changes to the build process or auxiliary tools and libraries such as documentation
   generation
-
-If no commit message contains any information, then **default_bump** (currently set to minor) will be used. For major changes, using the exact given format including the line spacing is required. All others do not require any extra lines.
 
 ## How to install pip requirements
 
@@ -60,7 +60,7 @@ python3 -m flask run
 This will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
 
 ### Available Endpoints
-[**Animal Endpoint**](#Animal) | [**Basketball Facts Endpoint**](#Basketball) | [**Brainrot Endpoint**](#Brainrot) | [**Calculator Endpoint**](#Calculator) | [**Color Hexifier Endpoint**](#Hexifier) | [**Convert To Binary Endpoint**](#Binary) | [**Convert To Decimal Endpoint**](#Decimal) | [**Dad Jokes Endpoint**](#Dad) | [**Factorial Endpoint**](#Factorial) | [**Favorite Quote Endpoint**](#Favorite) | [**Fortune Cookie Endpoint**](#Fortune) | [**Fruit Info Endpoint**](#Fruit) | [**Generate Name Endpoint**](#Name) | [**Get Items Endpoint**](#Items) | [**Greeting Endpoint**](#Greeting) | [**Live Weather Endpoint**](#Weather) | [**Make an Endpoint**](#Make) | [**Marathon Facts Endpoint**](#Marathon) | [**MTG Mana Endpoint**](#MTG) | [**Motivation Endpoint**](#Motivation) | [**Netflix Show Endpoint**] | [**Photo Gallery Endpoint**](#Photo) | [**Pizza Toppings Endpoint**](#Pizza) | [**Pokefishing Endpoint**](#Pokefishing) | [**Power Endpoint**](#Power) | [**Random Fact Endpoint**](#Random) | [**Swimming Facts Endpoint**](#Sports) |[**Sports Facts Endpoint**](#Sports) | [**Study Fact Endpoint**](#Study) | [**Stoic Quotes Endpoint**](#Stoic) | [**Tennis Facts Endpoint**](#Tennis) | [**Travel Randomizer Endpoint**](#Travel) | [**Two Mana Combo Endpoint**](#Combo)| [**Wrestling Facts Endpoint**](#Sports)
+[**Animal Endpoint**](#Animal) | [**Basketball Facts Endpoint**](#Basketball) | [**Brainrot Endpoint**](#Brainrot) | [**Calculator Endpoint**](#Calculator) | [**Color Hexifier Endpoint**](#Hexifier) | [**Convert To Binary Endpoint**](#Binary) | [**Convert To Decimal Endpoint**](#Decimal) | [**Dad Jokes Endpoint**](#Dad) | [**Factorial Endpoint**](#Factorial) | [**Favorite Quote Endpoint**](#Favorite) | [**Fortune Cookie Endpoint**](#Fortune) | [**Fruit Info Endpoint**](#Fruit) | [**Generate Name Endpoint**](#Name) | [**Get Items Endpoint**](#Items) | [**Greeting Endpoint**](#Greeting) | [**Live Weather Endpoint**](#Weather) | [**Make an Endpoint**](#Make) | [**Marathon Facts Endpoint**](#Marathon) | [**MTG Mana Endpoint**](#MTG) | [**Motivation Endpoint**](#Motivation) | [**Netflix Show Endpoint**](#Netflix) | [**Photo Gallery Endpoint**](#Photo) | [**Pizza Toppings Endpoint**](#Pizza) | [**Pokefishing Endpoint**](#Pokefishing) | [**Power Endpoint**](#Power) | [**Random Fact Endpoint**](#Random) | [**Swimming Facts Endpoint**](#Sports) |[**Sports Facts Endpoint**](#Sports) | [**Study Fact Endpoint**](#Study) | [**Stoic Quotes Endpoint**](#Stoic) | [**Tennis Facts Endpoint**](#Tennis) | [**Travel Randomizer Endpoint**](#Travel) | [**Two Mana Combo Endpoint**](#Combo)| [**Wrestling Facts Endpoint**](#Sports)
 
 - <a name="All Facts">**All Facts Endpoint**</a>
   - **Endpoint**: 'GET /allFacts'
@@ -191,7 +191,7 @@ This will start the server. From there navigate to the url and your desired endp
   - **Description**: The /motivation endpoint provides a random motivational quote whenever accessed via a GET request. When a user sends a request to this endpoint, the app responds with one of five pre-defined motivational quotes, returned in JSON format.
   - **Test File**: test_motivation.py test_get_motivation.py
 
-- <a name="NetflixShows">**Netflix Shows Endpoint**</a>
+- <a name="Netflix">**Netflix Shows Endpoint**</a>
   - **Endpoint**: `GET /netflix-shows`
   - **Description**: Get a random fun fact about your favorite Netflix shows! Add your own shows and facts to the source code to see them on the endpoint! !NO Adult Content allowed!
   - **Test File**: `test_netflix_shows.py`
