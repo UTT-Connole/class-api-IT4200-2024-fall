@@ -24,6 +24,9 @@ jobs:
           release_branches: main
           create_annotated_tag: True
 
+      - name: Output the new tag
+        run: echo "NEW_TAG=${{ steps.tagging.outputs.new_tag }}" >> $GITHUB_ENV
+
   build-and-push:
     name: Build and Push Docker Image
     runs-on: ubuntu-latest
@@ -37,8 +40,8 @@ jobs:
       
       - name: Build Docker Image
         run: |
-          docker build -t bubbaj/class-api-it4200-2024-fall:${{steps.tagging.outputs.new_tag}} .
+          docker build -t bubbaj/class-api-it4200-2024-fall:${{ env.NEW_TAG }} .
       
       - name: Push Docker Image
         run: |
-          docker push bubbaj/class-api-it4200-2024-fall:${{steps.tagging.outputs.new_tag}}
+          docker push bubbaj/class-api-it4200-2024-fall:${{ env.NEW_TAG }}
