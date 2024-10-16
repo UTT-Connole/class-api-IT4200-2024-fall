@@ -29,7 +29,7 @@ jobs:
   build-and-push:
     name: Build and Push Docker Image
     runs-on: ubuntu-latest
-    needs: bump-version  # Ensure this job waits until bump-version job completes
+    needs: bump-version
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -37,10 +37,18 @@ jobs:
       - name: Log in to DockerHub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
       
+      - name: Extract x.y.z version
+        id: extract_version
+        run: |
+          VERSION=${{ needs.bump-version.outputs.new_version }}
+          # Extract the x.y.z part (everything before the hyphen)
+          SIMPLE_VERSION=$(echo $VERSION | cut -d '-' -f 1)
+          echo "version=$SIMPLE_VERSION" >> $GITHUB_ENV  # Store it in environment variable
+      
       - name: Build Docker Image
         run: |
-          docker build -t bubbaj/class-api-it4200-2024-fall:${{ needs.bump-version.outputs.new_version }} .
+          docker build -t bubbaj/class-api-it4200-2024-fall:${{ env.version }} .
       
       - name: Push Docker Image
         run: |
-          docker push bubbaj/class-api-it4200-2024-fall:${{ needs.bump-version.outputs.new_version }}
+          docker push bubbaj/class-api-it4200-2024-fall:${{ env.version }}
