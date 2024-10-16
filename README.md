@@ -188,10 +188,10 @@ This will start the server. From there navigate to the url and your desired endp
   - **Description**: Go checkout the art gallery complied by yours truly. !Add your own images to the images folder to see them on the endpoint! !NO Adult Content allowed! 
   - **Test File**: test_photogallery.py
 
-- <a name="Pizza">**Pizza Toppings Endpoint**</a>
-  - **Endpoint**: `GET /pizzaToppings`
-  - **Description**: Too lazy to think of what pizza to order? Get your crust, sauce and toppings randomly chosen. 
-  - **Test File**: test_toppings.py
+- <a name="Pizza">**Pizza Endpoint**</a>
+  - **Endpoint**: `GET /pizza`
+  - **Description**: Too lazy to think of what pizza to order? Get your own fully randomized pizza here. 🍕
+  - **Test File**: test_pizza.py
 
 - <a name="Pokefishing">**Pokefishing Endpoint**</a>
   - **Endpoint**: `GET /pokefishing`
