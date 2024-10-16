@@ -105,3 +105,10 @@ def test_calc_power(client):
     assert response.status_code == 200
     json_data = response.get_json()
     assert json_data['result'] == 8
+    
+def test_calc_cube(client):
+    """Test the cube operation"""
+    response = client.get('/calc?x=3&op=cube')
+    assert response.status_code == 200
+    json_data = response.get_json()
+    assert json_data['result'] == 27
