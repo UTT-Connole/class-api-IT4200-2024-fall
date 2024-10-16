@@ -12,7 +12,20 @@ Here is an example of the release type that will be done based on a commit messa
 | `feat(pencil): add 'graphiteWidth' option`                                                                                                                                                       | Minor Release |
 | `perf(pencil): remove graphiteWidth option`<br><br>`BREAKING CHANGE: The graphiteWidth option has been removed.`<br>`The default graphite width of 10mm is always used for performance reasons.` | Major Release |
 
-If no commit message contains any information, then **default_bump** (currently set to minor) will be used.
+### Other commit options
+
+* **feat**: A new feature
+* **fix**: A bug fix
+* **docs**: Documentation only changes
+* **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing
+  semi-colons, etc)
+* **refactor**: A code change that neither fixes a bug nor adds a feature
+* **perf**: A code change that improves performance
+* **test**: Adding missing or correcting existing tests
+* **chore**: Changes to the build process or auxiliary tools and libraries such as documentation
+  generation
+
+If no commit message contains any information, then **default_bump** (currently set to minor) will be used. For major changes, both perf and BREAKING CHANGE lines are required.
 
 ## How to install pip requirements
 
