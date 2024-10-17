@@ -3,20 +3,33 @@ from endpoints.marathonfacts import marathonFacts_bp
 from endpoints.dadjoke import dadjoke_bp
 from endpoints.brainrot import brainrot_bp
 from endpoints.motivation import motivation_bp
-from endpoints.calc import calc_bp
+from endpoints.math import math_bp
 from endpoints.mtg import mtg_bp
 from endpoints.allsportfacts import allsportfacts_bp
 from endpoints.pizza import pizza_bp
 from endpoints.version import version_bp
-import os
+from endpoints.quotes import quotes_bp
 from endpoints.photogallery import photogallery_bp
-import random
+import random, requests
+import os
 import time
 from decimal import Decimal, getcontext 
 import matplotlib, math
 
 def create_app():
     app = Flask(__name__)
+
+    app.register_blueprint(brainrot_bp)
+    app.register_blueprint(dadjoke_bp)
+    app.register_blueprint(math_bp)
+    app.register_blueprint(allsportfacts_bp)
+    app.register_blueprint(marathonFacts_bp)
+    app.register_blueprint(mtg_bp)
+    app.register_blueprint(motivation_bp)
+    app.register_blueprint(photogallery_bp)
+    app.register_blueprint(pizza_bp)
+    app.register_blueprint(version_bp)
+    app.register_blueprint(quotes_bp)
 
     facts = {
     "random": [
@@ -107,10 +120,6 @@ def create_app():
         else:
             return jsonify({"animal": random_animal}), 200
 
-    app.register_blueprint(brainrot_bp)
-
-    app.register_blueprint(calc_bp)
-
     @app.route('/color', methods=['GET','POST'])
     def color_hexifier():
         color_name = request.args.get('color')
@@ -122,37 +131,6 @@ def create_app():
             return f"The hex code for {color_name} is {hex_code}"
         else:
             return "Invalid color name"
-        
-    app.register_blueprint(dadjoke_bp)
-
-    factorialCache = {}
-    @app.route('/factorial', methods=['GET'])
-    def factorial():
-        n = request.args.getlist('n', type=int)
-        as_string = request.args.get('as_string', 'false').lower() == 'true'
-        max_allowed = 1000 
-
-        if not n:
-            return jsonify({"error": "No input provided"}), 400
-
-        resultList = []
-
-        for num in n:
-            if num < 0:
-                return jsonify({"error": f"No negative numbers: {num}"}), 400
-            
-            if num in factorialCache:
-                result = factorialCache[num]
-            else:
-                result = math.factorial(num)
-                factorialCache[num] = result
-            
-            resultList.append(result)
-
-        if len(resultList) == 1:
-            return jsonify(result=resultList[0]), 200 
-        else:
-            return jsonify(result=resultList), 200
         
     @app.route('/favoritequote', methods=['GET', 'POST'])
     def get_favorite_quote():
@@ -222,6 +200,8 @@ def create_app():
     def weather(city):
         url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={WEATHER_API_KEY}&units=imperial'
         response = requests.get(url)
+        print("API Key:", WEATHER_API_KEY)
+        print("Request URL:", url)
         #Returns error if invalid city is entered
         if response.status_code != 200:
             return ({"error": "City not found or API error."}), 404
@@ -251,18 +231,6 @@ def create_app():
             return jsonify({"error": "Invalid step number"}), 400
 
         return jsonify(endpointSteps)
-
-    app.register_blueprint(marathonFacts_bp)
-
-    app.register_blueprint(mtg_bp)
-
-    app.register_blueprint(motivation_bp)
-
-    app.register_blueprint(photogallery_bp)
-
-    app.register_blueprint(pizza_bp)
-    
-    app.register_blueprint(version_bp)
 
     @app.route('/pokefishing', methods=['GET','POST'])
     def fish():
@@ -316,8 +284,6 @@ def create_app():
         fact_count = len(facts)  # Count of total facts
         return jsonify({"fact": selected_fact['fact'], "totalFacts": fact_count})
 
-    app.register_blueprint(allsportfacts_bp)
-
     @app.route('/swimming_fact', methods=['GET'])
     def swimming_fact():
         facts = [
@@ -329,38 +295,6 @@ def create_app():
         ]
         return jsonify({"fact": facts[0]})
 
-    @app.route('/motivation', methods=['GET'])
-    def get_motivation():
-        motivational_quotes = [
-            "The only way to do great work is to love what you do.",
-            "Success is not final, failure is not fatal: It is the courage to continue that counts.",
-            "Believe you can and you're halfway there.",
-            "Act as if what you do makes a difference. It does.",
-            "The harder you work for something, the greater you’ll feel when you achieve it."
-        ]
-        selected_quote = random.choice(motivational_quotes)
-        return jsonify({"motivational_quote": selected_quote})
- 
-    @app.route('/quotes', methods=['GET'])
-    def fav_quotes():
-        quotes = [
-        {"author": "Marcus Aurelius", "quote": "You have power over your mind - not outside events. Realize this, and you will find strength."},
-        {"author": "Marcus Aurelius", "quote": "The happiness of your life depends upon the quality of your thoughts."},
-        {"author": "Epictetus", "quote": "It's not what happens to you, but how you react to it that matters."},
-        {"author": "Seneca", "quote": "We suffer more in imagination than in reality."},
-        {"author": "Marcus Aurelius", "quote": "Waste no more time arguing about what a good man should be. Be one."},
-        {"author": "Epictetus", "quote": "No man is free who is not master of himself."},
-        {"author": "Seneca", "quote": "Luck is what happens when preparation meets opportunity."},
-        {"author": "Marcus Aurelius", "quote": "Things are not asking to be judged by you."},
-        {"author": "Marcus Aurelius", "quote": "The best revenge is to be unlike hom who performed the injury."},
-        {"author": "Plato", "quote": "We can easily forgive a child who is afraid of the dark; the real tragedy of life is when men are afraid of the light."},
-        {"author": "Plato", "quote": "Wise men talk because they have something to say; fools, because they have to say something."},
-        {"author": "Plato", "quote": "Human behavior flows from threee main sources: desire, emotion, and knowledge."},
-        {"author": "Thorin Oakenshield", "quote": "If more of us valued food and cheer and song above hoarded gold, it would be a merrier world."}
-        ]
-        quote = random.choice(quotes)
-        return jsonify(quote)
-    
     @app.route('/netflix-shows', methods=['GET'])
     def get_netflix_shows():
         netflix_shows = [
@@ -422,7 +356,6 @@ def create_app():
         fact = random.choice(wrestling_facts)
         return jsonify({"fact": fact})
     return app
-
 
 app = create_app()
 

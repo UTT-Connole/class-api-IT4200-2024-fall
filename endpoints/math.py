@@ -1,8 +1,9 @@
 from flask import Blueprint, request, jsonify, render_template
+import matplotlib, math
 
-calc_bp = Blueprint('calc', __name__)
+math_bp = Blueprint('math', __name__)
 
-@calc_bp.route('/calc', methods=['GET'])
+@math_bp.route('/calc', methods=['GET'])
 def calc_main():
     x = request.args.get('x')
     y = request.args.get('y')
@@ -49,7 +50,37 @@ def calc_main():
     
     return jsonify({"result": result})
 
-@calc_bp.route('/calcop', methods=['GET'])
+@math_bp.route('/calcop', methods=['GET'])
 def calc_operators():
     operations = ['add', 'subtract', 'multiply', 'divide', 'mod', 'square', 'sqrt', 'decimal', 'binary', 'power', 'cube']
     return jsonify(operations)
+
+
+factorialCache = {}
+@math_bp.route('/factorial', methods=['GET'])
+def factorial():
+    n = request.args.getlist('n', type=int)
+    as_string = request.args.get('as_string', 'false').lower() == 'true'
+    max_allowed = 1000 
+
+    if not n:
+        return jsonify({"error": "No input provided"}), 400
+
+    resultList = []
+
+    for num in n:
+        if num < 0:
+            return jsonify({"error": f"No negative numbers: {num}"}), 400
+        
+        if num in factorialCache:
+            result = factorialCache[num]
+        else:
+            result = math.factorial(num)
+            factorialCache[num] = result
+        
+        resultList.append(result)
+
+    if len(resultList) == 1:
+        return jsonify(result=resultList[0]), 200 
+    else:
+        return jsonify(result=resultList), 200
