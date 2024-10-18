@@ -142,8 +142,8 @@ This will start the server. From there navigate to the url and your desired endp
   - **Test File**: test_generate_name.py
 
 - <a name="Items">**Get Items Endpoint**</a>
-  - **Endpoint**: `GET /items`
-  - **Description**: Returns a list of items. Optionally filter items by a minimum price. Query parameter `min_price` filters items that have a price greater than or equal to the specified value (default is 0).
+  - **Endpoint**: `GET /items/(integer)`
+  - **Description**: Returns a list of items from items.json. Add an integer value (eg: /items/2) and it will only return a list of items where the price is greater than the value.
   - **Test File**: test_get_items.py test_items.py
 
 - <a name="Greeting">**Greeting Endpoint**</a>

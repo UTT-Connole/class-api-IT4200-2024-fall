@@ -14,3 +14,9 @@
 #     assert response.status_code == 404
 #     assert response.is_json
 #     assert response.json['message'] == 'No items found'
+from app import create_app
+
+def test_items_json(client):
+    """Test to see if the items endpoint returns a JSON format"""
+    response = client.get('/items')
+    assert response.content_type == 'application/json'
