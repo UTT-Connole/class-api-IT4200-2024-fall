@@ -11,10 +11,16 @@ from endpoints.version import version_bp
 from endpoints.quotes import quotes_bp
 from endpoints.photogallery import photogallery_bp
 import random, requests
-import os
+import os, json
 import time
 from decimal import Decimal, getcontext 
 import matplotlib, math
+
+def load_items_from_file():
+    with open('items.json', 'r') as f:
+        return json.load(f)
+    
+
 
 def create_app():
     app = Flask(__name__)
@@ -187,13 +193,15 @@ def create_app():
         else:
             return jsonify({"error": "Fruit not found. Please try apple, banana, lemon, orange, grape, or lime."}), 404
     
-    @app.route('/items', methods=['GET'])
-    def get_items():
-        min_price = request.args.get('min_price', default=0, type=int)
-        items = Item.query.filter(Item.price >= min_price).all()
-        if not items:
+    @app.route('/items/<int:min_price>', methods=['GET'])
+    def get_items(min_price):
+        #min_price = request.args.get('min_price', default=0, type=int)
+        items = load_items_from_file()
+        filtered_items = [item for item in items if item['price'] >= min_price]
+        #items = Item.query.filter(Item.price >= min_price).all()
+        if not filtered_items:
             return jsonify({'message': 'No items found'}), 404
-        return jsonify([item.serialize() for item in items]), 200
+        return jsonify(filtered_items), 200
 
     WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
     @app.route('/weather/<city>', methods=['GET'])
