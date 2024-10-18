@@ -18,5 +18,5 @@ from app import create_app
 
 def test_items_json(client):
     """Test to see if the items endpoint returns a JSON format"""
-    response = client.get('/items')
+    response = client.get('/items/0')
     assert response.content_type == 'application/json'
