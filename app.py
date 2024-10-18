@@ -204,16 +204,18 @@ def create_app():
         print("Request URL:", url)
         #Returns error if invalid city is entered
         if response.status_code != 200:
-            return ({"error": "City not found or API error."}), 404
+            return render_template({"error": "City not found or API error."}), 404
         
         data = response.json()
         weather_data = {
+            "city": city,
             "temperature": f"{data['main']['temp']}°F",
             "condition": data['weather'][0]['description'],
             "humidity": f"{data['main']['humidity']}%",
             "wind_speed": f"{data['wind']['speed']} mph"
         }
-        return (weather_data)
+        return render_template('weather.html', weather=weather_data)
+        
 
     @app.route('/howToMakeEndpoint', methods=['GET'])
     def get_endpoints():
