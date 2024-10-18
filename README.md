@@ -60,9 +60,9 @@ python3 -m flask run
 This will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
 
 ### Available Endpoints
-[**Animal Endpoint**](#Animal) | [**Basketball Facts Endpoint**](#Basketball) | [**Brainrot Endpoint**](#Brainrot) | [**Calculator Endpoint**](#Calculator) | [**Color Hexifier Endpoint**](#Hexifier) | [**Convert To Binary Endpoint**](#Binary) | [**Convert To Decimal Endpoint**](#Decimal) | [**Dad Jokes Endpoint**](#Dad) | [**Factorial Endpoint**](#Factorial) | [**Favorite Quote Endpoint**](#Favorite) | [**Fortune Cookie Endpoint**](#Fortune) | [**Fruit Info Endpoint**](#Fruit) | [**Generate Name Endpoint**](#Name) | [**Get Items Endpoint**](#Items) | [**Greeting Endpoint**](#Greeting) | [**Live Weather Endpoint**](#Weather) | [**Make an Endpoint**](#Make) | [**Marathon Facts Endpoint**](#Marathon) | [**MTG Mana Endpoint**](#MTG) | [**Motivation Endpoint**](#Motivation) | [**Netflix Show Endpoint**](#Netflix) | [**Photo Gallery Endpoint**](#Photo) | [**Pizza Toppings Endpoint**](#Pizza) | [**Pokefishing Endpoint**](#Pokefishing) | [**Power Endpoint**](#Power) | [**Random Fact Endpoint**](#Random) | [**Swimming Facts Endpoint**](#Sports) |[**Sports Facts Endpoint**](#Sports) | [**Study Fact Endpoint**](#Study) | [**Stoic Quotes Endpoint**](#Stoic) | [**Tennis Facts Endpoint**](#Tennis) | [**Travel Randomizer Endpoint**](#Travel) | [**Two Mana Combo Endpoint**](#Combo)| [**Wrestling Facts Endpoint**](#Sports)
+[**All Facts Endpoint**](#AllFacts) | [**Animal Endpoint**](#Animal) | [**Basketball Facts Endpoint**](#Basketball) | [**Brainrot Endpoint**](#Brainrot) | [**Calculator Endpoint**](#Calculator) | [**Color Hexifier Endpoint**](#Hexifier) | [**Convert To Binary Endpoint**](#Binary) | [**Convert To Decimal Endpoint**](#Decimal) | [**Dad Jokes Endpoint**](#Dad) | [**Factorial Endpoint**](#Factorial) | [**Favorite Quote Endpoint**](#Favorite) | [**Fortune Cookie Endpoint**](#Fortune) | [**Fruit Info Endpoint**](#Fruit) | [**Generate Name Endpoint**](#Name) | [**Get Items Endpoint**](#Items) | [**Greeting Endpoint**](#Greeting) | [**Live Weather Endpoint**](#Weather) | [**Make an Endpoint**](#Make) | [**Marathon Facts Endpoint**](#Marathon) | [**MTG Mana Endpoint**](#MTG) | [**Motivation Endpoint**](#Motivation) | [**Netflix Show Endpoint**](#Netflix) | [**Photo Gallery Endpoint**](#Photo) | [**Pizza Toppings Endpoint**](#Pizza) | [**Pokefishing Endpoint**](#Pokefishing) | [**Power Endpoint**](#Power) | [**Random Fact Endpoint**](#Random) | [**Swimming Facts Endpoint**](#Sports) |[**Sports Facts Endpoint**](#Sports) | [**Study Fact Endpoint**](#Study) | [**Stoic Quotes Endpoint**](#Stoic) | [**Tennis Facts Endpoint**](#Tennis) | [**Travel Randomizer Endpoint**](#Travel) | [**Two Mana Combo Endpoint**](#Combo) | [**Version Endpoints**](#Version) | [**Wrestling Facts Endpoint**](#Sports)
 
-- <a name="All Facts">**All Facts Endpoint**</a>
+- <a name="AllFacts">**All Facts Endpoint**</a>
   - **Endpoint**: 'GET /allFacts'
   - **Description**: The All Facts endpoint is a consolidated endpoint of facts about various topics. Just going to the /allFacts endpoint will return a random fact from any category. But specifying a category, like random, swimming, basketball, and wrestling will return a random fact about that category. EX: /allFacts?category=swimming
   - **Test File**: test_allfacts.py
@@ -91,15 +91,6 @@ This will start the server. From there navigate to the url and your desired endp
     - If any of the variables (`x`, `y`, or `op`) are missing (unless specified), you will receive an error.
     - If no parameters are provided, the endpoint will render an HTML form for input.
   - **Test File**: `test_calc.py`
-  
-- <a name="Version"> **Version Endpoints**</a>
-  - **Endpoint**: `GET /version`
-  - **Description**: Returns the latest version of the repository based on the latest tag.
-  - **Test File**: test_version.py
-
-  - **Endpoint**: `GET /current-version`
-  - **Description**: Returns the current working version of the application based on the current commit.
-  - **Test File**: test_version.py
 
 - <a name="Hexifier">**Color Hexifier Endpoint**</a>
   - **Endpoint**: `GET /color?color=blue`
@@ -245,6 +236,15 @@ This will start the server. From there navigate to the url and your desired endp
   - **Endpoint**: `GET /twoManaCombos?color=your_color`
   - **Description**: Go to http://127.0.0.1:5000/twoManaCombos?color=your_color. Specify which color you want included in your deck by replacing it with your_color. ⚪🔵⚫🔴🟢
   - **Test File**: test_twomana.py
+    
+- <a name="Version">**Version Endpoints**</a>
+  - **Endpoint**: `GET /version`
+  - **Description**: Returns the latest version of the repository based on the latest tag.
+  - **Test File**: test_version.py
+
+  - **Endpoint**: `GET /current-version`
+  - **Description**: Returns the current working version of the application based on the current commit.
+  - **Test File**: test_version.py
 
 - <a name="Wrestling">**Wrestling fact Endpoint**</a>
   - **Endpoint**: `GET /quotes`
