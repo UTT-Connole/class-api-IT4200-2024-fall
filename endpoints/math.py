@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify, render_template
-import matplotlib, math
+import math
 
 math_bp = Blueprint('math', __name__)
 
@@ -33,10 +33,12 @@ def calc_main():
         'mod': (x % y if y != 0 else "You cannot take modulus by 0"),
         'square': x * x,
         'sqrt': (x ** 0.5 if x >= 0 else "Cannot take square root of a negative number"),
-        'decimal': (bin(x).replace("0b","") if x >= 0 else "Not compatible with negative input"),
-        'binary': ((str(int(str(x), 2))) if all(c in '01' for c in str(x)) and x >= 0 else "Not compatible format to convert to binary"),
+        'decimal': (bin(x).replace("0b", "") if x >= 0 else "Not compatible with negative input"),
+        'binary': (str(int(str(x), 2)) if all(c in '01' for c in str(x)) and x >= 0 else "Not compatible format to convert to binary"),
         'power': x ** y,
-        'cube': x ** 3
+        'cube': x ** 3,
+        # New logarithm operation: log(x) with base y (default to base 10 if y is 0)
+        'log': (math.log(x, y) if y != 0 else math.log(x, 10)) if x > 0 else "Cannot take logarithm of zero or negative number"
     }
 
     if op not in operations:
@@ -52,10 +54,10 @@ def calc_main():
 
 @math_bp.route('/calcop', methods=['GET'])
 def calc_operators():
-    operations = ['add', 'subtract', 'multiply', 'divide', 'mod', 'square', 'sqrt', 'decimal', 'binary', 'power', 'cube']
+    operations = ['add', 'subtract', 'multiply', 'divide', 'mod', 'square', 'sqrt', 'decimal', 'binary', 'power', 'cube', 'log']
     return jsonify(operations)
 
-
+# Factorial endpoint remains unchanged
 factorialCache = {}
 @math_bp.route('/factorial', methods=['GET'])
 def factorial():

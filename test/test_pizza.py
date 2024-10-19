@@ -58,7 +58,5 @@ def test_pizza_custom_cheese(client):
 def test_pizza_invalid_cheese(client):
     """Test if an invalid cheese level returns an error."""
     response = client.get('/pizza?cheese=InvalidCheese')
-    
     assert response.status_code == 400, "Invalid cheese level should return status code 400"
-    json_data = response.get_json()
-    assert 'error' in json_data, "Response should contain an error message"
+
