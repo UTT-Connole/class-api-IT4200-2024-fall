@@ -194,7 +194,8 @@ This will start the server. From there navigate to the url and your desired endp
 
 - <a name="Pizza">**Pizza Endpoint**</a>
   - **Endpoint**: `GET /pizza`
-  - **Description**: Too lazy to think of what pizza to order? Get your own fully randomized pizza here. 🍕
+  - **Description**: This endpoint randomly generates a pizza, but sometimes you may get two pizzas instead of one! You can customize the cheese level by putting in a cheese query. The cheese level options are: Light Cheese, Regular Cheese, and Extra Cheese.🍕🍕🍕
+  - **Example request**: http://127.0.0.1:5000/pizza?cheese=Extra%20Cheese
   - **Test File**: test_pizza.py
 
 - <a name="Pokefishing">**Pokefishing Endpoint**</a>
