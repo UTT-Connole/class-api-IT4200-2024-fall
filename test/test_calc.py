@@ -1,5 +1,6 @@
 import pytest
 from app import create_app
+import math  # Add the missing import
 
 @pytest.fixture
 def client():
