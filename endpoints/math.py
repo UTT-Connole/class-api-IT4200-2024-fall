@@ -25,11 +25,11 @@ def calc_main():
     except ValueError:
         return jsonify({"error": "Invalid Input"}), 400
 
-    # Handle non-integer values for 'decimal' and 'binary'
-    if op == 'decimal' and not x.is_integer():
-        return jsonify({"error": "Invalid Input"}), 400
-    if op == 'binary' and not x.is_integer():
-        return jsonify({"error": "Invalid Input"}), 400
+    # Handle non-integer and negative values for 'decimal' and 'binary'
+    if op == 'decimal' and (not x.is_integer() or x < 0):
+        return jsonify({"error": "Not compatible with negative input"}), 400
+    if op == 'binary' and (not x.is_integer() or x < 0):
+        return jsonify({"error": "Not compatible format to convert to binary"}), 400
     
     operations = {
         'add': x + y,
