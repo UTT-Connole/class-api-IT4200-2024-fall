@@ -33,7 +33,7 @@ def calc_main():
         'mod': (x % y if y != 0 else "You cannot take modulus by 0"),
         'square': x * x,
         'sqrt': (x ** 0.5 if x >= 0 else "Cannot take square root of a negative number"),
-        'decimal': (bin(int(x)).replace("0b", "") if x >= 0 and x.is_integer() else "Not compatible with non-integer or negative input"),
+        'decimal': (bin(int(x)).replace("0b", "") if x >= 0 and x.is_integer() else "Not compatible with negative input"),
         'binary': (str(int(str(int(x)), 2)) if all(c in '01' for c in str(int(x))) and x.is_integer() else "Not compatible format to convert to binary"),
         'power': x ** y,
         'cube': x ** 3,
