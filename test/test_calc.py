@@ -112,3 +112,10 @@ def test_calc_cube(client):
     assert response.status_code == 200
     json_data = response.get_json()
     assert json_data['result'] == 27
+
+def test_calc_exp(client):
+    """Test the exponential operation"""
+    response = client.get('/calc?x=1&op=exp')
+    assert response.status_code == 200
+    json_data = response.get_json()
+    assert json_data['result'] == pytest.approx(2.71828, rel=1e-5) 
