@@ -20,16 +20,10 @@ def calc_main():
     y = 0 if y is None or y == '' else y
     
     try:
-        x = float(x)  # Changed to float to handle decimals for the exponential function
-        y = float(y)
+        x = int(x)
+        y = int(y)
     except ValueError:
         return jsonify({"error": "Invalid Input"}), 400
-
-    # Handle non-integer and negative values for 'decimal' and 'binary'
-    if op == 'decimal' and (not x.is_integer() or x < 0):
-        return jsonify({"error": "Not compatible with negative input"}), 400
-    if op == 'binary' and (not x.is_integer() or x < 0):
-        return jsonify({"error": "Not compatible format to convert to binary"}), 400
     
     operations = {
         'add': x + y,
@@ -39,13 +33,12 @@ def calc_main():
         'mod': (x % y if y != 0 else "You cannot take modulus by 0"),
         'square': x * x,
         'sqrt': (x ** 0.5 if x >= 0 else "Cannot take square root of a negative number"),
-        'decimal': bin(int(x)).replace("0b", ""),
-        'binary': str(int(str(int(x)), 2)) if all(c in '01' for c in str(int(x))) else "Not compatible format to convert to binary",
+        'decimal': (bin(x).replace("0b", "") if x >= 0 else "Not compatible with negative input"),
+        'binary': (str(int(str(x), 2)) if all(c in '01' for c in str(x)) and x >= 0 else "Not compatible format to convert to binary"),
         'power': x ** y,
         'cube': x ** 3,
-        'log': (math.log(x, y) if y != 0 else math.log(x, 10)) if x > 0 else "Cannot take logarithm of zero or negative number",
-        # Adding the exponent (exp) function
-        'exp': math.exp(x)  # e^x, where e is Euler's number
+        # New logarithm operation: log(x) with base y (default to base 10 if y is 0)
+        'log': (math.log(x, y) if y != 0 else math.log(x, 10)) if x > 0 else "Cannot take logarithm of zero or negative number"
     }
 
     if op not in operations:
@@ -61,12 +54,11 @@ def calc_main():
 
 @math_bp.route('/calcop', methods=['GET'])
 def calc_operators():
-    operations = ['add', 'subtract', 'multiply', 'divide', 'mod', 'square', 'sqrt', 'decimal', 'binary', 'power', 'cube', 'log', 'exp']
+    operations = ['add', 'subtract', 'multiply', 'divide', 'mod', 'square', 'sqrt', 'decimal', 'binary', 'power', 'cube', 'log']
     return jsonify(operations)
 
 # Factorial endpoint remains unchanged
 factorialCache = {}
-
 @math_bp.route('/factorial', methods=['GET'])
 def factorial():
     n = request.args.getlist('n', type=int)
