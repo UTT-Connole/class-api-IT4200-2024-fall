@@ -24,6 +24,12 @@ def calc_main():
         y = float(y)
     except ValueError:
         return jsonify({"error": "Invalid Input"}), 400
+
+    # Handle non-integer values for 'decimal' and 'binary'
+    if op == 'decimal' and not x.is_integer():
+        return jsonify({"error": "Invalid Input"}), 400
+    if op == 'binary' and not x.is_integer():
+        return jsonify({"error": "Invalid Input"}), 400
     
     operations = {
         'add': x + y,
@@ -33,8 +39,8 @@ def calc_main():
         'mod': (x % y if y != 0 else "You cannot take modulus by 0"),
         'square': x * x,
         'sqrt': (x ** 0.5 if x >= 0 else "Cannot take square root of a negative number"),
-        'decimal': (bin(int(x)).replace("0b", "") if x >= 0 and x.is_integer() else "Not compatible with negative input"),
-        'binary': (str(int(str(int(x)), 2)) if all(c in '01' for c in str(int(x))) and x.is_integer() else "Not compatible format to convert to binary"),
+        'decimal': bin(int(x)).replace("0b", ""),
+        'binary': str(int(str(int(x)), 2)) if all(c in '01' for c in str(int(x))) else "Not compatible format to convert to binary",
         'power': x ** y,
         'cube': x ** 3,
         'log': (math.log(x, y) if y != 0 else math.log(x, 10)) if x > 0 else "Cannot take logarithm of zero or negative number",
