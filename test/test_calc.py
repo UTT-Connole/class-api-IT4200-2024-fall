@@ -78,12 +78,36 @@ def test_calc_sqrt_negative(client):
     json_data = response.get_json()
     assert json_data['result'] == "Cannot take square root of a negative number"
 
+# Update for negative input with decimal conversion
+def test_calc_decimal_negative(client):
+    """Test if a negative input for decimal returns an error."""
+    response = client.get('/calc?x=-1&op=decimal')
+    assert response.status_code == 400
+    json_data = response.get_json()
+    assert json_data['error'] == "Not compatible with negative input"
+
+# Update for float input with decimal conversion
+def test_calc_decimal_float(client):
+    """Test if a float input for decimal returns an error."""
+    response = client.get('/calc?x=5.5&op=decimal')
+    assert response.status_code == 400
+    json_data = response.get_json()
+    assert json_data['error'] == "Not compatible with non-integer or negative input"
+
 def test_calc_decimal(client):
     """Test the decimal to binary conversion"""
     response = client.get('/calc?x=5&op=decimal')
     assert response.status_code == 200
     json_data = response.get_json()
     assert json_data['result'] == '101'
+
+# Update for float input with binary conversion
+def test_calc_binary_float(client):
+    """Test if a float input for binary returns an error."""
+    response = client.get('/calc?x=5.5&op=binary')
+    assert response.status_code == 400
+    json_data = response.get_json()
+    assert json_data['error'] == "Not compatible format to convert to binary"
 
 def test_calc_binary(client):
     """Test the binary to decimal conversion"""
