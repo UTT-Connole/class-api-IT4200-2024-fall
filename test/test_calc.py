@@ -8,6 +8,8 @@ def client():
     with app.test_client() as client:
         yield client
 
+# Updated tests
+
 def test_decimal_negative(client):
     """Test if a negative input for decimal returns an error."""
     response = client.get('/calc?x=-1&y=&op=decimal')
