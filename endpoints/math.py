@@ -27,6 +27,11 @@ def calc_main():
     except ValueError:
         return jsonify({"error": "Invalid Input. Must be a number."}), 400
 
+    # Ensure x is an integer where necessary (binary, decimal)
+    if op in ['binary', 'decimal']:
+        if not x.is_integer() or x < 0:
+            return jsonify({"result": "Not compatible with negative input"}), 200
+
     operations = {
         'add': x + y,
         'subtract': x - y,
