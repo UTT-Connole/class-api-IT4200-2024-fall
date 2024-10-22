@@ -25,11 +25,13 @@ def calc_main():
         x = float(x)  # Allow x to be a float (decimal input)
         y = float(y)  # Allow y to be a float (decimal input)
     except ValueError:
-        return jsonify({"error": "Invalid Input. Must be a number."}), 400
+        return jsonify({"error": "Invalid Input"}), 400
 
     # Ensure x is an integer where necessary (binary, decimal)
     if op in ['binary', 'decimal']:
-        if not x.is_integer() or x < 0:
+        if not x.is_integer():
+            return jsonify({"error": "Invalid Input. Must be a number."}), 400
+        if x < 0:
             return jsonify({"result": "Not compatible with negative input"}), 200
 
     operations = {
@@ -40,7 +42,7 @@ def calc_main():
         'mod': (x % y if y != 0 else "You cannot take modulus by 0"),
         'square': x * x,
         'sqrt': (x ** 0.5 if x >= 0 else "Cannot take square root of a negative number"),
-        'decimal': (bin(int(x)).replace("0b", "") if x >= 0 and x.is_integer() else "Not compatible with non-integer or negative input"),
+        'decimal': (bin(int(x)).replace("0b", "") if x >= 0 and x.is_integer() else "Not compatible with negative input"),
         'binary': (str(int(str(int(x)), 2)) if all(c in '01' for c in str(int(x))) else "Not compatible format to convert to binary"),
         'power': x ** y,
         'cube': x ** 3,
@@ -62,33 +64,3 @@ def calc_main():
 def calc_operators():
     operations = ['add', 'subtract', 'multiply', 'divide', 'mod', 'square', 'sqrt', 'decimal', 'binary', 'power', 'cube', 'exp']
     return jsonify(operations)
-
-# Factorial endpoint remains unchanged
-factorialCache = {}
-@math_bp.route('/factorial', methods=['GET'])
-def factorial():
-    n = request.args.getlist('n', type=int)
-    as_string = request.args.get('as_string', 'false').lower() == 'true'
-    max_allowed = 1000 
-
-    if not n:
-        return jsonify({"error": "No input provided"}), 400
-
-    resultList = []
-
-    for num in n:
-        if num < 0:
-            return jsonify({"error": f"No negative numbers: {num}"}), 400
-        
-        if num in factorialCache:
-            result = factorialCache[num]
-        else:
-            result = math.factorial(num)
-            factorialCache[num] = result
-        
-        resultList.append(result)
-
-    if len(resultList) == 1:
-        return jsonify(result=resultList[0]), 200 
-    else:
-        return jsonify(result=resultList), 200
