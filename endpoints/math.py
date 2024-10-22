@@ -22,8 +22,8 @@ def calc_main():
         y = 0
 
     try:
-        x = int(x)
-        y = int(y)
+        x = float(x)  # Allow x to be a float (decimal input)
+        y = float(y)  # Allow y to be a float (decimal input)
     except ValueError:
         return jsonify({"error": "Invalid Input. Must be a number."}), 400
 
@@ -35,10 +35,11 @@ def calc_main():
         'mod': (x % y if y != 0 else "You cannot take modulus by 0"),
         'square': x * x,
         'sqrt': (x ** 0.5 if x >= 0 else "Cannot take square root of a negative number"),
-        'decimal': (bin(x).replace("0b", "") if x >= 0 else "Not compatible with negative input"),
-        'binary': (str(int(str(x), 2)) if all(c in '01' for c in str(x)) and x >= 0 else "Not compatible format to convert to binary"),
+        'decimal': (bin(int(x)).replace("0b", "") if x >= 0 and x.is_integer() else "Not compatible with non-integer or negative input"),
+        'binary': (str(int(str(int(x)), 2)) if all(c in '01' for c in str(int(x))) else "Not compatible format to convert to binary"),
         'power': x ** y,
-        'cube': x ** 3
+        'cube': x ** 3,
+        'exp': math.exp(x)  # New exponential function
     }
 
     if op not in operations:
@@ -54,7 +55,7 @@ def calc_main():
 
 @math_bp.route('/calcop', methods=['GET'])
 def calc_operators():
-    operations = ['add', 'subtract', 'multiply', 'divide', 'mod', 'square', 'sqrt', 'decimal', 'binary', 'power', 'cube']
+    operations = ['add', 'subtract', 'multiply', 'divide', 'mod', 'square', 'sqrt', 'decimal', 'binary', 'power', 'cube', 'exp']
     return jsonify(operations)
 
 # Factorial endpoint remains unchanged
