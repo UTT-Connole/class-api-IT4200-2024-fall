@@ -99,7 +99,7 @@ def create_app():
         else:
             name = random.choice(names)
     
-        return jsonify({"name": name})
+        return jsonify({"firstname": name})
 
     
     @app.route('/greet', methods=['GET'])
