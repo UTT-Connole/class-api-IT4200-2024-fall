@@ -194,9 +194,14 @@ This will start the server. From there navigate to the url and your desired endp
 
 - <a name="Pizza">**Pizza Endpoint**</a>
   - **Endpoint**: `GET /pizza`
-  - **Description**: This endpoint randomly generates a pizza, but sometimes you may get two pizzas instead of one! You can customize the cheese level by putting in a cheese query. The cheese level options are: Light Cheese, Regular Cheese, and Extra Cheese.🍕🍕🍕
+  - **Description**: This endpoint randomly generates a pizza, but sometimes you may get two pizzas instead of one! You can customize the cheese level by putting in a cheese query. Added the option to request a half-and-half pizza where each half of the pizza has a different set of toppings. The cheese level options are: Light Cheese, Regular Cheese, and Extra Cheese. Also recently added a new half half toppings feature.🍕🍕🍕
   - **Example request**: http://127.0.0.1:5000/pizza?cheese=Extra%20Cheese
   - **Test File**: test_pizza.py
+
+- <a name="Soda">**Soda Endpoint**</a>
+  - **Endpoint**: `GET /soda`
+  - **Description**: This endpoint is used to choose a soda to go with your meal. 🥤🥤🥤
+  - **Test File**: test_soda.py
 
 - <a name="Pokefishing">**Pokefishing Endpoint**</a>
   - **Endpoint**: `GET /pokefishing`
