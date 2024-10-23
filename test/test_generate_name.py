@@ -4,9 +4,9 @@ def test_generate_name(client):
     assert response.status_code == 200
     data = response.get_json()
 
-    assert "name" in data
-    assert isinstance(data['name'], str)
-    assert data['name'] in ["Eve", "Jack", "Liam", "Mia"]
+    assert "firstname" in data
+    assert isinstance(data['firstname'], str)
+    assert data['firstname'] in ["Eve", "Jack", "Liam", "Mia"]
 
 def test_generate_name_with_length(client):
     """Test the '/generateName' endpoint with length parameter"""
@@ -14,8 +14,8 @@ def test_generate_name_with_length(client):
     assert response.status_code == 200
     data = response.get_json()
 
-    assert "name" in data
-    assert data['name'] in ["Eve", "Mia"]
+    assert "firstname" in data
+    assert data['firstname'] in ["Eve", "Mia"]
 
 def test_generate_name_invalid_length(client):
     """Test the '/generateName' endpoint with an invalid length"""
