@@ -4,7 +4,7 @@ on:
   pull_request:
     branches:
       - main
-      - 'soren-changes' # For any feature branch
+      - soren-changes
 
 jobs:
   build-and-test:
