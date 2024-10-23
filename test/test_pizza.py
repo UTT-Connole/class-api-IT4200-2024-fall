@@ -1,3 +1,4 @@
+
 import pytest
 from app import create_app
 import json
@@ -59,4 +60,20 @@ def test_pizza_invalid_cheese(client):
     """Test if an invalid cheese level returns an error."""
     response = client.get('/pizza?cheese=InvalidCheese')
     assert response.status_code == 400, "Invalid cheese level should return status code 400"
+
+# New Test: Half-and-Half Pizza Option
+def test_half_and_half_option(client):
+    """Test if the half-and-half option returns two sets of toppings."""
+    response = client.get('/pizza?half_and_half=true')  # Request half-and-half pizza
+    json_data = response.get_json()
+
+    assert 'half1_toppings' in json_data, "The first half toppings should be present in the response"
+    assert 'half2_toppings' in json_data, "The second half toppings should be present in the response"
+    assert len(json_data['half1_toppings']) == 3, "First half should have exactly three toppings"
+    assert len(json_data['half2_toppings']) == 3, "Second half should have exactly three toppings"
+
+
+
+
+
 
