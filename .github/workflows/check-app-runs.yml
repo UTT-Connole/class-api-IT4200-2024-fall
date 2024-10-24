@@ -1,0 +1,43 @@
+name: Build and Run Docker for PR
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    name: Build and Test Docker App
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Docker
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # Build the Docker image
+      - name: Build Docker image
+        run: |
+          docker build -t myapp-test:pr .
+
+      # Run the Docker container to ensure the app starts properly
+      - name: Run Docker container
+        run: |
+          docker run -d -p 5000:5000 --name myapp-test-container myapp-test:pr
+          
+      # Check if the container is running successfully
+      - name: Check if app is running
+        run: |
+          sleep 10  # Wait for the app to start
+          docker ps --filter "name=myapp-test-container" --filter "status=running" --format "{{.Names}}" | grep myapp-test-container
+
+      # Clean up
+      - name: Stop and remove Docker container
+        if: always()
+        run: |
+          docker stop myapp-test-container
+          docker rm myapp-test-container

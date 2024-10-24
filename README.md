@@ -12,7 +12,20 @@ Here is an example of the release type that will be done based on a commit messa
 | `feat(pencil): add 'graphiteWidth' option`                                                                                                                                                       | Minor Release |
 | `perf(pencil): remove graphiteWidth option`<br><br>`BREAKING CHANGE: The graphiteWidth option has been removed.`<br>`The default graphite width of 10mm is always used for performance reasons.` | Major Release |
 
-If no commit message contains any information, then **default_bump** (currently set to minor) will be used.
+If no commit message contains any information, then **default_bump** (currently set to minor) will be used. For major changes, using the exact given format including the line spacing is required. All others do not require any extra lines.
+
+### Other commit options
+
+* **feat**: A new feature
+* **fix**: A bug fix
+* **docs**: Documentation only changes
+* **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing
+  semi-colons, etc)
+* **refactor**: A code change that neither fixes a bug nor adds a feature
+* **perf**: A code change that improves performance
+* **test**: Adding missing or correcting existing tests
+* **chore**: Changes to the build process or auxiliary tools and libraries such as documentation
+  generation
 
 ## How to install pip requirements
 
@@ -47,11 +60,11 @@ python3 -m flask run
 This will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
 
 ### Available Endpoints
-[**All Facts Endpoint**](#AllFacts) | [**Animal Endpoint**](#Animal) | [**Brainrot Endpoint**](#Brainrot) | [**Calculator Endpoint**](#Calculator) | [**Color Hexifier Endpoint**](#Hexifier) | [**Convert To Binary Endpoint**](#Binary) | [**Convert To Decimal Endpoint**](#Decimal) | [**Dad Jokes Endpoint**](#Dad) | [**Factorial Endpoint**](#Factorial) | [**Favorite Quote Endpoint**](#Favorite) | [**Fortune Cookie Endpoint**](#Fortune) | [**Fruit Info Endpoint**](#Fruit) | [**Generate Name Endpoint**](#Name) | [**Get Items Endpoint**](#Items) | [**Greeting Endpoint**](#Greeting) | [**Live Weather Endpoint**](#Weather) | [**Make an Endpoint**](#Make) | [**Marathon Facts Endpoint**](#Marathon) | [**MTG Mana Endpoint**](#MTG) | [**Motivation Endpoint**](#Motivation) | [**Netflix Show Endpoint**](#Netflix) | [**Photo Gallery Endpoint**](#Photo) | [**Pizza Toppings Endpoint**](#Pizza) | [**Pokefishing Endpoint**](#Pokefishing) | [**Power Endpoint**](#Power) | [**Random Fact Endpoint**](#Random) | [**Swimming Facts Endpoint**](#Swim) |[**Sports Facts Endpoint**](#Sports) | [**Study Fact Endpoint**](#Study) | [**Stoic Quotes Endpoint**](#Stoic) | [**Tennis Facts Endpoint**](#Tennis) | [**Travel Randomizer Endpoint**](#Travel) | [**Two Mana Combo Endpoint**](#Combo)| [**Wrestling Facts Endpoint**](#Sports)
+[**All Facts Endpoint**](#AllFacts) | [**Animal Endpoint**](#Animal) | [**Brainrot Endpoint**](#Brainrot) | [**Calculator Endpoint**](#Calculator) | [**Color Hexifier Endpoint**](#Hexifier) | [**Convert To Binary Endpoint**](#Binary) | [**Convert To Decimal Endpoint**](#Decimal) | [**Dad Jokes Endpoint**](#Dad) | [**Factorial Endpoint**](#Factorial) | [**Favorite Quote Endpoint**](#Favorite) | [**Fortune Cookie Endpoint**](#Fortune) | [**Fruit Info Endpoint**](#Fruit) | [**Generate Name Endpoint**](#Name) | [**Get Items Endpoint**](#Items) | [**Greeting Endpoint**](#Greeting) | [**Live Weather Endpoint**](#Weather) | [**Make an Endpoint**](#Make) | [**Marathon Facts Endpoint**](#Marathon) | [**MTG Mana Endpoint**](#MTG) | [**Motivation Endpoint**](#Motivation) | [**Netflix Show Endpoint**](#Netflix) | [**Photo Gallery Endpoint**](#Photo) | [**Pizza Toppings Endpoint**](#Pizza) | [**Pokefishing Endpoint**](#Pokefishing) | [**Power Endpoint**](#Power) | [**Random Fact Endpoint**](#Random) | [**Sports Facts Endpoint**](#Sports) | [**Study Fact Endpoint**](#Study) | [**Stoic Quotes Endpoint**](#Stoic) | [**Tennis Facts Endpoint**](#Tennis) | [**Travel Randomizer Endpoint**](#Travel) | [**Two Mana Combo Endpoint**](#Combo) | [**Version Endpoints**](#Version) 
 
 - <a name="AllFacts">**All Facts Endpoint**</a>
   - **Endpoint**: 'GET /allFacts'
-  - **Description**: The All Facts endpoint is a consolidated endpoint of facts about various topics. Just going to the /allFacts endpoint will return a random fact from any category. But specifying a category, like random, swimming, basketball, and wrestling will return a random fact about that category. EX: /allFacts?category=swimming
+  - **Description**: The All Facts endpoint is a consolidated endpoint of facts about various topics. Going to the /allFacts endpoint will show you which categories you can specify. Specifying a category (i.e random, tennis, swimming, basketball, popularity, studying or wrestling) will return a random fact about that category. EX: /allFacts?category=swimming 🌈🎾🏊🏀💅📚🤼. Add your own favorite facts/tips to the source code to see them on the endpoint! !NO Adult Content allowed! 
   - **Test File**: test_allfacts.py
 
 - <a name="Animal">**Animal Endpoint**</a>
@@ -78,15 +91,6 @@ This will start the server. From there navigate to the url and your desired endp
     - If any of the variables (`x`, `y`, or `op`) are missing (unless specified), you will receive an error.
     - If no parameters are provided, the endpoint will render an HTML form for input.
   - **Test File**: `test_calc.py`
-  
-- <a name="Version"> **Version Endpoints**</a>
-  - **Endpoint**: `GET /version`
-  - **Description**: Returns the latest version of the repository based on the latest tag.
-  - **Test File**: test_version.py
-
-  - **Endpoint**: `GET /current-version`
-  - **Description**: Returns the current working version of the application based on the current commit.
-  - **Test File**: test_version.py
 
 - <a name="Hexifier">**Color Hexifier Endpoint**</a>
   - **Endpoint**: `GET /color?color=blue`
@@ -138,8 +142,8 @@ This will start the server. From there navigate to the url and your desired endp
   - **Test File**: test_generate_name.py
 
 - <a name="Items">**Get Items Endpoint**</a>
-  - **Endpoint**: `GET /items`
-  - **Description**: Returns a list of items. Optionally filter items by a minimum price. Query parameter `min_price` filters items that have a price greater than or equal to the specified value (default is 0).
+  - **Endpoint**: `GET /items/(integer)`
+  - **Description**: Returns a list of items from items.json. Add an integer value (eg: /items/2) and it will only return a list of items where the price is greater than the value.
   - **Test File**: test_get_items.py test_items.py
 
 - <a name="Greeting">**Greeting Endpoint**</a>
@@ -190,8 +194,14 @@ This will start the server. From there navigate to the url and your desired endp
 
 - <a name="Pizza">**Pizza Endpoint**</a>
   - **Endpoint**: `GET /pizza`
-  - **Description**: Too lazy to think of what pizza to order? Get your own fully randomized pizza here. 🍕
+  - **Description**: This endpoint randomly generates a pizza, but sometimes you may get two pizzas instead of one! You can customize the cheese level by putting in a cheese query. Added the option to request a half-and-half pizza where each half of the pizza has a different set of toppings. The cheese level options are: Light Cheese, Regular Cheese, and Extra Cheese. Also recently added a new half half toppings feature.🍕🍕🍕
+  - **Example request**: http://127.0.0.1:5000/pizza?cheese=Extra%20Cheese
   - **Test File**: test_pizza.py
+
+- <a name="Soda">**Soda Endpoint**</a>
+  - **Endpoint**: `GET /soda`
+  - **Description**: This endpoint is used to choose a soda to go with your meal. 🥤🥤🥤
+  - **Test File**: test_soda.py
 
 - <a name="Pokefishing">**Pokefishing Endpoint**</a>
   - **Endpoint**: `GET /pokefishing`
@@ -208,21 +218,6 @@ This will start the server. From there navigate to the url and your desired endp
   - **Description**: Get a good random stoic quote from Plato and others.
   - **Test File**: test_quotes.py
 
-- <a name="Study">**Study Facts Endpoint**</a>
-  - **Endpoint**: `GET /study-facts`
-  - **Description**: Retrieve random study tips and facts to enhance your learning experience! Add your own tips to the source code to see them on the endpoint! !NO Adult Content allowed!
-  - **Test File**: `test_study_facts.py`
-
-- <a name="Swim">**Swimming fact Endpoint**</a>
-  - **Endpoint**: `GET /swimming_fact`
-  - **Description**: learn fun facts about swimming.
-  - **Test File**: test_swimming_fact.py
-
-- <a name="Tennis">**Tennis Facts Endpoint**</a>
-  - **Endpoint**: `GET /tennis_fact`
-  - **Description**: 🎾 Learn fun facts about tennis!
-  - **Test File**: test_tennisfacts_.py
-
 - <a name="Travel">**Travel Randomizer Endpoint**</a>
   - **Endpoint**: `GET /travel`
   - **Description**: Be given a randomly chosen travel destination! This app will output a popular travel destination in "city, country" JSON format.
@@ -232,11 +227,15 @@ This will start the server. From there navigate to the url and your desired endp
   - **Endpoint**: `GET /twoManaCombos?color=your_color`
   - **Description**: Go to http://127.0.0.1:5000/twoManaCombos?color=your_color. Specify which color you want included in your deck by replacing it with your_color. ⚪🔵⚫🔴🟢
   - **Test File**: test_twomana.py
+    
+- <a name="Version">**Version Endpoints**</a>
+  - **Endpoint**: `GET /version`
+  - **Description**: Returns the latest version of the repository based on the latest tag.
+  - **Test File**: test_version.py
 
-- <a name="Wrestling">**Wrestling fact Endpoint**</a>
-  - **Endpoint**: `GET /wrestling_fact`
-  - **Description**: learn fun facts about wrestling.
-  - **Test File**: test_wrestling_fact.py
+  - **Endpoint**: `GET /current-version`
+  - **Description**: Returns the current working version of the application based on the current commit.
+  - **Test File**: test_version.py
 
 ## Contributors
 

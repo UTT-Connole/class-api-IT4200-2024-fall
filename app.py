@@ -5,16 +5,23 @@ from endpoints.brainrot import brainrot_bp
 from endpoints.motivation import motivation_bp
 from endpoints.math import math_bp
 from endpoints.mtg import mtg_bp
-from endpoints.allsportfacts import allsportfacts_bp
+from endpoints.allfacts import allfacts_bp
 from endpoints.pizza import pizza_bp
+from endpoints.soda import soda_bp
 from endpoints.version import version_bp
 from endpoints.quotes import quotes_bp
 from endpoints.photogallery import photogallery_bp
 import random, requests
-import os
+import os, json
 import time
 from decimal import Decimal, getcontext 
 import matplotlib, math
+
+def load_items_from_file():
+    with open('items.json', 'r') as f:
+        return json.load(f)
+    
+
 
 def create_app():
     app = Flask(__name__)
@@ -22,61 +29,15 @@ def create_app():
     app.register_blueprint(brainrot_bp)
     app.register_blueprint(dadjoke_bp)
     app.register_blueprint(math_bp)
-    app.register_blueprint(allsportfacts_bp)
+    app.register_blueprint(allfacts_bp)
     app.register_blueprint(marathonFacts_bp)
     app.register_blueprint(mtg_bp)
     app.register_blueprint(motivation_bp)
     app.register_blueprint(photogallery_bp)
     app.register_blueprint(pizza_bp)
+    app.register_blueprint(soda_bp)
     app.register_blueprint(version_bp)
     app.register_blueprint(quotes_bp)
-
-    facts = {
-    "random": [
-        "Honey never spoils.",
-        "Octopuses have three hearts.",
-        "Bananas are berries, but strawberries are not.",
-        "A day on Venus is longer than a year on Venus.",
-        "Sharks have been around longer than trees.",
-        "The ocean covers 71 percent of the Earth's surface and the average depth is 12,100 feet."
-    ],
-    "swimming": [
-        "Swimming is one of the best aerobic exercises.",
-        "Michael Phelps has won 23 Olympic gold medals.",
-        "The front crawl is the fastest swimming stroke.",
-        "Humans have been swimming for thousands of years.",
-        "Swimming burns more calories than running."
-    ],
-    "wrestling": [
-        "Hulk Hogan won his first WWF Championship in 1984.",
-        "The Undertaker has a 25-2 WrestleMania record.",
-        "Stone Cold Steve Austin's 'Austin 3:16' speech revolutionized wrestling promos.",
-        "Ric Flair is a 16-time world champion.",
-        "Shawn Michaels is known as 'Mr. WrestleMania' for his outstanding performances on the big stage."
-    ],
-    "basketball": [
-        "Michael Jordan has won six NBA championships.",
-        "Kareem Abdul-Jabbar is the all-time leading scorer in NBA history.",
-        "The NBA was founded in New York City on June 6, 1946.",
-        "Wilt Chamberlain scored 100 points in a single game.",
-        "The Boston Celtics have the most NBA titles with 17 championships."
-    ]
-    }
-
-    @app.route('/allFacts', methods=['GET'])
-    def all_facts():
-        category = request.args.get('category', '').lower()
-
-        if category in facts:
-            fact = random.choice(facts[category])
-            return jsonify({"fact": fact})
-        all_facts_flat = [fact for category_facts in facts.values() for fact in category_facts]
-        random_fact = random.choice(all_facts_flat)
-        return jsonify({"fact": random_fact})
-    
-    @app.route('/facts', methods=['GET'])
-    def get_facts():
-        return jsonify(facts)
 
     @app.route('/generateName', methods=['GET'])
     def generate_name():
@@ -91,7 +52,7 @@ def create_app():
         else:
             name = random.choice(names)
     
-        return jsonify({"name": name})
+        return jsonify({"firstname": name})
 
     
     @app.route('/greet', methods=['GET'])
@@ -187,13 +148,15 @@ def create_app():
         else:
             return jsonify({"error": "Fruit not found. Please try apple, banana, lemon, orange, grape, or lime."}), 404
     
-    @app.route('/items', methods=['GET'])
-    def get_items():
-        min_price = request.args.get('min_price', default=0, type=int)
-        items = Item.query.filter(Item.price >= min_price).all()
-        if not items:
+    @app.route('/items/<int:min_price>', methods=['GET'])
+    def get_items(min_price):
+        #min_price = request.args.get('min_price', default=0, type=int)
+        items = load_items_from_file()
+        filtered_items = [item for item in items if item['price'] >= min_price]
+        #items = Item.query.filter(Item.price >= min_price).all()
+        if not filtered_items:
             return jsonify({'message': 'No items found'}), 404
-        return jsonify([item.serialize() for item in items]), 200
+        return jsonify(filtered_items), 200
 
     WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
     @app.route('/weather/<city>', methods=['GET'])
@@ -204,16 +167,18 @@ def create_app():
         print("Request URL:", url)
         #Returns error if invalid city is entered
         if response.status_code != 200:
-            return ({"error": "City not found or API error."}), 404
+            return render_template({"error": "City not found or API error."}), 404
         
         data = response.json()
         weather_data = {
+            "city": city,
             "temperature": f"{data['main']['temp']}°F",
             "condition": data['weather'][0]['description'],
             "humidity": f"{data['main']['humidity']}%",
             "wind_speed": f"{data['wind']['speed']} mph"
         }
-        return (weather_data)
+        return render_template('weather.html', weather=weather_data)
+        
 
     @app.route('/howToMakeEndpoint', methods=['GET'])
     def get_endpoints():
@@ -319,31 +284,6 @@ def create_app():
         except Exception as e:
             return jsonify({"error": f"Calculation error: {str(e)}"}), 500
 
-    @app.route('/randomFact', methods=['GET'])
-    def random_fact():
-        facts = [
-            {"fact": "Honey never spoils."},
-            {"fact": "Octopuses have three hearts."},
-            {"fact": "Bananas are berries, but strawberries are not."},
-            {"fact": "A day on Venus is longer than a year on Venus."},
-            {"fact": "Sharks have been around longer than trees."},
-            {"fact": "The ocean covers 71 percent of the Earth's surface and the average depth is 12,100 feet."}
-        ]
-        selected_fact = random.choice(facts)
-        fact_count = len(facts)  # Count of total facts
-        return jsonify({"fact": selected_fact['fact'], "totalFacts": fact_count})
-
-    @app.route('/swimming_fact', methods=['GET'])
-    def swimming_fact():
-        facts = [
-            "Swimming is one of the best aerobic exercises.",
-            "Michael Phelps has won 23 Olympic gold medals.",
-            "The front crawl is the fastest swimming stroke.",
-            "Humans have been swimming for thousands of years.",
-            "Swimming burns more calories than running."
-        ]
-        return jsonify({"fact": facts[0]})
-
     @app.route('/netflix-shows', methods=['GET'])
     def get_netflix_shows():
         netflix_shows = [
@@ -380,30 +320,6 @@ def create_app():
         picked = random.choice(destinations)
         return jsonify(picked)
 
-    @app.route('/study-facts', methods=['GET'])
-    def get_study_facts():
-        study_facts = [
-            "The Pomodoro Technique helps improve focus by working in 25-minute intervals.",
-            "Exercise before studying can enhance learning and memory.",
-            "Short, frequent study sessions are more effective than long, infrequent ones.",
-            "Taking handwritten notes improves memory more than typing.",
-            "Sleep plays a crucial role in memory consolidation after studying."
-        ]
-        selected_fact = random.choice(study_facts)
-        return jsonify({"study_fact": selected_fact})
-
-
-    @app.route('/wrestling_fact', methods=['GET'])
-    def wrestling_fact():
-        wrestling_facts = [
-            "Hulk Hogan won his first WWF Championship in 1984.",
-            "The Undertaker has a 25-2 WrestleMania record.",
-            "Stone Cold Steve Austin's 'Austin 3:16' speech revolutionized wrestling promos.",
-            "Ric Flair is a 16-time world champion.",
-            "Shawn Michaels is known as 'Mr. WrestleMania' for his outstanding performances on the big stage."
-        ]
-        fact = random.choice(wrestling_facts)
-        return jsonify({"fact": fact})
     return app
 
 app = create_app()

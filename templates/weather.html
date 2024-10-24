@@ -1,0 +1,22 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather in {{ weather.city }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #f0f8ff; }
+        .weather-box { background-color: #ffebcd; padding: 20px; border-radius: 10px; display: inline-block; }
+        .temperature { font-size: 2em; margin-bottom: 10px; }
+        .condition, .humidity, .wind { font-size: 1.2em; }
+    </style>
+</head>
+<body>
+    <div class="weather-box">
+        <h2>Weather in {{ weather.city }}</h2>
+        <div class="temperature">{{ weather.temperature }}</div>
+        <div class="condition">Condition: {{ weather.condition }}</div>
+        <div class="humidity">Humidity: {{ weather.humidity }}</div>
+        <div class="wind">Wind Speed: {{ weather.wind_speed }}</div>
+    </div>
+</body>
+</html>
