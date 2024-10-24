@@ -64,7 +64,7 @@ This will start the server. From there navigate to the url and your desired endp
 
 - <a name="AllFacts">**All Facts Endpoint**</a>
   - **Endpoint**: 'GET /allFacts'
-  - **Description**: The All Facts endpoint is a consolidated endpoint of facts about various topics. Just going to the /allFacts endpoint will return a random fact from any category. But specifying a category, like random, swimming, basketball, and wrestling will return a random fact about that category. EX: /allFacts?category=swimming
+  - **Description**: The All Facts endpoint is a consolidated endpoint of facts about various topics. Just going to the /allFacts endpoint will return a random fact from any category. But specifying a category (i.e random, tennis, swimming, basketball, popularity, studying or wrestling) will return a random fact about that category. EX: /allFacts?category=swimming 🌈🎾🏊🏀💅📚🤼. Add your own favorite facts/tips to the source code to see them on the endpoint! !NO Adult Content allowed! 
   - **Test File**: test_allfacts.py
 
 - <a name="Animal">**Animal Endpoint**</a>
@@ -217,16 +217,6 @@ This will start the server. From there navigate to the url and your desired endp
   - **Endpoint**: `GET /quotes`
   - **Description**: Get a good random stoic quote from Plato and others.
   - **Test File**: test_quotes.py
-
-- <a name="Study">**Study Facts Endpoint**</a>
-  - **Endpoint**: `GET /study-facts`
-  - **Description**: Retrieve random study tips and facts to enhance your learning experience! Add your own tips to the source code to see them on the endpoint! !NO Adult Content allowed!
-  - **Test File**: `test_study_facts.py`
-
-- <a name="Tennis">**Tennis Facts Endpoint**</a>
-  - **Endpoint**: `GET /tennis_fact`
-  - **Description**: 🎾 Learn fun facts about tennis!
-  - **Test File**: test_tennisfacts_.py
 
 - <a name="Travel">**Travel Randomizer Endpoint**</a>
   - **Endpoint**: `GET /travel`
