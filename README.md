@@ -60,7 +60,7 @@ python3 -m flask run
 This will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
 
 ### Available Endpoints
-[**All Facts Endpoint**](#AllFacts) | [**Animal Endpoint**](#Animal) | [**Brainrot Endpoint**](#Brainrot) | [**Calculator Endpoint**](#Calculator) | [**Color Hexifier Endpoint**](#Hexifier) | [**Convert To Binary Endpoint**](#Binary) | [**Convert To Decimal Endpoint**](#Decimal) | [**Dad Jokes Endpoint**](#Dad) | [**Factorial Endpoint**](#Factorial) | [**Favorite Quote Endpoint**](#Favorite) | [**Fortune Cookie Endpoint**](#Fortune) | [**Fruit Info Endpoint**](#Fruit) | [**Generate Name Endpoint**](#Name) | [**Get Items Endpoint**](#Items) | [**Greeting Endpoint**](#Greeting) | [**Live Weather Endpoint**](#Weather) | [**Make an Endpoint**](#Make) | [**Marathon Facts Endpoint**](#Marathon) | [**MTG Mana Endpoint**](#MTG) | [**Motivation Endpoint**](#Motivation) | [**Netflix Show Endpoint**](#Netflix) | [**Photo Gallery Endpoint**](#Photo) | [**Pizza Toppings Endpoint**](#Pizza) | [**Pokefishing Endpoint**](#Pokefishing) | [**Power Endpoint**](#Power) | [**Random Fact Endpoint**](#Random) | [**Sports Facts Endpoint**](#Sports) | [**Study Fact Endpoint**](#Study) | [**Stoic Quotes Endpoint**](#Stoic) | [**Tennis Facts Endpoint**](#Tennis) | [**Travel Randomizer Endpoint**](#Travel) | [**Two Mana Combo Endpoint**](#Combo) | [**Version Endpoints**](#Version) 
+[**All Facts Endpoint**](#AllFacts) | [**Animal Endpoint**](#Animal) | [**Brainrot Endpoint**](#Brainrot) | [**Calculator Endpoint**](#Calculator) | [**Color Hexifier Endpoint**](#Hexifier) | [**Convert To Binary Endpoint**](#Binary) | [**Convert To Decimal Endpoint**](#Decimal) | [**Dad Jokes Endpoint**](#Dad) | [**Factorial Endpoint**](#Factorial) | [**Favorite Quote Endpoint**](#Favorite) | [**Fortune Cookie Endpoint**](#Fortune) | [**Fruit Info Endpoint**](#Fruit) | [**Generate Name Endpoint**](#Name) | [**Get Items Endpoint**](#Items) | [**Greeting Endpoint**](#Greeting) | [**Live Weather Endpoint**](#Weather) | [**Make an Endpoint**](#Make) | [**Marathon Facts Endpoint**](#Marathon) | [**MTG Mana Endpoint**](#MTG) | [**Motivation Endpoint**](#Motivation) | [**Multiply Endpoint**](#multiply) | [**Netflix Show Endpoint**](#Netflix) | [**Photo Gallery Endpoint**](#Photo) | [**Pizza Toppings Endpoint**](#Pizza) | [**Pokefishing Endpoint**](#Pokefishing) | [**Power Endpoint**](#Power) | [**Random Fact Endpoint**](#Random) | [**Sports Facts Endpoint**](#Sports) | [**Study Fact Endpoint**](#Study) | [**Stoic Quotes Endpoint**](#Stoic) | [**Tennis Facts Endpoint**](#Tennis) | [**Travel Randomizer Endpoint**](#Travel) | [**Two Mana Combo Endpoint**](#Combo) | [**Version Endpoints**](#Version) 
 
 - <a name="AllFacts">**All Facts Endpoint**</a>
   - **Endpoint**: 'GET /allFacts'
@@ -122,6 +122,7 @@ This will start the server. From there navigate to the url and your desired endp
 - <a name="Favorite">**Favorite Quote Endpoint**</a>
   - **Endpoint**: `GET /favoritequote`
   - **Description**: Retrieve a favorite quote. Update: You can add your own favorite quote now too!!
+  - Implemented PATCH functionality to allow updating favorite quotes based on author.
   - **Test File**: test_favorite_quote.py
 
 - <a name="Fortune">**Fortune Cookie Endpoint**</a>
@@ -179,8 +180,19 @@ This will start the server. From there navigate to the url and your desired endp
 
 - <a name="Motivation">**Motivation Endpoint**</a>
   - **Endpoint**: `GET /motivation`
-  - **Description**: The /motivation endpoint provides a random motivational quote whenever accessed via a GET request. When a user sends a request to this endpoint, the app responds with one of five pre-defined motivational quotes, returned in JSON format.
+  - **Description**: The /motivation endpoint provides a random motivational quote whenever accessed via a GET request. When a user sends a request to this endpoint, the app responds with one of five pre-defined motivational quotes, returned in JSON format. Additionally, users can retrieve the full list of motivational quotes by using the query parameter `all=true`. This returns all available quotes.
   - **Test File**: test_motivation.py test_get_motivation.py
+
+- <a name="multiply">**Multiply Endpoint**</a>
+  - **Endpoint**: `GET /multiply`
+  - **Description**: Multiply two numbers provided as query parameters. 
+  - **Parameters**: 
+    - `a`: The first number to multiply (required).
+    - `b`: The second number to multiply (required).
+  - **Response**:
+    - Success: Returns a JSON object with the multiplication result.
+    - Error: Returns an error message if inputs are missing or invalid.
+  - **Test File**: `test_multiply.py`
 
 - <a name="Netflix">**Netflix Shows Endpoint**</a>
   - **Endpoint**: `GET /netflix-shows`
@@ -200,7 +212,7 @@ This will start the server. From there navigate to the url and your desired endp
 
 - <a name="Soda">**Soda Endpoint**</a>
   - **Endpoint**: `GET /soda`
-  - **Description**: This endpoint is used to choose a soda to go with your meal. 🥤🥤🥤
+  - **Description**: This endpoint is used to choose a soda to go with your meal. By default, it returns a random soda brand. You can retrieve the full list of available sodas by using the query parameter `all=true`. 🥤🥤🥤
   - **Test File**: test_soda.py
 
 - <a name="Pokefishing">**Pokefishing Endpoint**</a>
@@ -254,24 +266,14 @@ This will start the server. From there navigate to the url and your desired endp
 * Yomi Odubiyi
 * Brayden Connole
 
-## About The Contributors
-
-```bash
-#Soren Bybee: 
-  Interests: Hiking, Rock Climbing, Mountain Biking, and Playing Video Games.
-    - Add me up on Discord(sorenbybee) if your looking to play Rainbow Six Siege on PC.
-    - If you need someone to approve your pull requests here is my number: (530-363-6531)
-```
-
 ## Welcome to The IT4200 Art Gallery!
 
 
 *Only KOOL Kids Will Get This Reference....
 
 ![alt text](https://github.com/UTT-Connole/class-api-IT4200-2024-fall/blob/main/images/gojo.jpg)
+```
 
-
-```bash
 ⬛⬛⬛⬛⬛🟩🟩⬛🟩🟩⬛⬛⬛
 ⬛⬛⬛⬛🟩🟩🟩🟩🟩🟩🟩⬛⬛ 
 ⬛⬛⬛🟩🟩⬜⬛⬜⬜⬛🟩⬛⬛ 
@@ -304,8 +306,40 @@ Pepe after forcing to main....
 ⠀⠀⠀⠀⠹⡆⠀⠈⠙⠶⠶⢤⣄⣀⣀⣀⣤⡽⠿⠛⠉⠀⢀⣤⠞⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣿⣿⣿⠟⠃⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠻⣷⢦⣤⣀⣀⣀⡀⠀⠀⢀⣀⣀⣀⡤⠶⠞⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣾⣿⣿⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠈⠳⣄⣀⠀⠈⠉⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣴⣾⣿⠿⠿⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠙⠒⠒⠲⠦⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠶⠒⠒⠚⠛⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠙⠒⠒⠲⠦⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠶⠒⠒⠚⠛⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢶⡿⣿⣿⣿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡿⢿⣿⣿⣿⢿⣾⣿⡵⡟⡮⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡻⡍⠄⠘⠫⢶⣹⡿⡷⡿⣵⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣷⠈⡀⠉⢳⣿⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡔⠀⠠⡟⡽⡟⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣾⣟⡧⣰⣣⣋⡭⣝⣿⣿⣻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣯⣿⣿⣿⣗⢿⣶⣿⣿⣿⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡽⡛⣯⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠛⠱⠛⠛⠿⣿⣿⣿⣿⣿⣿⣿⡟⢻⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠂⠂⠀⠀⠀⠙⢿⣿⣿⣿⣽⣜⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣀⡢⠀⠀⠀⠀⠀⠹⣿⣿⣯⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⣿⣿⣟⢿⣿⣿⣿⣿⣿⣿⣿⣿⣟⢻⣿⣿⠲⡂⡀⠀⠀⡄⠀⢹⣿⣿⣻⣿⣿⣿⣿⠻⣿⣿⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⣿⣿⠁⢻⣿⡿⣸⣿⣿⣿⣿⣿⣿⣿⣿⠓⠿⠾⣿⠧⠀⠰⢚⠷⠄⠀⢸⣿⣿⣿⣿⣿⣿⣿⠁⢸⣷⠎⣿⣟⢿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡌⣽⣷⣭⣟⣁⣻⣿⡿⣿⣿⣿⣿⣿⣿⣿⡟⢹⣿⣦⠀⠐⢶⡄⠀⠀⠘⣿⣿⣿⣿⠟⠻⣿⡖⠀⠿⠹⣿⠛⣼⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠟⠳⣶⠹⣷⣶⣿⡟⣡⣿⣿⣿⣿⣿⣿⣿⢡⣿⣿⣯⣥⣄⠘⣿⡀⠀⠀⣼⣿⣿⣿⣷⡄⠀⠉⣵⣿⣏⢆⢺⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣯⣤⣶⣶⢞⣻⣿⠛⣼⣿⣿⣿⣿⣿⣿⣿⡯⢼⣿⣿⣿⣿⣿⣢⣿⠇⡄⢠⣿⣿⣿⣿⣿⣿⣷⣔⠸⣿⣿⣿⣷⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣏⣑⣶⠘⣿⣿⣿⣿⣿⣿⣿⣿⠆⣿⢿⠟⣿⣿⣿⡟⢸⣠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠇⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣵⣴⣿⢁⠘⢿⣿⣿⣿⣿⣿⣿⣇⣿⡁⠰⣾⣿⣹⡏⢠⣏⣻⡿⢿⠿⢿⣿⣿⣿⣟⠿⠂⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡕⢖⠀⠙⡻⢿⣿⣿⣿⣿⣿⣿⣶⡿⠃⠘⣱⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣟⢎⢄⠀⢠⡹⣿⣿⣿⣿⣿⣿⣽⣓⢐⡴⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣿⠏⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠽⣦⡄⢯⣻⡿⣿⡿⢝⡛⠙⠉⠀⢹⡠⠯⡿⣿⣿⣿⣿⣿⡿⢟⣥⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⣿⣿⣿⣽⣿⣿⣿⣼⡿⢂⡤⣍⡁⢀⡶⡆⡽⠙⣻⣫⣷⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣾⣿⣮⣞⣻⣿⠀⡁⠀⠃⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣅⢉⢉⡿⢥⡁⠶⠒⠨⠴⠀⢭⡛⢻⣿⣿⣿⣿⣿⣿⡟⠝⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣿⣟⣟⣿⣷⣌⣽⣿⡵⣿⣿⣌⠞⣭⡑⠠⠠⣰⠎⢠⡙⡆⠙⣿⡿⢿⡿⠿⣷⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⢽⣿⣟⣻⣿⣿⡞⠽⢍⡷⣟⢿⢿⣶⠕⠶⡷⣄⣴⡧⢋⣋⠁⠀⠺⣷⡈⠈⣆⡩⡄⠈⡿⣿⡿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣷⣿⣿⣟⣖⣫⡿⣿⣶⣘⠜⣻⣧⣷⣿⡍⣖⣈⢘⣙⡛⢷⣨⢽⣤⣤⡏⠈⡹⠴⠄⠼⢾⣷⣾⣷⣆⠿⡟⢿⣿⠿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣿⣿⡟⣻⣿⠷⣟⣯⣽⣿⣿⣷⠙⠿⡦⣿⣙⣾⣷⣮⡥⣱⡶⠊⡑⠞⡿⣙⠒⣦⣆⣼⣿⣯⢶⠻⣶⠘⢮⣙⡙⢉⣻⣷⣝⡦⡀⢭⠂
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢱⣼⣿⣥⣯⢻⣷⣿⣧⣽⡛⣦⢼⠙⣿⣏⣹⣿⣟⢚⡺⢳⡷⡦⡺⢛⣹⢚⢿⡿⣿⣿⣫⣓⡀⠜⢿⣟⢹⣎⣨⣗⠸⣴⢂⡝⢿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣽⣿⢿⣿⣿⡿⢿⣿⠿⡟⣿⣭⣉⢍⣼⢿⣼⣥⡩⠽⣷⠾⢿⣪⣇⣾⣿⠰⣻⣿⣿⠁⣼⣇⡝⣿⢮⣿⡿⣀⠦⢹⢒⢥⠿⣿⡟⢂⠀⡳⣼
+⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
         *
        /O\
       /_O_\

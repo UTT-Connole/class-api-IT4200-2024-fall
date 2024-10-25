@@ -110,7 +110,18 @@ def create_app():
             quotes.append(new_quote)  
             return jsonify({"message": "New favorite quote added!", "quote": new_quote}), 201
     
-    
+        elif request.method == 'PATCH':
+        # Assuming the client sends the author's name to identify which quote to update
+            author = request.json.get('author')
+            updated_quote = request.json.get('quote')
+        
+        for quote in quotes:
+            if quote['author'] == author:
+                quote['quote'] = updated_quote
+                return jsonify({"message": "Favorite quote updated!", "quote": quote}), 200
+        
+        return jsonify({"error": "Quote not found for the given author."}), 404
+
     @app.route('/fortune', methods=['GET'])
     def get_fortune():
         fortunes = [
@@ -299,6 +310,18 @@ def create_app():
         ]
         selected_show = random.choice(netflix_shows)
         return jsonify({"netflix_show": selected_show})
+
+    @app.route('/multiply', methods=['GET'])
+    def multiply():
+        try:
+            a = float(request.args.get('a'))
+            b = float(request.args.get('b'))
+            result = a * b
+            return jsonify({'result': result}), 200
+        except (TypeError, ValueError):
+            return jsonify({'error': 'Invalid input'}), 400
+
+
 
     @app.route('/travel', methods=['GET','POST'])
     def travel():
