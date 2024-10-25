@@ -21,3 +21,15 @@ def test_get_random_soda(client):
     valid_sodas = ['Fanta', 'Coca Cola', 'Sprite', 'Mountain Dew', 'Dr. Pepper']
     assert json_data['soda'] in valid_sodas, "Returned soda is not in the list of valid sodas"
 
+def test_get_all_sodas(client):
+    """Test the soda endpoint returns all soda brands when queried with all=true"""
+    response = client.get('/soda?all=true')
+    assert response.status_code == 200  # Check if the status code is 200 (OK)
+
+    json_data = response.get_json()
+    assert 'sodas' in json_data  # Check if 'sodas' key is in the response
+
+    # Check if the returned list matches the soda options
+    expected_sodas = ['Fanta', 'Coca Cola', 'Sprite', 'Mountain Dew', 'Dr. Pepper']
+    assert json_data['sodas'] == expected_sodas, "The returned sodas list doesn't match the expected list"
+
