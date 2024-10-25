@@ -183,12 +183,32 @@ def create_app():
             return render_template({"error": "City not found or API error."}), 404
         
         data = response.json()
+        temperature = data['main']['temp']
+        print(temperature)
+
+        if temperature < 32:
+            bg_color = "#56A5EC"
+        elif 32 <= temperature < 50:
+            bg_color = "#40E0D0"
+        elif 50 <= temperature < 70:
+            bg_color = "#50C878"
+        elif 70 <= temperature < 80:
+            bg_color = "#F5E216"
+        elif 80 <= temperature < 90:
+            bg_color = "#FFA500"
+        elif 90 <= temperature < 100:
+            bg_color = "#FF5F1F"
+        else:
+            bg_color = "#F62817"
+
+            
         weather_data = {
             "city": city,
             "temperature": f"{data['main']['temp']}°F",
             "condition": data['weather'][0]['description'],
             "humidity": f"{data['main']['humidity']}%",
-            "wind_speed": f"{data['wind']['speed']} mph"
+            "wind_speed": f"{data['wind']['speed']} mph",
+            "bg_color": bg_color
         }
         return render_template('weather.html', weather=weather_data)
         
