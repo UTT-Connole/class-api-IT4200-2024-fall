@@ -1,0 +1,45 @@
+name: Run Pytest Tests in Docker Container
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Set up Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      # Build the Docker image
+      - name: Build Docker image
+        run: docker build -t class-api-test .
+
+      # Run the Docker container to ensure the app starts properly
+      - name: Run Docker container
+        run: |
+          docker run -d -p 5000:5000 --name class-api-test-container class-api-test
+          
+      # Check if the container is running successfully
+      - name: Check if app is running
+        run: |
+          sleep 10  # Wait for the app to start
+          docker ps --filter "name=class-api-test-container" --filter "status=running" --format "{{.Names}}" | grep class-api-test-container
+
+      # Run tests in Docker container
+      - name: Run tests in Docker container
+        run: docker exec class-api-test-container pytest test
+
+      # Clean up
+      - name: Stop and remove Docker container
+        if: always()
+        run: |
+          docker stop class-api-test-container
+          docker rm class-api-test-container
