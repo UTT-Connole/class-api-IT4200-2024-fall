@@ -45,3 +45,17 @@ def test_motivation_status_code(client):
     """Test if the motivation endpoint returns a 200 OK status"""
     response = client.get('/motivation')
     assert response.status_code == 200
+
+# Test: Verify the endpoint returns all motivational quotes when queried
+def test_motivation_get_all_quotes(client):
+    """Test if the motivation endpoint returns all motivational quotes when the query parameter is used"""
+    response = client.get('/motivation?all=true')
+    assert response.status_code == 200
+    json_data = response.get_json()
+    assert 'motivational_quotes' in json_data  # Check if 'motivational_quotes' key is in the response
+    assert isinstance(json_data['motivational_quotes'], list)  # Check if it's a list
+    assert len(json_data['motivational_quotes']) == 5  # Check if it matches the number of predefined quotes
+    for quote in json_data['motivational_quotes']:
+        assert isinstance(quote, str)  # Ensure each quote is a string
+        assert len(quote) > 0  # Ensure none of the quotes are empty
+
