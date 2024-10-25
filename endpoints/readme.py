@@ -6,7 +6,7 @@ import subprocess
 import threading
 
 # Create a Blueprint for the welcome endpoint
-welcome_bp = Blueprint('welcome', __name__)
+readme_bp = Blueprint('readme', __name__)
 
 GRIP_URL = 'http://localhost:6419'
 
@@ -18,16 +18,16 @@ def run_grip():
 grip_thread = threading.Thread(target=run_grip, daemon=True)
 grip_thread.start()
 
-@welcome_bp.route('/')
-def welcome():
-    # Render the HTML content with a welcome message and a link to the README.md served by Grip
+@readme_bp.route('/readme')
+def readme():
+    # Render the HTML content with a readme message and a link to the README.md served by Grip
     return render_template_string("""
     <!doctype html>
     <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Welcome</title>
+        <title>README</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <style>
             body, html {
@@ -44,7 +44,6 @@ def welcome():
     </head>
     <body>
         <div class="container centered">
-            <h1 class="my-4 text-center">Welcome to the IT4200 class API!</h1>
             <p class="text-center">
                 <a href="{{ grip_url }}" target="_blank" class="btn btn-primary">View README.md</a>
             </p>

@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template
-from endpoints.welcome import welcome_bp
+from endpoints.readme import readme_bp
 from endpoints.marathonfacts import marathonFacts_bp
 from endpoints.dadjoke import dadjoke_bp
 from endpoints.brainrot import brainrot_bp
@@ -27,7 +27,7 @@ def load_items_from_file():
 def create_app():
     app = Flask(__name__)
 
-    app.register_blueprint(welcome_bp)
+    app.register_blueprint(readme_bp)
     app.register_blueprint(brainrot_bp)
     app.register_blueprint(dadjoke_bp)
     app.register_blueprint(math_bp)

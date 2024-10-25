@@ -60,7 +60,7 @@ python3 -m flask run
 This will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
 
 ### Available Endpoints
-[**All Facts Endpoint**](#AllFacts) | [**Animal Endpoint**](#Animal) | [**Brainrot Endpoint**](#Brainrot) | [**Calculator Endpoint**](#Calculator) | [**Color Hexifier Endpoint**](#Hexifier) | [**Convert To Binary Endpoint**](#Binary) | [**Convert To Decimal Endpoint**](#Decimal) | [**Dad Jokes Endpoint**](#Dad) | [**Factorial Endpoint**](#Factorial) | [**Favorite Quote Endpoint**](#Favorite) | [**Fortune Cookie Endpoint**](#Fortune) | [**Fruit Info Endpoint**](#Fruit) | [**Generate Name Endpoint**](#Name) | [**Get Items Endpoint**](#Items) | [**Greeting Endpoint**](#Greeting) | [**Live Weather Endpoint**](#Weather) | [**Make an Endpoint**](#Make) | [**Marathon Facts Endpoint**](#Marathon) | [**MTG Mana Endpoint**](#MTG) | [**Motivation Endpoint**](#Motivation) | [**Multiply Endpoint**](#multiply) | [**Netflix Show Endpoint**](#Netflix) | [**Photo Gallery Endpoint**](#Photo) | [**Pizza Toppings Endpoint**](#Pizza) | [**Pokefishing Endpoint**](#Pokefishing) | [**Power Endpoint**](#Power) | [**Random Fact Endpoint**](#Random) | [**Sports Facts Endpoint**](#Sports) | [**Study Fact Endpoint**](#Study) | [**Stoic Quotes Endpoint**](#Stoic) | [**Tennis Facts Endpoint**](#Tennis) | [**Travel Randomizer Endpoint**](#Travel) | [**Two Mana Combo Endpoint**](#Combo) | [**Version Endpoints**](#Version) 
+[**All Facts Endpoint**](#AllFacts) | [**Animal Endpoint**](#Animal) | [**Brainrot Endpoint**](#Brainrot) | [**Calculator Endpoint**](#Calculator) | [**Color Hexifier Endpoint**](#Hexifier) | [**Convert To Binary Endpoint**](#Binary) | [**Convert To Decimal Endpoint**](#Decimal) | [**Dad Jokes Endpoint**](#Dad) | [**Factorial Endpoint**](#Factorial) | [**Favorite Quote Endpoint**](#Favorite) | [**Fortune Cookie Endpoint**](#Fortune) | [**Fruit Info Endpoint**](#Fruit) | [**Generate Name Endpoint**](#Name) | [**Get Items Endpoint**](#Items) | [**Greeting Endpoint**](#Greeting) | [**Live Weather Endpoint**](#Weather) | [**Make an Endpoint**](#Make) | [**Marathon Facts Endpoint**](#Marathon) | [**MTG Mana Endpoint**](#MTG) | [**Motivation Endpoint**](#Motivation) | [**Multiply Endpoint**](#multiply) | [**Netflix Show Endpoint**](#Netflix) | [**Photo Gallery Endpoint**](#Photo) | [**Pizza Toppings Endpoint**](#Pizza) | [**Pokefishing Endpoint**](#Pokefishing) | [**Power Endpoint**](#Power) | [**Random Fact Endpoint**](#Random) | [**Sports Facts Endpoint**](#Sports) | [**Study Fact Endpoint**](#Study) | [**Stoic Quotes Endpoint**](#Stoic) | [**Tennis Facts Endpoint**](#Tennis) | [**Travel Randomizer Endpoint**](#Travel) | [**Two Mana Combo Endpoint**](#Combo) | [**Version Endpoints**](#Version) | [**Readme Endpoint**](#Readme) 
 
 - <a name="AllFacts">**All Facts Endpoint**</a>
   - **Endpoint**: 'GET /allFacts'
@@ -248,6 +248,11 @@ This will start the server. From there navigate to the url and your desired endp
   - **Endpoint**: `GET /current-version`
   - **Description**: Returns the current working version of the application based on the current commit.
   - **Test File**: test_version.py
+
+- <a name="Readme">**Readme Endpoint**</a>
+  - **Endpoint**: `GET /readme`
+  - **Description**: view the README.
+  - **Test File**: test_readme.py
 
 ## Contributors
 
