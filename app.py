@@ -298,6 +298,18 @@ def create_app():
         selected_show = random.choice(netflix_shows)
         return jsonify({"netflix_show": selected_show})
 
+    @app.route('/multiply', methods=['GET'])
+    def multiply():
+        try:
+            a = float(request.args.get('a'))
+            b = float(request.args.get('b'))
+            result = a * b
+            return jsonify({'result': result}), 200
+        except (TypeError, ValueError):
+            return jsonify({'error': 'Invalid input'}), 400
+
+
+
     @app.route('/travel', methods=['GET','POST'])
     def travel():
         destinations = [
