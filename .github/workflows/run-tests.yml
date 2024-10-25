@@ -35,7 +35,7 @@ jobs:
 
       # Run tests in Docker container
       - name: Run tests in Docker container
-        run: docker exec class-api-test-container pytest
+        run: docker exec class-api-test-container pytest test
 
       # Clean up
       - name: Stop and remove Docker container
