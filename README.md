@@ -122,6 +122,7 @@ This will start the server. From there navigate to the url and your desired endp
 - <a name="Favorite">**Favorite Quote Endpoint**</a>
   - **Endpoint**: `GET /favoritequote`
   - **Description**: Retrieve a favorite quote. Update: You can add your own favorite quote now too!!
+  - Implemented PATCH functionality to allow updating favorite quotes based on author.
   - **Test File**: test_favorite_quote.py
 
 - <a name="Fortune">**Fortune Cookie Endpoint**</a>
