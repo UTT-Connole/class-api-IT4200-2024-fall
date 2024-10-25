@@ -12,6 +12,7 @@ COPY templates templates
 COPY endpoints endpoints
 COPY static static
 COPY app.py app.py
+COPY items.json items.json
 
 ENV WEATHER_API_KEY=$WEATHER_API_KEY
 
