@@ -180,7 +180,7 @@ This will start the server. From there navigate to the url and your desired endp
 
 - <a name="Motivation">**Motivation Endpoint**</a>
   - **Endpoint**: `GET /motivation`
-  - **Description**: The /motivation endpoint provides a random motivational quote whenever accessed via a GET request. When a user sends a request to this endpoint, the app responds with one of five pre-defined motivational quotes, returned in JSON format. Additionally, users can retrieve the full list of motivational quotes by using the query parameter `all=true`. This returns all available quotes in a single response.
+  - **Description**: The /motivation endpoint provides a random motivational quote whenever accessed via a GET request. When a user sends a request to this endpoint, the app responds with one of five pre-defined motivational quotes, returned in JSON format. Additionally, users can retrieve the full list of motivational quotes by using the query parameter `all=true`. This returns all available quotes.
   - **Test File**: test_motivation.py test_get_motivation.py
 
 - <a name="multiply">**Multiply Endpoint**</a>

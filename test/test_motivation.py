@@ -59,3 +59,4 @@ def test_motivation_get_all_quotes(client):
         assert isinstance(quote, str)  # Ensure each quote is a string
         assert len(quote) > 0  # Ensure none of the quotes are empty
 
+

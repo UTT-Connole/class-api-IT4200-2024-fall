@@ -14,7 +14,6 @@ def get_motivation():
         "The harder you work for something, the greater you’ll feel when you achieve it."
     ]
     
-    # Check if the 'all' query parameter is present
     if 'all' in request.args and request.args.get('all').lower() == 'true':
         return jsonify({"motivational_quotes": motivational_quotes})
     
