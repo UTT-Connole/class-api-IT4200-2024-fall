@@ -1,5 +1,5 @@
 import random
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request  # Import request
 
 # Create a blueprint for motivation endpoint
 motivation_bp = Blueprint('motivation', __name__)
@@ -13,5 +13,10 @@ def get_motivation():
         "Act as if what you do makes a difference. It does.",
         "The harder you work for something, the greater you’ll feel when you achieve it."
     ]
+    
+    # Check if the 'all' query parameter is present
+    if 'all' in request.args and request.args.get('all').lower() == 'true':
+        return jsonify({"motivational_quotes": motivational_quotes})
+    
     selected_quote = random.choice(motivational_quotes)
     return jsonify({"motivational_quote": selected_quote})
