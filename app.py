@@ -38,6 +38,7 @@ def create_app():
     app.register_blueprint(motivation_bp)
     app.register_blueprint(photogallery_bp)
     app.register_blueprint(pizza_bp)
+    app.register_blueprint(pokefishing_bp)
     app.register_blueprint(soda_bp)
     app.register_blueprint(version_bp)
     app.register_blueprint(quotes_bp)
