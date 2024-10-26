@@ -79,7 +79,7 @@ This will start the server. From there navigate to the url and your desired endp
 
 - <a name="Calculator">**Calculator Endpoint**</a>
   - **Endpoint**: `GET /calc?x=<number>&y=<number>&op=<operator>` or `POST /calc`
-  - **Description**: Use the following template to add, subtract, multiply, divide, or find the modulus of two numbers: `http://127.0.0.1:5000/calc?x=<number>&y=<number>&op=<operator>`. Replace `<number>` with the numbers you want to use, and replace `<operator>` with one of the following operations: `add`, `subtract`, `multiply`, `divide`, `mod`, `power`.
+  - **Description**: Use the following template to add, subtract, multiply, divide, or find the modulus of two numbers: `http://127.0.0.1:5000/calc?x=<number>&y=<number>&op=<operator>`. Replace `<number>` with the numbers you want to use, and replace `<operator>` with one of the following operations: `add`, `subtract`, `multiply`, `divide`, `mod`, `power`, `exp`.
     
     For square, square root, or cube operations, use the following template: `http://127.0.0.1:5000/calc?x=<number>&op=<operator>`. Replace `<number>` with the number you want to use, and replace `<operator>` with either `square`, `sqrt`, or `cube`.
 

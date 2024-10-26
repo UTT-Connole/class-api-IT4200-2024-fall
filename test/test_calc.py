@@ -112,3 +112,10 @@ def test_calc_cube(client):
     assert response.status_code == 200
     json_data = response.get_json()
     assert json_data['result'] == 27
+    
+def test_calc_exp(client):
+    """Test the exponentiation operation"""
+    response = client.get('/calc?x=2&y=3&op=exp')
+    assert response.status_code == 200
+    json_data = response.get_json()
+    assert json_data['result'] == 8
