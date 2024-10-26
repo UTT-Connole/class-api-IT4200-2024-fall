@@ -1,3 +1,5 @@
+import pytest
+
 def test_factorial_single_positive(client):
     response = client.get('/factorial?n=5')
     assert response.status_code == 200

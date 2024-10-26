@@ -3,6 +3,7 @@ from endpoints.readme import readme_bp
 from endpoints.marathonfacts import marathonFacts_bp
 from endpoints.dadjoke import dadjoke_bp
 from endpoints.brainrot import brainrot_bp
+from endpoints.math import math_bp
 from endpoints.motivation import motivation_bp
 from endpoints.math import math_bp
 from endpoints.mtg import mtg_bp
@@ -96,6 +97,8 @@ def create_app():
             return f"The hex code for {color_name} is {hex_code}"
         else:
             return "Invalid color name"
+        
+    app.register_blueprint(dadjoke_bp)
         
     @app.route('/favoritequote', methods=['GET', 'POST'])
     def get_favorite_quote():
@@ -232,78 +235,51 @@ def create_app():
 
         return jsonify(endpointSteps)
 
-    @app.route('/power', methods=['GET'])
-    def power():
-        try:
-            base_param = request.args.get('base')
-            if not base_param:
-                return jsonify({"error": "Base parameter is required"}), 400
-                
-            try:
-                bases = [float(x.strip()) for x in base_param.split(',')]
-            except ValueError:
-                return jsonify({"error": "Invalid base value(s)"}), 400
-                
-            try:
-                exp = float(request.args.get('exp', 0))
-            except ValueError:
-                return jsonify({"error": "Invalid exponent value"}), 400
-                
-            notation = request.args.get('notation', 'decimal').lower()
-            precision = int(request.args.get('precision', 6))
-            
-            if precision < 0 or precision > 20:
-                return jsonify({"error": "Precision must be between 0 and 20"}), 400
-                
-            results = []
-            for base in bases:
-                if base == 0 and exp < 0:
-                    return jsonify({"error": "Cannot raise 0 to a negative power"}), 400
-                if base < 0 and not exp.is_integer():
-                    return jsonify({"error": "Cannot raise negative numbers to fractional powers"}), 400
+    app.register_blueprint(math_bp)
+    app.register_blueprint(marathonFacts_bp)
 
-                result = math.pow(base, exp)
+    app.register_blueprint(mtg_bp)
 
-                if notation == 'scientific':
-                    formatted_result = f"{result:.{precision}e}"
-                else: 
-                    formatted_result = f"{result:.{precision}f}"
-                
-                results.append({
-                    "base": base,
-                    "exponent": exp,
-                    "result": formatted_result
-                })
+    app.register_blueprint(motivation_bp)
 
-            if len(results) == 1:
-                return jsonify({
-                    "base": results[0]["base"],
-                    "exponent": results[0]["exponent"],
-                    "result": results[0]["result"],
-                    "notation": notation
-                })
+    app.register_blueprint(photogallery_bp)
 
-            return jsonify({
-                "calculations": results,
-                "count": len(results),
-                "notation": notation
-            })
-            
-        except OverflowError:
-            return jsonify({"error": "Result too large to compute"}), 400
-        except Exception as e:
-            return jsonify({"error": f"Calculation error: {str(e)}"}), 500
+    app.register_blueprint(pizza_bp)
 
-    @app.route('/netflix-shows', methods=['GET'])
-    def get_netflix_shows():
-        netflix_shows = [
-            {"title": "Stranger Things", "fact": "The Demogorgon suit was mostly practical effects."},
-            {"title": "The Witcher", "fact": "Henry Cavill performed many of his own stunts."},
-            {"title": "Money Heist", "fact": "The show was initially a flop in Spain before Netflix acquired it."},
-            {"title": "The Crown", "fact": "Claire Foy was paid less than Matt Smith despite being the lead."},
-            {"title": "Narcos", "fact": "The show initially faced criticism for its portrayal of Colombian culture."},
-            {"title": "BoJack Horseman", "fact": "The show used celebrity guest stars who played exaggerated versions of themselves."},
-            {"title": "Black Mirror", "fact": "The show explores the dark side of technology and modern society."}
+    @app.route('/pokefishing', methods=['GET','POST'])
+    def fish():
+        magikarp = [
+            "a regular ol' Magikarp",
+            "a calico pattern Magikarp",
+            "a orange two-tone pattern Magikarp",
+            "a pink dapple pattern Magikarp",
+            "a gray diamond pattern Magikarp",
+            "a purple patches pattern Magikarp",
+            "a apricot tiger pattern Magikarp",
+            "a brown stripes pattern Magikarp",
+            "a orange forehead pattern Magikarp",
+            "a blue raindrops pattern Magikarp",
+            "a shiny Magikarp",
+            "a... Oh no, it's a Gyarados!!",
+            "a Goldeen and it's the biggest you've ever seen",
+            "nothing... But you did see a Mudkip riding on a Lotad"
+            ]
+        success = random.choice([True, False])
+        if success:
+            caught = random.choice(magikarp)
+        else:
+            caught = "... Oops, you forgot to reel it in"
+        return jsonify({"You caught": caught + "!"})
+
+    @app.route('/randomFact', methods=['GET'])
+    def random_fact():
+        facts = [
+            {"fact": "Honey never spoils."},
+            {"fact": "Octopuses have three hearts."},
+            {"fact": "Bananas are berries, but strawberries are not."},
+            {"fact": "A day on Venus is longer than a year on Venus."},
+            {"fact": "Sharks have been around longer than trees."},
+            {"fact": "The ocean covers 71 percent of the Earth's surface and the average depth is 12,100 feet."}
         ]
         selected_show = random.choice(netflix_shows)
         return jsonify({"netflix_show": selected_show})
