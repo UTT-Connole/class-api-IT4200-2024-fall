@@ -12,6 +12,7 @@ from endpoints.soda import soda_bp
 from endpoints.version import version_bp
 from endpoints.quotes import quotes_bp
 from endpoints.photogallery import photogallery_bp
+from endpoints.pokefishing import pokefishing_bp
 import random, requests
 import os, json
 import time
@@ -37,6 +38,7 @@ def create_app():
     app.register_blueprint(motivation_bp)
     app.register_blueprint(photogallery_bp)
     app.register_blueprint(pizza_bp)
+    app.register_blueprint(pokefishing_bp)
     app.register_blueprint(soda_bp)
     app.register_blueprint(version_bp)
     app.register_blueprint(quotes_bp)
@@ -229,31 +231,6 @@ def create_app():
             return jsonify({"error": "Invalid step number"}), 400
 
         return jsonify(endpointSteps)
-
-    @app.route('/pokefishing', methods=['GET','POST'])
-    def fish():
-        magikarp = [
-            "a regular ol' Magikarp",
-            "a calico pattern Magikarp",
-            "a orange two-tone pattern Magikarp",
-            "a pink dapple pattern Magikarp",
-            "a gray diamond pattern Magikarp",
-            "a purple patches pattern Magikarp",
-            "a apricot tiger pattern Magikarp",
-            "a brown stripes pattern Magikarp",
-            "a orange forehead pattern Magikarp",
-            "a blue raindrops pattern Magikarp",
-            "a shiny Magikarp",
-            "a... Oh no, it's a Gyarados!!",
-            "a Goldeen and it's the biggest you've ever seen",
-            "nothing... But you did see a Mudkip riding on a Lotad"
-            ]
-        success = random.choice([True, False])
-        if success:
-            caught = random.choice(magikarp)
-        else:
-            caught = "... Oops, you forgot to reel it in"
-        return jsonify({"You caught": caught + "!"})
 
     @app.route('/power', methods=['GET'])
     def power():
