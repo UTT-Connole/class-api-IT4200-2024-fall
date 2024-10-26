@@ -20,9 +20,11 @@ def test_weather_html_valid_city(mocker):
 
     # Act
     response = client.get('/weather/London')
+    html = response.data.decode()
 
     # Assert
     assert response.status_code == 200
+    assert 'background-color: #F5E216;' in html
 
 # Test for invalid city response
 def test_weather_html_invalid_city(mocker):
