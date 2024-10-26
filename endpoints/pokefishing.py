@@ -23,8 +23,8 @@ magikarp = [
 @pokefishing_bp.route('/pokefishing', methods=['GET'])
 def fish():
     success = random.choice([True, False])
-        if success:
-            caught = random.choice(magikarp)
-        else:
-            caught = "... Oops, you forgot to reel it in"
-        return jsonify({"You caught": caught + "!"})
+    if success:
+        caught = random.choice(magikarp)
+    else:
+        caught = "... Oops, you forgot to reel it in"
+    return jsonify({"You caught": caught + "!"})
