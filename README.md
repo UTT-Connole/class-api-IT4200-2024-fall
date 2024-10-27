@@ -2,30 +2,17 @@
 We will be using this repo to create an API for our entire class. We will use Flask for this application and each member of the class will work within this single repo.
 
 ## Commit instructions for developers
-A GitHub action has been created for automatic semantic version tagging using this repository: [Github tag with sematic versioning](https://github.com/marketplace/actions/github-tag-with-semantic-versioning). It uses [Angular Commit Message Conventions](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines) as commit message guidelines.
+A GitHub action has been created for automatic semantic version tagging using this repository: [Github tag with semantic versioning](https://github.com/marketplace/actions/github-tag-with-semantic-versioning). It uses [semantic-release](https://github.com/semantic-release/semantic-release)  as commit message guidelines.
 
 Here is an example of the release type that will be done based on a commit messages:
 
-| Commit message                                                                                                                                                                                   | Release type  |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
-| `fix(pencil): stop graphite breaking when too much pressure applied`                                                                                                                             | Patch Release |
-| `feat(pencil): add 'graphiteWidth' option`                                                                                                                                                       | Minor Release |
-| `perf(pencil): remove graphiteWidth option`<br><br>`BREAKING CHANGE: The graphiteWidth option has been removed.`<br>`The default graphite width of 10mm is always used for performance reasons.` | Major Release |
+| Commit message                                                                                                                                                                                   | Release type                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `fix(pencil): stop graphite breaking when too much pressure applied`                                                                                                                             | Patch Release                                                                                           |
+| `feat(pencil): add 'graphiteWidth' option`                                                                                                                                                       | Minor Release                                                                                       |
+| `perf(pencil): remove graphiteWidth option`<br><br>`BREAKING CHANGE: The graphiteWidth option has been removed.`<br>`The default graphite width of 10mm is always used for performance reasons.` | Major Release <br /> (Note that the `BREAKING CHANGE: ` token must be in the footer of the commit) |
 
-If no commit message contains any information, then **default_bump** (currently set to minor) will be used. For major changes, using the exact given format including the line spacing is required. All others do not require any extra lines.
-
-### Other commit options
-
-* **feat**: A new feature
-* **fix**: A bug fix
-* **docs**: Documentation only changes
-* **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing
-  semi-colons, etc)
-* **refactor**: A code change that neither fixes a bug nor adds a feature
-* **perf**: A code change that improves performance
-* **test**: Adding missing or correcting existing tests
-* **chore**: Changes to the build process or auxiliary tools and libraries such as documentation
-  generation
+If no commit message contains any information, then **default_bump** (currently set to minor) will be used. 
 
 ## How to install pip requirements
 
