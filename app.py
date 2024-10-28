@@ -219,68 +219,6 @@ def create_app():
 
         return jsonify(endpointSteps)
 
-    @app.route('/power', methods=['GET'])
-    def power():
-        try:
-            base_param = request.args.get('base')
-            if not base_param:
-                return jsonify({"error": "Base parameter is required"}), 400
-                
-            try:
-                bases = [float(x.strip()) for x in base_param.split(',')]
-            except ValueError:
-                return jsonify({"error": "Invalid base value(s)"}), 400
-                
-            try:
-                exp = float(request.args.get('exp', 0))
-            except ValueError:
-                return jsonify({"error": "Invalid exponent value"}), 400
-                
-            notation = request.args.get('notation', 'decimal').lower()
-            precision = int(request.args.get('precision', 6))
-            
-            if precision < 0 or precision > 20:
-                return jsonify({"error": "Precision must be between 0 and 20"}), 400
-                
-            results = []
-            for base in bases:
-                if base == 0 and exp < 0:
-                    return jsonify({"error": "Cannot raise 0 to a negative power"}), 400
-                if base < 0 and not exp.is_integer():
-                    return jsonify({"error": "Cannot raise negative numbers to fractional powers"}), 400
-
-                result = math.pow(base, exp)
-
-                if notation == 'scientific':
-                    formatted_result = f"{result:.{precision}e}"
-                else: 
-                    formatted_result = f"{result:.{precision}f}"
-                
-                results.append({
-                    "base": base,
-                    "exponent": exp,
-                    "result": formatted_result
-                })
-
-            if len(results) == 1:
-                return jsonify({
-                    "base": results[0]["base"],
-                    "exponent": results[0]["exponent"],
-                    "result": results[0]["result"],
-                    "notation": notation
-                })
-
-            return jsonify({
-                "calculations": results,
-                "count": len(results),
-                "notation": notation
-            })
-            
-        except OverflowError:
-            return jsonify({"error": "Result too large to compute"}), 400
-        except Exception as e:
-            return jsonify({"error": f"Calculation error: {str(e)}"}), 500
-
     @app.route('/netflix-shows', methods=['GET'])
     def get_netflix_shows():
         netflix_shows = [
