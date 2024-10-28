@@ -85,12 +85,18 @@ def factorial():
 
     if not n:
         return jsonify({"error": "No input provided"}), 400
+    
+    if len(n) > 10:
+        return jsonify({"error": "too many inputs please provide up to 10"}), 400
 
     resultList = []
 
     for num in n:
         if num < 0:
             return jsonify({"error": f"No negative numbers: {num}"}), 400
+        
+        if num > max_allowed:
+            return jsonify({"error": f"Number too large: {num}. Maximum allowed is {max_allowed}."}), 400
         
         if num in factorialCache:
             result = factorialCache[num]
