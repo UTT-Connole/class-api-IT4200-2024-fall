@@ -15,7 +15,7 @@ def calc_main():
     if not op:
         return jsonify({"error": "Invalid Input"}), 400
     
-    # Replace blanks with 0
+    
     x = 0 if x is None or x == '' else x
     y = 0 if y is None or y == '' else y
     
@@ -24,28 +24,47 @@ def calc_main():
         y = int(y)
     except ValueError:
         return jsonify({"error": "Invalid Input"}), 400
+    if abs(x) > 10**6 or abs(y) > 10**6:
+        return jsonify({"error": "Input out of bounds"}), 400
     
-    operations = {
-        'add': x + y,
-        'subtract': x - y,
-        'multiply': x * y,
-        'divide': (x / y if y != 0 else "You cannot divide by 0"),
-        'mod': (x % y if y != 0 else "You cannot take modulus by 0"),
-        'square': x * x,
-        'sqrt': (x ** 0.5 if x >= 0 else "Cannot take square root of a negative number"),
-        'decimal': (bin(x).replace("0b", "") if x >= 0 else "Not compatible with negative input"),
-        'binary': (str(int(str(x), 2)) if all(c in '01' for c in str(x)) and x >= 0 else "Not compatible format to convert to binary"),
-        'power': x ** y,
-        'cube': x ** 3,
-        'log': (math.log(x, y) if y != 0 else math.log(x, 10)) if x > 0 else "Cannot take logarithm of zero or negative number",
-        'exp': x ** y
-    }
+    if op == 'divide':
+        if y == 0:
+            return jsonify({"error": "You cannot divide by 0"}), 400
+        result = x / y
+        
+    elif op == 'mod':
+        if y == 0:
+            return jsonify({"error": "You cannot take modulus by 0"}), 400
+        result = x % y
+    
+    elif op == 'sqrt':
+        if x < 0:
+            return jsonify({"error": "Cannot take square root of a negative number"}), 400
+        result = x ** 0.5
+    
+    
+    else:
+        operations = {
+            'add': x + y,
+            'subtract': x - y,
+            'multiply': x * y,
+            'divide': (x / y if y != 0 else jsonify({"error":"You cannot divide by 0"}), 400),
+            'mod': (x % y if y != 0 else jsonify({"error":"You cannot take modulus by 0"}), 400),
+            'square': x * x,
+            'sqrt': (x ** 0.5 if x >= 0 else jsonify({"error":"Cannot take square root of a negative number"}), 400),
+            'decimal': (bin(x).replace("0b", "") if x >= 0 else "Not compatible with negative input"),
+            'binary': (str(int(str(x), 2)) if all(c in '01' for c in str(x)) and x >= 0 else "Not compatible format to convert to binary"),
+            'power': (x ** y if abs(x ** y) < 10**6 else "Result too large"),
+            'cube': x ** 3,
+            'log': (math.log(x, y) if y != 0 else math.log(x, 10)) if x > 0 else "Cannot take logarithm of zero or negative number",
+            'exp': x ** y
+        }
 
-    if op not in operations:
-        available_operations = ', '.join(operations.keys())
-        return jsonify({"error": f"Invalid operation. Available operations are: {available_operations}"}), 400
-    
-    result = operations[op]
+        if op not in operations:
+            available_operations = ', '.join(operations.keys())
+            return jsonify({"error": f"Invalid operation. Available operations are: {available_operations}"}), 400
+        
+        result = operations[op]
 
     if 'text/html' in request.headers.get('Accept', ''):
         return render_template('calc.html', result=result)

@@ -39,9 +39,9 @@ def test_calc_divide(client):
 def test_calc_divide_by_zero(client):
     """Test divide by zero"""
     response = client.get('/calc?x=10&y=0&op=divide')
-    assert response.status_code == 200
+    assert response.status_code == 400
     json_data = response.get_json()
-    assert json_data['result'] == "You cannot divide by 0"
+    assert json_data['error'] == "You cannot divide by 0"
 
 def test_calc_mod(client):
     """Test the mod operation"""
@@ -53,9 +53,9 @@ def test_calc_mod(client):
 def test_calc_mod_by_zero(client):
     """Test mod by zero"""
     response = client.get('/calc?x=10&y=0&op=mod')
-    assert response.status_code == 200
+    assert response.status_code == 400
     json_data = response.get_json()
-    assert json_data['result'] == "You cannot take modulus by 0"
+    assert json_data['error'] == "You cannot take modulus by 0"
 
 def test_calc_square(client):
     """Test the square operation"""
@@ -74,9 +74,9 @@ def test_calc_sqrt(client):
 def test_calc_sqrt_negative(client):
     """Test the square root of a negative number"""
     response = client.get('/calc?x=-16&op=sqrt')
-    assert response.status_code == 200
+    assert response.status_code == 400
     json_data = response.get_json()
-    assert json_data['result'] == "Cannot take square root of a negative number"
+    assert json_data['error'] == "Cannot take square root of a negative number"
 
 def test_calc_decimal(client):
     """Test the decimal to binary conversion"""
