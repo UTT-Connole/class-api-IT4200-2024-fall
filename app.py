@@ -13,6 +13,7 @@ from endpoints.version import version_bp
 from endpoints.quotes import quotes_bp
 from endpoints.photogallery import photogallery_bp
 from endpoints.pokefishing import pokefishing_bp
+from endpoints.animalGuesser import animalGuess_bp
 import random, requests
 import os, json
 import time
@@ -42,6 +43,7 @@ def create_app():
     app.register_blueprint(soda_bp)
     app.register_blueprint(version_bp)
     app.register_blueprint(quotes_bp)
+    app.register_blueprint(animalGuess_bp)
 
     @app.route('/generateName', methods=['GET'])
     def generate_name():
@@ -69,21 +71,6 @@ def create_app():
     @app.route('/')
     def hello_world():
         return render_template('index.html')
-
-    @app.route('/animalGuesser', methods=['GET'])
-    def animal_guesser():
-        animals = ["lion", "tiger", "elephant", "giraffe", "zebra", "panda", "koala"]
-        random_animal = random.choice(animals)
-
-        guess = request.args.get('guess', '').lower()
-
-        if guess == random_animal:
-            return jsonify({"result": "Correct! You guessed the animal!"}), 200
-        elif guess:
-            hint = f"The animal starts with '{random_animal[0]}'. Try again!"
-            return jsonify({"result": "Incorrect guess", "hint": hint}), 200
-        else:
-            return jsonify({"animal": random_animal}), 200
 
     @app.route('/color', methods=['GET','POST'])
     def color_hexifier():
