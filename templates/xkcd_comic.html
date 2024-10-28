@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XKCD Random Comic</title>
+</head>
+<body>
+    {% if comic %}
+        <!-- Display the comic details if available -->
+        <h1>{{ comic.title }} (#{{ comic.num }})</h1>
+        <img src="{{ comic.img }}" alt="{{ comic.alt }}">
+        <p>{{ comic.alt }}</p>
+    {% elif error %}
+        <!-- Display the error message if there was an issue -->
+        <h1>{{ error }}</h1>
+    {% else %}
+        <!-- Fallback in case neither comic nor error is passed -->
+        <h1>No comic information available.</h1>
+    {% endif %}
+</body>
+</html>
