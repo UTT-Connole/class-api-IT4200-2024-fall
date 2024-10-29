@@ -28,7 +28,7 @@ def load_items_from_file():
 
 def create_app():
     app = Flask(__name__)
-
+    automobiles = [{"id": 1, "make": "Toyota", "model": "Corolla", "year": 2020}]
     app.register_blueprint(readme_bp)
     app.register_blueprint(brainrot_bp)
     app.register_blueprint(dadjoke_bp)
@@ -127,6 +127,29 @@ def create_app():
             count = 1
         return jsonify({"fortunes": random.sample(fortunes, min(count, len(fortunes)))})
     
+    @app.route('/automobiles', methods=['GET', 'POST'])
+    def handle_automobiles():
+        if request.method == 'POST':
+            new_auto = request.json
+            new_auto['id'] = automobiles[-1]['id'] + 1 if automobiles else 1
+            automobiles.append(new_auto)
+            return jsonify(new_auto), 201
+        return jsonify(automobiles), 200
+
+    @app.route('/automobiles/<int:automobile_id>', methods=['GET', 'PUT', 'DELETE'])
+    def handle_automobile(automobile_id):
+        automobile = next((auto for auto in automobiles if auto['id'] == automobile_id), None)
+        if not automobile:
+            return jsonify({"error": "Automobile not found"}), 404
+        if request.method == 'PUT':
+            automobile.update(request.json)
+            return jsonify(automobile), 200
+        elif request.method == 'DELETE':
+            automobiles.remove(automobile)
+            return jsonify({"message": "Automobile deleted"}), 200
+        return jsonify(automobile), 200
+
+
     @app.route('/fruitInfo', methods=['GET'])
     def fruit_info():
         fruits = {
