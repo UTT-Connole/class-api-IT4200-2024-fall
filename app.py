@@ -84,7 +84,7 @@ def create_app():
         else:
             return "Invalid color name"
         
-    @app.route('/favoritequote', methods=['GET', 'POST'])
+    @app.route('/favoritequote', methods=['GET', 'POST', 'PATCH'])
     def get_favorite_quote():
         favorite_quote = {
          "quote": "The only way to do great work is to love what you do.",
