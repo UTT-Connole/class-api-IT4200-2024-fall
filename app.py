@@ -289,6 +289,18 @@ def create_app():
         
         picked = random.choice(destinations)
         return jsonify(picked)
+    
+    @app.route('/xkcd-comic', methods=['GET'])
+    def get_random_xkcd_comic():
+        random_comic_num = random.randint(1, 2450)
+        url = f"http://xkcd.com/{random_comic_num}/info.0.json"
+        response = requests.get(url)
+
+        if response.status_code != 200:
+            return render_template('xkcd_comic.html', error="Comic not found"), 404
+        
+        comic_data = response.json()
+        return render_template('xkcd_comic.html', comic=comic_data)
 
     return app
 
