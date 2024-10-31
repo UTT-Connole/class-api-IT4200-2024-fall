@@ -61,7 +61,15 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-
+        
+      - name: Extract x.y.z version
+        id: extract_version
+        run: |
+          VERSION=${{ needs.bump-version.outputs.new_version }}
+          # Extract the x.y.z part (everything before the hyphen)
+          SIMPLE_VERSION=$(echo $VERSION | cut -d '-' -f 1)
+          echo "version=$SIMPLE_VERSION" >> $GITHUB_ENV  # Store it in environment variable
+      
       - name: Write version to file
         run: echo "${{ github.sha }}" > version.txt
 
