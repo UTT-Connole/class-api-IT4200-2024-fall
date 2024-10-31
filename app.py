@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, abort
 from endpoints.readme import readme_bp
 from endpoints.marathonfacts import marathonFacts_bp
 from endpoints.dadjoke import dadjoke_bp
@@ -45,6 +45,31 @@ def create_app():
     app.register_blueprint(animalGuess_bp)
     app.register_blueprint(restaurant_bp)
 
+    continents = [
+    {"id": 1, "name": "Africa", "area": 30370000, "population": 1340598000},
+    {"id": 2, "name": "Antarctica", "area": 14000000, "population": 1106},
+    {"id": 3, "name": "Asia", "area": 44579000, "population": 4641054775},
+    {"id": 4, "name": "Europe", "area": 10180000, "population": 747636026},
+    {"id": 5, "name": "North America", "area": 24709000, "population": 592072212},
+    {"id": 6, "name": "Australia", "area": 8600000, "population": 42677813},
+    {"id": 7, "name": "South America", "area": 17840000, "population": 430759766},
+    ]
+
+    @app.route('/continents', methods=['GET'])
+    def get_continents():
+        """Return a list of all continents."""
+        return jsonify(continents)
+
+    @app.route('/continents/<int:continent_id>', methods=['GET'])
+    def get_continent(continent_id):
+        """Return details of a single continent by its ID."""
+        continent = next((cont for cont in continents if cont["id"] == continent_id), None)
+        if continent:
+            return jsonify(continent)
+        else:
+            # Use abort to return a 404 response
+            abort(404, description="Continent not found")
+    
     @app.route('/generateName', methods=['GET'])
     def generate_name():
         names = ["Eve", "Jack", "Liam", "Mia"]
