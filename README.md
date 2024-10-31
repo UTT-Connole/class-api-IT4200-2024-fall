@@ -47,7 +47,7 @@ python3 -m flask run
 This will start the server. From there navigate to the url and your desired endpoint “http://127.0.0.1:5000/calc” for calculator for example. 
 
 ### Available Endpoints
-[**All Facts Endpoint**](#AllFacts) | [**Animal Endpoint**](#Animal) | [**Automobiles Endpoint**] | (#Automobiles) [**Brainrot Endpoint**](#Brainrot) | [**Calculator Endpoint**](#Calculator) | [**Color Hexifier Endpoint**](#Hexifier) | [**Convert To Binary Endpoint**](#Binary) | [**Convert To Decimal Endpoint**](#Decimal) | [**Dad Jokes Endpoint**](#Dad) | [**Factorial Endpoint**](#Factorial) | [**Favorite Quote Endpoint**](#Favorite) | [**Fortune Cookie Endpoint**](#Fortune) | [**Fruit Info Endpoint**](#Fruit) | [**Generate Name Endpoint**](#Name) | [**Get Items Endpoint**](#Items) | [**Greeting Endpoint**](#Greeting) | [**Live Weather Endpoint**](#Weather) | [**Make an Endpoint**](#Make) | [**Marathon Facts Endpoint**](#Marathon) | [**MTG Mana Endpoint**](#MTG) | [**Motivation Endpoint**](#Motivation) | [**Multiply Endpoint**](#multiply) | [**Netflix Show Endpoint**](#Netflix) | [**Photo Gallery Endpoint**](#Photo) | [**Pizza Toppings Endpoint**](#Pizza) | [**Pokefishing Endpoint**](#Pokefishing) | [**Power Endpoint**](#Power) | [**Random Fact Endpoint**](#Random) | [**Sports Facts Endpoint**](#Sports) | [**Study Fact Endpoint**](#Study) | [**Stoic Quotes Endpoint**](#Stoic) | [**Tennis Facts Endpoint**](#Tennis) | [**Travel Randomizer Endpoint**](#Travel) | [**Two Mana Combo Endpoint**](#Combo) | [**Version Endpoints**](#Version) | [**Readme Endpoint**](#Readme) 
+[**All Facts Endpoint**](#AllFacts) | [**Animal Endpoint**](#Animal) | [**Automobiles Endpoint**] | (#Automobiles) [**Brainrot Endpoint**](#Brainrot) | [**Calculator Endpoint**](#Calculator) | [**Color Hexifier Endpoint**](#Hexifier) | [**Continents Endpoint**](#Continents) | [**Convert To Binary Endpoint**](#Binary) | [**Convert To Decimal Endpoint**](#Decimal) | [**Dad Jokes Endpoint**](#Dad) | [**Factorial Endpoint**](#Factorial) | [**Favorite Quote Endpoint**](#Favorite) | [**Fortune Cookie Endpoint**](#Fortune) | [**Fruit Info Endpoint**](#Fruit) | [**Generate Name Endpoint**](#Name) | [**Get Items Endpoint**](#Items) | [**Greeting Endpoint**](#Greeting) | [**Live Weather Endpoint**](#Weather) | [**Make an Endpoint**](#Make) | [**Marathon Facts Endpoint**](#Marathon) | [**MTG Mana Endpoint**](#MTG) | [**Motivation Endpoint**](#Motivation) | [**Multiply Endpoint**](#multiply) | [**Netflix Show Endpoint**](#Netflix) | [**Photo Gallery Endpoint**](#Photo) | [**Pizza Toppings Endpoint**](#Pizza) | [**Pokefishing Endpoint**](#Pokefishing) | [**Power Endpoint**](#Power) | [**Random Fact Endpoint**](#Random) | [**Sports Facts Endpoint**](#Sports) | [**Study Fact Endpoint**](#Study) | [**Stoic Quotes Endpoint**](#Stoic) | [**Tennis Facts Endpoint**](#Tennis) | [**Travel Randomizer Endpoint**](#Travel) | [**Two Mana Combo Endpoint**](#Combo) | [**Version Endpoints**](#Version) | [**Readme Endpoint**](#Readme) 
 
 - <a name="AllFacts">**All Facts Endpoint**</a>
   - **Endpoint**: 'GET /allFacts'
@@ -95,6 +95,16 @@ This will start the server. From there navigate to the url and your desired endp
   - **Description**: Go to http://127.0.0.1:5000/convertToBinary?num=#&type=decimal to get the binary convertion of any non-negative whole number!
    Don't even think about putting in floats, strings, or blanks. I have tested all of those cases and you will get appropriate responses for each!
   - **Test File**: test_binaryconvert.py
+
+-<a name="Continents">**Continents Endpoint**</a>
+  - **Endpoint**: `GET /continents`
+  - **Description**: Returns a list of continents in JSON format. You can retrieve specific continents using their unique ID.
+  - **Test File**: `test_getcontinents.py`
+
+- <a name="SingleContinent">**Single Continent Endpoint**</a>
+  - **Endpoint**: `GET /continents/<int:continent_id>`
+  - **Description**: Returns details of a single continent based on the provided ID. If the continent ID does not exist, a 404 error will be returned.
+  - **Test File**: `test_get_single_continent.py`
 
 - <a name="Decimal">**Convert To Decimal Endpoint**</a>
   - **Endpoint**: `GET /convertToBinary?num=#&type=binary`
