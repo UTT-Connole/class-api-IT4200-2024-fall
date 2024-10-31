@@ -3,10 +3,7 @@ name: Bump version and Build Docker Image
 on:
   push:
     branches:
-      - main
-      - dallinweek8new
-      - s-new
-      - don-whyme
+      - '**'  # This will match any branch
 
 jobs:
   bump-version:
