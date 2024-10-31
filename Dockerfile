@@ -14,6 +14,7 @@ COPY static static
 COPY app.py app.py
 COPY items.json items.json
 COPY test test
+COPY version.txt version.txt
 
 ENV WEATHER_API_KEY=$WEATHER_API_KEY
 
