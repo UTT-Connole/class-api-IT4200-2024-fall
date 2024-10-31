@@ -41,7 +41,6 @@ jobs:
             execSync('git add version.txt');
             execSync(`git commit -m "chore: update version to ${process.env.NEW_VERSION}"`);
             execSync('git push');
-
   build-and-push:
     name: Build and Push Docker Image
     runs-on: ubuntu-latest
@@ -60,11 +59,9 @@ jobs:
           # Extract the x.y.z part (everything before the hyphen)
           SIMPLE_VERSION=$(echo $VERSION | cut -d '-' -f 1)
           echo "version=$SIMPLE_VERSION" >> $GITHUB_ENV  # Store it in environment variable
-
       - name: Build Docker Image
         run: |
           docker build -t bubbaj/class-api-it4200-2024-fall:${{ env.version }} .
-
       - name: Push Docker Image
         run: |
           docker push bubbaj/class-api-it4200-2024-fall:${{ env.version }}
