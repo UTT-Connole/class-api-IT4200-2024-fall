@@ -10,12 +10,13 @@ on:
 
 jobs:
   bump-version:
+    if: github.ref == 'refs/heads/main'
     permissions: write-all
     runs-on: ubuntu-latest
     outputs:
       new_version: ${{ steps.tagging.outputs.new_tag }}  # Capture the new version tag
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@master
       
       - name: Github Tag with semantic versioning
         id: tagging
@@ -27,21 +28,8 @@ jobs:
           release_branches: main
           create_annotated_tag: True
 
-      - name: Write version to file
-        run: echo "${{ steps.tagging.outputs.new_tag }}" > version.txt
-
-      - name: Commit version file
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const { execSync } = require('child_process');
-            execSync('git config user.name "github-actions[bot]"');
-            execSync('git config user.email "github-actions[bot]@users.noreply.github.com"');
-            execSync('git add version.txt');
-            execSync(`git commit -m "chore: update version to ${process.env.NEW_VERSION}"`);
-            execSync('git push');
   build-and-push:
+    if: github.ref == 'refs/heads/main'
     name: Build and Push Docker Image
     runs-on: ubuntu-latest
     needs: bump-version
@@ -59,9 +47,35 @@ jobs:
           # Extract the x.y.z part (everything before the hyphen)
           SIMPLE_VERSION=$(echo $VERSION | cut -d '-' -f 1)
           echo "version=$SIMPLE_VERSION" >> $GITHUB_ENV  # Store it in environment variable
+      
       - name: Build Docker Image
         run: |
           docker build -t bubbaj/class-api-it4200-2024-fall:${{ env.version }} .
+      
       - name: Push Docker Image
         run: |
           docker push bubbaj/class-api-it4200-2024-fall:${{ env.version }}
+
+  commit-version-file:
+    if: github.ref != 'refs/heads/main'
+    name: Commit Version File
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Write version to file
+        run: echo "${{ github.sha }}" > version.txt
+
+      - name: Commit version file
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { execSync } = require('child_process');
+            execSync('git config user.name "github-actions[bot]"');
+            execSync('git config user.email "github-actions[bot]@users.noreply.github.com"');
+            execSync('git add version.txt');
+            execSync(`git commit -m "chore: update version to ${process.env.NEW_VERSION}"`);
+            execSync('git push');
