@@ -8,6 +8,7 @@ from endpoints.math import math_bp
 from endpoints.mtg import mtg_bp
 from endpoints.allfacts import allfacts_bp
 from endpoints.pizza import pizza_bp
+from endpoints.restaurants import restaurant_bp
 from endpoints.soda import soda_bp
 from endpoints.version import version_bp
 from endpoints.quotes import quotes_bp
@@ -24,8 +25,6 @@ def load_items_from_file():
     with open('items.json', 'r') as f:
         return json.load(f)
     
-
-
 def create_app():
     app = Flask(__name__)
     automobiles = [{"id": 1, "make": "Toyota", "model": "Corolla", "year": 2020}]
@@ -44,6 +43,7 @@ def create_app():
     app.register_blueprint(version_bp)
     app.register_blueprint(quotes_bp)
     app.register_blueprint(animalGuess_bp)
+    app.register_blueprint(restaurant_bp)
 
     @app.route('/generateName', methods=['GET'])
     def generate_name():
