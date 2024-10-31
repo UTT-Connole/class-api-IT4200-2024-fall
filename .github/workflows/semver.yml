@@ -36,6 +36,8 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const { execSync } = require('child_process');
+            execSync('git config user.name "github-actions[bot]"');
+            execSync('git config user.email "github-actions[bot]@users.noreply.github.com"');
             execSync('git add version.txt');
             execSync(`git commit -m "chore: update version to ${process.env.NEW_VERSION}"`);
             execSync('git push');
