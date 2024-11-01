@@ -2,6 +2,20 @@ def test_randomFactStatus(client):
     response = client.get('/allFacts')
     assert response.status_code == 200
 
+def test_validCategoryWrestling(client):
+    response = client.get('/allFacts?category=wrestling')
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['category'] == 'wrestling'
+    assert data['fact'] in facts['wrestling']
+
+def test_validCategoryStudying(client):
+    response = client.get('/allFacts?category=studying')
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['category'] == 'studying'
+    assert data['fact'] in facts['studying']
+
 def test_validCategorySwimming(client):
     response = client.get('/allFacts?category=swimming')
     assert response.status_code == 200
