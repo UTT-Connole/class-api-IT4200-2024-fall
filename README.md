@@ -189,10 +189,11 @@ This will start the server. From there navigate to the url and your desired endp
 
 - <a name="multiply">**Multiply Endpoint**</a>
   - **Endpoint**: `GET /multiply`
-  - **Description**: Multiply two numbers provided as query parameters. 
+  - **Description**: Multiply two numbers provided as query parameters. This endpoint now also supports multiplying multiple numbers by providing a comma-separated list in the `numbers` parameter.
   - **Parameters**: 
     - `a`: The first number to multiply (required).
     - `b`: The second number to multiply (required).
+    - `numbers`: A comma-separated list of numbers to multiply (optional).
   - **Response**:
     - Success: Returns a JSON object with the multiplication result.
     - Error: Returns an error message if inputs are missing or invalid.
