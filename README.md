@@ -239,7 +239,7 @@ This will start the server. From there navigate to the url and your desired endp
 
 - <a name="Travel">**Travel Randomizer Endpoint**</a>
   - **Endpoint**: `GET /travel`
-  - **Description**: Be given a randomly chosen travel destination! This app will output a popular travel destination in "city, country" JSON format.
+  - **Description**: Be given a randomly chosen travel destination! This app will output a popular travel destination in "city, country" JSON format. The app now allows users to specify a maximum flight duration, returning a travel destination that fits within the provided time limit.
   - **Test File**: test_travel.py
 
 - <a name="Combo">**Two Mana Combo Endpoint**</a>
