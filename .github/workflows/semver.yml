@@ -44,7 +44,8 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t bubbaj/class-api-it4200-2024-fall:${{ env.version }} . --build-arg VERSION=${{ env.version }}
+          docker build -t bubbaj/class-api-it4200-2024-fall:${{ env.version }} . --build-arg VERSION=${{ env.version }} --build-arg WEATHER_API_KEY=${{ secrets.WEATHER_API_KEY }}
+            
 
       - name: Push Docker Image
         run: |
