@@ -16,7 +16,7 @@ menu_items = [
 ]
 
 @restaurant_bp.route('/restaurant', methods=['GET'])
-def get_menu():
+def get_menu(): 
     return jsonify({"menu": menu_items})
 
 @restaurant_bp.route('/order', methods=['POST'])
