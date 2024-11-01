@@ -293,13 +293,20 @@ def create_app():
     @app.route('/multiply', methods=['GET'])
     def multiply():
         try:
-            a = float(request.args.get('a'))
-            b = float(request.args.get('b'))
-            result = a * b
+            # Get the 'numbers' parameter and split it into a list of numbers
+            numbers = request.args.get('numbers')
+            if not numbers:
+                return jsonify({'error': 'No input provided'}), 400
+        
+            # Convert the list of string numbers to floats
+            number_list = [float(num) for num in numbers.split(',')]
+            result = 1
+            for num in number_list:
+                result *= num
+            
             return jsonify({'result': result}), 200
         except (TypeError, ValueError):
             return jsonify({'error': 'Invalid input'}), 400
-
 
 
     @app.route('/travel', methods=['GET','POST'])
