@@ -319,9 +319,16 @@ def create_app():
             {"You should go to": "Salt Lake, Utah", "To fly from SLC it will take ": "You're already there silly"},
             {"You should go to": "Denver, Colorado", "To fly from SLC it will take ": "1hr 35m"},
             {"You should go to": "Santa Cruz, California", "To fly from SLC it will take ": "2hr"},
-            ]
-        
-        picked = random.choice(destinations)
+        ]
+            
+        max_duration = request.args.get('max_duration')
+    
+        if max_duration:
+            max_hours = int(max_duration)
+            # Filter destinations to those with flight time within max_duration
+            destinations = [d for d in destinations if 'hr' in d["To fly from SLC it will take "] and int(d["To fly from SLC it will take "].split('hr')[0]) <= max_hours]
+    
+        picked = random.choice(destinations) if destinations else {"message": "No destinations within specified duration."}
         return jsonify(picked)
     
     @app.route('/xkcd-comic', methods=['GET'])
