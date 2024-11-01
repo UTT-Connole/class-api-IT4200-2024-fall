@@ -6,6 +6,9 @@ EXPOSE 5000
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
+ARG WEATHER_API_KEY
+ENV WEATHER_API_KEY=${WEATHER_API_KEY}
+
 COPY .git .git
 COPY __init__.py __init__.py
 COPY templates templates
@@ -15,7 +18,6 @@ COPY app.py app.py
 COPY items.json items.json
 COPY test test
 
-ENV WEATHER_API_KEY=$WEATHER_API_KEY
 ENV VERSION=$VERSION
 
 CMD ["python", "app.py"]
