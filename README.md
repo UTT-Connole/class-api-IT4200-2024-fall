@@ -201,6 +201,9 @@ This will start the server. From there navigate to the url and your desired endp
 - <a name="Netflix">**Netflix Shows Endpoint**</a>
   - **Endpoint**: `GET /netflix-shows`
   - **Description**: Get a random fun fact about your favorite Netflix shows! Add your own shows and facts to the source code to see them on the endpoint! !NO Adult Content allowed!
+  - Fixed `get_netflix_shows` function to ensure it gracefully handles cases where a title filter does not match any shows, returning a 404 error with a clear message.
+  - Corrected response structure for title filter to prevent errors when no shows are found.
+  - Added test cases for base random selection, title filter match, and non-matching filter.
   - **Test File**: `test_netflix_shows.py`
 
 - <a name="Photo">**Photo Gallery Endpoint**</a>

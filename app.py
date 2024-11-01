@@ -269,6 +269,7 @@ def create_app():
 
     @app.route('/netflix-shows', methods=['GET'])
     def get_netflix_shows():
+        title_filter = request.args.get('title')
         netflix_shows = [
             {"title": "Stranger Things", "fact": "The Demogorgon suit was mostly practical effects."},
             {"title": "The Witcher", "fact": "Henry Cavill performed many of his own stunts."},
@@ -278,7 +279,15 @@ def create_app():
             {"title": "BoJack Horseman", "fact": "The show used celebrity guest stars who played exaggerated versions of themselves."},
             {"title": "Black Mirror", "fact": "The show explores the dark side of technology and modern society."}
         ]
-        selected_show = random.choice(netflix_shows)
+
+        if title_filter:
+                filtered_shows = [show for show in netflix_shows if title_filter.lower() in show["title"].lower()]
+                if not filtered_shows:
+                    return jsonify({"error": "No shows found with the specified title."}), 404
+                selected_show = random.choice(filtered_shows)
+        else:
+            selected_show = random.choice(netflix_shows)
+            
         return jsonify({"netflix_show": selected_show})
 
     @app.route('/multiply', methods=['GET'])
