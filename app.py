@@ -15,6 +15,7 @@ from endpoints.quotes import quotes_bp
 from endpoints.photogallery import photogallery_bp
 from endpoints.pokefishing import pokefishing_bp
 from endpoints.animalGuesser import animalGuess_bp
+from endpoints.weather import weather_bp
 import random, requests
 import os, json
 import time
@@ -44,6 +45,7 @@ def create_app():
     app.register_blueprint(quotes_bp)
     app.register_blueprint(animalGuess_bp)
     app.register_blueprint(restaurant_bp)
+    app.register_blueprint(weather_bp)
 
     continents = [
     {"id": 1, "name": "Africa", "area": 30370000, "population": 1340598000},
@@ -208,47 +210,6 @@ def create_app():
             return jsonify({'message': 'No items found'}), 404
         return jsonify(filtered_items), 200
 
-    WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
-    @app.route('/weather/<city>', methods=['GET'])
-    def weather(city):
-        url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={WEATHER_API_KEY}&units=imperial'
-        response = requests.get(url)
-        print("API Key:", WEATHER_API_KEY)
-        print("Request URL:", url)
-        #Returns error if invalid city is entered
-        if response.status_code != 200:
-            return render_template({"error": "City not found or API error."}), 404
-        
-        data = response.json()
-        temperature = data['main']['temp']
-        print(temperature)
-
-        if temperature < 32:
-            bg_color = "#56A5EC"
-        elif 32 <= temperature < 50:
-            bg_color = "#40E0D0"
-        elif 50 <= temperature < 70:
-            bg_color = "#50C878"
-        elif 70 <= temperature < 80:
-            bg_color = "#F5E216"
-        elif 80 <= temperature < 90:
-            bg_color = "#FFA500"
-        elif 90 <= temperature < 100:
-            bg_color = "#FF5F1F"
-        else:
-            bg_color = "#F62817"
-
-            
-        weather_data = {
-            "city": city,
-            "temperature": f"{data['main']['temp']}°F",
-            "condition": data['weather'][0]['description'],
-            "humidity": f"{data['main']['humidity']}%",
-            "wind_speed": f"{data['wind']['speed']} mph",
-            "bg_color": bg_color
-        }
-        return render_template('weather.html', weather=weather_data)
-        
 
     @app.route('/howToMakeEndpoint', methods=['GET'])
     def get_endpoints():
