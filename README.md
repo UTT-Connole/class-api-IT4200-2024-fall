@@ -248,13 +248,9 @@ This will start the server. From there navigate to the url and your desired endp
   - **Description**: Go to http://127.0.0.1:5000/twoManaCombos?color=your_color. Specify which color you want included in your deck by replacing it with your_color. ⚪🔵⚫🔴🟢
   - **Test File**: test_twomana.py
     
-- <a name="Version">**Version Endpoints**</a>
+- <a name="Version">**Version Endpoint**</a>
   - **Endpoint**: `GET /version`
-  - **Description**: Returns the latest version of the repository based on the latest tag.
-  - **Test File**: test_version.py
-
-  - **Endpoint**: `GET /current-version`
-  - **Description**: Returns the current working version of the application based on the current commit.
+  - **Description**: Returns the latest version of the repository based on the `VERSION` environment variable.
   - **Test File**: test_version.py
 
 - <a name="Readme">**Readme Endpoint**</a>

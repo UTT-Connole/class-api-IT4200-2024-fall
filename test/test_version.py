@@ -14,10 +14,3 @@ def test_version_endpoint(client):
     assert response.content_type == 'application/json'
     json_data = response.get_json()
     assert 'version' in json_data
-
-def test_current_version_endpoint(client):
-    response = client.get('/current-version')
-    assert response.status_code == 200
-    assert response.content_type == 'application/json'
-    json_data = response.get_json()
-    assert 'version' in json_data
