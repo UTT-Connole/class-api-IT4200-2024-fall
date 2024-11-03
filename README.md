@@ -142,8 +142,8 @@ This will start the server. From there navigate to the url and your desired endp
     - If the fruit is not available, you will need to select from the provided options.
 
 - <a name="Name">**Generate Name Endpoint**</a>
-  - **Endpoint**: `GET /generateName`
-  - **Description**: Get a randomly generated name. You can specify the length parameter to filter names by a specific length.
+  - **Endpoint**: `GET /generateName` or `GET /generateName?gender=male` or `GET /generateName?length=3&gender=female`
+  - **Description**: Get a randomly generated name. You can specify the `length` parameter to filter names by a specific length, and the `gender` parameter to filter names by gender (`male` or `female`), but both of these parameters are optional.
   - **Test File**: test_generate_name.py
 
 - <a name="Items">**Get Items Endpoint**</a>
