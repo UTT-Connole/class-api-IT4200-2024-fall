@@ -1,0 +1,34 @@
+{
+    "apple": {
+        "color": "red",
+        "taste": "sweet"
+    },
+    "banana": {
+        "color": "yellow",
+        "taste": "sweet"
+    },
+    "grape": {
+        "color": "purple",
+        "taste": "sweet"
+    },
+    "lemon": {
+        "color": "yellow",
+        "taste": "sour"
+    },
+    "lime": {
+        "color": "green",
+        "taste": "sour"
+    },
+    "orange": {
+        "color": "orange",
+        "taste": "citrus"
+    },
+    "peach": {
+        "color": "yellow",
+        "taste": "sweet"
+    },
+    "plum": {
+        "color": "purple",
+        "taste": "sweet"
+    }
+}
