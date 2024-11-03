@@ -1,7 +1,7 @@
 import json
 
 def test_get_non_existing_fruit(client):
-    response = client.get('/fruitInfo?fruit=kiwi')
+    response = client.get('/fruitInfo?fruit=notafruit')
     data = json.loads(response.data)
     assert 'error' in data
     assert 'Available fruits' in data['error']

@@ -177,30 +177,6 @@ def create_app():
             automobiles.remove(automobile)
             return jsonify({"message": "Automobile deleted"}), 200
         return jsonify(automobile), 200
-
-
-    @app.route('/fruitInfo', methods=['GET'])
-    def fruit_info():
-        fruits = {
-            "apple": {"color": "red", "taste": "sweet"},
-            "banana": {"color": "yellow", "taste": "sweet"},
-            "lemon": {"color": "yellow", "taste": "sour"},
-            "orange": {"color": "orange", "taste": "citrus"},
-            "grape": {"color": "purple", "taste": "sweet"},
-            "lime": {"color": "green", "taste": "sour"}
-        }
-    
-        fruit_name = request.args.get('fruit')
-    
-        if fruit_name and fruit_name.lower() in fruits:
-            info = fruits[fruit_name.lower()]
-            return jsonify({
-                "fruit": fruit_name,
-                "color": info["color"],
-                "taste": info["taste"]
-            })
-        else:
-            return jsonify({"error": "Fruit not found. Please try apple, banana, lemon, orange, grape, or lime."}), 404
     
     @app.route('/items/<int:min_price>', methods=['GET'])
     def get_items(min_price):
