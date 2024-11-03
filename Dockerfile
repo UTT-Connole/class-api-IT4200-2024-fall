@@ -16,6 +16,7 @@ COPY .git .git
 COPY __init__.py __init__.py
 COPY templates templates
 COPY endpoints endpoints
+COPY images images
 COPY static static
 COPY app.py app.py
 COPY items.json items.json
