@@ -233,6 +233,11 @@ This will start the server. From there navigate to the url and your desired endp
   - **Description**: Go to http://127.0.0.1:5000/power?base=2&exp=4. Replace the values of `base` and `exp` with whatever numbers you want.
 - **Test File**: test_power.py
 
+- <a name="Restaurants">**Restaurants Endpoint**</a>
+  - **Endpoint**: `GET /restaurant`
+  - **Description**: Go to http://127.0.0.1:5000/restaurant. See the list of restaurants and their menus and then place your order.
+  - **Test File**: test_restaurants.py
+
 - <a name="Stoic">**Stoic Quotes Endpoint**</a>
   - **Endpoint**: `GET /quotes`
   - **Description**: Get a good random stoic quote from Plato and others.
@@ -247,6 +252,11 @@ This will start the server. From there navigate to the url and your desired endp
   - **Endpoint**: `GET /twoManaCombos?color=your_color`
   - **Description**: Go to http://127.0.0.1:5000/twoManaCombos?color=your_color. Specify which color you want included in your deck by replacing it with your_color. ⚪🔵⚫🔴🟢
   - **Test File**: test_twomana.py
+
+- <a name="XKCD Comic">**XKCD Comics Endpoint**</a>
+  - **Endpoint**: `GET /xkcd-comic`
+  - **Description**: Go to http://127.0.0.1:5000/xkcd-comic. Refresh the page to enjoy many comics!
+  - **Test File**: test_xkcd.py
     
 - <a name="Version">**Version Endpoint**</a>
   - **Endpoint**: `GET /version`

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Food</title>
+    <script>
+        const menuItems = {
+            "McDonalds": [
+                { "id": 1, "name": "Burger" },
+                { "id": 2, "name": "Fries" },
+                { "id": 3, "name": "Soda" }
+            ],
+            "Chick Fil A": [
+                { "id": 4, "name": "Salad" }
+            ],
+            "Dominos": [
+                { "id": 5, "name": "Pizza" }
+            ],
+            "Pasta Factory": [
+                { "id": 6, "name": "Pasta" }
+            ],
+            "Subway": [
+                { "id": 7, "name": "Sandwich" }
+            ],
+            "Taco Bell": [
+                { "id": 8, "name": "Taco" }
+            ],
+            "Chipotle": [
+                { "id": 9, "name": "Burrito" }
+            ],
+            "Buffalo Wild Wings": [
+                { "id": 10, "name": "Wings" }
+            ]
+        };
+
+        function updateItems() {
+            const restaurant = document.getElementById("restaurant").value;
+            const itemsContainer = document.getElementById("items");
+            itemsContainer.innerHTML = "";
+
+            if (menuItems[restaurant]) {
+                menuItems[restaurant].forEach(item => {
+                    const checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.name = "item_ids";
+                    checkbox.value = item.id;
+                    checkbox.id = `item_${item.id}`;
+
+                    const label = document.createElement("label");
+                    label.htmlFor = `item_${item.id}`;
+                    label.textContent = item.name;
+
+                    itemsContainer.appendChild(checkbox);
+                    itemsContainer.appendChild(label);
+                    itemsContainer.appendChild(document.createElement("br"));
+                });
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("restaurant").addEventListener("change", updateItems);
+            updateItems(); // Initial call to populate items based on the default selection
+        });
+    </script>
+</head>
+<body>
+    <h1>Order Food</h1>
+    <form action="/order" method="post">
+        <label for="restaurant">Select Restaurant:</label>
+        <select name="restaurant" id="restaurant">
+            <option value="McDonalds">McDonalds</option>
+            <option value="Chick Fil A">Chick Fil A</option>
+            <option value="Dominos">Dominos</option>
+            <option value="Pasta Factory">Pasta Factory</option>
+            <option value="Subway">Subway</option>
+            <option value="Taco Bell">Taco Bell</option>
+            <option value="Chipotle">Chipotle</option>
+            <option value="Buffalo Wild Wings">Buffalo Wild Wings</option>
+        </select>
+        <br><br>
+        <label for="items">Select Items:</label>
+        <br>
+        <div id="items"></div>
+        <br>
+        <input type="submit" value="Order">
+    </form>
+</body>
+</html>
