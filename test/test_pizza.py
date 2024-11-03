@@ -71,6 +71,16 @@ def test_half_and_half_option(client):
     assert 'half2_toppings' in json_data, "The second half toppings should be present in the response"
     assert len(json_data['half1_toppings']) == 3, "First half should have exactly three toppings"
     assert len(json_data['half2_toppings']) == 3, "Second half should have exactly three toppings"
+    
+# New Test: Special Type Pizza Option
+def test_pizza_special_type(client):
+    """Test if the pizza has a valid special type."""
+    response = client.get('/pizza')
+    json_data = response.get_json()
+
+    valid_special_types = ["Regular", "Gluten-Free", "Vegan", "Keto"]
+    assert 'special_type' in json_data, "The 'special_type' key should be present in the response"
+    assert json_data['special_type'] in valid_special_types, "Special type should be one of the valid options"
 
 
 

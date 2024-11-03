@@ -10,16 +10,21 @@ def client():
         yield client
 
 def test_get_random_soda(client):
-    """Test the soda endpoint returns a valid soda brand"""
+    """Test the soda endpoint returns a valid soda brand and size"""
     response = client.get('/soda')
     assert response.status_code == 200  # Check if the status code is 200 (OK)
     
     json_data = response.get_json()
     assert 'soda' in json_data  # Check if 'soda' key is in the response
+    assert 'size' in json_data  # Check if 'size' key is in the response
 
     # Check if the returned soda is one of the valid options
     valid_sodas = ['Fanta', 'Coca Cola', 'Sprite', 'Mountain Dew', 'Dr. Pepper']
     assert json_data['soda'] in valid_sodas, "Returned soda is not in the list of valid sodas"
+
+    # Check if the returned size is one of the valid options
+    valid_sizes = ['Personal', '2 Liter']
+    assert json_data['size'] in valid_sizes, "Returned size is not in the list of valid sizes"
 
 def test_get_all_sodas(client):
     """Test the soda endpoint returns all soda brands when queried with all=true"""
@@ -32,4 +37,3 @@ def test_get_all_sodas(client):
     # Check if the returned list matches the soda options
     expected_sodas = ['Fanta', 'Coca Cola', 'Sprite', 'Mountain Dew', 'Dr. Pepper']
     assert json_data['sodas'] == expected_sodas, "The returned sodas list doesn't match the expected list"
-
