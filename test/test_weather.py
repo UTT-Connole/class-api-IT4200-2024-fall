@@ -24,7 +24,7 @@ def test_weather_html_valid_city(mocker):
 
     # Assert
     assert response.status_code == 200
-    assert 'background-color: #F5E216;' in html
+    assert 'background-color: #87CEEB;' in html
 
 # Test for invalid city response
 def test_weather_html_invalid_city(mocker):
