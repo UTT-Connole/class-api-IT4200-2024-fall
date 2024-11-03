@@ -1,5 +1,5 @@
 import json
-    
+
 def test_get_non_existing_fruit(client):
     response = client.get('/fruitInfo?fruit=kiwi')
     data = json.loads(response.data)
