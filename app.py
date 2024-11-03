@@ -3,6 +3,7 @@ from dadjoke import dadjoke_bp
 from brainrot import brainrot_bp
 import random
 import matplotlib
+import json
 
 def create_app():
     app = Flask(__name__)
@@ -98,15 +99,54 @@ def create_app():
             for i in range(1, n + 1):
                 fact *= i
             return str(fact)
+    @app.route('/fruitInfo', methods=['GET', 'POST'])
+    def fruit_info():
+        try:
+            # Load existing fruits from the JSON file
+            with open('fruits.json', 'r') as f:
+                fruits = json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError):
+            fruits = {}  # Start with an empty dictionary if the file doesn't exist
+
+        if request.method == 'GET':
+            fruit_name = request.args.get('fruit')
+            if fruit_name:
+                fruit_name_lower = fruit_name.lower()
+                if fruit_name_lower in fruits:
+                    info = fruits[fruit_name_lower]
+                    return jsonify({
+                        "fruit": fruit_name_lower,
+                        "color": info["color"],
+                        "taste": info["taste"]
+                    })
+                else:
+                    available_fruits = ', '.join(fruits.keys())
+                    return jsonify({"error": f"Fruit not found. Available fruits: {available_fruits}."}), 404
+            else:
+                return jsonify(fruits), 200  # Return all fruits if no specific fruit is requested
+
+        elif request.method == 'POST':
+            new_fruit = request.args.get('fruit')
+            new_color = request.args.get('color')
+            new_taste = request.args.get('taste')
+
+            if new_fruit and new_color and new_taste:
+                fruits[new_fruit.lower()] = {
+                    "color": new_color,
+                    "taste": new_taste
+                }
+                # Save updated fruits to the file
+                with open('fruits.json', 'w') as f:
+                    json.dump(fruits, f, indent=4)
+                return jsonify({"message": f"{new_fruit} added successfully!"}), 201
+            else:
+                return jsonify({"error": "Invalid data. Please provide fruit name, color, and taste."}), 400
 
     return app
 
 app = create_app()
 
 # Additional routes remain unchanged
-
-
-
 
 @app.route('/color', methods=['GET','POST'])
 def color_hexifier():
@@ -230,29 +270,6 @@ def get_endpoints():
     ]
 	return jsonify("Follow these steps:"+ str(endpointSteps))
 
-@app.route('/fruitInfo', methods=['GET'])
-def fruit_info():
-    fruits = {
-        "apple": {"color": "red", "taste": "sweet"},
-        "banana": {"color": "yellow", "taste": "sweet"},
-        "lemon": {"color": "yellow", "taste": "sour"},
-        "orange": {"color": "orange", "taste": "citrus"},
-        "grape": {"color": "purple", "taste": "sweet"},
-        "lime": {"color": "green", "taste": "sour"}
-    }
-    
-    fruit_name = request.args.get('fruit')
-    
-    if fruit_name and fruit_name.lower() in fruits:
-        info = fruits[fruit_name.lower()]
-        return jsonify({
-            "fruit": fruit_name,
-            "color": info["color"],
-            "taste": info["taste"]
-        })
-    else:
-        return jsonify({"error": "Fruit not found. Please try apple, banana, lemon, orange, grape, or lime."}), 404
-
 @app.route('/motivation', methods=['GET'])
 def get_motivation():
     motivational_quotes = [
@@ -264,6 +281,7 @@ def get_motivation():
     ]
     selected_quote = random.choice(motivational_quotes)
     return jsonify({"motivational_quote": selected_quote})
+
 @app.route('/items', methods=['GET'])
 def get_items():
     min_price = request.args.get('min_price', default=0, type=int)
@@ -293,5 +311,6 @@ def animal_info():
         })
     else:
         return jsonify({"error": "Animal not found. Please try dog, cat, cow, lion, or parrot."}), 404
+
 
 # we built this brick by brick and we will never stop

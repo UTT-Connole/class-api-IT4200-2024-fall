@@ -1,0 +1,10 @@
+{
+    "peach": {
+        "color": "yellow",
+        "taste": "sweet"
+    },
+    "plum": {
+        "color": "purple",
+        "taste": "sweet"
+    }
+}

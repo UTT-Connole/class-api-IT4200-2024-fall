@@ -28,10 +28,14 @@ To get to your endpoint go to the folder the app is in in a terminal (EX. class-
 Currently not working, needs to be rewritten -- if you want to ignore it (like I did), comment it out to run pytest lol
 
 ## How to use fruit_info Endpoint
-Navigate to http://127.0.0.1:5000/fruitInfo?fruit=apple
-Replace "apple" from the end of the url with the fruit of your choice.
-If the fruit isn't available an error message will come up and you will be given a list of options.
-Choose a fruit from the options given.
+To retrieve information about a specific fruit, navigate to: http://127.0.0.1:5000/fruitInfo?fruit=apple
+Replace "apple" from the end of the URL with the fruit of your choice.
+If the fruit is available, you will receive its color and taste. 
+If the fruit isn't available, an error message will display, along with a list of available options.
+To add a new fruit, use the following format (must use Postman with the post method): http://127.0.0.1:5000/fruitInfo?fruit=peach&color=orange&taste=sweet
+Replace "peach," "orange," and "sweet" with the desired fruit name, color, and taste, respectively.
+If the fruit is added successfully, a confirmation message will be returned.
+If any required data is missing, an error message will prompt you to provide the necessary information.
 
 ## How to use Calculator Endpoint
 Use this template to add,subtract,multiple,or divide two numbers "http://127.0.0.1:5000/calc?x=#&y=#&op=#"
