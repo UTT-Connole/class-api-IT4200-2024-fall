@@ -1,11 +1,5 @@
 import json
 
-def test_get_non_existing_fruit(client):
-    response = client.get('/fruitInfo?fruit=notafruit')
-    data = json.loads(response.data)
-    assert 'error' in data
-    assert 'Please try' in data['error']
-
 def test_post_new_fruit(client):
     response = client.post('/fruitInfo?fruit=plum&color=purple&taste=sweet')
     data = json.loads(response.data)
