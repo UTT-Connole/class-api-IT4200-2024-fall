@@ -16,6 +16,7 @@ from endpoints.photogallery import photogallery_bp
 from endpoints.pokefishing import pokefishing_bp
 from endpoints.animalGuesser import animalGuess_bp
 from endpoints.weather import weather_bp
+from endpoints.fruitInfo import fruit_bp
 import random, requests
 import os, json
 import time
@@ -46,6 +47,7 @@ def create_app():
     app.register_blueprint(animalGuess_bp)
     app.register_blueprint(restaurant_bp)
     app.register_blueprint(weather_bp)
+    app.register_blueprint(fruit_bp)
 
     continents = [
     {"id": 1, "name": "Africa", "area": 30370000, "population": 1340598000},

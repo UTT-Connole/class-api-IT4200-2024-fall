@@ -136,7 +136,7 @@ This will start the server. From there navigate to the url and your desired endp
 
 - <a name="Fruit">**Fruit Info Endpoint**</a>
   - **Endpoint**: `GET /fruitInfo?fruit=<fruit_name>`
-  - **Description**: Navigate to `http://127.0.0.1:5000/fruitInfo?fruit=<fruit_name>`. Replace `<fruit_name>` with the name of the fruit you want information about. If the fruit isn't available, an error message will appear, and you will be given a list of available options. Choose a fruit from the options provided.
+  - **Description**: Navigate to `http://127.0.0.1:5000/fruitInfo?fruit=<fruit_name>`. Replace `<fruit_name>` with the name of the fruit you want information about. If the fruit isn't available, an error message will appear, and you will be given a list of available options. Choose a fruit from the options provided. To add a new fruit, use Postman with the POST method, then navigate to `http://127.0.0.1:5000/fruitInfo?fruit=<fruit_name>&color=<fruit_color>&taste=<fruit_taste>`, Replace `<fruit_name>`, `<fruit_color>`, and `<fruit_taste>` with the desired fruit name, color, and taste, respectively. If the fruit is added successfully, a confirmation message will be returned. If any required data is missing, an error message will prompt you to provide the necessary information.
   - **Important Notes**:
     - Ensure the fruit name is spelled correctly to avoid errors.
     - If the fruit is not available, you will need to select from the provided options.
