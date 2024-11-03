@@ -17,7 +17,8 @@ def pizza():
     ]
     crusts = ["Hand Tossed", "Handmade Pan", "Crunchy Thin Crust"]
     cheese_levels = ["Light Cheese", "Regular Cheese", "Extra Cheese"]
-    
+    special_types = ["Regular", "Gluten-Free", "Vegan", "Keto"]
+
     # Half-and-half pizza option
     half_and_half = request.args.get('half_and_half', 'false').lower() == 'true'
     
@@ -26,7 +27,9 @@ def pizza():
     selected_toppings = random.sample(toppings, 3)
     selected_crust = random.choice(crusts)
     selected_cheese = request.args.get('cheese', 'Regular Cheese')
+    selected_special_type = random.choice(special_types)  # Randomly assign a special type
 
+    # Validate cheese level
     if selected_cheese not in cheese_levels:
         return jsonify({"error": "Invalid cheese level"}), 400
 
@@ -37,14 +40,16 @@ def pizza():
             "sauce": selected_sauce,
             "half1_toppings": selected_toppings,
             "half2_toppings": second_toppings,
-            "cheese": selected_cheese  
+            "cheese": selected_cheese,
+            "special_type": selected_special_type  # Add special type to the pizza response
         }
     else:
         pizza = {
             "crust": selected_crust,
             "sauce": selected_sauce,
             "toppings": selected_toppings,
-            "cheese": selected_cheese  
+            "cheese": selected_cheese,
+            "special_type": selected_special_type  # Add special type to the pizza response
         }
 
     return jsonify(pizza)
