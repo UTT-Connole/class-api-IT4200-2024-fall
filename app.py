@@ -25,6 +25,9 @@ import time
 from decimal import Decimal, getcontext 
 import matplotlib, math
 
+import boto3
+
+
 def load_items_from_file():
     with open('items.json', 'r') as f:
         return json.load(f)
@@ -52,6 +55,20 @@ def create_app():
     app.register_blueprint(fruit_bp)
     app.register_blueprint(name_bp)
     app.register_blueprint(color_hexifier_bp)
+
+    @app.route('/db_test')
+    def db_test():
+        print("db_test")
+        dynamo_url = os.environ.get('DYNAMO_URL') or 'http://localhost:8000'
+        dynamo_region = os.environ.get('DYNAMO_REGION') or 'us-west-2'
+
+        print('dynamo_url:', dynamo_url)
+        print('dynamo_region:', dynamo_region)
+
+        dynamodb = boto3.resource('dynamodb', endpoint_url=dynamo_url, region_name=dynamo_region)
+        table = dynamodb.Table('test')
+        response = table.scan()
+        return response['Items']
 
     continents = [
     {"id": 1, "name": "Africa", "area": 30370000, "population": 1340598000},
@@ -283,9 +300,10 @@ def create_app():
 
     return app
 
+
 app = create_app()
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5001, debug=True)
 
 # we built this brick by brick and we will never stop
