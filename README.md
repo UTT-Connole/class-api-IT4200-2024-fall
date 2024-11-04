@@ -87,7 +87,7 @@ This will start the server. From there navigate to the url and your desired endp
 
 - <a name="Hexifier">**Color Hexifier Endpoint**</a>
   - **Endpoint**: `GET /color?color=blue`
-  - **Description**: Use the template to return a hex code of the color you want "http://127.0.0.1:5000/color?color=blue". Replace the "blue" at the end with any color of your choosing. If the color doesn't exist in the library, you will get an error.
+  - **Description**: Use the template to return a hex code of the color you want "http://127.0.0.1:5000/color". Type in the color of your choice into the text box on the page then press the "Get Hex Code" button to find out the hex code of the color. If the color doesn't exist in the library of colors saved, then you will return an error.
   - **Test File**: test_color_hexifier.py
 
 - <a name="Binary">**Convert To Binary Endpoint**</a>
