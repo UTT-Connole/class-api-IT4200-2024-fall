@@ -18,6 +18,7 @@ from endpoints.animalGuesser import animalGuess_bp
 from endpoints.weather import weather_bp
 from endpoints.fruitInfo import fruit_bp
 from endpoints.name_generator import name_bp
+from endpoints.color_hexifier import color_hexifier_bp
 import random, requests
 import os, json
 import time
@@ -50,6 +51,7 @@ def create_app():
     app.register_blueprint(weather_bp)
     app.register_blueprint(fruit_bp)
     app.register_blueprint(name_bp)
+    app.register_blueprint(color_hexifier_bp)
 
     continents = [
     {"id": 1, "name": "Africa", "area": 30370000, "population": 1340598000},
@@ -102,18 +104,6 @@ def create_app():
     @app.route('/')
     def hello_world():
         return render_template('index.html')
-
-    @app.route('/color', methods=['GET','POST'])
-    def color_hexifier():
-        color_name = request.args.get('color')
-    
-        print(f"Received color name: {color_name}")
-    
-        if color_name and color_name.lower() in matplotlib.colors.CSS4_COLORS:
-            hex_code = matplotlib.colors.CSS4_COLORS[color_name.lower()]
-            return f"The hex code for {color_name} is {hex_code}"
-        else:
-            return "Invalid color name"
         
     @app.route('/favoritequote', methods=['GET', 'POST', 'PATCH'])
     def get_favorite_quote():
