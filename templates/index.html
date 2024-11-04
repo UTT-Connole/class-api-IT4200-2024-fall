@@ -5,8 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flask API Explorer</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="bg-gray-100 min-h-screen">
+    <!-- Dark Mode Toggle -->
+    <div class="container mx-auto px-4 py-4 text-right">
+        <label class="dark-mode-toggle">
+            <input type="checkbox" id="dark-mode-toggle">
+            <span class="slider round"></span>
+        </label>
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">Flask API Explorer</h1>
+            <p class="text-gray-600">Explore our available endpoints and try them out!</p>
+        </header>
+
     <div class="container mx-auto px-4 py-8">
         <header class="text-center mb-12">
             <h1 class="text-4xl font-bold text-gray-800 mb-4">Flask API Explorer</h1>
@@ -82,5 +97,6 @@
             <p>Try adding parameters to endpoints where applicable. Example: /greet?name=John</p>
         </footer>
     </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
