@@ -85,6 +85,12 @@ This will start the server. From there navigate to the url and your desired endp
     - If no parameters are provided, the endpoint will render an HTML form for input.
   - **Test File**: `test_calc.py`
 
+
+  - <a name="Crypto">**Crypto prices Endpoint**</a>
+  - **Endpoint**: `GET /bitcoin_price`
+  - **Description**: Check what the price for crypto is!
+  - **Test File**: test_crypto.py
+
 - <a name="Hexifier">**Color Hexifier Endpoint**</a>
   - **Endpoint**: `GET /color?color=blue`
   - **Description**: Use the template to return a hex code of the color you want "http://127.0.0.1:5000/color". Type in the color of your choice into the text box on the page then press the "Get Hex Code" button to find out the hex code of the color. If the color doesn't exist in the library of colors saved, then you will return an error.
