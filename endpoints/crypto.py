@@ -50,3 +50,28 @@ def get_ethereum_price():
             "message": "Failed to retrieve Ethereum price",
             "details": str(e)
         }), 500
+    
+
+@bitcoin_bp.route("/solana_price", methods=["GET"])
+def get_solana_price():
+    url = "https://api.coinbase.com/v2/prices/SOL-USD/spot" 
+    
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        
+        data = response.json()
+        price = data["data"]["amount"]
+        
+        return jsonify({
+            "status": "success",
+            "solana_price_usd": price
+        })
+        
+    except requests.RequestException as e:
+        return jsonify({
+            "status": "error",
+            "message": "Failed to retrieve Solana price",
+            "details": str(e)
+        }), 500
+ 
