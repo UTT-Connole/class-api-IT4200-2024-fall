@@ -31,7 +31,7 @@ def test_bitcoin_price_response_format(client):
         assert response.is_json
         assert 'status' in response.json
         assert 'bitcoin_price_usd' in response.json
-        assert isinstance(response.json['bitcoin_price_usd'], str)  # Price should be a string
+        assert isinstance(response.json['bitcoin_price_usd'], str) 
 
 
 def test_ethereum_price(client):
@@ -64,6 +64,35 @@ def test_ethereum_price_response_format(client):
         assert 'ethereum_price_usd' in response.json
         assert isinstance(response.json['ethereum_price_usd'], str) 
 
+def test_solana_price(client):
+    """Test the '/solana_price' endpoint for successful response."""
+    with patch("endpoints.crypto.requests.get") as mock_get:
+        # Mock Coinbase API response for Solana
+        mock_get.return_value.status_code = 200
+        mock_get.return_value.json.return_value = {
+            "data": {"base": "SOL", "currency": "USD", "amount": "30.00"}
+        }
+
+        response = client.get('/api/solana_price')
+        assert response.status_code == 200
+        assert response.is_json
+        assert 'solana_price_usd' in response.json
+        assert response.json['solana_price_usd'] == "30.00"
+
+def test_solana_price_response_format(client):
+    """Test that '/solana_price' endpoint returns the expected response format."""
+    with patch("endpoints.crypto.requests.get") as mock_get:
+        mock_get.return_value.status_code = 200
+        mock_get.return_value.json.return_value = {
+            "data": {"base": "SOL", "currency": "USD", "amount": "30.00"}
+        }
+
+        response = client.get('/api/solana_price')
+        assert response.status_code == 200
+        assert response.is_json
+        assert 'status' in response.json
+        assert 'solana_price_usd' in response.json
+        assert isinstance(response.json['solana_price_usd'], str) 
 
 
 @pytest.fixture
