@@ -87,7 +87,7 @@ This will start the server. From there navigate to the url and your desired endp
 
 
   - <a name="Crypto">**Crypto prices Endpoint**</a>
-  - **Endpoint**: `GET /bitcoin_price`
+  - **Endpoint**: `GET /bitcoin_price`, `GET /ethereum_price`
   - **Description**: Check what the price for crypto is!
   - **Test File**: test_crypto.py
 
