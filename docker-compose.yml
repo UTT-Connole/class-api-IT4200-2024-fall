@@ -3,6 +3,7 @@ services:
    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
    image: "amazon/dynamodb-local:2.5.2"
    container_name: dynamodb-local
+   user: root
    ports:
      - "8000:8000"
    volumes:
