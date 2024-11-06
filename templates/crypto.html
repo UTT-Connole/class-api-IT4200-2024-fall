@@ -1,0 +1,26 @@
+<!-- templates/crypto.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Prices</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='crypto.css') }}">
+</head>
+<body>
+
+    <h1>Crypto Prices</h1>
+    
+    <div class="button-container">
+        <button onclick="fetchCrypto('bitcoin')">Show Bitcoin Price</button>
+        <button onclick="fetchCrypto('ethereum')">Show Ethereum Price</button>
+        <button onclick="fetchCrypto('solana')">Show Solana Price</button>
+    </div>
+
+    <div id="crypto-output" class="output-container">
+        <p>Select a cryptocurrency to view the latest price.</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='crypto.js') }}"></script>
+</body>
+</html>
