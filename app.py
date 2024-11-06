@@ -58,6 +58,11 @@ def create_app():
     app.register_blueprint(color_hexifier_bp)
     app.register_blueprint(bitcoin_bp, url_prefix='/api')
 
+
+    @app.route('/crypto')
+    def crypto_page():
+        return render_template('crypto.html')
+
     @app.route('/db_test')
     def db_test():
         print("db_test")
