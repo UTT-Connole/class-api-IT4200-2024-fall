@@ -20,7 +20,6 @@ from endpoints.fruitInfo import fruit_bp
 from endpoints.name_generator import name_bp
 from endpoints.color_hexifier import color_hexifier_bp
 from endpoints.crypto import bitcoin_bp
-from endpoints.favquote import quotes_bp
 import random, requests
 import os, json
 import time
@@ -58,7 +57,11 @@ def create_app():
     app.register_blueprint(name_bp)
     app.register_blueprint(color_hexifier_bp)
     app.register_blueprint(bitcoin_bp, url_prefix='/api')
-    app.register_blueprint(quotes_bp)
+
+
+    @app.route('/crypto')
+    def crypto_page():
+        return render_template('crypto.html')
 
     @app.route('/db_test')
     def db_test():
@@ -277,7 +280,6 @@ def create_app():
         return render_template('xkcd_comic.html', comic=comic_data)
 
     return app
-
 
 app = create_app()
 
