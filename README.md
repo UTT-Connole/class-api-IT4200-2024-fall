@@ -22,6 +22,36 @@ Make sure to run these commands before you run the Flask app. It will install al
 pip install -r requirements.txt
 ```
 
+## Running the DB Locally
+
+Run:
+
+```
+docker-compose up
+```
+
+
+### Seeding the Database
+
+First, ensure you have the aws cli installed:
+
+```
+aws --version
+```
+
+If you don't have it installed: [AWS CLI Installation Guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html#getting-started-install-instructions)
+
+
+Run the seed bash script
+
+```
+bash dynamo/seed.bash
+```
+
+If everythin ran correctly, you should be able to go to the `/db_test` endpoint and see the seed data returned there.
+
+
+
 ## Testing
 ### To run all the tests at once:
 Run 
