@@ -7,7 +7,7 @@ from endpoints.motivation import motivation_bp
 from endpoints.math import math_bp
 from endpoints.mtg import mtg_bp
 from endpoints.allfacts import allfacts_bp
-from endpoints.pizza import pizza_bp
+from endpoints.pizza_meal import pizza_meal_bp
 from endpoints.restaurants import restaurant_bp
 from endpoints.soda import soda_bp
 from endpoints.version import version_bp
@@ -45,7 +45,7 @@ def create_app():
     app.register_blueprint(mtg_bp)
     app.register_blueprint(motivation_bp)
     app.register_blueprint(photogallery_bp)
-    app.register_blueprint(pizza_bp)
+    app.register_blueprint(pizza_meal_bp)
     app.register_blueprint(pokefishing_bp)
     app.register_blueprint(soda_bp)
     app.register_blueprint(version_bp)

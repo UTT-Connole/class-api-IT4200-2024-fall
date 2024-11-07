@@ -217,17 +217,11 @@ This will start the server. From there navigate to the url and your desired endp
   - **Endpoint**: `GET /photogallery`
   - **Description**: Go checkout the art gallery complied by yours truly. !Add your own images to the images folder to see them on the endpoint! !NO Adult Content allowed! 
   - **Test File**: test_photogallery.py
-
-- <a name="Pizza">**Pizza Endpoint**</a>
-  - **Endpoint**: `GET /pizza`
-  - **Description**: This endpoint randomly generates a pizza, but sometimes you may get two pizzas instead of one! You can customize the cheese level by putting in a cheese query. Recently added a Special Pizza Type attribute, such as Gluten-Free, Vegan, or Keto, may be randomly assigned to some pizzas, adding a unique twist for those with specific diets. 🍕🍕🍕
-  - **Example request**: http://127.0.0.1:5000/pizza?cheese=Extra%20Cheese
-  - **Test File**: test_pizza.py
-
-- <a name="Soda">**Soda Endpoint**</a>
-  - **Endpoint**: `GET /soda`
-  - **Description**: This endpoint is used to choose a soda to go with your meal. By default, it returns a random soda brand. You can retrieve the full list of available sodas by using the query parameter `all=true`. Recently added feature that chooses between ice or no ice. 🥤🥤🥤
-  - **Test File**: test_soda.py
+ 
+- <a name="PizzaMeal">Pizza Meal Endpoint</a>
+  - **Endpoint**: `GET /pizza_meal`
+  - **Description**: This endpoint generates a complete meal, now has both a randomly selected pizza and soda combo. Customize your pizza by selecting a cheese level (Light, Regular, or Extra Cheese) or opt for a half-and-half pizza with unique toppings on each side. Some pizzas may come with a special type designation like Gluten-Free, Vegan, or Keto for dietary preferences. The meal includes a soda with a random brand, bottle size (Personal or 2 Liter), and ice preference (With Ice or No Ice). Use the `soda=all` query parameter to view the full list of soda brands. 🍕🥤
+  - **Test File**: test_pizza_meal.py
 
 - <a name="Pokefishing">**Pokefishing Endpoint**</a>
   - **Endpoint**: `GET /pokefishing`
