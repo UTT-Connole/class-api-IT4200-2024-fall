@@ -226,7 +226,7 @@ This will start the server. From there navigate to the url and your desired endp
 
 - <a name="Soda">**Soda Endpoint**</a>
   - **Endpoint**: `GET /soda`
-  - **Description**: This endpoint is used to choose a soda to go with your meal. By default, it returns a random soda brand. You can retrieve the full list of available sodas by using the query parameter `all=true`. Recently added a randomly chosen bottle size section, either Personal or 2 Liter, 🥤🥤🥤
+  - **Description**: This endpoint is used to choose a soda to go with your meal. By default, it returns a random soda brand. You can retrieve the full list of available sodas by using the query parameter `all=true`. Recently added feature that chooses between ice or no ice. 🥤🥤🥤
   - **Test File**: test_soda.py
 
 - <a name="Pokefishing">**Pokefishing Endpoint**</a>
