@@ -75,3 +75,48 @@ def get_solana_price():
             "details": str(e)
         }), 500
  
+@bitcoin_bp.route("/cardano_price", methods=["GET"])
+def get_cardano_price():
+    url = "https://api.coinbase.com/v2/prices/ADA-USD/spot"
+    
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        
+        data = response.json()
+        price = data["data"]["amount"]
+        
+        return jsonify({
+            "status": "success",
+            "cardano_price_usd": price
+        })
+        
+    except requests.RequestException as e:
+        return jsonify({
+            "status": "error",
+            "message": "Failed to retrieve Cardano price",
+            "details": str(e)
+        }), 500
+    
+@bitcoin_bp.route("/monero_price", methods=["GET"])
+def get_monero_price():
+    url = "https://api.coinbase.com/v2/prices/XMR-USD/spot"
+    
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        
+        data = response.json()
+        price = data["data"]["amount"]
+        
+        return jsonify({
+            "status": "success",
+            "monero_price_usd": price
+        })
+        
+    except requests.RequestException as e:
+        return jsonify({
+            "status": "error",
+            "message": "Failed to retrieve Monero price",
+            "details": str(e)
+        }), 500
