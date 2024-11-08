@@ -2,6 +2,7 @@
 DYNAMODB_ENDPOINT="http://localhost:8000"
 TABLE_NAME="test"
 echo "Creating Table $TABLE_NAME"
+echo "$DYNAMODB_ENDPOINT"
 aws dynamodb create-table --table-name $TABLE_NAME --attribute-definitions AttributeName=Id,AttributeType=S --key-schema AttributeName=Id,KeyType=HASH --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 --endpoint-url $DYNAMODB_ENDPOINT
 echo "Waiting for table to be created..."
 aws dynamodb wait table-exists --table-name $TABLE_NAME --endpoint-url $DYNAMODB_ENDPOINT
