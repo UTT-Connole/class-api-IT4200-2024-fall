@@ -100,7 +100,7 @@ def get_cardano_price():
     
 @bitcoin_bp.route("/monero_price", methods=["GET"])
 def get_monero_price():
-    url = "https://api.coinbase.com/v2/prices/XMR-USD/spot"
+    url = "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=usd"
     
     try:
         response = requests.get(url)
