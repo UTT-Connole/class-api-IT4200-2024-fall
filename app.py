@@ -13,6 +13,7 @@ from endpoints.version import version_bp
 from endpoints.quotes import quotes_bp
 from endpoints.photogallery import photogallery_bp
 from endpoints.pokefishing import pokefishing_bp
+from endpoints.color import color_bp
 import random, requests
 import os, json
 import time
@@ -22,8 +23,6 @@ import matplotlib, math
 def load_items_from_file():
     with open('items.json', 'r') as f:
         return json.load(f)
-    
-
 
 def create_app():
     app = Flask(__name__)
@@ -85,18 +84,6 @@ def create_app():
         else:
             return jsonify({"animal": random_animal}), 200
 
-    @app.route('/color', methods=['GET','POST'])
-    def color_hexifier():
-        color_name = request.args.get('color')
-    
-        print(f"Received color name: {color_name}")
-    
-        if color_name and color_name.lower() in matplotlib.colors.CSS4_COLORS:
-            hex_code = matplotlib.colors.CSS4_COLORS[color_name.lower()]
-            return f"The hex code for {color_name} is {hex_code}"
-        else:
-            return "Invalid color name"
-        
     @app.route('/favoritequote', methods=['GET', 'POST'])
     def get_favorite_quote():
         favorite_quote = {
