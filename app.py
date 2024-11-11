@@ -20,6 +20,7 @@ from endpoints.fruitInfo import fruit_bp
 from endpoints.name_generator import name_bp
 from endpoints.color_hexifier import color_hexifier_bp
 from endpoints.crypto import bitcoin_bp
+from endpoints.fortune import fortune_bp
 import random, requests
 import os, json
 import time
@@ -56,6 +57,7 @@ def create_app():
     app.register_blueprint(fruit_bp)
     app.register_blueprint(name_bp)
     app.register_blueprint(color_hexifier_bp)
+    app.register_blueprint(fortune_bp)
     app.register_blueprint(bitcoin_bp, url_prefix='/api')
 
 
@@ -129,22 +131,6 @@ def create_app():
     def hello_world():
         return render_template('index.html')
         
-    @app.route('/fortune', methods=['GET'])
-    def get_fortune():
-        fortunes = [
-            "You will find a fortune.",
-            "A fresh start will put you on your way.",
-            "Fortune favors the brave.",
-            "Good news will come to you by mail.",
-            "A beautiful, smart, and loving person will be coming into your life.",
-            "A soft voice may be awfully persuasive.",
-            "All your hard work will soon pay off."
-        ]
-        count = request.args.get('count', default=1, type=int)
-        if count < 1:
-            count = 1
-        return jsonify({"fortunes": random.sample(fortunes, min(count, len(fortunes)))})
-    
     @app.route('/automobiles', methods=['GET', 'POST'])
     def handle_automobiles():
         if request.method == 'POST':
