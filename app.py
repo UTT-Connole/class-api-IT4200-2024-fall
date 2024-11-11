@@ -57,6 +57,7 @@ def create_app():
     app.register_blueprint(fruit_bp)
     app.register_blueprint(name_bp)
     app.register_blueprint(color_hexifier_bp)
+    app.register_blueprint(fortune_bp)
     app.register_blueprint(bitcoin_bp, url_prefix='/api')
 
 
