@@ -21,6 +21,7 @@ from endpoints.name_generator import name_bp
 from endpoints.color_hexifier import color_hexifier_bp
 from endpoints.crypto import bitcoin_bp
 from endpoints.fortune import fortune_bp
+from endpoints.items import items_bp
 import random, requests
 import os, json
 import time
@@ -59,6 +60,7 @@ def create_app():
     app.register_blueprint(color_hexifier_bp)
     app.register_blueprint(fortune_bp)
     app.register_blueprint(bitcoin_bp, url_prefix='/api')
+    app.register_blueprint(items_bp)
 
 
     @app.route('/crypto')
@@ -152,17 +154,6 @@ def create_app():
             automobiles.remove(automobile)
             return jsonify({"message": "Automobile deleted"}), 200
         return jsonify(automobile), 200
-    
-    @app.route('/items/<int:min_price>', methods=['GET'])
-    def get_items(min_price):
-        #min_price = request.args.get('min_price', default=0, type=int)
-        items = load_items_from_file()
-        filtered_items = [item for item in items if item['price'] >= min_price]
-        #items = Item.query.filter(Item.price >= min_price).all()
-        if not filtered_items:
-            return jsonify({'message': 'No items found'}), 404
-        return jsonify(filtered_items), 200
-
 
     @app.route('/howToMakeEndpoint', methods=['GET'])
     def get_endpoints():

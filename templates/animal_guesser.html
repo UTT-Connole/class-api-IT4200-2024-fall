@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Guesser Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='animal_guesser.js') }}"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Animal Guesser Game</h1>
+        <p>Guess the animal in 5 attempts or less. Enter your guess below and click "Submit".</p>
+        
+        <div class="game-container">
+            <input type="text" id="guessInput" placeholder="Enter your guess">
+            <button onclick="submitGuess()">Submit</button>
+        </div>
+
+        <div id="feedback"></div>
+    </div>
+</body>
+</html>
