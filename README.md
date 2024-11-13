@@ -86,7 +86,7 @@ This will start the server. From there navigate to the url and your desired endp
 
 - <a name="Animal">**Animal Endpoint**</a>
   - **Endpoint**: `GET /animalGuesser`
-  - **Description**: The Animal Guesser will randomly guess an animal from a predefined list. If the user makes a guess, it checks the guess against the selected animal. If the guess is correct, it returns a success message. If the guess is incorrect, it returns a message with a hint that reveals the first letter of the animal. You will only get 5 guesses and it will be game over! EX: /animalGuesser?guess=lion
+  - **Description**: The Animal Guesser will randomly guess an animal from a predefined list. If the user makes a guess, it checks the guess against the selected animal. If the guess is correct, it returns a success message. If the guess is incorrect, it returns a message with a hint that reveals the first letter of the animal. You will only get 5 guesses and it will be game over! This endpoint now returns an html page.
   - **Test File**: test_animal.py
 
 - <a name="Automobiles">**Automobiles Endpoint**</a>
