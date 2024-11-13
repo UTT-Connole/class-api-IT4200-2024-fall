@@ -25,7 +25,7 @@ from endpoints.items import items_bp
 import random, requests
 import os, json
 import time
-from decimal import Decimal, getcontext 
+from decimal import Decimal, getcontext, DecimalException
 import matplotlib, math
 
 import boto3
@@ -198,50 +198,86 @@ def create_app():
     @app.route('/multiply', methods=['GET'])
     def multiply():
         try:
-            # Get the 'numbers' parameter and split it into a list of numbers
             numbers = request.args.get('numbers')
             if not numbers:
-                return jsonify({'error': 'No input provided'}), 400
-        
-            # Convert the list of string numbers to floats
-            number_list = [float(num) for num in numbers.split(',')]
-            result = 1
-            for num in number_list:
-                result *= num
+                return jsonify({'error': 'Please provide numbers to multiply'}), 400
+
+            number_list = [float(num.strip()) for num in numbers.split(',') if num.strip()]
             
-            return jsonify({'result': result}), 200
-        except (TypeError, ValueError):
-            return jsonify({'error': 'Invalid input'}), 400
+            if not number_list:
+                return jsonify({'error': 'No valid numbers provided'}), 400
+                
+            if len(number_list) < 2:
+                return jsonify({'error': 'Please provide at least two numbers'}), 400
+
+            getcontext().prec = 10
+            result = Decimal('1.0')
+            for num in number_list:
+                result *= Decimal(str(num))
+
+            return jsonify({
+                'result': float(result),
+                'numbers_multiplied': len(number_list)
+            }), 200
+                
+        except (ValueError, DecimalException) as e:
+            return jsonify({
+                'error': 'Invalid input. Please provide valid numbers separated by commas',
+                'details': str(e)
+            }), 400
 
 
     @app.route('/travel', methods=['GET','POST'])
     def travel():
         destinations = [
-            {"You should go to": "Paris, France", "To fly from SLC it will take ": "9h 50m"},
-            {"You should go to": "Rome, Italy", "To fly from SLC it will take ": "13hr 30m"},
-            {"You should go to": "London, England", "To fly from SLC it will take ": "9hr 30m"},
-            {"You should go to": "Tokyo, Japan", "To fly from SLC it will take ": "13hr 40m"},
-            {"You should go to": "Barcelona, Spain", "To fly from SLC it will take ": "12hr 30m"},
-            {"You should go to": "New York City, New York", "To fly from SLC it will take ": "4hr 35m"},
-            {"You should go to": "Los Angeles, California", "To fly from SLC it will take ": "2hr"},
-            {"You should go to": "Dublin, Ireland", "To fly from SLC it will take ": "11hr 30m"},
-            {"You should go to": "Cairo, Egypt", "To fly from SLC it will take ": "15hr 15m"},
-            {"You should go to": "Sydney, Australia", "To fly from SLC it will take ": "18hr 15m"},
-            {"You should go to": "Sacramento, California", "To fly from SLC it will take ": "1hr 45m"},
-            {"You should go to": "Salt Lake, Utah", "To fly from SLC it will take ": "You're already there silly"},
-            {"You should go to": "Denver, Colorado", "To fly from SLC it will take ": "1hr 35m"},
-            {"You should go to": "Santa Cruz, California", "To fly from SLC it will take ": "2hr"},
+            {"destination": "Paris, France", "duration": "9h 50m", "continent": "Europe", "best_season": "Spring"},
+            {"destination": "Rome, Italy", "duration": "13hr 30m", "continent": "Europe", "best_season": "Summer"},
+            {"destination": "London, England", "duration": "9hr 30m", "continent": "Europe", "best_season": "Fall"},
+            {"destination": "Tokyo, Japan", "duration": "13hr 40m", "continent": "Asia", "best_season": "Spring"},
+            {"destination": "Barcelona, Spain", "duration": "12hr 30m", "continent": "Europe", "best_season": "Spring"},
+            {"destination": "New York City, New York", "duration": "4hr 35m", "continent": "North America", "best_season": "Winter"},
+            {"destination": "Los Angeles, California", "duration": "2hr", "continent": "North America", "best_season": "Fall"},
+            {"destination": "Dublin, Ireland", "duration": "11hr 30m", "continent": "Europe", "best_season": "Fall"},
+            {"destination": "Cairo, Egypt", "duration": "15hr 15m", "continent": "Africa", "best_season": "Winter"},
+            {"destination": "Sydney, Australia", "duration": "18hr 15m", "continent": "Australia", "best_season": "Summer"},
+            {"destination": "Sacramento, California", "duration": "1hr 45m", "continent": "North America", "best_season": "Spring"},
+            {"destination": "Salt Lake, Utah", "duration": "0hr 0m", "continent": "North America", "best_season": "Anytime"},
+            {"destination": "Denver, Colorado", "duration": "1hr 35m", "continent": "North America", "best_season": "Summer"},
+            {"destination": "Santa Cruz, California", "duration": "2hr", "continent": "North America", "best_season": "Fall"},
         ]
-            
+
         max_duration = request.args.get('max_duration')
-    
+        continent = request.args.get('continent')
+        filtered_destinations = destinations
+
         if max_duration:
-            max_hours = int(max_duration)
-            # Filter destinations to those with flight time within max_duration
-            destinations = [d for d in destinations if 'hr' in d["To fly from SLC it will take "] and int(d["To fly from SLC it will take "].split('hr')[0]) <= max_hours]
-    
-        picked = random.choice(destinations) if destinations else {"message": "No destinations within specified duration."}
-        return jsonify(picked)
+            try:
+                max_hours = int(max_duration)
+                filtered_destinations = [
+                    d for d in filtered_destinations
+                    if ('h' in d["duration"] or 'hr' in d["duration"])  # Check for 'h' or 'hr' to handle both
+                    and int(''.join(filter(str.isdigit, d["duration"].split('h')[0]))) <= max_hours  # Extract and compare hours
+                ]
+            except ValueError:
+                return jsonify({"message": "Invalid max_duration value. Please provide an integer."}), 400
+
+        if continent:
+            filtered_destinations = [
+                d for d in filtered_destinations
+                if d["continent"].lower() == continent.lower()
+            ]
+        
+        if not filtered_destinations:
+            return jsonify({"message": "No destinations match your criteria."}), 404
+
+        picked = random.choice(filtered_destinations)
+        return jsonify({
+            "recommended_destination": picked["destination"],
+            "flight_duration": picked["duration"],
+            "continent": picked["continent"],
+            "best_time_to_visit": picked["best_season"]
+        })
+  
     
     @app.route('/xkcd-comic', methods=['GET'])
     def get_random_xkcd_comic():
