@@ -47,6 +47,11 @@ Run the seed bash script
 ```
 bash dynamo/seed.bash
 ```
+If you have issues running the bash script try the python script
+
+```
+python dynamo/seed.py
+```
 
 If everythin ran correctly, you should be able to go to the `/db_test` endpoint and see the seed data returned there.
 
