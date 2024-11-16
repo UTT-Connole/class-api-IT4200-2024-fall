@@ -75,4 +75,41 @@ aws dynamodb put-item \
     --endpoint-url $DYNAMODB_ENDPOINT \
     --region us-west-2
 
-echo "Seeding completed for $ITEMS_TABLE_NAME."
+# --------------------------
+# Table for storing names data (for /generateName endpoint)
+NAMES_TABLE_NAME="names"
+echo "Creating Table $NAMES_TABLE_NAME"
+
+aws dynamodb create-table \
+    --table-name $NAMES_TABLE_NAME \
+    --attribute-definitions AttributeName=gender,AttributeType=S AttributeName=name,AttributeType=S \
+    --key-schema AttributeName=gender,KeyType=HASH AttributeName=name,KeyType=RANGE \
+    --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+echo "Waiting for $NAMES_TABLE_NAME to be created..."
+aws dynamodb wait table-exists --table-name $NAMES_TABLE_NAME --endpoint-url $DYNAMODB_ENDPOINT
+
+echo "Table $NAMES_TABLE_NAME created."
+echo "Seeding data for names table..."
+
+# Insert names data
+aws dynamodb put-item \
+    --table-name $NAMES_TABLE_NAME \
+    --item '{"gender": {"S": "male"}, "name": {"S": "John"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $NAMES_TABLE_NAME \
+    --item '{"gender": {"S": "female"}, "name": {"S": "Jane"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $NAMES_TABLE_NAME \
+    --item '{"gender": {"S": "male"}, "name": {"S": "Michael"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+echo "Seeding completed for $NAMES_TABLE_NAME."
