@@ -81,6 +81,31 @@ def create_app():
         response = table.scan()
         return response['Items']
 
+    @app.route('/items')
+    def get_items():
+        """Fetch items from DynamoDB and return them."""
+        print("Fetching items from DynamoDB...")
+
+        dynamo_url = os.environ.get('DYNAMO_URL') or 'http://localhost:8000'
+        dynamo_region = os.environ.get('DYNAMO_REGION') or 'us-west-2'
+
+        print('dynamo_url:', dynamo_url)
+        print('dynamo_region:', dynamo_region)
+
+        dynamodb = boto3.resource('dynamodb', endpoint_url=dynamo_url, region_name=dynamo_region)
+
+        table = dynamodb.Table('items')
+
+        try:
+            response = table.scan()
+
+            return jsonify(response['Items']), 200
+
+        except Exception as e:
+            print(f"Error accessing DynamoDB: {str(e)}")
+            return jsonify({"error": "Failed to access DynamoDB", "details": str(e)}), 500
+
+
     continents = [
     {"id": 1, "name": "Africa", "area": 30370000, "population": 1340598000},
     {"id": 2, "name": "Antarctica", "area": 14000000, "population": 1106},
