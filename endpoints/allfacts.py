@@ -1,7 +1,22 @@
 from flask import Blueprint, jsonify, request
 import random
+import boto3
+from botocore.exceptions import ClientError
 
 allfacts_bp = Blueprint('allfacts', __name__)
+
+DYNAMODB_ENDPOINT = "http://localhost:8000"
+REGION_NAME = "us-west-2"
+FACTS_TABLE_NAME = "facts"
+
+# Initialize DynamoDB resource
+dynamodb = boto3.resource(
+    'dynamodb',
+    endpoint_url=DYNAMODB_ENDPOINT,
+    region_name=REGION_NAME,
+    aws_access_key_id='dummy',
+    aws_secret_access_key='dummy'
+)
 
 facts = {
     "random": [
@@ -26,36 +41,28 @@ facts = {
         "Ric Flair is a 16-time world champion.",
         "Shawn Michaels is known as 'Mr. WrestleMania' for his outstanding performances on the big stage."
     ],
-    "basketball": [
-        "Michael Jordan has won six NBA championships.",
-        "Kareem Abdul-Jabbar is the all-time leading scorer in NBA history.",
-        "The NBA was founded in New York City on June 6, 1946.",
-        "Wilt Chamberlain scored 100 points in a single game.",
-        "The Boston Celtics have the most NBA titles with 17 championships.",
-        "Basketball was invented in 1891 by Dr. James Naismith."
-    ],
     "tennis": [
         "The fastest serve was 163.7 mph by Sam Groth.",
-        "The longest match lasted 11 hours and 5 minutes.", 
+        "The longest match lasted 11 hours and 5 minutes.",
         "Wimbledon is the oldest tournament.",
-        "Yellow tennis balls were introduced in 1972.", 
-        "Nadal has won the French Open 14 times."
-    ],
-    "history": [
-        "The first modern Olympic Games were held in Athens in 1896."
-    ],
-    "popularity": [
-        "The Super Bowl is the most-watched annual sporting event.",
-        "Soccer is the most popular sport in the world."
-    ],
-    "studying": [
-        "The Pomodoro Technique helps improve focus by working in 25-minute intervals.",
-        "Exercise before studying can enhance learning and memory.",
-        "Short, frequent study sessions are more effective than long, infrequent ones.",
-        "Taking handwritten notes improves memory more than typing.",
-        "Sleep plays a crucial role in memory consolidation after studying."
+        "Yellow tennis balls were introduced in 1972."
     ]
 }
+
+def get_facts_by_category(category):
+    table = dynamodb.Table(FACTS_TABLE_NAME)
+    try:
+        response = table.scan(
+            FilterExpression=boto3.dynamodb.conditions.Attr('Category').eq(category)
+        )
+        print(f"Fetched {len(response['Items'])} items for category '{category}'")
+        return [item['Fact'] for item in response['Items']]
+    except ClientError as e:
+        print(f"Error fetching facts: {e}")
+        return []
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+        return []
 
 @allfacts_bp.route('/allFacts', methods=['GET'])
 def all_facts():
@@ -64,7 +71,17 @@ def all_facts():
     if category in facts:
         fact = random.choice(facts[category])
         return jsonify({"category": category, "fact": fact})
-    
-    available_categories = list(facts.keys())
+
+    if category:
+        category_facts = get_facts_by_category(category)
+        if category_facts:
+            fact = random.choice(category_facts)
+            return jsonify({"category": category, "fact": fact})
+        else:
+            available_categories = list(facts.keys()) + ['basketball', 'studying']
+            message = f"Please choose a valid category. Available categories are: {', '.join(available_categories)}"
+            return jsonify({"error": message})
+
+    available_categories = list(facts.keys()) + ['basketball', 'studying']
     message = f"Please choose a valid category. Available categories are: {', '.join(available_categories)}"
     return jsonify({"error": message})
