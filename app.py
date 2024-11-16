@@ -133,18 +133,40 @@ def create_app():
     
     @app.route('/generateName', methods=['GET'])
     def generate_name():
-        names = ["Eve", "Jack", "Liam", "Mia"]
+        """Fetch a name from DynamoDB based on gender or length"""
+        print("Fetching names from DynamoDB...")
+
+        dynamo_url = os.environ.get('DYNAMO_URL') or 'http://localhost:8000'
+        dynamo_region = os.environ.get('DYNAMO_REGION') or 'us-west-2'
+
+        print('dynamo_url:', dynamo_url)
+        print('dynamo_region:', dynamo_region)
+
+        dynamodb = boto3.resource('dynamodb', endpoint_url=dynamo_url, region_name=dynamo_region)
+
+        table = dynamodb.Table('names')
+
+        gender = request.args.get('gender', default=None, type=str)
         length = request.args.get('length', default=None, type=int)
-    
-        if length:
-            filtered_names = [name for name in names if len(name) == length]
-            if not filtered_names:
-                return jsonify({"error": f"No names found with length {length}"}), 400
-            name = random.choice(filtered_names)
-        else:
-            name = random.choice(names)
-    
-        return jsonify({"firstname": name})
+
+        try:
+            response = table.scan()
+            names = response['Items']
+            if gender:
+                names = [name for name in names if name['gender'].lower() == gender.lower()]
+            if length:
+                names = [name for name in names if len(name['name']) == length]
+            if not names:
+                return jsonify({"error": "No names found matching your criteria"}), 400
+        
+            # Randomly select a name from the filtered list
+            name = random.choice(names)['name']
+        
+            return jsonify({"firstname": name}), 200
+
+        except Exception as e:
+            print(f"Error accessing DynamoDB: {str(e)}")
+            return jsonify({"error": "Failed to access DynamoDB", "details": str(e)}), 500
 
     
     @app.route('/greet', methods=['GET'])
