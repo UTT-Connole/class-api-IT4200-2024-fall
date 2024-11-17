@@ -113,3 +113,108 @@ aws dynamodb put-item \
     --region us-west-2
 
 echo "Seeding completed for $NAMES_TABLE_NAME."
+
+# --------------------------
+# Table for storing travel data (for /travel endpoint)
+TRAVEL_TABLE_NAME="travel"
+echo "Creating Table $TRAVEL_TABLE_NAME"
+
+aws dynamodb create-table \
+    --table-name $TRAVEL_TABLE_NAME \
+    --attribute-definitions AttributeName=ID,AttributeType=S \
+    --key-schema AttributeName=ID,KeyType=HASH \
+    --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+echo "Waiting for $TRAVEL_TABLE_NAME to be created..."
+aws dynamodb wait table-exists --table-name $TRAVEL_TABLE_NAME --endpoint-url $DYNAMODB_ENDPOINT
+
+echo "Table $TRAVEL_TABLE_NAME created."
+echo "Seeding data for travel table..."
+
+# Insert all travel data items
+aws dynamodb put-item \
+    --table-name $TRAVEL_TABLE_NAME \
+    --item '{"ID": {"S": "1"}, "destination": {"S": "Paris, France"}, "duration": {"S": "9h 50m"}, "continent": {"S": "Europe"}, "best_season": {"S": "Spring"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $TRAVEL_TABLE_NAME \
+    --item '{"ID": {"S": "2"}, "destination": {"S": "Rome, Italy"}, "duration": {"S": "13hr 30m"}, "continent": {"S": "Europe"}, "best_season": {"S": "Summer"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $TRAVEL_TABLE_NAME \
+    --item '{"ID": {"S": "3"}, "destination": {"S": "London, England"}, "duration": {"S": "9hr 30m"}, "continent": {"S": "Europe"}, "best_season": {"S": "Fall"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $TRAVEL_TABLE_NAME \
+    --item '{"ID": {"S": "4"}, "destination": {"S": "Tokyo, Japan"}, "duration": {"S": "13hr 40m"}, "continent": {"S": "Asia"}, "best_season": {"S": "Spring"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $TRAVEL_TABLE_NAME \
+    --item '{"ID": {"S": "5"}, "destination": {"S": "Barcelona, Spain"}, "duration": {"S": "12hr 30m"}, "continent": {"S": "Europe"}, "best_season": {"S": "Spring"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $TRAVEL_TABLE_NAME \
+    --item '{"ID": {"S": "6"}, "destination": {"S": "New York City, New York"}, "duration": {"S": "4hr 35m"}, "continent": {"S": "North America"}, "best_season": {"S": "Winter"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $TRAVEL_TABLE_NAME \
+    --item '{"ID": {"S": "7"}, "destination": {"S": "Los Angeles, California"}, "duration": {"S": "2hr"}, "continent": {"S": "North America"}, "best_season": {"S": "Fall"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $TRAVEL_TABLE_NAME \
+    --item '{"ID": {"S": "8"}, "destination": {"S": "Dublin, Ireland"}, "duration": {"S": "11hr 30m"}, "continent": {"S": "Europe"}, "best_season": {"S": "Fall"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $TRAVEL_TABLE_NAME \
+    --item '{"ID": {"S": "9"}, "destination": {"S": "Cairo, Egypt"}, "duration": {"S": "15hr 15m"}, "continent": {"S": "Africa"}, "best_season": {"S": "Winter"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $TRAVEL_TABLE_NAME \
+    --item '{"ID": {"S": "10"}, "destination": {"S": "Sydney, Australia"}, "duration": {"S": "18hr 15m"}, "continent": {"S": "Australia"}, "best_season": {"S": "Summer"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $TRAVEL_TABLE_NAME \
+    --item '{"ID": {"S": "11"}, "destination": {"S": "Sacramento, California"}, "duration": {"S": "1hr 45m"}, "continent": {"S": "North America"}, "best_season": {"S": "Spring"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $TRAVEL_TABLE_NAME \
+    --item '{"ID": {"S": "12"}, "destination": {"S": "Salt Lake, Utah"}, "duration": {"S": "0hr 0m"}, "continent": {"S": "North America"}, "best_season": {"S": "Anytime"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $TRAVEL_TABLE_NAME \
+    --item '{"ID": {"S": "13"}, "destination": {"S": "Denver, Colorado"}, "duration": {"S": "1hr 35m"}, "continent": {"S": "North America"}, "best_season": {"S": "Summer"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $TRAVEL_TABLE_NAME \
+    --item '{"ID": {"S": "14"}, "destination": {"S": "Santa Cruz, California"}, "duration": {"S": "2hr"}, "continent": {"S": "North America"}, "best_season": {"S": "Fall"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+echo "Seeding completed for $TRAVEL_TABLE_NAME."
