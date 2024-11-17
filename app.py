@@ -284,47 +284,62 @@ def create_app():
         print('dynamo_url:', dynamo_url)
         print('dynamo_region:', dynamo_region)
 
-        dynamodb = boto3.resource('dynamodb', endpoint_url=dynamo_url, region_name=dynamo_region)
-        table = dynamodb.Table('travel')
+        try:
+            dynamodb = boto3.resource('dynamodb', endpoint_url=dynamo_url, region_name=dynamo_region)
+            table = dynamodb.Table('travel')
+
+            response = table.scan()
+            destinations = response['Items']
+        except Exception as e:
+            print(f"Error accessing DynamoDB: {str(e)}")
+            destinations = [
+            {"destination": "Paris, France", "duration": "9h 50m", "continent": "Europe", "best_season": "Spring"},
+            {"destination": "Rome, Italy", "duration": "13hr 30m", "continent": "Europe", "best_season": "Summer"},
+            {"destination": "London, England", "duration": "9hr 30m", "continent": "Europe", "best_season": "Fall"},
+            {"destination": "Tokyo, Japan", "duration": "13hr 40m", "continent": "Asia", "best_season": "Spring"},
+            {"destination": "Barcelona, Spain", "duration": "12hr 30m", "continent": "Europe", "best_season": "Spring"},
+            {"destination": "New York City, New York", "duration": "4hr 35m", "continent": "North America", "best_season": "Winter"},
+            {"destination": "Los Angeles, California", "duration": "2hr", "continent": "North America", "best_season": "Fall"},
+            {"destination": "Dublin, Ireland", "duration": "11hr 30m", "continent": "Europe", "best_season": "Fall"},
+            {"destination": "Cairo, Egypt", "duration": "15hr 15m", "continent": "Africa", "best_season": "Winter"},
+            {"destination": "Sydney, Australia", "duration": "18hr 15m", "continent": "Australia", "best_season": "Summer"},
+            {"destination": "Sacramento, California", "duration": "1hr 45m", "continent": "North America", "best_season": "Spring"},
+            {"destination": "Salt Lake, Utah", "duration": "0hr 0m", "continent": "North America", "best_season": "Anytime"},
+            {"destination": "Denver, Colorado", "duration": "1hr 35m", "continent": "North America", "best_season": "Summer"},
+            {"destination": "Santa Cruz, California", "duration": "2hr", "continent": "North America", "best_season": "Fall"},
+        ]
 
         max_duration = request.args.get('max_duration')
         continent = request.args.get('continent')
 
-        try:
-            response = table.scan()
-            destinations = response['Items']
-
-            if max_duration:
-                try:
-                    max_hours = int(max_duration)
-                    destinations = [
-                        d for d in destinations
-                        if ('h' in d["duration"] or 'hr' in d["duration"])
-                        and int(''.join(filter(str.isdigit, d["duration"].split('h')[0]))) <= max_hours
-                    ]
-                except ValueError:
-                    return jsonify({"message": "Invalid max_duration value. Please provide an integer."}), 400
-
-            if continent:
+        if max_duration:
+            try:
+                max_hours = int(max_duration)
                 destinations = [
                     d for d in destinations
-                    if d["continent"].lower() == continent.lower()
+                    if ('h' in d["duration"] or 'hr' in d["duration"])
+                    and int(''.join(filter(str.isdigit, d["duration"].split('h')[0]))) <= max_hours
                 ]
+            except ValueError:
+                return jsonify({"message": "Invalid max_duration value. Please provide an integer."}), 400
 
-            if not destinations:
-                return jsonify({"message": "No destinations match your criteria."}), 404
+        if continent:
+            destinations = [
+                d for d in destinations
+                if d["continent"].lower() == continent.lower()
+            ]
 
-            picked = random.choice(destinations)
-            return jsonify({
-                "recommended_destination": picked["destination"],
-                "flight_duration": picked["duration"],
-                "continent": picked["continent"],
-                "best_time_to_visit": picked["best_season"]
-            }), 200
+        if not destinations:
+            return jsonify({"message": "No destinations match your criteria."}), 404
 
-        except Exception as e:
-            print(f"Error accessing DynamoDB: {str(e)}")
-            return jsonify({"error": "Failed to access DynamoDB", "details": str(e)}), 500
+        picked = random.choice(destinations)
+        return jsonify({
+            "recommended_destination": picked["destination"],
+            "flight_duration": picked["duration"],
+            "continent": picked["continent"],
+            "best_time_to_visit": picked["best_season"]
+        }), 200
+
 
   
     
