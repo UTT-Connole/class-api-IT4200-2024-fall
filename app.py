@@ -274,56 +274,58 @@ def create_app():
             }), 400
 
 
-    @app.route('/travel', methods=['GET','POST'])
+    @app.route('/travel', methods=['GET'])
     def travel():
-        destinations = [
-            {"destination": "Paris, France", "duration": "9h 50m", "continent": "Europe", "best_season": "Spring"},
-            {"destination": "Rome, Italy", "duration": "13hr 30m", "continent": "Europe", "best_season": "Summer"},
-            {"destination": "London, England", "duration": "9hr 30m", "continent": "Europe", "best_season": "Fall"},
-            {"destination": "Tokyo, Japan", "duration": "13hr 40m", "continent": "Asia", "best_season": "Spring"},
-            {"destination": "Barcelona, Spain", "duration": "12hr 30m", "continent": "Europe", "best_season": "Spring"},
-            {"destination": "New York City, New York", "duration": "4hr 35m", "continent": "North America", "best_season": "Winter"},
-            {"destination": "Los Angeles, California", "duration": "2hr", "continent": "North America", "best_season": "Fall"},
-            {"destination": "Dublin, Ireland", "duration": "11hr 30m", "continent": "Europe", "best_season": "Fall"},
-            {"destination": "Cairo, Egypt", "duration": "15hr 15m", "continent": "Africa", "best_season": "Winter"},
-            {"destination": "Sydney, Australia", "duration": "18hr 15m", "continent": "Australia", "best_season": "Summer"},
-            {"destination": "Sacramento, California", "duration": "1hr 45m", "continent": "North America", "best_season": "Spring"},
-            {"destination": "Salt Lake, Utah", "duration": "0hr 0m", "continent": "North America", "best_season": "Anytime"},
-            {"destination": "Denver, Colorado", "duration": "1hr 35m", "continent": "North America", "best_season": "Summer"},
-            {"destination": "Santa Cruz, California", "duration": "2hr", "continent": "North America", "best_season": "Fall"},
-        ]
+        print("Fetching travel data from DynamoDB...")
+
+        dynamo_url = os.environ.get('DYNAMO_URL') or 'http://localhost:8000'
+        dynamo_region = os.environ.get('DYNAMO_REGION') or 'us-west-2'
+
+        print('dynamo_url:', dynamo_url)
+        print('dynamo_region:', dynamo_region)
+
+        dynamodb = boto3.resource('dynamodb', endpoint_url=dynamo_url, region_name=dynamo_region)
+        table = dynamodb.Table('travel')
 
         max_duration = request.args.get('max_duration')
         continent = request.args.get('continent')
-        filtered_destinations = destinations
 
-        if max_duration:
-            try:
-                max_hours = int(max_duration)
-                filtered_destinations = [
-                    d for d in filtered_destinations
-                    if ('h' in d["duration"] or 'hr' in d["duration"])  # Check for 'h' or 'hr' to handle both
-                    and int(''.join(filter(str.isdigit, d["duration"].split('h')[0]))) <= max_hours  # Extract and compare hours
+        try:
+            response = table.scan()
+            destinations = response['Items']
+
+            if max_duration:
+                try:
+                    max_hours = int(max_duration)
+                    destinations = [
+                        d for d in destinations
+                        if ('h' in d["duration"] or 'hr' in d["duration"])
+                        and int(''.join(filter(str.isdigit, d["duration"].split('h')[0]))) <= max_hours
+                    ]
+                except ValueError:
+                    return jsonify({"message": "Invalid max_duration value. Please provide an integer."}), 400
+
+            if continent:
+                destinations = [
+                    d for d in destinations
+                    if d["continent"].lower() == continent.lower()
                 ]
-            except ValueError:
-                return jsonify({"message": "Invalid max_duration value. Please provide an integer."}), 400
 
-        if continent:
-            filtered_destinations = [
-                d for d in filtered_destinations
-                if d["continent"].lower() == continent.lower()
-            ]
-        
-        if not filtered_destinations:
-            return jsonify({"message": "No destinations match your criteria."}), 404
+            if not destinations:
+                return jsonify({"message": "No destinations match your criteria."}), 404
 
-        picked = random.choice(filtered_destinations)
-        return jsonify({
-            "recommended_destination": picked["destination"],
-            "flight_duration": picked["duration"],
-            "continent": picked["continent"],
-            "best_time_to_visit": picked["best_season"]
-        })
+            picked = random.choice(destinations)
+            return jsonify({
+                "recommended_destination": picked["destination"],
+                "flight_duration": picked["duration"],
+                "continent": picked["continent"],
+                "best_time_to_visit": picked["best_season"]
+            }), 200
+
+        except Exception as e:
+            print(f"Error accessing DynamoDB: {str(e)}")
+            return jsonify({"error": "Failed to access DynamoDB", "details": str(e)}), 500
+
   
     
     @app.route('/xkcd-comic', methods=['GET'])
