@@ -107,3 +107,56 @@ with facts_table.batch_writer() as batch:
         batch.put_item(Item=fact)
 
 print("Seeding completed.")
+
+# Create the travel table
+TRAVEL_TABLE_NAME = "travel"
+print(f"Creating Table {TRAVEL_TABLE_NAME}")
+
+try:
+    travel_table = dynamodb.create_table(
+        TableName=TRAVEL_TABLE_NAME,
+        KeySchema=[
+            {'AttributeName': 'ID', 'KeyType': 'HASH'}
+        ],
+        AttributeDefinitions=[
+            {'AttributeName': 'ID', 'AttributeType': 'S'}
+        ],
+        ProvisionedThroughput={
+            'ReadCapacityUnits': 5,
+            'WriteCapacityUnits': 5
+        }
+    )
+    travel_table.meta.client.get_waiter('table_exists').wait(TableName=TRAVEL_TABLE_NAME)
+    print(f"Table {TRAVEL_TABLE_NAME} created successfully.")
+except ClientError as e:
+    if e.response['Error']['Code'] == 'ResourceInUseException':
+        print(f"Table {TRAVEL_TABLE_NAME} already exists.")
+        travel_table = dynamodb.Table(TRAVEL_TABLE_NAME)
+    else:
+        print(f"Unexpected error: {e}")
+        exit(1)
+
+# Seed travel data
+travel_items = [
+    {"ID": "1", "destination": "Paris, France", "duration": "9h 50m", "continent": "Europe", "best_season": "Spring"},
+    {"ID": "2", "destination": "Rome, Italy", "duration": "13hr 30m", "continent": "Europe", "best_season": "Summer"},
+    {"ID": "3", "destination": "London, England", "duration": "9hr 30m", "continent": "Europe", "best_season": "Fall"},
+    {"ID": "4", "destination": "Tokyo, Japan", "duration": "13hr 40m", "continent": "Asia", "best_season": "Spring"},
+    {"ID": "5", "destination": "Barcelona, Spain", "duration": "12hr 30m", "continent": "Europe", "best_season": "Spring"},
+    {"ID": "6", "destination": "New York City, New York", "duration": "4hr 35m", "continent": "North America", "best_season": "Winter"},
+    {"ID": "7", "destination": "Los Angeles, California", "duration": "2hr", "continent": "North America", "best_season": "Fall"},
+    {"ID": "8", "destination": "Dublin, Ireland", "duration": "11hr 30m", "continent": "Europe", "best_season": "Fall"},
+    {"ID": "9", "destination": "Cairo, Egypt", "duration": "15hr 15m", "continent": "Africa", "best_season": "Winter"},
+    {"ID": "10", "destination": "Sydney, Australia", "duration": "18hr 15m", "continent": "Australia", "best_season": "Summer"},
+    {"ID": "11", "destination": "Sacramento, California", "duration": "1hr 45m", "continent": "North America", "best_season": "Spring"},
+    {"ID": "12", "destination": "Salt Lake, Utah", "duration": "0hr 0m", "continent": "North America", "best_season": "Anytime"},
+    {"ID": "13", "destination": "Denver, Colorado", "duration": "1hr 35m", "continent": "North America", "best_season": "Summer"},
+    {"ID": "14", "destination": "Santa Cruz, California", "duration": "2hr", "continent": "North America", "best_season": "Fall"}
+]
+
+print(f"Seeding data into {TRAVEL_TABLE_NAME}")
+with travel_table.batch_writer() as batch:
+    for item in travel_items:
+        batch.put_item(Item=item)
+
+print("Seeding completed.")
