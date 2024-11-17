@@ -22,6 +22,41 @@ Make sure to run these commands before you run the Flask app. It will install al
 pip install -r requirements.txt
 ```
 
+## Running the DB Locally
+
+Run:
+
+```
+docker-compose up
+```
+
+
+### Seeding the Database
+
+First, ensure you have the aws cli installed:
+
+```
+aws --version
+```
+
+If you don't have it installed: [AWS CLI Installation Guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html#getting-started-install-instructions)
+
+
+Run the seed bash script
+
+```
+bash dynamo/seed.bash
+```
+If you have issues running the bash script try the python script
+
+```
+python dynamo/seed.py
+```
+
+If everythin ran correctly, you should be able to go to the `/db_test` endpoint and see the seed data returned there.
+
+
+
 ## Testing
 ### To run all the tests at once:
 Run 
@@ -56,7 +91,7 @@ This will start the server. From there navigate to the url and your desired endp
 
 - <a name="Animal">**Animal Endpoint**</a>
   - **Endpoint**: `GET /animalGuesser`
-  - **Description**: The Animal Guesser will randomly guess an animal from a predefined list. If the user makes a guess, it checks the guess against the selected animal. If the guess is correct, it returns a success message. If the guess is incorrect, it returns a message with a hint that reveals the first letter of the animal. You will only get 5 guesses and it will be game over! EX: /animalGuesser?guess=lion
+  - **Description**: The Animal Guesser will randomly guess an animal from a predefined list. If the user makes a guess, it checks the guess against the selected animal. If the guess is correct, it returns a success message. If the guess is incorrect, it returns a message with a hint that reveals the first letter of the animal. You will only get 5 guesses and it will be game over! This endpoint now returns an html page.
   - **Test File**: test_animal.py
 
 - <a name="Automobiles">**Automobiles Endpoint**</a>
@@ -84,6 +119,12 @@ This will start the server. From there navigate to the url and your desired endp
     - If any of the variables (`x`, `y`, or `op`) are missing (unless specified), you will receive an error.
     - If no parameters are provided, the endpoint will render an HTML form for input.
   - **Test File**: `test_calc.py`
+
+
+  - <a name="Crypto">**Crypto prices Endpoint**</a>
+  - **Endpoint**: `GET /bitcoin_price`, `GET /ethereum_price`
+  - **Description**: Check what the price for crypto is!
+  - **Test File**: test_crypto.py
 
 - <a name="Hexifier">**Color Hexifier Endpoint**</a>
   - **Endpoint**: `GET /color?color=blue`
@@ -211,17 +252,11 @@ This will start the server. From there navigate to the url and your desired endp
   - **Endpoint**: `GET /photogallery`
   - **Description**: Go checkout the art gallery complied by yours truly. !Add your own images to the images folder to see them on the endpoint! !NO Adult Content allowed! 
   - **Test File**: test_photogallery.py
-
-- <a name="Pizza">**Pizza Endpoint**</a>
-  - **Endpoint**: `GET /pizza`
-  - **Description**: This endpoint randomly generates a pizza, but sometimes you may get two pizzas instead of one! You can customize the cheese level by putting in a cheese query. Recently added a Special Pizza Type attribute, such as Gluten-Free, Vegan, or Keto, may be randomly assigned to some pizzas, adding a unique twist for those with specific diets. 🍕🍕🍕
-  - **Example request**: http://127.0.0.1:5000/pizza?cheese=Extra%20Cheese
-  - **Test File**: test_pizza.py
-
-- <a name="Soda">**Soda Endpoint**</a>
-  - **Endpoint**: `GET /soda`
-  - **Description**: This endpoint is used to choose a soda to go with your meal. By default, it returns a random soda brand. You can retrieve the full list of available sodas by using the query parameter `all=true`. Recently added a randomly chosen bottle size section, either Personal or 2 Liter, 🥤🥤🥤
-  - **Test File**: test_soda.py
+ 
+- <a name="PizzaMeal">Pizza Meal Endpoint</a>
+  - **Endpoint**: `GET /pizza_meal`
+  - **Description**: This endpoint generates a complete meal, now has both a randomly selected pizza and soda combo. Customize your pizza by selecting a cheese level (Light, Regular, or Extra Cheese) or opt for a half-and-half pizza with unique toppings on each side. Some pizzas may come with a special type designation like Gluten-Free, Vegan, or Keto for dietary preferences. The meal includes a soda with a random brand, bottle size (Personal or 2 Liter), and ice preference (With Ice or No Ice). Use the `soda=all` query parameter to view the full list of soda brands. 🍕🥤
+  - **Test File**: test_pizza_meal.py
 
 - <a name="Pokefishing">**Pokefishing Endpoint**</a>
   - **Endpoint**: `GET /pokefishing`
