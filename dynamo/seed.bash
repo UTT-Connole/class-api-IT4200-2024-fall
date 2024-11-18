@@ -218,3 +218,67 @@ aws dynamodb put-item \
     --region us-west-2
 
 echo "Seeding completed for $TRAVEL_TABLE_NAME."
+
+# --------------------------
+# Table for storing fortunes (for /fortune endpoint)
+FORTUNE_TABLE_NAME="fortunes"
+echo "Creating Table $FORTUNE_TABLE_NAME"
+
+aws dynamodb create-table \
+    --table-name $FORTUNE_TABLE_NAME \
+    --attribute-definitions AttributeName=ID,AttributeType=S \
+    --key-schema AttributeName=ID,KeyType=HASH \
+    --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+echo "Waiting for $FORTUNE_TABLE_NAME to be created..."
+aws dynamodb wait table-exists --table-name $FORTUNE_TABLE_NAME --endpoint-url $DYNAMODB_ENDPOINT
+
+echo "Table $FORTUNE_TABLE_NAME created."
+echo "Seeding data for fortune table..."
+
+# Insert fortune data
+aws dynamodb put-item \
+    --table-name $FORTUNE_TABLE_NAME \
+    --item '{"ID": {"S": "1"}, "fortune": {"S": "You will find a fortune."}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $FORTUNE_TABLE_NAME \
+    --item '{"ID": {"S": "2"}, "fortune": {"S": "A fresh start will put you on your way."}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $FORTUNE_TABLE_NAME \
+    --item '{"ID": {"S": "3"}, "fortune": {"S": "Fortune favors the brave."}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $FORTUNE_TABLE_NAME \
+    --item '{"ID": {"S": "4"}, "fortune": {"S": "Good news will come to you by mail."}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $FORTUNE_TABLE_NAME \
+    --item '{"ID": {"S": "5"}, "fortune": {"S": "A beautiful, smart, and loving person will be coming into your life."}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $FORTUNE_TABLE_NAME \
+    --item '{"ID": {"S": "6"}, "fortune": {"S": "A soft voice may be awfully persuasive."}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $FORTUNE_TABLE_NAME \
+    --item '{"ID": {"S": "7"}, "fortune": {"S": "All your hard work will soon pay off."}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+
+echo "Seeding completed for $NAMES_TABLE_NAME."
