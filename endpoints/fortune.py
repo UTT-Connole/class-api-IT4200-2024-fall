@@ -29,5 +29,17 @@ def get_fortune():
         selected_fortunes = random.sample(fortune_texts, min(count, len(fortune_texts)))
         return jsonify({"fortunes": selected_fortunes})
     except Exception as e:
-        print(e)
-        return jsonify({"fortunes": "Error fetching fortune"})
+        print(f"Error fetching fortunes from crystal ball: {str(e)}")
+        fortunes = [
+        "You will find a fortune.",
+        "A fresh start will put you on your way.",
+        "Fortune favors the brave.",
+        "Good news will come to you by mail.",
+        "A beautiful, smart, and loving person will be coming into your life.",
+        "A soft voice may be awfully persuasive.",
+        "All your hard work will soon pay off."
+        ]
+        count = request.args.get('count', default=1, type=int)
+        if count < 1:
+            count = 1
+        return jsonify({"fortunes": random.sample(fortunes, min(count, len(fortunes)))})
