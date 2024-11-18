@@ -17,12 +17,17 @@ def get_fortune():
 
     dynamodb = boto3.resource('dynamodb', endpoint_url=dynamo_url, region_name=dynamo_region)
     table = dynamodb.Table('fortunes')
-
+    
     try:
         response = table.scan()
         fortunes = response['Items']
-        fortuneselected = random.choice(fortunes)['fortune']
-        return jsonify({"fortune": fortuneselected})
+        # Extract only the 'fortune' attribute
+        fortune_texts = [fortune['fortune'] for fortune in fortunes]
+        count = request.args.get('count', default=1, type=int)
+        if count < 1:
+            count = 1
+        selected_fortunes = random.sample(fortune_texts, min(count, len(fortune_texts)))
+        return jsonify({"fortunes": selected_fortunes})
     except Exception as e:
         print(e)
-        return jsonify({"fortune": "Error fetching fortune"})
+        return jsonify({"fortunes": "Error fetching fortune"})
