@@ -5,12 +5,18 @@ import os, boto3
 pokefishing_bp = Blueprint('pokefishing', __name__)
 
 # Access DynamoDB table
-dynamo_url = os.environ.get('DYNAMO_URL') or 'http://localhost:8000'
-dynamo_region = os.environ.get('DYNAMO_REGION') or 'us-west-2'
-print('dynamo_url:', dynamo_url)
-print('dynamo_region:', dynamo_region)
-dynamodb = boto3.resource('dynamodb', endpoint_url=dynamo_url, region_name=dynamo_region)
-table = dynamodb.Table('pokefishing')
+DYNAMODB_ENDPOINT = "http://localhost:8000"
+REGION_NAME = "us-west-2"
+POKEFISHING_TABLE_NAME = "pokefishing"
+
+# Initialize DynamoDB resource
+dynamodb = boto3.resource(
+    'dynamodb',
+    endpoint_url=DYNAMODB_ENDPOINT,
+    region_name=REGION_NAME,
+    aws_access_key_id='dummy',
+    aws_secret_access_key='dummy'
+)
 
 @pokefishing_bp.route('/pokefishing', methods=['GET'])
 def fish():
