@@ -282,3 +282,38 @@ aws dynamodb put-item \
 
 
 echo "Seeding completed for $NAMES_TABLE_NAME."
+
+# Table for storing meals data (for /meal/<meal_id> endpoint)
+MEALS_TABLE_NAME="meals"
+echo "Creating Table $MEALS_TABLE_NAME"
+
+aws dynamodb create-table \
+    --table-name $MEALS_TABLE_NAME \
+    --attribute-definitions AttributeName=id,AttributeType=S \
+    --key-schema AttributeName=id,KeyType=HASH \
+    --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+echo "Waiting for $MEALS_TABLE_NAME to be created..."
+aws dynamodb wait table-exists --table-name $MEALS_TABLE_NAME --endpoint-url $DYNAMODB_ENDPOINT
+
+echo "Table $MEALS_TABLE_NAME created."
+echo "Seeding data for meals table..."
+
+# Insert meals data
+aws dynamodb put-item \
+    --table-name $MEALS_TABLE_NAME \
+    --item '{"id": {"S": "1"}, "name": {"S": "Classic Meal"}, "pizza": {"S": "Pepperoni"}, "soda": {"S": "Coca Cola"}, "size": {"S": "2 Liter"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+aws dynamodb put-item \
+    --table-name $MEALS_TABLE_NAME \
+    --item '{"id": {"S": "2"}, "name": {"S": "Vegan Meal"}, "pizza": {"S": "Vegan"}, "soda": {"S": "Sprite"}, "size": {"S": "Personal"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+aws dynamodb put-item \
+    --table-name $MEALS_TABLE_NAME \
+    --item '{"id": {"S": "3"}, "name": {"S": "Family Meal"}, "pizza": {"S": "Cheese"}, "soda": {"S": "Mountain Dew"}, "size": {"S": "2 Liter"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+echo "Seeding completed for $MEALS_TABLE_NAME."
