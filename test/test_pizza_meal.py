@@ -1,10 +1,12 @@
 import pytest
-from app import create_app
+from unittest.mock import patch
+from flask import Flask
+from endpoints.pizza_meal import pizza_meal_bp
 import json
 
 @pytest.fixture
 def client():
-    app = create_app()
+    from app import app
     app.config['TESTING'] = True
     with app.test_client() as client:
         yield client
