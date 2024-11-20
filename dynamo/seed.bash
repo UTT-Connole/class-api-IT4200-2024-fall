@@ -300,6 +300,7 @@ aws dynamodb wait table-exists --table-name $MEALS_TABLE_NAME --endpoint-url $DY
 echo "Table $MEALS_TABLE_NAME created."
 echo "Seeding data for meals table..."
 
+# --------------------------
 # Insert meals data
 aws dynamodb put-item \
     --table-name $MEALS_TABLE_NAME \
@@ -317,3 +318,4 @@ aws dynamodb put-item \
     --endpoint-url $DYNAMODB_ENDPOINT
 
 echo "Seeding completed for $MEALS_TABLE_NAME."
+
