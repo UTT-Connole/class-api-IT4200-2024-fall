@@ -5,6 +5,7 @@ DYNAMODB_ENDPOINT = "http://localhost:8000"
 REGION_NAME = "us-west-2"
 TABLE_NAME = "test"
 FACTS_TABLE_NAME = "facts"
+RESTAURANT_MENU_TABLE_NAME = "menuItems"
 
 # Initialize DynamoDB resource
 dynamodb = boto3.resource(
@@ -160,3 +161,51 @@ with travel_table.batch_writer() as batch:
         batch.put_item(Item=item)
 
 print("Seeding completed.")
+
+print(f"Creating Table {RESTAURANT_MENU_TABLE_NAME}")
+
+try:
+    restaurant_menu_table = dynamodb.create_table(
+        TableName=RESTAURANT_MENU_TABLE_NAME,
+        KeySchema=[
+            {'AttributeName': 'id', 'KeyType': 'HASH'}
+        ],
+        AttributeDefinitions=[
+            {'AttributeName': 'id', 'AttributeType': 'S'}
+        ],
+        ProvisionedThroughput={
+            'ReadCapacityUnits': 5,
+            'WriteCapacityUnits': 5
+        }
+    )
+    restaurant_menu_table.meta.client.get_waiter('table_exists').wait(TableName=RESTAURANT_MENU_TABLE_NAME)
+    print(f"Table {RESTAURANT_MENU_TABLE_NAME} created successfully.")
+except ClientError as e:
+    if e.response['Error']['Code'] == 'ResourceInUseException':
+        print(f"Table {RESTAURANT_MENU_TABLE_NAME} already exists.")
+        restaurant_menu_table = dynamodb.Table(RESTAURANT_MENU_TABLE_NAME)
+    else:
+        print(f"Unexpected error: {e}")
+        exit(1)
+
+# Seed restaurant data
+restaurant_data = [
+    {"id": "1", "name": "Burger", "price": 5.99, "restaurant": "McDonalds"},
+    {"id": "2", "name": "Fries", "price": 2.99, "restaurant": "McDonalds"},
+    {"id": "3", "name": "Soda", "price": 1.00, "restaurant": "McDonalds"},
+    {"id": "4", "name": "Salad", "price": 4.99, "restaurant": "Chick Fil A"},
+    {"id": "5", "name": "Pizza", "price": 7.99, "restaurant": "Dominos"},
+    {"id": "6", "name": "Pasta", "price": 6.99, "restaurant": "Pasta Factory"},
+    {"id": "7", "name": "Sandwich", "price": 5.99, "restaurant": "Subway"},
+    {"id": "8", "name": "Taco", "price": 3.99, "restaurant": "Taco Bell"},
+    {"id": "9", "name": "Burrito", "price": 6.99, "restaurant": "Chipotle"},
+    {"id": "10", "name": "Wings", "price": 8.99, "restaurant": "Buffalo Wild Wings"}
+]
+
+print(f"Seeding data into {RESTAURANT_MENU_TABLE_NAME}")
+
+with restaurant_menu_table.batch_writer() as batch:
+    for item in restaurant_data:
+        batch.put_item(Item=item)
+
+print("Restaurant menu table seeding completed.")
