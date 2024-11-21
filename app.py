@@ -21,6 +21,7 @@ from endpoints.color_hexifier import color_hexifier_bp
 from endpoints.crypto import bitcoin_bp
 from endpoints.fortune import fortune_bp
 from endpoints.items import items_bp
+from endpoints.books import books_bp 
 import random, requests
 import os, json
 import time
@@ -59,6 +60,8 @@ def create_app():
     app.register_blueprint(fortune_bp)
     app.register_blueprint(bitcoin_bp, url_prefix='/api')
     app.register_blueprint(items_bp)
+    app.register_blueprint(books_bp)
+
 
 
     @app.route('/crypto')
