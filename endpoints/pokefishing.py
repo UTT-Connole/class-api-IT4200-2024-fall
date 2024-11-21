@@ -20,17 +20,14 @@ dynamodb = boto3.resource(
 
 @pokefishing_bp.route('/pokefishing', methods=['GET'])
 def fish():
+    table = dynamodb.Table(POKEFISHING_TABLE_NAME)
     success = random.choice([True, False])
     if success:
-        caught = table.scan()
+        caught = table.scan(
+            FilterExpression=boto3.dynamodb.conditions.Attr('Catch').eq(catch)
+        )
+        fact = random.choice(category_facts)
+            return jsonify({"category": category, "fact": fact})
     else:
         caught = "... Oops, you forgot to reel it in"
     return jsonify({"You caught": caught + "!"})
-
-    try:
-        response = table.scan()
-        return jsonify(response['Items']), 200
-
-    except Exception as e:
-        print(f"Error accessing DynamoDB: {str(e)}")
-        return jsonify({"error": "Failed to access DynamoDB", "details": str(e)}), 500
