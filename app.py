@@ -9,7 +9,6 @@ from endpoints.mtg import mtg_bp
 from endpoints.allfacts import allfacts_bp
 from endpoints.pizza_meal import pizza_meal_bp
 from endpoints.restaurants import restaurant_bp
-from endpoints.soda import soda_bp
 from endpoints.version import version_bp
 from endpoints.quotes import quotes_bp
 from endpoints.photogallery import photogallery_bp
@@ -49,7 +48,6 @@ def create_app():
     app.register_blueprint(photogallery_bp)
     app.register_blueprint(pizza_meal_bp)
     app.register_blueprint(pokefishing_bp)
-    app.register_blueprint(soda_bp)
     app.register_blueprint(version_bp)
     app.register_blueprint(quotes_bp)
     app.register_blueprint(animalGuess_bp)
@@ -341,8 +339,33 @@ def create_app():
         }), 200
 
 
-  
-    
+    @app.route('/meal/<meal_id>', methods=['GET'])
+    def get_meal(meal_id):
+        """Fetch a specific meal by its ID from DynamoDB."""
+        print(f"Fetching meal {meal_id} from DynamoDB...")
+
+        dynamo_url = os.environ.get('DYNAMO_URL') or 'http://localhost:8000'
+        dynamo_region = os.environ.get('DYNAMO_REGION') or 'us-west-2'
+
+        print('dynamo_url:', dynamo_url)
+        print('dynamo_region:', dynamo_region)
+
+        try:
+            dynamodb = boto3.resource('dynamodb', endpoint_url=dynamo_url, region_name=dynamo_region)
+            table = dynamodb.Table('meals')
+
+            response = table.get_item(Key={'id': meal_id})
+
+            if 'Item' in response:
+                return jsonify(response['Item']), 200
+            else:
+                return jsonify({"error": "Meal not found"}), 404
+
+        except Exception as e:
+            print(f"Error accessing DynamoDB: {str(e)}")
+            return jsonify({"error": "Failed to access DynamoDB", "details": str(e)}), 500
+
+
     @app.route('/xkcd-comic', methods=['GET'])
     def get_random_xkcd_comic():
         random_comic_num = random.randint(1, 2450)
