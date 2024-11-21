@@ -319,3 +319,35 @@ aws dynamodb put-item \
 
 echo "Seeding completed for $MEALS_TABLE_NAME."
 
+# Table for storing books data (for /books endpoint)
+BOOKS_TABLE_NAME="books"
+echo "Creating Table $BOOKS_TABLE_NAME"
+
+aws dynamodb create-table \
+    --table-name $BOOKS_TABLE_NAME \
+    --attribute-definitions AttributeName=id,AttributeType=S \
+    --key-schema AttributeName=id,KeyType=HASH \
+    --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+echo "Waiting for $BOOKS_TABLE_NAME to be created..."
+aws dynamodb wait table-exists --table-name $BOOKS_TABLE_NAME --endpoint-url $DYNAMODB_ENDPOINT
+
+echo "Table $BOOKS_TABLE_NAME created."
+echo "Seeding data for books table..."
+aws dynamodb put-item \
+    --table-name $BOOKS_TABLE_NAME \
+    --item '{"id": {"S": "1"}, "title": {"S": "Clean Code"}, "author": {"S": "Robert Martin"}, "genre": {"S": "Programming"}, "year": {"N": "2008"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+aws dynamodb put-item \
+    --table-name $BOOKS_TABLE_NAME \
+    --item '{"id": {"S": "2"}, "title": {"S": "Design Patterns"}, "author": {"S": "Gang of Four"}, "genre": {"S": "Programming"}, "year": {"N": "1994"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+aws dynamodb put-item \
+    --table-name $BOOKS_TABLE_NAME \
+    --item '{"id": {"S": "3"}, "title": {"S": "The Pragmatic Programmer"}, "author": {"S": "Andy Hunt"}, "genre": {"S": "Programming"}, "year": {"N": "1999"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+echo "Seeding completed for $BOOKS_TABLE_NAME."
