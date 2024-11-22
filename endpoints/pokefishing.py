@@ -44,10 +44,8 @@ def fish():
     success = random.choice([True, False])
     if success:
         catch = get_table()
-        if not catch:  # Handle case where no items are returned
-            return jsonify({"error": "No items found in the database"}), 500
         caught_item = random.choice(catch)
-        caught = f"You caught: {caught_item['Catch']}!"
+        caught = {caught_item['Catch']}
     else:
-        caught = "You caught: ... Oops, you forgot to reel it in"
-    return jsonify({"message": caught})
+        caught = "... Oops, you forgot to reel it in"
+    return jsonify({"You caught": caught + "!"})
