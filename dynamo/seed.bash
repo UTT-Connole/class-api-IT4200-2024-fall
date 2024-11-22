@@ -115,6 +115,110 @@ aws dynamodb put-item \
 echo "Seeding completed for $NAMES_TABLE_NAME."
 
 # --------------------------
+# Pokefishing endpoint table
+TABLE_NAME="pokefishing"
+echo "Creating Table $TABLE_NAME"
+
+aws dynamodb create-table \
+    --table-name $TABLE_NAME \
+    --attribute-definitions AttributeName=Id,AttributeType=S \
+    --key-schema AttributeName=Id,KeyType=HASH \
+    --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+echo "Waiting for table to be created..."
+aws dynamodb wait table-exists --table-name $TABLE_NAME --endpoint-url $DYNAMODB_ENDPOINT
+
+echo "Table $TABLE_NAME created."
+echo "Seeding data..."
+
+aws dynamodb put-item \
+    --table-name $TABLE_NAME \
+    --item '{"Id": {"S": "1"}, "catch": {"S": "a regular ol' Magikarp"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $TABLE_NAME \
+    --item '{"Id": {"S": "2"}, "catch": {"S": "a calico pattern Magikarp"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+    
+aws dynamodb put-item \
+    --table-name $TABLE_NAME \
+    --item '{"Id": {"S": "3"}, "catch": {"S": "a orange two-tone pattern Magikarp"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+    
+aws dynamodb put-item \
+    --table-name $TABLE_NAME \
+    --item '{"Id": {"S": "4"}, "catch": {"S": "a pink dapple pattern Magikarp"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $TABLE_NAME \
+    --item '{"Id": {"S": "5"}, "catch": {"S": "a gray diamond pattern Magikarp"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $TABLE_NAME \
+    --item '{"Id": {"S": "6"}, "catch": {"S": "a purple patches pattern Magikarp"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $TABLE_NAME \
+    --item '{"Id": {"S": "7"}, "catch": {"S": "a apricot tiger pattern Magikarp"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $TABLE_NAME \
+    --item '{"Id": {"S": "8"}, "catch": {"S": "a brown stripes pattern Magikarp"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+    
+aws dynamodb put-item \
+    --table-name $TABLE_NAME \
+    --item '{"Id": {"S": "9"}, "catch": {"S": "a orange forehead pattern Magikarp"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+aws dynamodb put-item \
+    --table-name $TABLE_NAME \
+    --item '{"Id": {"S": "10"}, "catch": {"S": "a blue raindrops pattern Magikarp"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+    
+aws dynamodb put-item \
+    --table-name $TABLE_NAME \
+    --item '{"Id": {"S": "11"}, "catch": {"S": "a shiny Magikarp"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+    
+aws dynamodb put-item \
+    --table-name $TABLE_NAME \
+    --item '{"Id": {"S": "12"}, "catch": {"S": "a... Oh no, it'\''s a Gyarados!!"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+    
+aws dynamodb put-item \
+    --table-name $TABLE_NAME \
+    --item '{"Id": {"S": "13"}, "catch": {"S": "a Goldeen and it'\''s the biggest you'\''ve ever seen"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+    
+aws dynamodb put-item \
+    --table-name $TABLE_NAME \
+    --item '{"Id": {"S": "14"}, "catch": {"S": "nothing... But you did see a Mudkip riding on a Lotad"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT \
+    --region us-west-2
+
+echo "Seeding completed for $TABLE_NAME."
+    
+# --------------------------
 # Table for storing travel data (for /travel endpoint)
 TRAVEL_TABLE_NAME="travel"
 echo "Creating Table $TRAVEL_TABLE_NAME"
@@ -136,8 +240,6 @@ echo "Seeding data for travel table..."
 aws dynamodb put-item \
     --table-name $TRAVEL_TABLE_NAME \
     --item '{"ID": {"S": "1"}, "destination": {"S": "Paris, France"}, "duration": {"S": "9h 50m"}, "continent": {"S": "Europe"}, "best_season": {"S": "Spring"}}' \
-    --endpoint-url $DYNAMODB_ENDPOINT \
-    --region us-west-2
 
 aws dynamodb put-item \
     --table-name $TRAVEL_TABLE_NAME \
