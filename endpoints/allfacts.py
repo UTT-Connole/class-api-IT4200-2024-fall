@@ -1,3 +1,4 @@
+import os
 from flask import Blueprint, jsonify, request
 import random
 import boto3
@@ -5,18 +6,16 @@ from botocore.exceptions import ClientError
 
 allfacts_bp = Blueprint('allfacts', __name__)
 
-DYNAMODB_ENDPOINT = "http://localhost:8000"
-REGION_NAME = "us-west-2"
 FACTS_TABLE_NAME = "facts"
 
-# Initialize DynamoDB resource
-dynamodb = boto3.resource(
-    'dynamodb',
-    endpoint_url=DYNAMODB_ENDPOINT,
-    region_name=REGION_NAME,
-    aws_access_key_id='dummy',
-    aws_secret_access_key='dummy'
-)
+def get_dynamodb_resource():
+    dynamo_url = os.environ.get('DYNAMO_URL') or 'http://localhost:8000'
+    dynamo_region = os.environ.get('DYNAMO_REGION') or 'us-west-2'
+    print('dynamo_url:', dynamo_url)
+    print('dynamo_region:', dynamo_region)
+    return boto3.resource('dynamodb', endpoint_url=dynamo_url, region_name=dynamo_region)
+
+dynamodb = get_dynamodb_resource()
 
 facts = {
     "random": [
