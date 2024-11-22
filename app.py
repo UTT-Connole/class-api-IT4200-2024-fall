@@ -9,7 +9,6 @@ from endpoints.mtg import mtg_bp
 from endpoints.allfacts import allfacts_bp
 from endpoints.pizza_meal import pizza_meal_bp
 from endpoints.restaurants import restaurant_bp
-from endpoints.soda import soda_bp
 from endpoints.version import version_bp
 from endpoints.quotes import quotes_bp
 from endpoints.photogallery import photogallery_bp
@@ -22,6 +21,7 @@ from endpoints.color_hexifier import color_hexifier_bp
 from endpoints.crypto import bitcoin_bp
 from endpoints.fortune import fortune_bp
 from endpoints.items import items_bp
+from endpoints.books import books_bp 
 import random, requests
 import os, json
 import time
@@ -49,7 +49,6 @@ def create_app():
     app.register_blueprint(photogallery_bp)
     app.register_blueprint(pizza_meal_bp)
     app.register_blueprint(pokefishing_bp)
-    app.register_blueprint(soda_bp)
     app.register_blueprint(version_bp)
     app.register_blueprint(quotes_bp)
     app.register_blueprint(animalGuess_bp)
@@ -61,6 +60,8 @@ def create_app():
     app.register_blueprint(fortune_bp)
     app.register_blueprint(bitcoin_bp, url_prefix='/api')
     app.register_blueprint(items_bp)
+    app.register_blueprint(books_bp)
+
 
 
     @app.route('/crypto')
@@ -274,9 +275,25 @@ def create_app():
             }), 400
 
 
-    @app.route('/travel', methods=['GET','POST'])
+    @app.route('/travel', methods=['GET'])
     def travel():
-        destinations = [
+        print("Fetching travel data from DynamoDB...")
+
+        dynamo_url = os.environ.get('DYNAMO_URL') or 'http://localhost:8000'
+        dynamo_region = os.environ.get('DYNAMO_REGION') or 'us-west-2'
+
+        print('dynamo_url:', dynamo_url)
+        print('dynamo_region:', dynamo_region)
+
+        try:
+            dynamodb = boto3.resource('dynamodb', endpoint_url=dynamo_url, region_name=dynamo_region)
+            table = dynamodb.Table('travel')
+
+            response = table.scan()
+            destinations = response['Items']
+        except Exception as e:
+            print(f"Error accessing DynamoDB: {str(e)}")
+            destinations = [
             {"destination": "Paris, France", "duration": "9h 50m", "continent": "Europe", "best_season": "Spring"},
             {"destination": "Rome, Italy", "duration": "13hr 30m", "continent": "Europe", "best_season": "Summer"},
             {"destination": "London, England", "duration": "9hr 30m", "continent": "Europe", "best_season": "Fall"},
@@ -295,37 +312,63 @@ def create_app():
 
         max_duration = request.args.get('max_duration')
         continent = request.args.get('continent')
-        filtered_destinations = destinations
 
         if max_duration:
             try:
                 max_hours = int(max_duration)
-                filtered_destinations = [
-                    d for d in filtered_destinations
-                    if ('h' in d["duration"] or 'hr' in d["duration"])  # Check for 'h' or 'hr' to handle both
-                    and int(''.join(filter(str.isdigit, d["duration"].split('h')[0]))) <= max_hours  # Extract and compare hours
+                destinations = [
+                    d for d in destinations
+                    if ('h' in d["duration"] or 'hr' in d["duration"])
+                    and int(''.join(filter(str.isdigit, d["duration"].split('h')[0]))) <= max_hours
                 ]
             except ValueError:
                 return jsonify({"message": "Invalid max_duration value. Please provide an integer."}), 400
 
         if continent:
-            filtered_destinations = [
-                d for d in filtered_destinations
+            destinations = [
+                d for d in destinations
                 if d["continent"].lower() == continent.lower()
             ]
-        
-        if not filtered_destinations:
+
+        if not destinations:
             return jsonify({"message": "No destinations match your criteria."}), 404
 
-        picked = random.choice(filtered_destinations)
+        picked = random.choice(destinations)
         return jsonify({
             "recommended_destination": picked["destination"],
             "flight_duration": picked["duration"],
             "continent": picked["continent"],
             "best_time_to_visit": picked["best_season"]
-        })
-  
-    
+        }), 200
+
+
+    @app.route('/meal/<meal_id>', methods=['GET'])
+    def get_meal(meal_id):
+        """Fetch a specific meal by its ID from DynamoDB."""
+        print(f"Fetching meal {meal_id} from DynamoDB...")
+
+        dynamo_url = os.environ.get('DYNAMO_URL') or 'http://localhost:8000'
+        dynamo_region = os.environ.get('DYNAMO_REGION') or 'us-west-2'
+
+        print('dynamo_url:', dynamo_url)
+        print('dynamo_region:', dynamo_region)
+
+        try:
+            dynamodb = boto3.resource('dynamodb', endpoint_url=dynamo_url, region_name=dynamo_region)
+            table = dynamodb.Table('meals')
+
+            response = table.get_item(Key={'id': meal_id})
+
+            if 'Item' in response:
+                return jsonify(response['Item']), 200
+            else:
+                return jsonify({"error": "Meal not found"}), 404
+
+        except Exception as e:
+            print(f"Error accessing DynamoDB: {str(e)}")
+            return jsonify({"error": "Failed to access DynamoDB", "details": str(e)}), 500
+
+
     @app.route('/xkcd-comic', methods=['GET'])
     def get_random_xkcd_comic():
         random_comic_num = random.randint(1, 2450)
