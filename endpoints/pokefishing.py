@@ -23,11 +23,7 @@ def fish():
     table = dynamodb.Table(POKEFISHING_TABLE_NAME)
     success = random.choice([True, False])
     if success:
-        caught = table.scan(
-            FilterExpression=boto3.dynamodb.conditions.Attr('Catch').eq(catch)
-        )
-        fact = random.choice(category_facts)
-            return jsonify({"category": category, "fact": fact})
+        caught = random.choice(table)
     else:
         caught = "... Oops, you forgot to reel it in"
     return jsonify({"You caught": caught + "!"})
