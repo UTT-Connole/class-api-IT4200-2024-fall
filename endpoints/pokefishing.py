@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 import random
-import os, boto3
+import boto3
+from botocore.exceptions import ClientError
 
 pokefishing_bp = Blueprint('pokefishing', __name__)
 
@@ -18,12 +19,35 @@ dynamodb = boto3.resource(
     aws_secret_access_key='dummy'
 )
 
+def get_table():
+    table = dynamodb.Table(POKEFISHING_TABLE_NAME)
+    try:
+        # Scan the table to retrieve all items
+        response = table.scan()
+        items = response.get('Items', [])
+        
+        # Format the output into the desired structure
+        formatted_items = [
+            {"Id": item.get("Id", ""), "Catch": item.get("Catch", "")} 
+            for item in items
+        ]
+        return formatted_items
+    except ClientError as e:
+        print(f"Error fetching data: {e}")
+        return []
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+        return []
+
 @pokefishing_bp.route('/pokefishing', methods=['GET'])
 def fish():
-    table = dynamodb.Table(POKEFISHING_TABLE_NAME)
     success = random.choice([True, False])
     if success:
-        caught = random.choice(table)
+        catch = get_table()
+        if not catch:  # Handle case where no items are returned
+            return jsonify({"error": "No items found in the database"}), 500
+        caught_item = random.choice(catch)
+        caught = f"You caught: {caught_item['Catch']}!"
     else:
-        caught = "... Oops, you forgot to reel it in"
-    return jsonify({"You caught": caught + "!"})
+        caught = "You caught: ... Oops, you forgot to reel it in"
+    return jsonify({"message": caught})
