@@ -498,3 +498,119 @@ aws dynamodb put-item \
     --endpoint-url $DYNAMODB_ENDPOINT
 
 echo "Seeding completed for $CRYPTO_TABLE_NAME."
+
+# MTG Mana combos
+TWO_MANA_TABLE_NAME="two_mana_combos"
+echo "Creating Table $TWO_MANA_TABLE_NAME"
+
+aws dynamodb create-table \
+    --table-name $TWO_MANA_TABLE_NAME \
+    --attribute-definitions AttributeName=ID,AttributeType=S \
+    --key-schema AttributeName=ID,KeyType=HASH \
+    --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+echo "Waiting for $TWO_MANA_TABLE_NAME to be created..."
+aws dynamodb wait table-exists --table-name $TWO_MANA_TABLE_NAME --endpoint-url $DYNAMODB_ENDPOINT
+
+echo "Table $TWO_MANA_TABLE_NAME created."
+#seed --------------------------
+echo "Seeding data for two_mana_combos table..."
+
+aws dynamodb put-item \
+    --table-name two_mana_combos \
+    --item '{"ID": {"S": "1"}, "Name": {"S": "Azorius"}, "Color_1": {"S": "White"}, "Color_2": {"S": "Blue"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+aws dynamodb put-item \
+    --table-name two_mana_combos \
+    --item '{"ID": {"S": "2"}, "Name": {"S": "Dimir"}, "Color_1": {"S": "Blue"}, "Color_2": {"S": "Black"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+aws dynamodb put-item \
+    --table-name two_mana_combos \
+    --item '{"ID": {"S": "3"}, "Name": {"S": "Rakdos"}, "Color_1": {"S": "Black"}, "Color_2": {"S": "Red"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+aws dynamodb put-item \
+    --table-name two_mana_combos \
+    --item '{"ID": {"S": "4"}, "Name": {"S": "Gruul"}, "Color_1": {"S": "Red"}, "Color_2": {"S": "Green"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+aws dynamodb put-item \
+    --table-name two_mana_combos \
+    --item '{"ID": {"S": "5"}, "Name": {"S": "Selesnya"}, "Color_1": {"S": "Green"}, "Color_2": {"S": "White"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+aws dynamodb put-item \
+    --table-name two_mana_combos \
+    --item '{"ID": {"S": "6"}, "Name": {"S": "Orzhov"}, "Color_1": {"S": "White"}, "Color_2": {"S": "Black"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+aws dynamodb put-item \
+    --table-name two_mana_combos \
+    --item '{"ID": {"S": "7"}, "Name": {"S": "Izzet"}, "Color_1": {"S": "Blue"}, "Color_2": {"S": "Red"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+aws dynamodb put-item \
+    --table-name two_mana_combos \
+    --item '{"ID": {"S": "8"}, "Name": {"S": "Golgari"}, "Color_1": {"S": "Black"}, "Color_2": {"S": "Green"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+aws dynamodb put-item \
+    --table-name two_mana_combos \
+    --item '{"ID": {"S": "9"}, "Name": {"S": "Boros"}, "Color_1": {"S": "Red"}, "Color_2": {"S": "White"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+aws dynamodb put-item \
+    --table-name two_mana_combos \
+    --item '{"ID": {"S": "10"}, "Name": {"S": "Simic"}, "Color_1": {"S": "Green"}, "Color_2": {"S": "Blue"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+echo "Seeding completed for two_mana_combos table."
+
+
+#mana types
+MANA_TYPES_TABLE_NAME="mana_types"
+echo "Creating Table $MANA_TYPES_TABLE_NAME"
+
+aws dynamodb create-table \
+    --table-name $MANA_TYPES_TABLE_NAME \
+    --attribute-definitions AttributeName=ID,AttributeType=S \
+    --key-schema AttributeName=ID,KeyType=HASH \
+    --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+echo "Waiting for $MANA_TYPES_TABLE_NAME to be created..."
+aws dynamodb wait table-exists --table-name $MANA_TYPES_TABLE_NAME --endpoint-url $DYNAMODB_ENDPOINT
+
+echo "Table $MANA_TYPES_TABLE_NAME created."
+#seed -----------------------
+echo "Seeding data for mana_types table..."
+
+aws dynamodb put-item \
+    --table-name mana_types \
+    --item '{"ID": {"S": "1"}, "Color": {"S": "White"}, "Trait": {"S": "Order and protection"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+aws dynamodb put-item \
+    --table-name mana_types \
+    --item '{"ID": {"S": "2"}, "Color": {"S": "Blue"}, "Trait": {"S": "Knowledge and control"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+aws dynamodb put-item \
+    --table-name mana_types \
+    --item '{"ID": {"S": "3"}, "Color": {"S": "Black"}, "Trait": {"S": "Ambition and power"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+aws dynamodb put-item \
+    --table-name mana_types \
+    --item '{"ID": {"S": "4"}, "Color": {"S": "Red"}, "Trait": {"S": "Freedom and chaos"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+aws dynamodb put-item \
+    --table-name mana_types \
+    --item '{"ID": {"S": "5"}, "Color": {"S": "Green"}, "Trait": {"S": "Growth and harmony"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+echo "Seeding completed for mana_types table."
