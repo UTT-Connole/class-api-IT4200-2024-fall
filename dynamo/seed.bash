@@ -453,3 +453,48 @@ aws dynamodb put-item \
     --endpoint-url $DYNAMODB_ENDPOINT
 
 echo "Seeding completed for $BOOKS_TABLE_NAME."
+
+# Table for storing cryptocurrency prices
+CRYPTO_TABLE_NAME="crypto_prices"
+echo "Creating Table $CRYPTO_TABLE_NAME"
+
+aws dynamodb create-table \
+    --table-name $CRYPTO_TABLE_NAME \
+    --attribute-definitions AttributeName=crypto,AttributeType=S \
+    --key-schema AttributeName=crypto,KeyType=HASH \
+    --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+echo "Waiting for $CRYPTO_TABLE_NAME to be created..."
+aws dynamodb wait table-exists --table-name $CRYPTO_TABLE_NAME --endpoint-url $DYNAMODB_ENDPOINT
+
+echo "Table $CRYPTO_TABLE_NAME created."
+echo "Seeding data for $CRYPTO_TABLE_NAME table..."
+
+# Insert mock data for cryptocurrency prices
+aws dynamodb put-item \
+    --table-name $CRYPTO_TABLE_NAME \
+    --item '{"crypto": {"S": "bitcoin"}, "price": {"S": "50000.00"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+aws dynamodb put-item \
+    --table-name $CRYPTO_TABLE_NAME \
+    --item '{"crypto": {"S": "ethereum"}, "price": {"S": "4000.00"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+aws dynamodb put-item \
+    --table-name $CRYPTO_TABLE_NAME \
+    --item '{"crypto": {"S": "solana"}, "price": {"S": "200.00"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+aws dynamodb put-item \
+    --table-name $CRYPTO_TABLE_NAME \
+    --item '{"crypto": {"S": "cardano"}, "price": {"S": "1.50"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+aws dynamodb put-item \
+    --table-name $CRYPTO_TABLE_NAME \
+    --item '{"crypto": {"S": "monero"}, "price": {"S": "300.00"}}' \
+    --endpoint-url $DYNAMODB_ENDPOINT
+
+echo "Seeding completed for $CRYPTO_TABLE_NAME."
