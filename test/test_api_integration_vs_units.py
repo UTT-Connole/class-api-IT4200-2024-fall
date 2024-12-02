@@ -1,70 +1,98 @@
 import unittest
-from flask import json
+from unittest.mock import Mock, patch
+import json
 from app import create_app
 
-class TestNetflixShowsIntegrationVsUnits(unittest.TestCase):
+class TestIntegrationVsUnit(unittest.TestCase):
     def setUp(self):
-        # Initialize the Flask application
         self.app = create_app()
         self.client = self.app.test_client()
 
-    # Integration Test: Tests the full functionality of the endpoint
-    def test_get_random_show_integration(self):
+    # Integration Test: Using a Stub for Endpoint Response
+    def test_travel_endpoint_integration_with_stub(self):
         """
-        Integration Test: Ensures the entire endpoint works as expected when no filters are provided.
+        Integration Test: Tests the /travel endpoint with a stub for DynamoDB
+        This test simulates the entire endpoint interaction.
         """
-        response = self.client.get('/netflix-shows')
-        data = json.loads(response.data)
+        # Create a stub for DynamoDB response
+        stub_destinations = [{
+            "destination": "Test City, Test Country",
+            "duration": "5hr 30m",
+            "continent": "Europe",
+            "best_season": "Summer"
+        }]
 
-        self.assertEqual(response.status_code, 200)
-        self.assertIn("netflix_show", data)
-        self.assertIn("title", data["netflix_show"])
-        self.assertIn("fact", data["netflix_show"])
+        # Using a context manager to replace boto3.resource with our stub
+        with patch('boto3.resource') as stub_dynamo:
+            # Configure the stub to return our test data
+            mock_table = Mock()
+            mock_table.scan.return_value = {'Items': stub_destinations}
+            stub_dynamo.return_value.Table.return_value = mock_table
 
-    def test_get_filtered_show_integration(self):
+            # Make request to the endpoint
+            response = self.client.get('/travel?continent=Europe&max_duration=6')
+            data = json.loads(response.data)
+
+            # Check for expected response structure and data
+            self.assertEqual(response.status_code, 200)
+            self.assertIn('recommended_destination', data)
+            self.assertIn('flight_duration', data)
+            self.assertEqual(data['continent'], 'Europe')
+
+    def test_meal_endpoint_unit_with_mock(self):
         """
-        Integration Test: Verifies the endpoint with a valid title filter.
+        Unit Test: Verifies the behavior of the /meal endpoint using a mock
+        This test focuses on testing the interaction with DynamoDB, ensuring it is called correctly.
         """
-        response = self.client.get('/netflix-shows?title=Stranger')
-        data = json.loads(response.data)
+        test_meal_id = "123"
+        expected_meal = {
+            'id': test_meal_id,
+            'name': 'Test Meal',
+            'description': 'Test Description'
+        }
 
-        self.assertEqual(response.status_code, 200)
-        self.assertIn("netflix_show", data)
-        self.assertEqual(data["netflix_show"]["title"], "Stranger Things")
+        # Create a mock for DynamoDB
+        with patch('boto3.resource') as mock_dynamo:
+            # Configure the mock
+            mock_table = Mock()
+            mock_table.get_item.return_value = {'Item': expected_meal}
+            mock_dynamo.return_value.Table.return_value = mock_table
 
-    # Unit Test: Focuses on the filtering logic
-    def test_filter_logic_unit(self):
+            # Make request to the endpoint
+            response = self.client.get(f'/meal/{test_meal_id}')
+
+            # Verify the interaction with DynamoDB
+            mock_dynamo.assert_called_once()
+            mock_table.get_item.assert_called_once_with(
+                Key={'id': test_meal_id}
+            )
+
+            # Verify the response from the endpoint
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(json.loads(response.data), expected_meal)
+
+    # Unit Test: Verifying Error Handling with Mocked DynamoDB Failure
+    def test_meal_endpoint_error_handling_with_mock(self):
         """
-        Unit Test: Directly tests the filtering logic without the full endpoint.
+        Unit Test: Verifies error handling for the /meal endpoint
+        This test uses a mock to simulate DynamoDB throwing an error.
         """
-        # Simulate Netflix shows data
-        netflix_shows = [
-            {"title": "Stranger Things", "fact": "The Demogorgon suit was mostly practical effects."},
-            {"title": "The Witcher", "fact": "Henry Cavill performed many of his own stunts."},
-        ]
-        title_filter = "Witcher"
+        test_meal_id = "nonexistent"
 
-        # Filtering logic
-        filtered_shows = [show for show in netflix_shows if title_filter.lower() in show["title"].lower()]
+        with patch('boto3.resource') as mock_dynamo:
+            # Configure mock to raise an exception
+            mock_table = Mock()
+            mock_table.get_item.side_effect = Exception("DynamoDB error")
+            mock_dynamo.return_value.Table.return_value = mock_table
 
-        self.assertEqual(len(filtered_shows), 1)
-        self.assertEqual(filtered_shows[0]["title"], "The Witcher")
+            # Make request to the endpoint
+            response = self.client.get(f'/meal/{test_meal_id}')
 
-    # Unit Test: Simulating a case where no match is found
-    def test_filter_logic_no_match_unit(self):
-        """
-        Unit Test: Ensures filtering logic returns an empty list when no matches are found.
-        """
-        netflix_shows = [
-            {"title": "Stranger Things", "fact": "The Demogorgon suit was mostly practical effects."},
-            {"title": "The Witcher", "fact": "Henry Cavill performed many of his own stunts."},
-        ]
-        title_filter = "NonExistent"
-
-        # Filtering logic
-        filtered_shows = [show for show in netflix_shows if title_filter.lower() in show["title"].lower()]
-
-        self.assertEqual(len(filtered_shows), 0)
+            # Verify error handling behavior
+            self.assertEqual(response.status_code, 500)
+            data = json.loads(response.data)
+            self.assertIn('error', data)
+            self.assertEqual(data['error'], 'Failed to access DynamoDB')
 
 if __name__ == '__main__':
     unittest.main()
