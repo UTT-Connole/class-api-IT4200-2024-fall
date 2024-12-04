@@ -21,13 +21,10 @@ from endpoints.color_hexifier import color_hexifier_bp
 from endpoints.crypto import bitcoin_bp
 from endpoints.fortune import fortune_bp
 from endpoints.items import items_bp
+from endpoints.books import books_bp 
 import random, requests
-import os, json
-import time
+import os, json, boto3, doctest
 from decimal import Decimal, getcontext, DecimalException
-import matplotlib, math
-
-import boto3
 
 
 def load_items_from_file():
@@ -59,6 +56,8 @@ def create_app():
     app.register_blueprint(fortune_bp)
     app.register_blueprint(bitcoin_bp, url_prefix='/api')
     app.register_blueprint(items_bp)
+    app.register_blueprint(books_bp)
+
 
 
     @app.route('/crypto')
@@ -116,12 +115,35 @@ def create_app():
 
     @app.route('/continents', methods=['GET'])
     def get_continents():
-        """Return a list of all continents."""
+        """
+        Return a list of all continents.
+        
+        Example usage:
+        
+        >>> get_continents()
+        [{"id": 1, "name": "Africa", "area": 30370000, "population": 1340598000},
+        {"id": 2, "name": "Antarctica", "area": 14000000, "population": 1106},
+        {"id": 3, "name": "Asia", "area": 44579000, "population": 4641054775},
+        {"id": 4, "name": "Europe", "area": 10180000, "population": 747636026},
+        {"id": 5, "name": "North America", "area": 24709000, "population": 592072212},
+        {"id": 6, "name": "Australia", "area": 8600000, "population": 42677813},
+        {"id": 7, "name": "South America", "area": 17840000, "population": 430759766}]
+        """
         return jsonify(continents)
 
     @app.route('/continents/<int:continent_id>', methods=['GET'])
     def get_continent(continent_id):
-        """Return details of a single continent by its ID."""
+        """
+        Returns the details of a single continent by its ID.
+        
+        Example usage:
+        
+        >>> get_continent(1)
+        {"id": 1, "name": "Africa", "area": 30370000, "population": 1340598000}
+        
+        >>> get_continent(999)
+        '404 Not Found'
+        """
         continent = next((cont for cont in continents if cont["id"] == continent_id), None)
         if continent:
             return jsonify(continent)

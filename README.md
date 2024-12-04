@@ -118,8 +118,16 @@ This will start the server. From there navigate to the url and your desired endp
     - The operators must be spelled exactly as shown above, or you will receive an error.
     - If any of the variables (`x`, `y`, or `op`) are missing (unless specified), you will receive an error.
     - If no parameters are provided, the endpoint will render an HTML form for input.
-  - **Test File**: `test_calc.py`
-
+  - **Test File**: `test_calc.py` `puppeteer_test_calc.js`
+  - **Running Puppeteer Tests**:
+    To run the Puppeteer tests for the calculator, follow these steps:
+    1. Install Puppeteer using npm:
+        ```sh
+        npm install puppeteer
+        ```
+    2. Run the Puppeteer test script:
+        ```sh
+        node test/puppeteer_test_calc.js
 
   - <a name="Crypto">**Crypto prices Endpoint**</a>
   - **Endpoint**: `GET /bitcoin_price`, `GET /ethereum_price`
@@ -292,6 +300,11 @@ This will start the server. From there navigate to the url and your desired endp
   - **Endpoint**: `GET /xkcd-comic`
   - **Description**: Go to http://127.0.0.1:5000/xkcd-comic. Refresh the page to enjoy many comics!
   - **Test File**: test_xkcd.py
+
+- <a name="Books">**Books Endpoint**</a>
+  - **Endpoint**: `GET /books`
+  - **Description**: Just a endpoint about books.
+  - **Test File**: test_books.py
     
 - <a name="Version">**Version Endpoint**</a>
   - **Endpoint**: `GET /version`

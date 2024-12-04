@@ -5,6 +5,7 @@ DYNAMODB_ENDPOINT = "http://localhost:8000"
 REGION_NAME = "us-west-2"
 TABLE_NAME = "test"
 FACTS_TABLE_NAME = "facts"
+POKEFISHING_TABLE_NAME = "pokefishing"
 RESTAURANT_MENU_TABLE_NAME = "menuItems"
 
 # Initialize DynamoDB resource
@@ -106,6 +107,59 @@ print(f"Seeding data into {FACTS_TABLE_NAME}")
 with facts_table.batch_writer() as batch:
     for fact in facts:
         batch.put_item(Item=fact)
+
+print("Seeding completed.")
+
+# Create the pokefishing table
+print(f"Creating Table {POKEFISHING_TABLE_NAME}")
+
+try:
+    pokefishing_table = dynamodb.create_table(
+        TableName=POKEFISHING_TABLE_NAME,
+        KeySchema=[
+            {'AttributeName': 'Id', 'KeyType': 'HASH'}
+        ],
+        AttributeDefinitions=[
+            {'AttributeName': 'Id', 'AttributeType': 'S'}
+        ],
+        ProvisionedThroughput={
+            'ReadCapacityUnits': 5,
+            'WriteCapacityUnits': 5
+        }
+    )
+    pokefishing_table.meta.client.get_waiter('table_exists').wait(TableName=POKEFISHING_TABLE_NAME)
+    print(f"Table {POKEFISHING_TABLE_NAME} created successfully.")
+except ClientError as e:
+    if e.response['Error']['Code'] == 'ResourceInUseException':
+        print(f"Table {POKEFISHING_TABLE_NAME} already exists.")
+        pokefishing_table = dynamodb.Table(POKEFISHING_TABLE_NAME)
+    else:
+        print(f"Unexpected error: {e}")
+        exit(1)
+
+# Seed data into the pokefishing table
+catches = [
+    {"Id": "1", "Catch": "a regular ol' Magikarp"},
+    {"Id": "2", "Catch": "a calico pattern Magikarp"},
+    {"Id": "3", "Catch": "a orange two-tone pattern Magikarp"},
+    {"Id": "4", "Catch": "a pink dapple pattern Magikarp"},
+    {"Id": "5", "Catch": "a gray diamond pattern Magikarp"},
+    {"Id": "6", "Catch": "a purple patches pattern Magikarp"},
+    {"Id": "7", "Catch": "a apricot tiger pattern Magikarp"},
+    {"Id": "8", "Catch": "a brown stripes pattern Magikarp"},
+    {"Id": "9", "Catch": "a orange forehead pattern Magikarp"},
+    {"Id": "10", "Catch": "a blue raindrops pattern Magikarp"},
+    {"Id": "11", "Catch": "a shiny Magikarp"},
+    {"Id": "12", "Catch": "a... Oh no, it's a Gyarados!!"},
+    {"Id": "13", "Catch": "a Goldeen and it's the biggest you've ever seen"},
+    {"Id": "14", "Catch": "nothing... But you did see a Mudkip riding on a Lotad"}
+]
+
+print(f"Seeding data into {POKEFISHING_TABLE_NAME}")
+
+with pokefishing_table.batch_writer() as batch:
+    for catch in catches:
+        batch.put_item(Item=catch)
 
 print("Seeding completed.")
 
