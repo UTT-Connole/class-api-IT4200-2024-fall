@@ -27,3 +27,28 @@ def test_photogallery(mock_render_template, client):
     response = client.get('/photogallery')
     assert response.status_code == 200
     assert b"Mocked template response" in response.data
+
+@patch('endpoints.photogallery.render_template')
+def test_photogallery_permissions(mock_render_template, client):
+    mock_render_template.return_value = "Mocked template response"
+
+    # Path to the image folder
+    image_folder = os.path.join(client.application.root_path, 'images')
+
+    # Check that the image folder exists and is readable
+    assert os.path.exists(image_folder), "Image folder does not exist"
+    assert os.access(image_folder, os.R_OK), "Image folder is not readable"
+
+    # List image files
+    image_files = [f for f in os.listdir(image_folder) if f.lower().endswith(('.png', '.jpg', '.jpeg', '.gif'))]
+
+    # Check that each image file is readable
+    for image_file in image_files:
+        image_path = os.path.join(image_folder, image_file)
+        assert os.path.isfile(image_path), f"{image_file} is not a file"
+        assert os.access(image_path, os.R_OK), f"{image_file} is not readable"
+
+    # Test the photogallery route
+    response = client.get('/photogallery')
+    assert response.status_code == 200
+    assert b"Mocked template response" in response.data
