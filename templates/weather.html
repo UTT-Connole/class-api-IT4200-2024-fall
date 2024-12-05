@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather in {{ weather.city }}</title>
+    <title>Weather in {{ weather.city if weather else 'Unknown' }}</title>
     <style>
         /* General Styles */
         body { 
@@ -43,7 +43,7 @@
             opacity: 0.3;
         }
 
-                /* Rain */
+        /* Rain */
         .rain {
             background-color: #5F9EA0; /* Cadet blue for a rainy day */
             overflow: hidden;
@@ -175,25 +175,30 @@
     </style>
 </head>
 <body>
-    <div class="weather-box {{ 'clear-sky' if 'clear sky' in weather.condition else '' }}
-                        {{ 'rain' if 'rain' in weather.condition else '' }}
-                        {{ 'rain' if 'drizzle' in weather.condition else '' }}
-                        {{ 'snow' if 'sleet' in weather.condition else '' }}
-                        {{ 'snow' if 'snow' in weather.condition else '' }}
-                        {{ 'thunderstorm' if 'thunderstorm' in weather.condition else '' }}">
-        <h2>Weather in {{ weather.city }}</h2>
-        <div class="temperature">{{ weather.temperature }}</div>
-        <div class="condition">Condition: {{ weather.condition }}</div>
-        <div class="humidity">Humidity: {{ weather.humidity }}</div>
-        <div class="wind">Wind Speed: {{ weather.wind_speed }}</div>
+    <form method="post" action="{{ url_for('weather.weather') }}">
+        <input type="text" name="city" placeholder="Enter city name">
+        <button type="submit">Get Weather</button>
+    </form>
+    {% if weather %}
+        {% if weather.error %}
+            <div class="error">{{ weather.error }}</div>
+        {% else %}
+            <div class="weather-box {{ 'clear-sky' if 'clear sky' in weather.condition else '' }} {{ 'rain' if 'rain' in weather.condition else '' }} {{ 'rain' if 'drizzle' in weather.condition else '' }} {{ 'snow' if 'sleet' in weather.condition else '' }} {{ 'snow' if 'snow' in weather.condition else '' }} {{ 'thunderstorm' if 'thunderstorm' in weather.condition else '' }}">
+                <h2>Weather in {{ weather.city }}</h2>
+                <div class="temperature">{{ weather.temperature }}</div>
+                <div class="condition">Condition: {{ weather.condition }}</div>
+                <div class="humidity">Humidity: {{ weather.humidity }}</div>
+                <div class="wind">Wind Speed: {{ weather.wind_speed }}</div>
 
-        {% if weather.condition == 'Rain' %}
-        <span class="drop"></span>
-        <span class="drop"></span>
-        <span class="drop"></span>
-        <span class="drop"></span>
-        <span class="drop"></span>
+                {% if weather.condition == 'Rain' %}
+                <span class="drop"></span>
+                <span class="drop"></span>
+                <span class="drop"></span>
+                <span class="drop"></span>
+                <span class="drop"></span>
+                {% endif %}
+            </div>
+        {% endif %}
     {% endif %}
-    </div>
 </body>
 </html>
