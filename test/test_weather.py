@@ -19,24 +19,27 @@ def test_weather_html_valid_city(mocker):
     mocker.patch('requests.get', return_value=mock_response)
 
     # Act
-    response = client.get('/weather/London')
+    response = client.post('/weather', data={'city': 'London'}, follow_redirects=True)
     html = response.data.decode()
 
     # Assert
     assert response.status_code == 200
     assert 'background-color: #87CEEB;' in html
 
-# Test for invalid city response
+#Test for invalid city response
 def test_weather_html_invalid_city(mocker):
     # Arrange
     app.config['TESTING'] = True
     client = app.test_client()
 
     # Mock the API response for an invalid city (404)
-    mocker.patch('requests.get').return_value.status_code = 404
+    mock_response = mocker.Mock()
+    mock_response.status_code = 404
+    mocker.patch('requests.get', return_value=mock_response)
 
     # Act
-    response = client.get('/weather_html/InvalidCity')
+    response = client.post('/weather', data={'city': 'InvalidCity'}, follow_redirects=True)
 
     # Assert
     assert response.status_code == 404
+    assert b'City not found or API error.' in response.data
